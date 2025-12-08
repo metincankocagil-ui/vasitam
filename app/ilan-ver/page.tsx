@@ -1,5 +1,6 @@
 // app/ilan-ver/page.tsx
 import Link from "next/link";
+import ListingImageUploader from "@/components/listing-image-uploader";
 import { createListingAction } from "@/lib/actions";
 import { getCurrentUser } from "@/lib/auth";
 const vehicleTypes = [
@@ -82,7 +83,11 @@ export default async function CreateListingPage({ searchParams }: CreateListingP
         </div>
       )}
 
-      <form action={createListingAction} className="bg-white rounded-lg shadow divide-y">
+      <form
+        action={createListingAction}
+        className="bg-white rounded-lg shadow divide-y"
+        encType="multipart/form-data"
+      >
         <section className="p-6 space-y-4">
           <h2 className="text-lg font-semibold">İlan Bilgileri</h2>
           <div className="grid gap-4 md:grid-cols-2">
@@ -349,19 +354,7 @@ export default async function CreateListingPage({ searchParams }: CreateListingP
             </div>
           </div>
 
-          <div className="space-y-1">
-            <label htmlFor="images" className="text-sm font-medium text-gray-700">
-              Görsel URL&apos;leri
-            </label>
-            <textarea
-              id="images"
-              name="images"
-              rows={3}
-              placeholder="Her satıra bir görsel bağlantısı girin"
-              className="w-full border rounded px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-200"
-            />
-            <p className="text-xs text-gray-500">En fazla 8 görsel bağlantısı ekleyebilirsiniz.</p>
-          </div>
+          <ListingImageUploader />
         </section>
 
         <div className="p-6 flex items-center justify-end gap-3">

@@ -26,6 +26,27 @@ function getEnumValue<E extends Record<string, string>>(
     : null;
 }
 
+function extractUploadedImages(formData: FormData) {
+  const entries = formData.getAll("uploadedImages");
+  const coverImage = getString(formData, "coverImage");
+  const normalized = entries
+    .map((value) => (typeof value === "string" ? value.trim() : ""))
+    .filter(Boolean)
+    .slice(0, 8);
+
+  if (coverImage) {
+    const coverIndex = normalized.findIndex((image) => image === coverImage);
+    if (coverIndex > 0) {
+      const [selected] = normalized.splice(coverIndex, 1);
+      normalized.unshift(selected);
+    } else if (coverIndex === -1 && normalized.length > 0) {
+      normalized.unshift(coverImage);
+    }
+  }
+
+  return normalized;
+}
+
 function redirectWithError(path: string, error: string): never {
   const url = new URL(path, process.env.NEXT_PUBLIC_APP_URL ?? "http://localhost");
   url.searchParams.set("error", error);
@@ -106,14 +127,7 @@ export async function createListingAction(formData: FormData) {
   const city = getString(formData, "city");
   const district = getString(formData, "district");
   const isDamaged = formData.get("isDamaged") === "on";
-  const imagesRaw = getString(formData, "images");
-  const images = imagesRaw
-    ? imagesRaw
-        .split("\n")
-        .map((url) => url.trim())
-        .filter(Boolean)
-        .slice(0, 8)
-    : [];
+  const images = extractUploadedImages(formData);
 
   if (
     !title ||
@@ -126,7 +140,8 @@ export async function createListingAction(formData: FormData) {
     Number.isNaN(km) ||
     !city ||
     !fuelType ||
-    !gearType
+    !gearType ||
+    images.length === 0
   ) {
     redirectWithError("/ilan-ver", "missing");
   }

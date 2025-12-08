@@ -1,13 +1,39 @@
 // app/ilan/[id]/page.tsx
-import { prisma } from "@/lib/prisma";
+import Link from "next/link";
 import { notFound } from "next/navigation";
+import { prisma } from "@/lib/prisma";
 
-interface ListingPageProps {
-  params: { id: string };
-}
+const vehicleLabels: Record<string, string> = {
+  AUTOMOBILE: "Otomobil",
+  MOTORCYCLE: "Motosiklet",
+  SUV: "SUV",
+  COMMERCIAL: "Ticari",
+  TRUCK: "Kamyon",
+  BUS: "Otobüs",
+  OTHER: "Diğer",
+};
+const fuelLabels: Record<string, string> = {
+  GASOLINE: "Benzin",
+  DIESEL: "Dizel",
+  LPG: "LPG",
+  HYBRID: "Hibrit",
+  ELECTRIC: "Elektrik",
+  OTHER: "Diğer",
+};
+const gearLabels: Record<string, string> = {
+  MANUAL: "Manuel",
+  AUTOMATIC: "Otomatik",
+  SEMI_AUTOMATIC: "Yarı Otomatik",
+};
+const listingTypeLabels: Record<string, string> = {
+  FOR_SALE: "Satılık",
+  FOR_RENT: "Kiralık",
+  DAILY_RENT: "Günlük Kiralık",
+};
 
-export default async function ListingPage({ params }: ListingPageProps) {
-  const id = Number(params.id);
+export default async function ListingPage({ params }: { params: Promise<{ id: string }> }) {
+  const { id: rawId } = await params;
+  const id = Number(rawId);
   if (Number.isNaN(id)) {
     notFound();
   }
@@ -21,76 +47,150 @@ export default async function ListingPage({ params }: ListingPageProps) {
     notFound();
   }
 
+  const createdAt = new Intl.DateTimeFormat("tr-TR", {
+    day: "2-digit",
+    month: "long",
+    year: "numeric",
+  }).format(listing.createdAt);
+  const coverImage = listing.images[0] ?? "";
+  const gallery = listing.images.slice(1, 4);
+
+  const specs = [
+    { label: "Vasıta Tipi", value: vehicleLabels[listing.vehicleType] ?? listing.vehicleType },
+    { label: "Marka", value: listing.brand },
+    { label: "Model", value: listing.model },
+    { label: "Yıl", value: listing.year.toString() },
+    { label: "Yakıt", value: fuelLabels[listing.fuelType] ?? listing.fuelType },
+    { label: "Vites", value: gearLabels[listing.gearType] ?? listing.gearType },
+    { label: "Km", value: listing.km.toLocaleString("tr-TR") },
+    { label: "Renk", value: listing.color ?? "-" },
+    { label: "Hasar Kaydı", value: listing.isDamaged ? "Var" : "Yok / Bilinmiyor" },
+  ];
+
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-[2fr_1fr] gap-6">
-      {/* Sol kısım: görseller + açıklama */}
-      <section className="space-y-4">
-        <div className="bg-white rounded-lg shadow p-4">
-          <div className="aspect-video bg-gray-200 rounded mb-3" />
-          <div className="space-y-1">
-            <h1 className="text-xl font-bold">{listing.title}</h1>
-            <div className="text-sm text-gray-500">
-              {listing.city}
-              {listing.district ? `, ${listing.district}` : ""} •{" "}
-              {listing.createdAt.toLocaleDateString("tr-TR")}
+    <div className="space-y-10">
+      <div className="flex flex-wrap items-center justify-between gap-4">
+        <Link href="/" className="text-sm font-semibold text-indigo-600 hover:text-indigo-800">
+          ← İlanlara Dön
+        </Link>
+        <span className="rounded-full bg-indigo-50 px-3 py-1 text-xs font-medium text-indigo-600">
+          {listingTypeLabels[listing.listingType] ?? "İlan"}
+        </span>
+      </div>
+
+      <section className="grid gap-6 lg:grid-cols-[1.6fr_1fr]">
+        <div className="space-y-4 rounded-3xl border border-slate-100 bg-white p-5 shadow-lg">
+          <div className="grid gap-4 md:grid-cols-5">
+            <div className="relative overflow-hidden rounded-2xl bg-slate-100 md:col-span-3">
+              {coverImage ? (
+                <img
+                  src={coverImage}
+                  alt={listing.title}
+                  className="h-full w-full object-cover"
+                  loading="eager"
+                />
+              ) : (
+                <div className="flex h-full min-h-[320px] items-center justify-center text-5xl text-slate-400">
+                  🚘
+                </div>
+              )}
+              <div className="absolute left-4 top-4 rounded-full bg-white/80 px-3 py-1 text-xs font-semibold text-slate-700 backdrop-blur">
+                Vitrin
+              </div>
+            </div>
+            <div className="grid gap-4 md:col-span-2">
+              {gallery.length === 0 && (
+                <div className="flex h-full items-center justify-center rounded-2xl border border-dashed border-slate-200 text-sm text-slate-400">
+                  Ek görsel eklenmemiş
+                </div>
+              )}
+              {gallery.map((image, index) => (
+                <div key={image + index} className="overflow-hidden rounded-2xl bg-slate-100">
+                  <img src={image} alt={`Galerideki görsel ${index + 1}`} className="h-full w-full object-cover" />
+                </div>
+              ))}
+            </div>
+          </div>
+          <div className="space-y-2">
+            <h1 className="text-3xl font-semibold text-slate-900">{listing.title}</h1>
+            <div className="flex flex-wrap items-center gap-3 text-sm text-slate-600">
+              <span>
+                {listing.city}
+                {listing.district ? `, ${listing.district}` : ""}
+              </span>
+              <span className="h-1 w-1 rounded-full bg-slate-300" />
+              <span>{createdAt} tarihinde eklendi</span>
             </div>
           </div>
         </div>
 
-        <div className="bg-white rounded-lg shadow p-4 space-y-3">
-          <h2 className="font-semibold text-lg">İlan Detayları</h2>
-          <dl className="grid grid-cols-2 gap-2 text-sm">
-            <dt className="text-gray-500">Marka</dt>
-            <dd>{listing.brand}</dd>
-
-            <dt className="text-gray-500">Model</dt>
-            <dd>{listing.model}</dd>
-
-            <dt className="text-gray-500">Yıl</dt>
-            <dd>{listing.year}</dd>
-
-            <dt className="text-gray-500">Yakıt</dt>
-            <dd>{listing.fuelType}</dd>
-
-            <dt className="text-gray-500">Vites</dt>
-            <dd>{listing.gearType}</dd>
-
-            <dt className="text-gray-500">Km</dt>
-            <dd>{listing.km.toLocaleString("tr-TR")}</dd>
-
-            <dt className="text-gray-500">Renk</dt>
-            <dd>{listing.color ?? "-"}</dd>
-
-            <dt className="text-gray-500">Hasar Kaydı</dt>
-            <dd>{listing.isDamaged ? "Var" : "Yok / Bilinmiyor"}</dd>
-          </dl>
-        </div>
-
-        <div className="bg-white rounded-lg shadow p-4 space-y-3">
-          <h2 className="font-semibold text-lg">Açıklama</h2>
-          <p className="text-sm text-gray-800 whitespace-pre-line">
-            {listing.description}
-          </p>
+        <div className="space-y-4 rounded-3xl border border-slate-100 bg-white p-5 shadow-lg">
+          <div className="space-y-1">
+            <p className="text-sm uppercase tracking-[0.4em] text-slate-400">Fiyat</p>
+            <div className="text-4xl font-bold text-slate-900">
+              {listing.price.toLocaleString("tr-TR")} TL
+            </div>
+            <p className="text-xs text-slate-500">
+              {listing.listingType === "FOR_RENT"
+                ? "Aylık ücret"
+                : listing.listingType === "DAILY_RENT"
+                  ? "Günlük ücret"
+                  : "Satış fiyatı"}
+            </p>
+          </div>
+          <div className="rounded-2xl border border-slate-100 bg-slate-50/80 p-4">
+            <h2 className="text-sm font-semibold text-slate-600">İlan Sahibi</h2>
+            <p className="mt-2 text-base font-semibold text-slate-900">
+              {listing.owner?.name ?? "İlan Sahibi"}
+            </p>
+            <p className="text-sm text-slate-500">{listing.owner?.email ?? "E-posta paylaşılmamış"}</p>
+            <p className="mt-3 text-xs text-slate-400">
+              Güvenli iletişim için platform üzerinden mesaj gönderin.
+            </p>
+          </div>
+          <button
+            type="button"
+            className="w-full rounded-full bg-indigo-600 px-5 py-3 text-base font-semibold text-white transition hover:bg-indigo-500"
+          >
+            Satıcıyla İletişime Geç
+          </button>
         </div>
       </section>
 
-      {/* Sağ kısım: fiyat + ilan sahibi */}
-      <aside className="space-y-4">
-        <div className="bg-white rounded-lg shadow p-4 space-y-3">
-          <div className="text-2xl font-bold text-blue-700">
-            {listing.price.toLocaleString("tr-TR")} TL
-          </div>
+      <section className="grid gap-6 lg:grid-cols-[1.6fr_1fr]">
+        <div className="space-y-4 rounded-3xl border border-slate-100 bg-white p-5 shadow-lg">
+          <h2 className="text-xl font-semibold text-slate-900">Teknik Özellikler</h2>
+          <dl className="grid gap-4 sm:grid-cols-2">
+            {specs.map((spec) => (
+              <div
+                key={spec.label}
+                className="rounded-2xl border border-slate-100 bg-slate-50/50 px-4 py-3 text-sm text-slate-600"
+              >
+                <dt className="text-xs uppercase tracking-wide text-slate-400">{spec.label}</dt>
+                <dd className="text-base font-semibold text-slate-900">{spec.value}</dd>
+              </div>
+            ))}
+          </dl>
         </div>
 
-        <div className="bg-white rounded-lg shadow p-4 space-y-3">
-          <h2 className="font-semibold text-lg">İlan Sahibi</h2>
-          <div className="text-sm font-medium">
-            {listing.owner.name ?? "İlan Sahibi"}
+        <div className="space-y-4 rounded-3xl border border-slate-100 bg-white p-5 shadow-lg">
+          <h2 className="text-xl font-semibold text-slate-900">Konum</h2>
+          <div className="rounded-2xl border border-dashed border-slate-200 bg-slate-50 p-4 text-sm text-slate-600">
+            {listing.city}
+            {listing.district ? `, ${listing.district}` : ""} bölgesinde yer alıyor.
           </div>
-          <div className="text-xs text-gray-500">{listing.owner.email}</div>
-          {/* İleride telefon vs. için ayrı alanlar ekleriz */}
+          <div className="rounded-2xl border border-dashed border-slate-200 bg-slate-50 p-4 text-sm text-slate-600">
+            Sürüşe hazır teslimat için satıcıyla iletişime geçin.
+          </div>
         </div>
-      </aside>
+      </section>
+
+      <section className="rounded-3xl border border-slate-100 bg-white p-5 shadow-lg">
+        <h2 className="text-xl font-semibold text-slate-900">Açıklama</h2>
+        <p className="mt-3 whitespace-pre-line text-sm leading-relaxed text-slate-700">
+          {listing.description}
+        </p>
+      </section>
     </div>
   );
 }
