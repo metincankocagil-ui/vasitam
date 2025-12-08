@@ -1,5 +1,6 @@
 "use server";
 
+import { FuelType, ListingType, VehicleType, GearType } from "@prisma/client";
 import { prisma } from "./prisma";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
@@ -16,7 +17,16 @@ function getString(formData: FormData, key: string) {
   return typeof value === "string" ? value.trim() : "";
 }
 
-function redirectWithError(path: string, error: string) {
+function getEnumValue<E extends Record<string, string>>(
+  enumObj: E,
+  rawValue: string,
+): E[keyof E] | null {
+  return (Object.values(enumObj) as string[]).includes(rawValue)
+    ? (rawValue as E[keyof E])
+    : null;
+}
+
+function redirectWithError(path: string, error: string): never {
   const url = new URL(path, process.env.NEXT_PUBLIC_APP_URL ?? "http://localhost");
   url.searchParams.set("error", error);
   redirect(url.pathname + "?" + url.searchParams.toString());
@@ -82,14 +92,15 @@ export async function createListingAction(formData: FormData) {
 
   const title = getString(formData, "title");
   const description = getString(formData, "description");
-  const listingType = getString(formData, "listingType") || "FOR_SALE";
+  const listingType =
+    getEnumValue(ListingType, getString(formData, "listingType")) ?? ListingType.FOR_SALE;
   const price = Number(getString(formData, "price"));
-  const vehicleType = getString(formData, "vehicleType");
+  const vehicleType = getEnumValue(VehicleType, getString(formData, "vehicleType"));
   const brand = getString(formData, "brand");
   const model = getString(formData, "model");
   const year = Number(getString(formData, "year"));
-  const fuelType = getString(formData, "fuelType");
-  const gearType = getString(formData, "gearType");
+  const fuelType = getEnumValue(FuelType, getString(formData, "fuelType"));
+  const gearType = getEnumValue(GearType, getString(formData, "gearType"));
   const km = Number(getString(formData, "km"));
   const color = getString(formData, "color");
   const city = getString(formData, "city");

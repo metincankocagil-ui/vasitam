@@ -15,11 +15,7 @@ const SESSION_MAX_AGE = 60 * 60 * 24 * 30; // 30 gün
 type CookieStore = Awaited<ReturnType<typeof cookies>>;
 
 async function getCookieStore(): Promise<CookieStore> {
-  const store = cookies();
-  if (typeof (store as PromiseLike<CookieStore>).then === "function") {
-    return await (store as Promise<CookieStore>);
-  }
-  return store as CookieStore;
+  return cookies();
 }
 
 function deriveKey(password: BinaryLike, salt: string) {
