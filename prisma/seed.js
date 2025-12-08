@@ -1,0 +1,54 @@
+/* eslint-disable no-console */
+const { PrismaClient } = require("@prisma/client");
+
+const prisma = new PrismaClient();
+
+async function main() {
+  const user = await prisma.user.upsert({
+    where: { email: "demo@vasitan.com" },
+    update: {},
+    create: {
+      email: "demo@vasitan.com",
+      password:
+        "seedDemoSalt123:06bcf998e3edf1810e5dda0799730f1e174754d00b16c4b2359a3d5749de6cf4d90c6f0886bc24889e6085d1c1354f83615dd5e1f910a36351768fa355e607a8", // password: demo1234
+      name: "Demo Kullanıcı",
+      phone: "+90 555 000 00 00",
+    },
+  });
+
+  const listing = await prisma.listing.create({
+    data: {
+      title: "2019 Model Dizel Otomatik SUV",
+      description:
+        "Yetkili servis bakımlı, değişen yok. Şehir içi kullanılmadı. Takas düşünülür.",
+      price: 1250000,
+      vehicleType: "SUV",
+      brand: "Volvo",
+      model: "XC60",
+      year: 2019,
+      fuelType: "DIESEL",
+      gearType: "AUTOMATIC",
+      km: 58000,
+      color: "Gri",
+      city: "İstanbul",
+      district: "Kadıköy",
+      listingType: "FOR_SALE",
+      ownerId: user.id,
+      images: [
+        "https://images.unsplash.com/photo-1503376780353-7e6692767b70",
+        "https://images.unsplash.com/photo-1503736334956-4c8f8e92946d",
+      ],
+    },
+  });
+
+  console.log("Seed completed. User:", user.email, "Listing ID:", listing.id);
+}
+
+main()
+  .catch((error) => {
+    console.error(error);
+    process.exit(1);
+  })
+  .finally(async () => {
+    await prisma.$disconnect();
+  });

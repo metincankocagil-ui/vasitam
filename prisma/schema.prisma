@@ -1,0 +1,128 @@
+// prisma/schema.prisma
+
+// =======================
+// PRISMA 6 GENERATOR
+// =======================
+generator client {
+  provider = "prisma-client-js"
+}
+
+// =======================
+// DATASOURCE (DB Bağlantısı)
+// =======================
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// =======================
+// ENUM TANIMLARI
+// =======================
+
+enum VehicleType {
+  AUTOMOBILE   // Otomobil
+  MOTORCYCLE   // Motosiklet
+  SUV          // SUV
+  COMMERCIAL   // Ticari
+  TRUCK        // Kamyon
+  BUS          // Otobüs
+  OTHER        // Diğer
+}
+
+enum FuelType {
+  GASOLINE       // Benzin
+  DIESEL         // Dizel
+  LPG            // LPG
+  HYBRID         // Hibrit
+  ELECTRIC       // Elektrikli
+  OTHER          // Diğer
+}
+
+enum GearType {
+  MANUAL         // Düz
+  AUTOMATIC      // Otomatik
+  SEMI_AUTOMATIC // Yarı otomatik
+}
+
+enum ListingStatus {
+  ACTIVE   // Yayında
+  PASSIVE  // Pasif
+  SOLD     // Satıldı
+}
+
+enum ListingType {
+  FOR_SALE     // Satılık
+  FOR_RENT     // Kiralık
+  DAILY_RENT   // Günlük kiralık
+}
+
+enum UserRole {
+  USER
+  ADMIN
+}
+
+// =======================
+// MODEL: User (Kullanıcı)
+// =======================
+
+model User {
+  id        Int       @id @default(autoincrement())
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+
+  email     String    @unique
+  password  String    // Hashlenecek
+  name      String?
+
+  phone     String?
+  role      UserRole  @default(USER)
+
+  listings  Listing[]
+}
+
+// =======================
+// MODEL: Listing (İlan)
+// =======================
+
+model Listing {
+  id          Int       @id @default(autoincrement())
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  // Başlık + açıklama
+  title       String
+  description String
+
+  // Fiyat
+  price       Int       // TL
+  currency    String    @default("TRY")
+
+  // İlan tipi
+  listingType ListingType @default(FOR_SALE)
+
+  // Vasıta özellikleri
+  vehicleType VehicleType
+  brand       String
+  model       String
+  year        Int
+  fuelType    FuelType
+  gearType    GearType
+  km          Int
+  color       String?
+  isDamaged   Boolean    @default(false)
+
+  // Konum
+  city        String
+  district    String?
+
+  // Görseller (URL listesi)
+  images      String[]
+
+  // İlan sahibi
+  ownerId     Int
+  owner       User      @relation(fields: [ownerId], references: [id])
+
+  // Durum
+  status      ListingStatus @default(ACTIVE)
+}
