@@ -3,15 +3,7 @@ import Link from "next/link";
 import ListingImageUploader from "@/components/listing-image-uploader";
 import { createListingAction } from "@/lib/actions";
 import { getCurrentUser } from "@/lib/auth";
-const vehicleTypes = [
-  { value: "AUTOMOBILE", label: "Otomobil" },
-  { value: "MOTORCYCLE", label: "Motosiklet" },
-  { value: "SUV", label: "SUV" },
-  { value: "COMMERCIAL", label: "Ticari" },
-  { value: "TRUCK", label: "Kamyon" },
-  { value: "BUS", label: "Otobüs" },
-  { value: "OTHER", label: "Diğer" },
-];
+import CarQueryVehicleFields from "@/components/carquery-vehicle-fields";
 
 const fuelTypes = [
   { value: "GASOLINE", label: "Benzin" },
@@ -33,6 +25,10 @@ const listingTypes = [
   { value: "FOR_RENT", label: "Kiralık" },
   { value: "DAILY_RENT", label: "Günlük Kiralık" },
 ];
+
+const fieldClass =
+  "w-full rounded-2xl border border-slate-200 bg-white/80 px-4 py-3 text-sm text-slate-900 placeholder:text-slate-400 focus:border-indigo-400 focus:outline-none focus:ring-2 focus:ring-indigo-100";
+const textareaClass = `${fieldClass} min-h-[120px]`;
 
 const errorMessages: Record<string, string> = {
   missing: "Lütfen tüm zorunlu alanları doldurun.",
@@ -83,12 +79,8 @@ export default async function CreateListingPage({ searchParams }: CreateListingP
         </div>
       )}
 
-      <form
-        action={createListingAction}
-        className="bg-white rounded-lg shadow divide-y"
-        encType="multipart/form-data"
-      >
-        <section className="p-6 space-y-4">
+      <form action={createListingAction} className="space-y-6">
+        <section className="space-y-4 rounded-2xl border border-slate-200 bg-white/80 p-6 shadow-sm">
           <h2 className="text-lg font-semibold">İlan Bilgileri</h2>
           <div className="grid gap-4 md:grid-cols-2">
             <div className="space-y-1 md:col-span-2">
@@ -104,7 +96,7 @@ export default async function CreateListingPage({ searchParams }: CreateListingP
                 type="text"
                 required
                 placeholder="Örn. 2018 Model Dizel Otomatik SUV"
-                className="w-full border rounded px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-200"
+                className={fieldClass}
               />
             </div>
 
@@ -118,7 +110,7 @@ export default async function CreateListingPage({ searchParams }: CreateListingP
               <select
                 id="listingType"
                 name="listingType"
-                className="w-full border rounded px-3 py-2 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-blue-200"
+                className={fieldClass}
               >
                 {listingTypes.map((type) => (
                   <option key={type.value} value={type.value}>
@@ -141,7 +133,7 @@ export default async function CreateListingPage({ searchParams }: CreateListingP
                 type="number"
                 min={0}
                 required
-                className="w-full border rounded px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-200"
+                className={fieldClass}
               />
             </div>
           </div>
@@ -159,66 +151,15 @@ export default async function CreateListingPage({ searchParams }: CreateListingP
               required
               rows={5}
               placeholder="Araç hakkında detaylı bilgi paylaşın."
-              className="w-full border rounded px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-200"
+              className={textareaClass}
             />
           </div>
         </section>
 
-        <section className="p-6 space-y-4">
+        <section className="space-y-4 rounded-2xl border border-slate-200 bg-white/80 p-6 shadow-sm">
           <h2 className="text-lg font-semibold">Araç Detayları</h2>
+          <CarQueryVehicleFields />
           <div className="grid gap-4 md:grid-cols-2">
-            <div className="space-y-1">
-              <label
-                htmlFor="vehicleType"
-                className="text-sm font-medium text-gray-700"
-              >
-                Vasıta Tipi
-              </label>
-              <select
-                id="vehicleType"
-                name="vehicleType"
-                required
-                className="w-full border rounded px-3 py-2 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-blue-200"
-              >
-                {vehicleTypes.map((type) => (
-                  <option key={type.value} value={type.value}>
-                    {type.label}
-                  </option>
-                ))}
-              </select>
-            </div>
-
-            <div className="space-y-1">
-              <label
-                htmlFor="brand"
-                className="text-sm font-medium text-gray-700"
-              >
-                Marka
-              </label>
-              <input
-                id="brand"
-                name="brand"
-                type="text"
-                required
-                className="w-full border rounded px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-200"
-              />
-            </div>
-
-            <div className="space-y-1">
-              <label
-                htmlFor="model"
-                className="text-sm font-medium text-gray-700"
-              >
-                Model
-              </label>
-              <input
-                id="model"
-                name="model"
-                type="text"
-                required
-                className="w-full border rounded px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-200"
-              />
-            </div>
 
             <div className="space-y-1">
               <label
@@ -234,7 +175,7 @@ export default async function CreateListingPage({ searchParams }: CreateListingP
                 min={1980}
                 max={new Date().getFullYear()}
                 required
-                className="w-full border rounded px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-200"
+                className={fieldClass}
               />
             </div>
 
@@ -249,7 +190,7 @@ export default async function CreateListingPage({ searchParams }: CreateListingP
                 id="fuelType"
                 name="fuelType"
                 required
-                className="w-full border rounded px-3 py-2 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-blue-200"
+                className={fieldClass}
               >
                 {fuelTypes.map((type) => (
                   <option key={type.value} value={type.value}>
@@ -270,7 +211,7 @@ export default async function CreateListingPage({ searchParams }: CreateListingP
                 id="gearType"
                 name="gearType"
                 required
-                className="w-full border rounded px-3 py-2 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-blue-200"
+                className={fieldClass}
               >
                 {gearTypes.map((type) => (
                   <option key={type.value} value={type.value}>
@@ -290,7 +231,7 @@ export default async function CreateListingPage({ searchParams }: CreateListingP
                 type="number"
                 min={0}
                 required
-                className="w-full border rounded px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-200"
+                className={fieldClass}
               />
             </div>
 
@@ -305,7 +246,7 @@ export default async function CreateListingPage({ searchParams }: CreateListingP
                 id="color"
                 name="color"
                 type="text"
-                className="w-full border rounded px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-200"
+                className={fieldClass}
               />
             </div>
 
@@ -313,14 +254,14 @@ export default async function CreateListingPage({ searchParams }: CreateListingP
               <input
                 type="checkbox"
                 name="isDamaged"
-                className="w-4 h-4 rounded border-gray-300"
+                className="h-4 w-4 rounded border-slate-300 text-indigo-600 focus:ring-indigo-500"
               />
               Bilinen bir hasar kaydı var
             </label>
           </div>
         </section>
 
-        <section className="p-6 space-y-4">
+        <section className="space-y-4 rounded-2xl border border-slate-200 bg-white/80 p-6 shadow-sm">
           <h2 className="text-lg font-semibold">Konum & Görseller</h2>
           <div className="grid gap-4 md:grid-cols-2">
             <div className="space-y-1">
@@ -335,7 +276,7 @@ export default async function CreateListingPage({ searchParams }: CreateListingP
                 name="city"
                 type="text"
                 required
-                className="w-full border rounded px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-200"
+                className={fieldClass}
               />
             </div>
             <div className="space-y-1">
@@ -349,7 +290,7 @@ export default async function CreateListingPage({ searchParams }: CreateListingP
                 id="district"
                 name="district"
                 type="text"
-                className="w-full border rounded px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-200"
+                className={fieldClass}
               />
             </div>
           </div>
@@ -357,7 +298,7 @@ export default async function CreateListingPage({ searchParams }: CreateListingP
           <ListingImageUploader />
         </section>
 
-        <div className="p-6 flex items-center justify-end gap-3">
+        <div className="flex items-center justify-end gap-3 rounded-2xl border border-slate-200 bg-white/80 p-6 shadow-sm">
           <Link href="/panel/ilanlarim" className="text-sm text-gray-600 hover:text-gray-800">
             Vazgeç
           </Link>

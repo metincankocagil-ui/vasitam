@@ -4,10 +4,52 @@ import Link from "next/link";
 import "./globals.css";
 import { getCurrentUser } from "@/lib/auth";
 import { logoutAction } from "@/lib/actions";
+import { absoluteUrl, DEFAULT_DESCRIPTION, DEFAULT_KEYWORDS, DEFAULT_TITLE, SITE_URL } from "@/lib/seo";
 
 export const metadata: Metadata = {
-  title: "Vasıtan.com - Vasıta Alım Satım & Kiralama",
-  description: "Türkiye'nin sadece vasıta ilanları için hazırlanmış platformu.",
+  metadataBase: new URL(SITE_URL),
+  title: {
+    default: DEFAULT_TITLE,
+    template: "%s | Vasıtan.com",
+  },
+  description: DEFAULT_DESCRIPTION,
+  keywords: DEFAULT_KEYWORDS,
+  alternates: {
+    canonical: "/",
+    languages: {
+      "tr-TR": "/",
+    },
+  },
+  openGraph: {
+    type: "website",
+    locale: "tr_TR",
+    url: SITE_URL,
+    siteName: "Vasıtan.com",
+    title: DEFAULT_TITLE,
+    description: DEFAULT_DESCRIPTION,
+    images: [
+      {
+        url: absoluteUrl("/og-image.jpg"),
+        width: 1200,
+        height: 630,
+        alt: "Vasıtan.com",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: DEFAULT_TITLE,
+    description: DEFAULT_DESCRIPTION,
+    images: [absoluteUrl("/og-image.jpg")],
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+    },
+  },
 };
 
 export default async function RootLayout({
@@ -22,7 +64,7 @@ export default async function RootLayout({
   return (
     <html lang="tr">
       <body className="min-h-screen bg-gradient-to-b from-slate-50 via-white to-white text-slate-900 antialiased">
-        <div className="pointer-events-none fixed inset-x-0 top-0 -z-10 h-[420px] bg-[radial-gradient(circle_at_top,_rgba(180,198,252,0.65),_rgba(255,255,255,0))]" />
+        <div className="pointer-events-none fixed inset-x-0 top-0 -z-10 h-full bg-[radial-gradient(circle_at_top,_rgba(180,198,252,0.65),_rgba(255,255,255,0))]" />
         <header className="sticky top-0 z-20 border-b border-slate-200/70 bg-white/90 backdrop-blur">
           <div className="mx-auto flex h-20 max-w-6xl items-center justify-between px-4">
             <Link href="/" className="text-2xl font-semibold tracking-tight text-slate-900">
@@ -117,6 +159,82 @@ export default async function RootLayout({
           </div>
         </header>
         <main className="mx-auto max-w-6xl px-4 py-10">{children}</main>
+        <footer className="mt-10 border-t border-slate-200 bg-white/70">
+          <div className="mx-auto grid max-w-6xl gap-8 px-4 py-10 md:grid-cols-4">
+            <div className="space-y-3">
+              <Link href="/" className="text-2xl font-semibold text-slate-900">
+                Vasıtan<span className="text-indigo-500">.com</span>
+              </Link>
+              <p className="text-sm text-slate-600">
+                Modern vasıta pazar yeri. Marka ve modele göre filtreleme, güvenli ilan deneyimi.
+              </p>
+            </div>
+            <div>
+              <p className="text-xs uppercase tracking-[0.4em] text-slate-500">Keşfet</p>
+              <ul className="mt-3 space-y-2 text-sm text-slate-600">
+                <li>
+                  <Link className="transition hover:text-slate-900" href="/kategoriler">
+                    Kategoriler
+                  </Link>
+                </li>
+                <li>
+                  <Link className="transition hover:text-slate-900" href="/ilan-ver">
+                    İlan Ver
+                  </Link>
+                </li>
+                <li>
+                  <Link className="transition hover:text-slate-900" href="/hakkimizda">
+                    Hakkımızda
+                  </Link>
+                </li>
+              </ul>
+            </div>
+            <div>
+              <p className="text-xs uppercase tracking-[0.4em] text-slate-500">Destek</p>
+              <ul className="mt-3 space-y-2 text-sm text-slate-600">
+                <li>
+                  <Link className="transition hover:text-slate-900" href="/iletisim">
+                    İletişim
+                  </Link>
+                </li>
+                <li>
+                  <Link className="transition hover:text-slate-900" href="/hukuk/kullanim-kosullari">
+                    Kullanım Koşulları
+                  </Link>
+                </li>
+                <li>
+                  <Link className="transition hover:text-slate-900" href="/hukuk/gizlilik">
+                    Gizlilik Politikası
+                  </Link>
+                </li>
+              </ul>
+            </div>
+            <div>
+              <p className="text-xs uppercase tracking-[0.4em] text-slate-500">Bize ulaş</p>
+              <div className="mt-3 space-y-2 text-sm text-slate-600">
+                <p>destek@vasitan.com</p>
+                <p>+90 212 000 00 00</p>
+                <div className="flex gap-3 pt-2 text-base text-slate-500">
+                  <a className="hover:text-indigo-600" href="https://www.instagram.com" target="_blank">
+                    IG
+                  </a>
+                  <a className="hover:text-indigo-600" href="https://www.twitter.com" target="_blank">
+                    TW
+                  </a>
+                  <a className="hover:text-indigo-600" href="https://www.linkedin.com" target="_blank">
+                    IN
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="border-t border-slate-200 bg-white/80">
+            <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-3 px-4 py-4 text-xs text-slate-500">
+              <p>© {new Date().getFullYear()} Vasıtan.com</p>
+              <p>Türkiye&apos;nin vasıta ilan platformu</p>
+            </div>
+          </div>
+        </footer>
       </body>
     </html>
   );

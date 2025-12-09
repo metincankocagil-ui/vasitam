@@ -1,15 +1,8 @@
-// prisma/schema.prisma
 
-// =======================
-// PRISMA 6 GENERATOR
-// =======================
 generator client {
   provider = "prisma-client-js"
 }
 
-// =======================
-// DATASOURCE (DB Bağlantısı)
-// =======================
 
 datasource db {
   provider = "postgresql"

@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 const { PrismaClient } = require("@prisma/client");
 
 const prisma = new PrismaClient();
@@ -41,12 +40,10 @@ async function main() {
     },
   });
 
-  console.log("Seed completed. User:", user.email, "Listing ID:", listing.id);
 }
 
 main()
-  .catch((error) => {
-    console.error(error);
+  .catch(() => {
     process.exit(1);
   })
   .finally(async () => {

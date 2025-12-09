@@ -1,7 +1,11 @@
 // app/ilan/[id]/page.tsx
+import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { prisma } from "@/lib/prisma";
+import { absoluteUrl } from "@/lib/seo";
+
+export const revalidate = 60;
 
 const vehicleLabels: Record<string, string> = {
   AUTOMOBILE: "Otomobil",
@@ -31,21 +35,81 @@ const listingTypeLabels: Record<string, string> = {
   DAILY_RENT: "Günlük Kiralık",
 };
 
-export default async function ListingPage({ params }: { params: Promise<{ id: string }> }) {
+type ListingPageProps = { params: Promise<{ id: string }> };
+
+async function getListing(params: Promise<{ id: string }>) {
   const { id: rawId } = await params;
   const id = Number(rawId);
   if (Number.isNaN(id)) {
     notFound();
   }
-
   const listing = await prisma.listing.findUnique({
     where: { id },
-    include: { owner: true },
+    select: {
+      id: true,
+      title: true,
+      description: true,
+      price: true,
+      listingType: true,
+      vehicleType: true,
+      brand: true,
+      model: true,
+      year: true,
+      fuelType: true,
+      gearType: true,
+      km: true,
+      color: true,
+      isDamaged: true,
+      city: true,
+      district: true,
+      images: true,
+      createdAt: true,
+      owner: {
+        select: {
+          name: true,
+          email: true,
+        },
+      },
+    },
   });
-
   if (!listing) {
     notFound();
   }
+  return listing;
+}
+
+export async function generateMetadata({ params }: ListingPageProps): Promise<Metadata> {
+  const listing = await getListing(params);
+  const title = `${listing.brand} ${listing.model} ${listing.year} ilanı | Vasıtan.com`;
+  const description = `${listing.title} - ${listing.city}${listing.district ? `, ${listing.district}` : ""}. ${listing.price.toLocaleString("tr-TR")} TL, ${listing.km.toLocaleString("tr-TR")} km, ${listing.fuelType} ${listing.gearType}.`;
+  const url = absoluteUrl(`/ilan/${listing.id}`);
+  const image = listing.images[0]?.startsWith("http")
+    ? listing.images[0]
+    : absoluteUrl("/og-image.jpg");
+  return {
+    title,
+    description,
+    alternates: {
+      canonical: `/ilan/${listing.id}`,
+    },
+    openGraph: {
+      type: "article",
+      url,
+      title,
+      description,
+      images: [{ url: image }],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      images: [image],
+    },
+  };
+}
+
+export default async function ListingPage({ params }: ListingPageProps) {
+  const listing = await getListing(params);
 
   const createdAt = new Intl.DateTimeFormat("tr-TR", {
     day: "2-digit",

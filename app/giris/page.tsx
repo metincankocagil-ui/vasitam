@@ -2,6 +2,9 @@
 import Link from "next/link";
 import { loginAction } from "@/lib/actions";
 
+const fieldClass =
+  "w-full rounded-2xl border border-slate-200 bg-white/80 px-4 py-3 text-sm text-slate-900 placeholder:text-slate-400 focus:border-indigo-400 focus:outline-none focus:ring-2 focus:ring-indigo-100";
+
 const errorMessages: Record<string, string> = {
   missing: "E-posta ve şifre zorunludur.",
   invalid: "E-posta veya şifre hatalı.",
@@ -16,23 +19,27 @@ export default function LoginPage({ searchParams }: LoginPageProps) {
   const errorMessage = errorKey ? errorMessages[errorKey] ?? "Giriş yapılamadı." : "";
 
   return (
-    <div className="max-w-md mx-auto space-y-6">
-      <div className="space-y-2 text-center">
-        <h1 className="text-2xl font-bold">Giriş Yap</h1>
-        <p className="text-sm text-gray-600">
-          Hesabınıza giriş yaparak ilanlarınızı yönetin.
+    <div className="space-y-6">
+      <section className="space-y-3 text-center">
+        <p className="text-xs uppercase tracking-[0.4em] text-slate-500">Giriş</p>
+        <h1 className="text-3xl font-semibold text-slate-900">Hesabınıza giriş yapın</h1>
+        <p className="text-sm text-slate-600">
+          Kayıtlı ilanlarınızı yönetin, yeni ilan yayınlayın ve favorilerinizi takip edin.
         </p>
-      </div>
+      </section>
 
       {errorMessage && (
-        <div className="bg-red-50 border border-red-100 text-red-700 text-sm px-4 py-2 rounded">
+        <div className="rounded-2xl border border-red-200 bg-red-50 px-4 py-2 text-sm text-red-700">
           {errorMessage}
         </div>
       )}
 
-      <form action={loginAction} className="bg-white rounded-lg shadow p-6 space-y-4">
-        <div className="space-y-1">
-          <label htmlFor="email" className="text-sm font-medium text-gray-700">
+      <form
+        action={loginAction}
+        className="space-y-5 rounded-2xl border border-slate-200 bg-white/90 p-6 shadow-sm md:max-w-xl md:mx-auto"
+      >
+        <div className="space-y-1.5">
+          <label htmlFor="email" className="text-sm font-medium text-slate-700">
             E-posta
           </label>
           <input
@@ -41,15 +48,12 @@ export default function LoginPage({ searchParams }: LoginPageProps) {
             type="email"
             required
             placeholder="ornek@vasitan.com"
-            className="w-full border rounded px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-200"
+            className={fieldClass}
           />
         </div>
 
-        <div className="space-y-1">
-          <label
-            htmlFor="password"
-            className="text-sm font-medium text-gray-700"
-          >
+        <div className="space-y-1.5">
+          <label htmlFor="password" className="text-sm font-medium text-slate-700">
             Şifre
           </label>
           <input
@@ -58,35 +62,35 @@ export default function LoginPage({ searchParams }: LoginPageProps) {
             type="password"
             required
             placeholder="••••••••"
-            className="w-full border rounded px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-200"
+            className={fieldClass}
           />
         </div>
 
-        <div className="flex items-center justify-between text-sm">
-          <label className="flex items-center gap-2 text-gray-600">
+        <div className="flex items-center justify-between text-sm text-slate-600">
+          <label className="flex items-center gap-2">
             <input
               type="checkbox"
               name="remember"
-              className="w-4 h-4 rounded border-gray-300"
+              className="h-4 w-4 rounded border-slate-300 text-indigo-600 focus:ring-indigo-500"
             />
             Beni hatırla
           </label>
-          <Link className="text-blue-600 hover:underline" href="/sifre-sifirla">
-            Şifremi Unuttum
+          <Link className="text-indigo-600 hover:underline" href="/sifre-sifirla">
+            Şifremi unuttum
           </Link>
         </div>
 
         <button
           type="submit"
-          className="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium rounded py-2 text-sm"
+          className="w-full rounded-2xl bg-slate-900 px-4 py-3 text-sm font-semibold text-white transition hover:bg-slate-800"
         >
           Giriş Yap
         </button>
       </form>
 
-      <div className="text-center text-sm text-gray-600">
+      <div className="text-center text-sm text-slate-600">
         Henüz hesabın yok mu?{" "}
-        <Link className="text-blue-600 font-medium hover:underline" href="/kayit">
+        <Link className="font-semibold text-indigo-600 hover:text-indigo-700" href="/kayit">
           Kayıt ol
         </Link>
       </div>
