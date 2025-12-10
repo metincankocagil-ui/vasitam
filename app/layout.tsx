@@ -70,14 +70,7 @@ export default async function RootLayout({
             <Link href="/" className="text-2xl font-semibold tracking-tight text-slate-900">
               Vasıtan<span className="text-indigo-500">.com</span>
             </Link>
-            <nav className="hidden items-center gap-6 text-sm font-medium text-slate-600 md:flex">
-              <Link href="/" className="transition hover:text-slate-900">
-                Anasayfa
-              </Link>
-              <Link href="/ilan-ver" className="transition hover:text-slate-900">
-                İlan Ver
-              </Link>
-            </nav>
+            
             <div className="flex items-center gap-3 text-sm font-medium">
               <Link
                 href="/ilan-ver"

@@ -115,18 +115,31 @@ const vehicleTypeOptions = [
   { value: "OTHER", label: "Diğer" },
 ] as const;
 
-export default function CarQueryVehicleFields() {
+type CarQueryVehicleFieldsProps = {
+  defaultBrand?: string;
+  defaultModel?: string;
+  defaultVehicleType?: VehicleTypeValue;
+  defaultCategory?: string;
+};
+
+export default function CarQueryVehicleFields({
+  defaultBrand = "",
+  defaultModel = "",
+  defaultVehicleType = "AUTOMOBILE",
+  defaultCategory = "",
+}: CarQueryVehicleFieldsProps = {}) {
   const [makes, setMakes] = useState<VpicMake[]>([]);
   const [models, setModels] = useState<VpicModel[]>([]);
-  const [brandValue, setBrandValue] = useState("");
-  const [modelValue, setModelValue] = useState("");
-  const [vehicleTypeValue, setVehicleTypeValue] = useState<VehicleTypeValue>("AUTOMOBILE");
-  const [categoryValue, setCategoryValue] = useState("");
+  const [brandValue, setBrandValue] = useState(defaultBrand);
+  const [modelValue, setModelValue] = useState(defaultModel);
+  const [vehicleTypeValue, setVehicleTypeValue] =
+    useState<VehicleTypeValue>(defaultVehicleType);
+  const [categoryValue, setCategoryValue] = useState(defaultCategory);
 
   const [selectedMakeId, setSelectedMakeId] = useState("");
   const [selectedMakeName, setSelectedMakeName] = useState("");
-  const [useManualBrand, setUseManualBrand] = useState(false);
-  const [useManualModel, setUseManualModel] = useState(false);
+  const [useManualBrand, setUseManualBrand] = useState(Boolean(defaultBrand));
+  const [useManualModel, setUseManualModel] = useState(Boolean(defaultModel));
 
   const [loadingMakes, setLoadingMakes] = useState(true);
   const [loadingModels, setLoadingModels] = useState(false);

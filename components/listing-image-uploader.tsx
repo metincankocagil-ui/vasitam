@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useMemo, useRef, useState, type DragEvent } from "react";
+import { useCallback, useMemo, useRef, useState, type DragEvent } from "react";
 
 type ImageItem = {
   id: string;
@@ -8,21 +8,30 @@ type ImageItem = {
   name: string;
 };
 
+type ListingImageUploaderProps = {
+  initialImages?: string[];
+};
+
 const MAX_IMAGES = 8;
 const MAX_FILE_SIZE_MB = 4;
 const MAX_FILE_SIZE_BYTES = MAX_FILE_SIZE_MB * 1024 * 1024;
+const MAX_TOTAL_IMAGE_BYTES = 5 * 1024 * 1024;
+const MAX_ENTRY_BYTE_SIZE = 400_000;
 
-export default function ListingImageUploader() {
+export default function ListingImageUploader({ initialImages = [] }: ListingImageUploaderProps) {
   const fileInputRef = useRef<HTMLInputElement>(null);
-  const [images, setImages] = useState<ImageItem[]>([]);
-  const [coverId, setCoverId] = useState<string | null>(null);
+  const initialValues = useMemo(() => {
+    const normalized = normalizeInitialImages(initialImages);
+    return {
+      images: normalized,
+      coverId: normalized[0]?.id ?? null,
+    };
+  }, [initialImages]);
+  const [images, setImages] = useState<ImageItem[]>(() => initialValues.images);
+  const [coverId, setCoverId] = useState<string | null>(() => initialValues.coverId);
   const [error, setError] = useState<string>("");
-
-  useEffect(() => {
-    if (images.length > 0 && !coverId) {
-      setCoverId(images[0].id);
-    }
-  }, [coverId, images]);
+  const totalImageBytes = useMemo(() => getTotalBytes(images), [images]);
+  const exceedsTotalLimit = totalImageBytes > MAX_TOTAL_IMAGE_BYTES;
 
   const handleFiles = useCallback(
     async (filesList: FileList | null) => {
@@ -44,23 +53,37 @@ export default function ListingImageUploader() {
 
       try {
         const dataUrls = await Promise.all(selectedFiles.map(convertFileToDataUrl));
-        setImages((prev) => [
-          ...prev,
-          ...dataUrls.map((dataUrl, idx) => ({
+        const newImages = dataUrls.map((dataUrl, idx) => {
+          if (dataUrl.length > MAX_ENTRY_BYTE_SIZE) {
+            throw new Error("entry-too-large");
+          }
+          return {
             id: crypto.randomUUID(),
             dataUrl,
-            name: selectedFiles[idx]?.name ?? `Görsel ${prev.length + idx + 1}`,
-          })),
-        ]);
+            name: selectedFiles[idx]?.name ?? `Görsel ${images.length + idx + 1}`,
+          };
+        });
+        const nextImages = [...images, ...newImages];
+        if (getTotalBytes(nextImages) > MAX_TOTAL_IMAGE_BYTES) {
+          setError("Görsellerin toplam boyutu 5MB sınırını aşamaz. Lütfen daha küçük görseller seçin.");
+          return;
+        }
+
+        setImages(nextImages);
+        setCoverId((current) => current ?? nextImages[0]?.id ?? null);
         setError("");
         if (fileInputRef.current) {
           fileInputRef.current.value = "";
         }
-      } catch {
-        setError("Görseller yüklenirken bir sorun oluştu. Lütfen tekrar deneyin.");
+      } catch (err) {
+        if ((err as Error)?.message === "entry-too-large") {
+          setError("Seçtiğiniz görsellerden biri çok büyük. Lütfen daha küçük bir görsel seçin.");
+        } else {
+          setError("Görseller yüklenirken bir sorun oluştu. Lütfen tekrar deneyin.");
+        }
       }
     },
-    [images.length],
+    [images],
   );
 
   const handleSelectFiles = useCallback(() => {
@@ -142,6 +165,11 @@ export default function ListingImageUploader() {
           {error}
         </div>
       )}
+      {!error && exceedsTotalLimit && (
+        <div className="rounded border border-amber-200 bg-amber-50 px-3 py-2 text-xs text-amber-800">
+          Görsellerin toplam boyutu 5MB sınırını aşıyor. Lütfen bazı görselleri kaldırın.
+        </div>
+      )}
 
       {images.length > 0 && (
         <div className="grid gap-4 md:grid-cols-3">
@@ -209,4 +237,19 @@ function convertFileToDataUrl(file: File) {
     reader.onerror = reject;
     reader.readAsDataURL(file);
   });
+}
+
+function normalizeInitialImages(images: string[]) {
+  return images
+    .filter((image): image is string => typeof image === "string" && image.length > 0)
+    .slice(0, MAX_IMAGES)
+    .map((dataUrl, idx) => ({
+      id: `initial-image-${idx}`,
+      dataUrl,
+      name: `Görsel ${idx + 1}`,
+    }));
+}
+
+function getTotalBytes(items: ImageItem[]) {
+  return items.reduce((sum, item) => sum + item.dataUrl.length, 0);
 }

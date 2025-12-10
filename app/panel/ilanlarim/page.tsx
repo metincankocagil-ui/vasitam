@@ -122,12 +122,12 @@ export default async function MyListingsPage() {
                           Görüntüle
                         </Link>
                         <span className="text-gray-300">|</span>
-                        <button
-                          type="button"
+                        <Link
+                          href={`/panel/ilanlarim/${listing.id}`}
                           className="text-gray-600 hover:text-gray-900"
                         >
                           Düzenle
-                        </button>
+                        </Link>
                       </div>
                     </td>
                   </tr>

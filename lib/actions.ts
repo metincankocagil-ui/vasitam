@@ -53,6 +53,81 @@ function redirectWithError(path: string, error: string): never {
   redirect(url.pathname + "?" + url.searchParams.toString());
 }
 
+type ListingFormPayload = {
+  title: string;
+  description: string;
+  listingType: ListingType;
+  price: number;
+  vehicleType: VehicleType;
+  brand: string;
+  model: string;
+  year: number;
+  fuelType: FuelType;
+  gearType: GearType;
+  km: number;
+  color: string | null;
+  city: string;
+  district: string | null;
+  images: string[];
+  isDamaged: boolean;
+};
+
+function parseListingFormData(formData: FormData): ListingFormPayload | null {
+  const title = getString(formData, "title");
+  const description = getString(formData, "description");
+  const listingType =
+    getEnumValue(ListingType, getString(formData, "listingType")) ?? ListingType.FOR_SALE;
+  const price = Number(getString(formData, "price"));
+  const vehicleType = getEnumValue(VehicleType, getString(formData, "vehicleType"));
+  const brand = getString(formData, "brand");
+  const model = getString(formData, "model");
+  const year = Number(getString(formData, "year"));
+  const fuelType = getEnumValue(FuelType, getString(formData, "fuelType"));
+  const gearType = getEnumValue(GearType, getString(formData, "gearType"));
+  const km = Number(getString(formData, "km"));
+  const color = getString(formData, "color");
+  const city = getString(formData, "city");
+  const district = getString(formData, "district");
+  const isDamaged = formData.get("isDamaged") === "on";
+  const images = extractUploadedImages(formData);
+
+  if (
+    !title ||
+    !description ||
+    !vehicleType ||
+    !brand ||
+    !model ||
+    Number.isNaN(price) ||
+    Number.isNaN(year) ||
+    Number.isNaN(km) ||
+    !city ||
+    !fuelType ||
+    !gearType ||
+    images.length === 0
+  ) {
+    return null;
+  }
+
+  return {
+    title,
+    description,
+    listingType,
+    price,
+    vehicleType,
+    brand,
+    model,
+    year,
+    fuelType,
+    gearType,
+    km,
+    color: color || null,
+    city,
+    district: district || null,
+    images,
+    isDamaged,
+  };
+}
+
 export async function registerAction(formData: FormData) {
   const email = getString(formData, "email").toLowerCase();
   const password = getString(formData, "password");
@@ -110,65 +185,50 @@ export async function logoutAction() {
 
 export async function createListingAction(formData: FormData) {
   const ownerId = await requireUserId();
-
-  const title = getString(formData, "title");
-  const description = getString(formData, "description");
-  const listingType =
-    getEnumValue(ListingType, getString(formData, "listingType")) ?? ListingType.FOR_SALE;
-  const price = Number(getString(formData, "price"));
-  const vehicleType = getEnumValue(VehicleType, getString(formData, "vehicleType"));
-  const brand = getString(formData, "brand");
-  const model = getString(formData, "model");
-  const year = Number(getString(formData, "year"));
-  const fuelType = getEnumValue(FuelType, getString(formData, "fuelType"));
-  const gearType = getEnumValue(GearType, getString(formData, "gearType"));
-  const km = Number(getString(formData, "km"));
-  const color = getString(formData, "color");
-  const city = getString(formData, "city");
-  const district = getString(formData, "district");
-  const isDamaged = formData.get("isDamaged") === "on";
-  const images = extractUploadedImages(formData);
-
-  if (
-    !title ||
-    !description ||
-    !vehicleType ||
-    !brand ||
-    !model ||
-    Number.isNaN(price) ||
-    Number.isNaN(year) ||
-    Number.isNaN(km) ||
-    !city ||
-    !fuelType ||
-    !gearType ||
-    images.length === 0
-  ) {
+  const payload = parseListingFormData(formData);
+  if (!payload) {
     redirectWithError("/ilan-ver", "missing");
   }
-
   const listing = await prisma.listing.create({
     data: {
-      title,
-      description,
-      price,
-      vehicleType,
-      brand,
-      model,
-      year,
-      fuelType,
-      gearType,
-      km,
-      color: color || null,
-      city,
-      district: district || null,
-      listingType,
+      ...payload,
       ownerId,
-      images,
-      isDamaged,
     },
   });
 
   revalidatePath("/");
   revalidatePath("/panel/ilanlarim");
   redirect(`/ilan/${listing.id}`);
+}
+
+export async function updateListingAction(formData: FormData) {
+  const ownerId = await requireUserId();
+  const listingId = Number(getString(formData, "listingId"));
+  if (!Number.isInteger(listingId)) {
+    redirectWithError("/panel/ilanlarim", "missing");
+  }
+
+  const listing = await prisma.listing.findUnique({
+    where: { id: listingId },
+    select: { ownerId: true },
+  });
+
+  if (!listing || listing.ownerId !== ownerId) {
+    redirectWithError("/panel/ilanlarim", "unauthorized");
+  }
+
+  const payload = parseListingFormData(formData);
+  if (!payload) {
+    redirectWithError(`/panel/ilanlarim/${listingId}`, "missing");
+  }
+
+  await prisma.listing.update({
+    where: { id: listingId },
+    data: payload,
+  });
+
+  revalidatePath("/");
+  revalidatePath("/panel/ilanlarim");
+  revalidatePath(`/ilan/${listingId}`);
+  redirect(`/ilan/${listingId}`);
 }
