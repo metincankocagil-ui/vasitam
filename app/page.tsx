@@ -57,38 +57,18 @@ const vehicleFilters = [
 
 const formatNumber = (value: number) => value.toLocaleString("tr-TR");
 
-type ShowcaseShortcut =
-  | { label: string; icon: string; accent?: string; badge?: string; links?: never }
-  | { label: string; icon: string; accent?: string; badge?: string; links: readonly string[] };
-
-const showcaseShortcuts: readonly ShowcaseShortcut[] = [
-  { label: "Acil Acil", icon: "‼️", accent: "text-rose-600" },
-  { label: "Son 48 Saat / 1 Hafta / 1 Ay", icon: "🕒", accent: "text-slate-600" },
-  {
-    label: "Yepyeni ile Yenilenmiş Araçlar",
-    icon: "✨",
-    accent: "text-amber-600",
-    badge: "yeni",
-  },
-  {
-    label: "Test & Ekspertiz",
-    icon: "🛠️",
-    links: ["Ekspertiz Merkezleri", "Tümünü Göster"] as const,
-  },
-] as const;
-
 const showcaseCategoryGroups = [
   {
     label: "Vasıta",
     count: 799068,
     icon: "🚙",
     items: [
-      { label: "Otomobil", count: 394118 },
-      { label: "Arazi, SUV & Pickup", count: 104527 },
-      { label: "Elektrikli Araçlar", count: 8866 },
-      { label: "Motosiklet", count: 56298 },
-      { label: "Ticari Araçlar", count: 23217 },
-      { label: "Kiralık Araçlar", count: 11844 },
+      { label: "Otomobil", count: 394118, href: "/kategori/otomobil" },
+      { label: "Motosiklet", count: 56298, href: "/kategori/motosiklet" },
+      { label: "SUV & Pickup", count: 104527, href: "/kategori/suv" },
+      { label: "Elektrikli Araçlar", count: 8866, href: "/kategori/elektrikli-araclar" },
+      { label: "Ağır Vasıta", count: 23217, href: "/kategori/agri-vasita" },
+      { label: "Kiralık Araçlar", count: 11844, href: "/kategori/kiralik" },
     ],
   },
 ] as const;
@@ -196,54 +176,33 @@ export default async function HomePage({ searchParams }: HomePageProps) {
       {showcaseListings.length > 0 && (
         <section className="space-y-5 rounded-3xl border border-slate-200 bg-white/80 p-4 shadow-sm">
           <div className="grid gap-6 lg:grid-cols-[240px_1fr]">
-            <aside className="space-y-6 rounded-2xl border border-slate-100 bg-slate-50/60 p-4">
-              <div className="space-y-3">
-                {showcaseShortcuts.map((item) => (
-                  <div key={item.label} className="rounded-xl border border-slate-100 bg-white px-3 py-2">
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center gap-2 text-sm font-semibold text-slate-700">
-                        <span>{item.icon}</span>
-                        <span className={item.accent ?? "text-slate-700"}>{item.label}</span>
-                      </div>
-                      {item.badge && (
-                        <span className="rounded-full bg-amber-100 px-2 py-0.5 text-[10px] font-semibold uppercase text-amber-700">
-                          {item.badge}
-                        </span>
-                      )}
+            <aside className="space-y-4 rounded-3xl border border-slate-200 bg-slate-100/10 p-4 text-slate-800">
+              {showcaseCategoryGroups.map((group) => (
+                <div
+                  key={group.label}
+                  className="space-y-3 rounded-2xl border border-slate-100 bg-white/70 p-4 text-sm shadow"
+                >
+                  <div className="flex items-center justify-between text-xs uppercase tracking-wide text-slate-400">
+                    <div className="flex items-center gap-2 text-base font-semibold text-slate-900">
+                      <span>{group.icon}</span>
+                      <span>{group.label}</span>
                     </div>
-                    {item.links && (
-                      <div className="mt-2 flex flex-wrap gap-2 text-xs text-indigo-600">
-                        {item.links.map((link) => (
-                          <button key={link} type="button" className="font-semibold hover:underline">
-                            {link}
-                          </button>
-                        ))}
-                      </div>
-                    )}
+                    <span>{formatNumber(group.count)}</span>
                   </div>
-                ))}
-              </div>
-              <div className="space-y-4">
-                {showcaseCategoryGroups.map((group) => (
-                  <div key={group.label} className="rounded-2xl border border-slate-100 bg-white p-3 text-sm text-slate-700">
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center gap-2 font-semibold">
-                        <span>{group.icon}</span>
-                        <span>{group.label}</span>
-                      </div>
-                      <span className="text-xs text-slate-500">{formatNumber(group.count)}</span>
-                    </div>
-                    <ul className="mt-3 space-y-1 text-xs">
-                      {group.items.map((item) => (
-                        <li key={item.label} className="flex items-center justify-between text-slate-600">
-                          <span className="hover:text-indigo-600 hover:underline">{item.label}</span>
-                          <span>{formatNumber(item.count)}</span>
-                        </li>
-                      ))}
-                    </ul>
+                  <div className="grid gap-2">
+                    {group.items.map((item) => (
+                      <Link
+                        key={item.label}
+                        href={item.href}
+                        className="flex items-center justify-between rounded-xl border border-slate-100 bg-white px-3 py-2 text-xs font-semibold text-slate-700 transition hover:border-slate-300 hover:bg-slate-50"
+                      >
+                        <span>{item.label}</span>
+                        <span className="text-slate-500">{formatNumber(item.count)}</span>
+                      </Link>
+                    ))}
                   </div>
-                ))}
-              </div>
+                </div>
+              ))}
             </aside>
             <div className="space-y-4">
               <div className="flex flex-wrap items-center justify-between gap-4">
