@@ -64,11 +64,11 @@ const showcaseCategoryGroups = [
     icon: "🚙",
     items: [
       { label: "Otomobil", count: 394118, href: "/kategori/otomobil" },
+      { label: "SUV", count: 104527, href: "/kategori/suv" },
       { label: "Motosiklet", count: 56298, href: "/kategori/motosiklet" },
-      { label: "SUV & Pickup", count: 104527, href: "/kategori/suv" },
-      { label: "Elektrikli Araçlar", count: 8866, href: "/kategori/elektrikli-araclar" },
-      { label: "Ağır Vasıta", count: 23217, href: "/kategori/agri-vasita" },
-      { label: "Kiralık Araçlar", count: 11844, href: "/kategori/kiralik" },
+      { label: "Ticari", count: 23217, href: "/kategori/ticari" },
+      { label: "Kamyon / Pickup", count: 18000, href: "/kategori/pickup-kamyon" },
+      { label: "Diğer", count: 8866, href: "/kategori/diger" },
     ],
   },
 ] as const;

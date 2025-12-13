@@ -53,6 +53,16 @@ function redirectWithError(path: string, error: string): never {
   redirect(url.pathname + "?" + url.searchParams.toString());
 }
 
+async function generateListingCode() {
+  while (true) {
+    const code = Array.from({ length: 10 }, () => Math.floor(Math.random() * 10)).join("");
+    const existing = await prisma.listing.findUnique({ where: { code } });
+    if (!existing) {
+      return code;
+    }
+  }
+}
+
 type ListingFormPayload = {
   title: string;
   description: string;
@@ -192,6 +202,7 @@ export async function createListingAction(formData: FormData) {
   const listing = await prisma.listing.create({
     data: {
       ...payload,
+      code: await generateListingCode(),
       ownerId,
     },
   });

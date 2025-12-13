@@ -183,6 +183,11 @@ function normalizeImage(url) {
   return url.includes("?") ? url : `${url}?auto=format&fit=crop&w=800&q=80`;
 }
 
+function generateSeedCode(index) {
+  const base = 2586351000;
+  return String(base + index).padStart(10, "0");
+}
+
 async function main() {
   const user = await prisma.user.upsert({
     where: { email: "demo@vasitan.com" },
@@ -198,10 +203,11 @@ async function main() {
 
   await prisma.listing.deleteMany({ where: { ownerId: user.id } });
 
-  for (const listing of demoListings) {
+  for (const [index, listing] of demoListings.entries()) {
     await prisma.listing.create({
       data: {
         ...listing,
+        code: generateSeedCode(index),
         ownerId: user.id,
         images: listing.images.filter(Boolean).map(normalizeImage),
       },

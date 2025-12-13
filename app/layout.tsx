@@ -66,11 +66,34 @@ export default async function RootLayout({
       <body className="min-h-screen bg-gradient-to-b from-slate-50 via-white to-white text-slate-900 antialiased">
         <div className="pointer-events-none fixed inset-x-0 top-0 -z-10 h-full bg-[radial-gradient(circle_at_top,_rgba(180,198,252,0.65),_rgba(255,255,255,0))]" />
         <header className="sticky top-0 z-20 border-b border-slate-200/70 bg-white/90 backdrop-blur">
-          <div className="mx-auto flex h-20 max-w-6xl items-center justify-between px-4">
+          <div className="mx-auto flex h-20 max-w-6xl items-center justify-between gap-6 px-4">
             <Link href="/" className="text-2xl font-semibold tracking-tight text-slate-900">
               Vasıtan<span className="text-indigo-500">.com</span>
             </Link>
-            
+            <div className="flex flex-1 justify-center px-4">
+              <form action="/ara" className="relative w-full max-w-xl" method="GET">
+                <label htmlFor="global-search" className="sr-only">
+                  Ara
+                </label>
+                <input
+                  id="global-search"
+                  name="q"
+                  type="search"
+                  placeholder="Kelime, ilan no, mağaza adı ile ara"
+                  className="w-full rounded-full border border-slate-200 bg-white/80 px-5 py-2.5 text-sm text-slate-900 placeholder:text-slate-400/60 shadow-sm focus:border-indigo-400 focus:outline-none focus:ring-2 focus:ring-indigo-100"
+                />
+                <svg
+                  viewBox="0 0 24 24"
+                  className="pointer-events-none absolute right-4 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400"
+                  aria-hidden="true"
+                >
+                  <path
+                    d="M15.5 14h-.79l-.28-.27A6 6 0 1 0 14 15.5l.27.28v.79L20 21.5 21.5 20l-6-6zM10.5 15A4.5 4.5 0 1 1 15 10.5 4.5 4.5 0 0 1 10.5 15z"
+                    fill="currentColor"
+                  />
+                </svg>
+              </form>
+            </div>
             <div className="flex items-center gap-3 text-sm font-medium">
               <Link
                 href="/ilan-ver"

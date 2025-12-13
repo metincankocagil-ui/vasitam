@@ -62,6 +62,7 @@ async function getListing(params: Promise<{ id: string }>) {
       isDamaged: true,
       city: true,
       district: true,
+      code: true,
       images: true,
       createdAt: true,
       owner: {
@@ -208,6 +209,11 @@ export default async function ListingPage({ params }: ListingPageProps) {
               {listing.owner?.name ?? "İlan Sahibi"}
             </p>
             <p className="text-sm text-slate-500">{listing.owner?.email ?? "E-posta paylaşılmamış"}</p>
+            {listing.code && (
+              <p className="text-xs font-semibold text-slate-500">
+                İlan No: <span className="font-mono text-slate-900">{listing.code}</span>
+              </p>
+            )}
             <p className="mt-3 text-xs text-slate-400">
               Güvenli iletişim için platform üzerinden mesaj gönderin.
             </p>
