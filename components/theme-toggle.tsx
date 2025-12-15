@@ -49,19 +49,19 @@ export default function ThemeToggle() {
         aria-label="Tema değiştir"
         aria-pressed={isDark}
         onClick={() => setTheme(isDark ? "light" : "dark")}
-        className="relative flex h-10 w-28 items-center rounded-full border border-slate-200 bg-white/80 px-1 transition hover:border-indigo-300 focus:outline-none focus:ring-2 focus:ring-indigo-200"
+        className="relative flex h-8 w-20 items-center rounded-full border border-slate-200 bg-white/80 px-1 transition hover:border-indigo-300 focus:outline-none focus:ring-2 focus:ring-indigo-200"
       >
         <span
-          className={`absolute inset-1 flex items-center justify-between px-3 text-lg tracking-wide text-slate-500 transition ${
+          className={`absolute inset-1 flex items-center justify-between px-2 text-base tracking-wide text-slate-500 transition ${
             isDark ? "text-slate-400" : "text-slate-600"
           }`}
         >
           <span aria-hidden="true">🌞</span>
-          <span aria-hidden="true">🌙</span>
+          <span aria-hidden="true" className="relative left-1">🌙</span>
         </span>
         <span
-          className={`absolute inset-y-1 w-10 rounded-full bg-gradient-to-br from-indigo-500 to-indigo-600 shadow transition ${
-            isDark ? "translate-x-[64px]" : "translate-x-0"
+          className={`absolute inset-y-1 w-9 h-[22px] rounded-full bg-gradient-to-br from-indigo-500 to-indigo-600 shadow transition ${
+            isDark ? "translate-x-[48px]" : "translate-x-0"
           }`}
           aria-hidden="true"
         />
