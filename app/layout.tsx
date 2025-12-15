@@ -5,6 +5,7 @@ import "./globals.css";
 import { getCurrentUser } from "@/lib/auth";
 import { logoutAction } from "@/lib/actions";
 import { absoluteUrl, DEFAULT_DESCRIPTION, DEFAULT_KEYWORDS, DEFAULT_TITLE, SITE_URL } from "@/lib/seo";
+import ThemeToggle from "@/components/theme-toggle";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -169,6 +170,7 @@ export default async function RootLayout({
                   >
                     Üye Ol
                   </Link>
+                  <ThemeToggle />
                 </>
               )}
             </div>

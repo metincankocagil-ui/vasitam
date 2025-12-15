@@ -16,3 +16,59 @@ body {
   background: rgba(79, 70, 229, 0.2);
   color: inherit;
 }
+
+body.dark-mode {
+  color-scheme: dark;
+  background-color: #0f172a;
+  color: #e2e8f0;
+  background-image: linear-gradient(to bottom, #0f172a, #0b1223);
+}
+
+body.dark-mode .bg-white,
+body.dark-mode .bg-white\/80,
+body.dark-mode .bg-white\/90,
+body.dark-mode .bg-white\/95,
+body.dark-mode .bg-white\/70 {
+  background-color: rgba(15, 23, 42, 0.95) !important;
+}
+
+body.dark-mode .bg-slate-50,
+body.dark-mode .bg-slate-100,
+body.dark-mode .bg-slate-200 {
+  background-color: rgba(30, 41, 59, 0.85) !important;
+}
+
+body.dark-mode .bg-white\/5,
+body.dark-mode .bg-white\/10 {
+  background-color: rgba(255, 255, 255, 0.08) !important;
+}
+
+body.dark-mode .text-slate-900,
+body.dark-mode .text-slate-800,
+body.dark-mode .text-black {
+  color: #f8fafc !important;
+}
+
+body.dark-mode .text-slate-700,
+body.dark-mode .text-slate-600 {
+  color: #e2e8f0 !important;
+}
+
+body.dark-mode .text-slate-500,
+body.dark-mode .text-slate-400 {
+  color: #94a3b8 !important;
+}
+
+body.dark-mode .border-slate-200,
+body.dark-mode .border-slate-100,
+body.dark-mode .border-slate-50 {
+  border-color: #334155 !important;
+}
+
+body.dark-mode .text-indigo-600 {
+  color: #a5b4fc !important;
+}
+
+body.dark-mode .bg-white\/80 {
+  backdrop-filter: blur(10px);
+}

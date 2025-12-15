@@ -136,35 +136,42 @@ export default async function HomePage({ searchParams }: HomePageProps) {
 
   return (
     <div className="space-y-12">
-      <section className="rounded-3xl border border-slate-200 bg-white/80 px-6 py-10 text-slate-900 shadow-sm">
+      <section className="rounded-3xl border border-slate-200 bg-white/80 px-6 py-10 text-slate-900 shadow-sm dark-mode:border-slate-700 dark-mode:bg-slate-900/80 dark-mode:text-white">
         <div className="grid gap-8 md:grid-cols-[minmax(0,1.1fr)_minmax(0,.9fr)]">
           <div className="space-y-4">
-            <p className="text-sm font-semibold text-slate-600">Türkiye&apos;nin vasıta merkezi</p>
-            <h1 className="text-4xl font-semibold leading-tight md:text-5xl">
+            <p className="text-sm font-semibold text-slate-600 dark-mode:text-slate-200">Türkiye&apos;nin vasıta merkezi</p>
+            <h1 className="text-4xl font-semibold leading-tight text-slate-900 dark-mode:text-white md:text-5xl">
               Marka ve modele göre saniyeler içinde araç ara.
             </h1>
-            <p className="text-sm text-slate-600 md:text-base">
+            <p className="text-sm text-slate-600 dark-mode:text-slate-300 md:text-base">
               Tüm vasıta segmentlerinde güncel ilanlar, tek ekranda sade bir arama deneyimi.
             </p>
             <div className="flex flex-wrap gap-3">
               <Link
                 href="/ilan-ver"
-                className="rounded-full bg-slate-900 px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-slate-800"
+                className="rounded-full bg-slate-900 px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-slate-800 dark-mode:bg-indigo-500 dark-mode:hover:bg-indigo-400"
               >
                 İlan oluştur
               </Link>
               <Link
                 href="#listings"
-                className="rounded-full border border-slate-200 px-5 py-2.5 text-sm font-semibold text-slate-700 transition hover:border-slate-300"
+                className="rounded-full border border-slate-200 px-5 py-2.5 text-sm font-semibold text-slate-700 transition hover:border-slate-300 dark-mode:border-slate-600 dark-mode:text-slate-200"
               >
                 Son ilanlar
               </Link>
             </div>
             <dl className="grid gap-4 sm:grid-cols-3">
               {stats.map((stat) => (
-                <div key={stat.label} className="rounded-2xl border border-slate-100 bg-slate-50/80 p-3">
-                  <dt className="text-xs uppercase tracking-wider text-slate-500">{stat.label}</dt>
-                  <dd className="mt-1 text-2xl font-semibold">{stat.value}</dd>
+                <div
+                  key={stat.label}
+                  className="rounded-2xl border border-slate-100 bg-slate-50/80 p-4 shadow dark-mode:border-slate-600 dark-mode:bg-slate-800/70 dark-mode:shadow-[0_15px_35px_rgba(2,6,23,0.65)]"
+                >
+                  <dt className="text-xs uppercase tracking-wider text-slate-500 dark-mode:text-slate-300">
+                    {stat.label}
+                  </dt>
+                  <dd className="mt-1 text-2xl font-semibold text-slate-900 dark-mode:text-slate-50">
+                    {stat.value}
+                  </dd>
                 </div>
               ))}
             </dl>

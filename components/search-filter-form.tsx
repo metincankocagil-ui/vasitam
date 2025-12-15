@@ -278,11 +278,13 @@ export default function SearchFilterForm() {
     <form
       action="/arama"
       method="GET"
-      className="flex flex-col gap-3 rounded-2xl border border-slate-100 bg-white/90 p-4 text-sm text-slate-700 shadow-sm"
+      className="flex flex-col gap-3 rounded-2xl border border-slate-100 bg-white/90 p-4 text-sm text-slate-700 shadow-sm dark-mode:border-slate-700 dark-mode:bg-slate-900/70 dark-mode:text-slate-100"
     >
       <div className="flex flex-wrap gap-3">
         <div className="flex-1 min-w-[180px]">
-          <label className="text-xs uppercase tracking-wide text-slate-500">Marka</label>
+          <label className="text-xs uppercase tracking-wide text-slate-500 dark-mode:text-slate-300">
+            Marka
+          </label>
           {manualBrand ? (
             <input
               type="text"
@@ -290,14 +292,14 @@ export default function SearchFilterForm() {
               value={brand}
               onChange={(event) => setBrand(event.target.value)}
               placeholder="Marka girin"
-              className="mt-1 w-full rounded-2xl border border-slate-200 bg-white px-4 py-3 text-base text-slate-900 placeholder:text-slate-400 focus:border-indigo-400 focus:outline-none"
+              className="mt-1 w-full rounded-2xl border border-slate-200 bg-white px-4 py-3 text-base text-slate-900 placeholder:text-slate-400 focus:border-indigo-400 focus:outline-none dark-mode:border-slate-600 dark-mode:bg-slate-800/80 dark-mode:text-slate-100 dark-mode:placeholder:text-slate-400"
             />
           ) : (
             <select
               name="brand"
               value={brand}
               onChange={(event) => setBrand(event.target.value)}
-              className="mt-1 w-full rounded-2xl border border-slate-200 bg-white px-4 py-3 text-base text-slate-900 focus:border-indigo-400 focus:outline-none"
+              className="mt-1 w-full rounded-2xl border border-slate-200 bg-white px-4 py-3 text-base text-slate-900 focus:border-indigo-400 focus:outline-none dark-mode:border-slate-600 dark-mode:bg-slate-800/80 dark-mode:text-slate-100"
             >
               {loadingMakes && <option>Markalar yükleniyor...</option>}
               {!loadingMakes &&
@@ -310,7 +312,9 @@ export default function SearchFilterForm() {
           )}
         </div>
         <div className="flex-1 min-w-[180px]">
-          <label className="text-xs uppercase tracking-wide text-slate-500">Model</label>
+          <label className="text-xs uppercase tracking-wide text-slate-500 dark-mode:text-slate-300">
+            Model
+          </label>
           {manualModel ? (
             <input
               type="text"
@@ -318,7 +322,7 @@ export default function SearchFilterForm() {
               value={model}
               onChange={(event) => setModel(event.target.value)}
               placeholder="Model girin"
-              className="mt-1 w-full rounded-2xl border border-slate-200 bg-white px-4 py-3 text-base text-slate-900 placeholder:text-slate-400 focus:border-indigo-400 focus:outline-none"
+              className="mt-1 w-full rounded-2xl border border-slate-200 bg-white px-4 py-3 text-base text-slate-900 placeholder:text-slate-400 focus:border-indigo-400 focus:outline-none dark-mode:border-slate-600 dark-mode:bg-slate-800/80 dark-mode:text-slate-100 dark-mode:placeholder:text-slate-400"
             />
           ) : (
             <select
@@ -326,7 +330,7 @@ export default function SearchFilterForm() {
               value={model}
               onChange={(event) => setModel(event.target.value)}
               disabled={loadingModels || models.length === 0}
-              className="mt-1 w-full rounded-2xl border border-slate-200 bg-white px-4 py-3 text-base text-slate-900 focus:border-indigo-400 focus:outline-none disabled:bg-slate-100"
+              className="mt-1 w-full rounded-2xl border border-slate-200 bg-white px-4 py-3 text-base text-slate-900 focus:border-indigo-400 focus:outline-none disabled:bg-slate-100 dark-mode:border-slate-600 dark-mode:bg-slate-800/80 dark-mode:text-slate-100 dark-mode:disabled:bg-slate-700"
             >
               {loadingModels && <option>Modeller yükleniyor...</option>}
               {!loadingModels && models.length === 0 && <option>Model bulunamadı</option>}
@@ -340,7 +344,9 @@ export default function SearchFilterForm() {
           )}
         </div>
         <div className="flex-1 min-w-[150px]">
-          <label className="text-xs uppercase tracking-wide text-slate-500">Şehir</label>
+          <label className="text-xs uppercase tracking-wide text-slate-500 dark-mode:text-slate-300">
+            Şehir
+          </label>
           {provinceNames.length === 0 ? (
             <input
               type="text"
@@ -348,14 +354,14 @@ export default function SearchFilterForm() {
               value={city}
               onChange={(event) => setCity(event.target.value)}
               placeholder="Şehir girin"
-              className="mt-1 w-full rounded-2xl border border-slate-200 bg-white px-4 py-3 text-base text-slate-900 placeholder:text-slate-400 focus:border-indigo-400 focus:outline-none"
+              className="mt-1 w-full rounded-2xl border border-slate-200 bg-white px-4 py-3 text-base text-slate-900 placeholder:text-slate-400 focus:border-indigo-400 focus:outline-none dark-mode:border-slate-600 dark-mode:bg-slate-800/80 dark-mode:text-slate-100 dark-mode:placeholder:text-slate-400"
             />
           ) : (
             <select
               name="city"
               value={city}
               onChange={(event) => setCity(event.target.value)}
-              className="mt-1 w-full rounded-2xl border border-slate-200 bg-white px-4 py-3 text-base text-slate-900 focus:border-indigo-400 focus:outline-none"
+              className="mt-1 w-full rounded-2xl border border-slate-200 bg-white px-4 py-3 text-base text-slate-900 focus:border-indigo-400 focus:outline-none dark-mode:border-slate-600 dark-mode:bg-slate-800/80 dark-mode:text-slate-100"
             >
               {loadingCities && <option>Şehirler yükleniyor...</option>}
               {!loadingCities &&
@@ -368,7 +374,9 @@ export default function SearchFilterForm() {
           )}
         </div>
         <div className="flex-1 min-w-[150px]">
-          <label className="text-xs uppercase tracking-wide text-slate-500">İlçe</label>
+          <label className="text-xs uppercase tracking-wide text-slate-500 dark-mode:text-slate-300">
+            İlçe
+          </label>
           {districts.length === 0 ? (
             <input
               type="text"
@@ -376,14 +384,14 @@ export default function SearchFilterForm() {
               value={district}
               onChange={(event) => setDistrict(event.target.value)}
               placeholder="İlçe girin"
-              className="mt-1 w-full rounded-2xl border border-slate-200 bg-white px-4 py-3 text-base text-slate-900 placeholder:text-slate-400 focus:border-indigo-400 focus:outline-none"
+              className="mt-1 w-full rounded-2xl border border-slate-200 bg-white px-4 py-3 text-base text-slate-900 placeholder:text-slate-400 focus:border-indigo-400 focus:outline-none dark-mode:border-slate-600 dark-mode:bg-slate-800/80 dark-mode:text-slate-100 dark-mode:placeholder:text-slate-400"
             />
           ) : (
             <select
               name="district"
               value={district}
               onChange={(event) => setDistrict(event.target.value)}
-              className="mt-1 w-full rounded-2xl border border-slate-200 bg-white px-4 py-3 text-base text-slate-900 focus:border-indigo-400 focus:outline-none"
+              className="mt-1 w-full rounded-2xl border border-slate-200 bg-white px-4 py-3 text-base text-slate-900 focus:border-indigo-400 focus:outline-none dark-mode:border-slate-600 dark-mode:bg-slate-800/80 dark-mode:text-slate-100"
             >
               {districts.map((item) => (
                 <option key={item.name} value={item.name}>
@@ -394,12 +402,14 @@ export default function SearchFilterForm() {
           )}
         </div>
         <div className="flex-1 min-w-[150px]">
-          <label className="text-xs uppercase tracking-wide text-slate-500">Vasıta tipi</label>
+          <label className="text-xs uppercase tracking-wide text-slate-500 dark-mode:text-slate-300">
+            Vasıta tipi
+          </label>
           <select
             name="vehicleType"
             value={vehicleType}
             onChange={(event) => setVehicleType(event.target.value as VehicleTypeValue)}
-            className="mt-1 w-full rounded-2xl border border-slate-200 bg-white px-4 py-3 text-base text-slate-900 focus:border-indigo-400 focus:outline-none"
+            className="mt-1 w-full rounded-2xl border border-slate-200 bg-white px-4 py-3 text-base text-slate-900 focus:border-indigo-400 focus:outline-none dark-mode:border-slate-600 dark-mode:bg-slate-800/80 dark-mode:text-slate-100"
           >
             <option value="">Tümü</option>
             {vehicleTypeOptions.map((option) => (
@@ -412,14 +422,14 @@ export default function SearchFilterForm() {
         <div className="flex min-w-[140px] items-end">
           <button
             type="submit"
-            className="w-full rounded-2xl bg-gradient-to-r from-indigo-500 via-sky-500 to-blue-500 px-6 py-3 text-base font-semibold text-white shadow-lg shadow-indigo-500/30 transition hover:brightness-110"
+            className="w-full rounded-2xl bg-gradient-to-r from-indigo-500 via-sky-500 to-blue-500 px-6 py-3 text-base font-semibold text-white shadow-lg shadow-indigo-500/30 transition hover:brightness-110 dark-mode:shadow-indigo-900/50"
           >
             Ara
           </button>
         </div>
       </div>
       {error && (
-        <div className="rounded-2xl border border-amber-200 bg-amber-50 px-3 py-2 text-xs text-amber-700">
+        <div className="rounded-2xl border border-amber-200 bg-amber-50 px-3 py-2 text-xs text-amber-700 dark-mode:border-amber-400/70 dark-mode:bg-amber-500/10 dark-mode:text-amber-200">
           {error}
         </div>
       )}
