@@ -60,7 +60,7 @@ export default function ThemeToggle() {
           <span aria-hidden="true" className="relative left-1">🌙</span>
         </span>
         <span
-          className={`absolute inset-y-1 w-9 h-[22px] rounded-full bg-gradient-to-br from-indigo-500 to-indigo-600 shadow transition ${
+          className={`absolute inset-y-1 w-[22px] h-[22px] rounded-full bg-gradient-to-br from-indigo-500 to-indigo-600 shadow transition ${
             isDark ? "translate-x-[48px]" : "translate-x-0"
           }`}
           aria-hidden="true"

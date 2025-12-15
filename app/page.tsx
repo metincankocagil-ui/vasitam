@@ -164,12 +164,12 @@ export default async function HomePage({ searchParams }: HomePageProps) {
               {stats.map((stat) => (
                 <div
                   key={stat.label}
-                  className="rounded-2xl border border-slate-100 bg-slate-50/80 p-4 shadow dark:border-slate-600 dark:bg-slate-800/70 dark:shadow-[0_15px_35px_rgba(2,6,23,0.65)]"
+                  className="rounded-2xl border border-slate-100 bg-white p-4  dark-mode:border-slate-600 dark-mode:bg-slate-800/70 "
                 >
-                  <dt className="text-xs uppercase tracking-wider text-slate-500 dark:text-slate-300">
+                  <dt className="text-xs uppercase tracking-wider text-slate-500 dark-mode:text-slate-300">
                     {stat.label}
                   </dt>
-                  <dd className="mt-1 text-2xl font-semibold text-slate-900 dark:text-slate-50">
+                  <dd className="mt-1 text-2xl font-semibold text-slate-900 dark-mode:text-slate-50">
                     {stat.value}
                   </dd>
                 </div>
