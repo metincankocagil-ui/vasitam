@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>BMW 320i M-Sport - Vasıtan</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                            "background": "#0b1326",
+                            "secondary-fixed-dim": "#c0c1ff",
+                            "secondary": "#c0c1ff",
+                            "surface-dark": "#020617",
+                            "primary-fixed-dim": "#89ceff",
+                            "inverse-surface": "#dae2fd",
+                            "surface-container-highest": "#2d3449",
+                            "on-secondary-container": "#b0b2ff",
+                            "on-primary": "#00344d",
+                            "on-tertiary-container": "#303436",
+                            "tertiary-fixed": "#e0e3e5",
+                            "primary-container": "#0ea5e9",
+                            "surface": "#0b1326",
+                            "on-tertiary-fixed-variant": "#444749",
+                            "on-surface": "#dae2fd",
+                            "on-secondary-fixed": "#07006c",
+                            "tertiary": "#c4c7c9",
+                            "on-error": "#690005",
+                            "on-primary-fixed-variant": "#004c6e",
+                            "primary": "#89ceff",
+                            "secondary-container": "#3131c0",
+                            "error-container": "#93000a",
+                            "slate-gray": "#64748B",
+                            "surface-container": "#171f33",
+                            "on-primary-fixed": "#001e2f",
+                            "surface-container-lowest": "#060e20",
+                            "surface-bright": "#31394d",
+                            "on-primary-container": "#003751",
+                            "surface-variant": "#2d3449",
+                            "surface-tint": "#89ceff",
+                            "on-background": "#dae2fd",
+                            "error": "#ffb4ab",
+                            "on-secondary": "#1000a9",
+                            "outline-variant": "#3e4850",
+                            "tertiary-container": "#999c9e",
+                            "tertiary-fixed-dim": "#c4c7c9",
+                            "surface-dim": "#0b1326",
+                            "glass-border": "rgba(255, 255, 255, 0.1)",
+                            "primary-fixed": "#c9e6ff",
+                            "on-secondary-fixed-variant": "#2f2ebe",
+                            "on-tertiary": "#2d3133",
+                            "inverse-on-surface": "#283044",
+                            "surface-container-high": "#222a3d",
+                            "outline": "#88929b",
+                            "on-surface-variant": "#bec8d2",
+                            "secondary-fixed": "#e1e0ff",
+                            "on-tertiary-fixed": "#191c1e",
+                            "surface-container-low": "#131b2e",
+                            "on-error-container": "#ffdad6",
+                            "inverse-primary": "#006591"
+                    },
+                    "borderRadius": {
+                            "DEFAULT": "0.25rem",
+                            "lg": "0.5rem",
+                            "xl": "0.75rem",
+                            "full": "9999px"
+                    },
+                    "spacing": {
+                            "container-max-width": "1280px",
+                            "margin-desktop": "40px",
+                            "section-gap": "80px",
+                            "gutter": "24px",
+                            "margin-mobile": "20px",
+                            "base": "8px"
+                    },
+                    "fontFamily": {
+                            "mono-data": ["Inter"],
+                            "display-hero": ["Inter"],
+                            "headline-md": ["Inter"],
+                            "label-caps": ["Inter"],
+                            "headline-lg": ["Inter"],
+                            "body-lg": ["Inter"],
+                            "headline-lg-mobile": ["Inter"],
+                            "body-md": ["Inter"]
+                    },
+                    "fontSize": {
+                            "mono-data": ["14px", { "lineHeight": "1.4", "letterSpacing": "0.02em", "fontWeight": "500" }],
+                            "display-hero": ["72px", { "lineHeight": "1.1", "letterSpacing": "-0.04em", "fontWeight": "700" }],
+                            "headline-md": ["32px", { "lineHeight": "1.3", "letterSpacing": "-0.01em", "fontWeight": "500" }],
+                            "label-caps": ["12px", { "lineHeight": "1.2", "letterSpacing": "0.1em", "fontWeight": "600" }],
+                            "headline-lg": ["48px", { "lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "600" }],
+                            "body-lg": ["18px", { "lineHeight": "1.6", "letterSpacing": "0em", "fontWeight": "400" }],
+                            "headline-lg-mobile": ["32px", { "lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                            "body-md": ["16px", { "lineHeight": "1.5", "letterSpacing": "0em", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .glass-panel {
+            background-color: rgba(45, 52, 73, 0.4);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .ai-glow {
+            box-shadow: inset 0 0 20px rgba(137, 206, 255, 0.1);
+        }
+    </style>
+<link href="/stitch-v2/theme.css" rel="stylesheet"/>
+<script src="/stitch-v2/theme.js"></script>
+<script src="/stitch-v2/demo-listings.js"></script>
+</head>
+<body class="bg-background text-on-background min-h-screen font-body-md">
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full bg-surface/80 dark:bg-surface/80 backdrop-blur-xl border-b border-glass-border shadow-sm z-50">
+<div class="flex justify-between items-center px-margin-desktop py-4 max-w-container-max-width mx-auto">
+<a class="font-display-hero text-headline-md tracking-tighter text-primary dark:text-primary" href="/" target="_top">
+                Vasıtan
+            </a>
+<div class="hidden md:flex space-x-8">
+<a class="text-primary font-semibold border-b-2 border-primary pb-1 hover:scale-105 transition-transform duration-200 active:scale-95" href="/ara">İlanlar</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors hover:scale-105 transition-transform duration-200 active:scale-95" href="/arac-wiki">Değerleme</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors hover:scale-105 transition-transform duration-200 active:scale-95" href="/ai-danisman">Akıllı Analiz</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors hover:scale-105 transition-transform duration-200 active:scale-95" href="/garajim">Lojistik</a>
+</div>
+<div class="flex space-x-4">
+<button data-theme-toggle type="button" class="text-on-surface-variant hover:text-primary transition-colors hover:scale-105 transition-transform duration-200 active:scale-95">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">language</span>
+</button>
+<button onclick="location.href='/'" class="text-on-surface-variant hover:text-primary transition-colors hover:scale-105 transition-transform duration-200 active:scale-95">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">dark_mode</span>
+</button>
+<button onclick="location.href='/garajim'" class="text-on-surface-variant hover:text-primary transition-colors hover:scale-105 transition-transform duration-200 active:scale-95">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">account_circle</span>
+</button>
+</div>
+</div>
+</nav>
+<main class="pt-[100px] pb-section-gap px-margin-mobile md:px-margin-desktop max-w-container-max-width mx-auto">
+<section class="grid grid-cols-1 lg:grid-cols-12 gap-gutter mb-10">
+<div class="lg:col-span-8 space-y-4">
+<div class="relative h-[360px] md:h-[560px] rounded-xl overflow-hidden glass-panel">
+<img id="detail-hero-image" alt="İlan görseli" class="absolute inset-0 w-full h-full object-cover" src=""/>
+<div class="absolute top-4 left-4 flex flex-wrap gap-2">
+<span id="detail-listing-code" class="px-3 py-1 rounded-full bg-surface/80 border border-glass-border text-primary font-mono-data text-xs">İlan No</span>
+<span id="detail-location" class="px-3 py-1 rounded-full bg-surface/80 border border-glass-border text-on-surface-variant font-mono-data text-xs">Konum</span>
+</div>
+<div class="absolute top-4 right-4">
+<span id="detail-image-label" class="hidden px-3 py-1 rounded-full bg-surface/80 border border-glass-border text-on-surface-variant font-mono-data text-xs">Temsili görsel</span>
+</div>
+<div class="absolute bottom-0 left-0 w-full p-5 bg-gradient-to-t from-background via-background/70 to-transparent">
+<div id="detail-thumbnails" class="flex gap-2 overflow-x-auto pb-1"></div>
+</div>
+</div>
+<div class="glass-panel rounded-xl p-5">
+<h1 id="detail-title" class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-surface mb-3">İlan başlığı</h1>
+<div class="grid grid-cols-2 md:grid-cols-5 gap-3" id="detail-quick-stats"></div>
+</div>
+</div>
+<aside class="lg:col-span-4 flex flex-col gap-gutter">
+<div class="glass-panel p-6 rounded-xl">
+<div class="font-label-caps text-label-caps text-slate-gray mb-2">FİYAT</div>
+<div id="detail-price" class="font-display-hero text-headline-md text-primary">0 TL</div>
+<div class="grid grid-cols-2 gap-3 mt-5">
+<div class="rounded-lg bg-surface-container-high/50 border border-glass-border p-3">
+<div class="font-label-caps text-label-caps text-slate-gray">AI SKOR</div>
+<div id="detail-ai-score" class="font-headline-md text-headline-md text-primary">0</div>
+</div>
+<div class="rounded-lg bg-surface-container-high/50 border border-glass-border p-3">
+<div class="font-label-caps text-label-caps text-slate-gray">GÜVEN</div>
+<div id="detail-trust-score" class="font-headline-md text-headline-md text-secondary">0</div>
+</div>
+</div>
+</div>
+<div id="seller-card" class="glass-panel p-6 rounded-xl"></div>
+</aside>
+</section>
+<section class="grid grid-cols-1 lg:grid-cols-12 gap-gutter">
+<div class="lg:col-span-8 space-y-gutter">
+<section class="glass-panel p-6 rounded-xl">
+<h2 class="font-headline-md text-headline-md text-on-surface mb-5">Teknik Özellikler</h2>
+<div id="technical-specs" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3"></div>
+</section>
+<section class="glass-panel p-6 rounded-xl">
+<h2 class="font-headline-md text-headline-md text-on-surface mb-5">Ekspertiz Durumu</h2>
+<div id="expertise-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3"></div>
+</section>
+<section class="glass-panel p-6 rounded-xl">
+<h2 class="font-headline-md text-headline-md text-on-surface mb-5">Donanım Özellikleri</h2>
+<div id="features-grid" class="flex flex-wrap gap-2"></div>
+</section>
+<section class="glass-panel p-6 rounded-xl ai-glow">
+<div class="flex items-center gap-2 mb-5">
+<span class="material-symbols-outlined text-primary">smart_toy</span>
+<h2 class="font-headline-md text-headline-md text-on-surface">AI Değerlendirmesi</h2>
+</div>
+<div id="ai-review" class="space-y-5"></div>
+</section>
+</div>
+<aside class="lg:col-span-4 space-y-gutter">
+<section class="glass-panel p-6 rounded-xl">
+<h2 class="font-headline-md text-headline-md text-on-surface mb-5">Satıcıya Mesaj</h2>
+<p class="text-on-surface-variant text-sm mb-4">Hazır mesajlardan seç veya kendi mesajını yaz.</p>
+<button id="open-message-box-side" class="w-full py-3 rounded-lg border border-primary/30 text-primary hover:bg-primary/10 transition-colors">Mesaj Gönder</button>
+</section>
+<section class="glass-panel p-6 rounded-xl">
+<h2 class="font-headline-md text-headline-md text-on-surface mb-5">Benzer İlanlar</h2>
+<div id="similar-listings" class="space-y-3"></div>
+</section>
+</aside>
+</section>
+</main>
+<div id="message-modal" class="fixed inset-0 z-[80] hidden items-center justify-center bg-surface-dark/70 backdrop-blur-sm px-4">
+<div class="glass-panel rounded-xl p-6 w-full max-w-lg">
+<div class="flex items-start justify-between gap-4 mb-4">
+<div>
+<div class="font-label-caps text-label-caps text-primary">MESAJ GÖNDER</div>
+<h3 id="message-modal-title" class="font-headline-md text-headline-md text-on-surface mt-1">Satıcı</h3>
+</div>
+<button id="close-message-box" class="text-on-surface-variant hover:text-primary">
+<span class="material-symbols-outlined">close</span>
+</button>
+</div>
+<div id="message-suggestions" class="flex flex-wrap gap-2 mb-4"></div>
+<textarea id="seller-message-input" class="w-full min-h-[120px] rounded-lg bg-surface-container-high border border-glass-border text-on-surface resize-none" placeholder="Mesajınızı yazın..."></textarea>
+<div id="message-status" class="hidden mt-3 text-sm text-primary"></div>
+<div class="flex justify-end gap-3 mt-5">
+<button id="cancel-message-box" class="px-4 py-2 rounded-lg border border-glass-border text-on-surface-variant hover:text-on-surface">Kapat</button>
+<button id="send-seller-message" class="px-4 py-2 rounded-lg bg-primary text-on-primary">Gönder</button>
+</div>
+</div>
+</div>
+<!-- Footer -->
+<footer class="w-full mt-section-gap bg-surface-container-lowest dark:bg-surface-container-lowest border-t border-glass-border">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-gutter px-margin-desktop py-section-gap max-w-container-max-width mx-auto">
+<div>
+<div class="font-display-hero text-headline-md text-primary mb-4">Vasıtan</div>
+<div class="font-body-md text-body-md text-slate-gray">
+                    © 2024 Vasıtan AEROSPACE AUTOMOTIVE. TÜM HAKLARI SAKLIDIR.
+                </div>
+</div>
+<div class="flex flex-col space-y-2">
+<a class="font-body-md text-body-md text-slate-gray hover:text-on-surface transition-colors hover:text-primary" href="/">Platform</a>
+<a class="font-body-md text-body-md text-slate-gray hover:text-on-surface transition-colors hover:text-primary" href="/ara">Pazar Yeri</a>
+</div>
+<div class="flex flex-col space-y-2">
+<a class="font-body-md text-body-md text-slate-gray hover:text-on-surface transition-colors hover:text-primary" href="/arac-wiki">API Dokümantasyonu</a>
+<a class="font-body-md text-body-md text-slate-gray hover:text-on-surface transition-colors hover:text-primary" href="/">Gizlilik Protokolü</a>
+<a class="font-body-md text-body-md text-slate-gray hover:text-on-surface transition-colors hover:text-primary" href="/">Kullanım Koşulları</a>
+</div>
+<div>
+<p class="font-body-md text-body-md text-slate-gray">Sistem Durumu: <span class="text-primary inline-flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span> Aktif</span></p>
+</div>
+</div>
+</footer>
+<script>
+        (function () {
+            var listings = window.VASITAN_DEMO_LISTINGS || [];
+            var params = new URLSearchParams(window.location.search);
+            var id = Number(params.get("id") || "1");
+            var listing = listings.find(function (item) { return item.id === id; }) || listings[0];
+            var activeImage = 0;
+            var phoneVisible = false;
+            if (!listing) return;
+
+            function formatPrice(value) {
+                return Number(value).toLocaleString("tr-TR") + " TL";
+            }
+
+            function formatKm(value) {
+                return Number(value).toLocaleString("tr-TR") + " km";
+            }
+
+            function escapeHtml(value) {
+                return String(value == null ? "" : value).replace(/[&<>"']/g, function (char) {
+                    return {"&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#039;"}[char];
+                });
+            }
+
+            function vehicleColor(item, index) {
+                var palette = ["#0ea5e9", "#38bdf8", "#6366f1", "#14b8a6"];
+                var color = String(item.color || "").toLowerCase();
+                if (color.indexOf("siyah") >= 0) return "#111827";
+                if (color.indexOf("beyaz") >= 0 || color.indexOf("inci") >= 0 || color.indexOf("sedef") >= 0) return "#f8fafc";
+                if (color.indexOf("gri") >= 0 || color.indexOf("füme") >= 0 || color.indexOf("gümüş") >= 0) return "#64748b";
+                if (color.indexOf("kırmızı") >= 0 || color.indexOf("rosso") >= 0) return "#dc2626";
+                if (color.indexOf("mavi") >= 0 || color.indexOf("lacivert") >= 0) return "#1d4ed8";
+                if (color.indexOf("yeşil") >= 0 || color.indexOf("haki") >= 0) return "#15803d";
+                if (color.indexOf("sarı") >= 0 || color.indexOf("turuncu") >= 0) return "#f59e0b";
+                return palette[index % palette.length];
+            }
+
+            function vehicleShape(item, index) {
+                var accent = vehicleColor(item, index);
+                if (item.bodyType === "Motosiklet" || item.bodyType === "Scooter") return '<circle cx="150" cy="266" r="34" fill="#020617" stroke="#cbd5e1" stroke-width="10"/><circle cx="430" cy="266" r="34" fill="#020617" stroke="#cbd5e1" stroke-width="10"/><path d="M156 244 C220 172 298 172 374 238 L430 238" fill="none" stroke="' + accent + '" stroke-width="34" stroke-linecap="round"/><path d="M268 172 L316 112 L364 180" fill="none" stroke="#e2e8f0" stroke-width="18" stroke-linecap="round"/>';
+                if (item.bodyType === "Tekne" || item.bodyType === "Yat" || item.bodyType === "Jet Ski") return '<path d="M80 250 H500 L440 318 H150 Z" fill="' + accent + '"/><path d="M180 176 H344 L392 250 H136 Z" fill="#e2e8f0" opacity="0.9"/><path d="M70 330 C150 300 220 360 300 330 C380 300 450 360 520 330" fill="none" stroke="#38bdf8" stroke-width="14" stroke-linecap="round"/>';
+                if (item.bodyType === "Hava Aracı") return '<path d="M80 230 L290 166 L520 230 L290 292 Z" fill="' + accent + '"/><path d="M260 90 H320 L360 350 H220 Z" fill="#e2e8f0" opacity="0.9"/><circle cx="290" cy="230" r="26" fill="#020617"/>';
+                if (item.bodyType === "Traktör" || item.bodyType === "İş Makinası") return '<circle cx="160" cy="282" r="64" fill="#020617" stroke="#cbd5e1" stroke-width="16"/><circle cx="392" cy="288" r="42" fill="#020617" stroke="#cbd5e1" stroke-width="16"/><path d="M130 206 H288 L340 280 H440 V202 H374 L330 148 H224 L204 198 H130 Z" fill="' + accent + '"/><path d="M340 198 L500 142" stroke="#eab308" stroke-width="22" stroke-linecap="round"/>';
+                if (item.bodyType === "Çekici" || item.bodyType === "Ticari" || item.bodyType === "Panelvan" || item.bodyType === "Minibüs" || item.bodyType === "Pickup") return '<path d="M84 210 H336 V290 H84 Z" fill="' + accent + '"/><path d="M336 172 H456 L510 236 V290 H336 Z" fill="#e2e8f0"/><circle cx="164" cy="296" r="34" fill="#020617"/><circle cx="426" cy="296" r="34" fill="#020617"/><path d="M360 194 H430 L462 236 H360 Z" fill="#0f172a" opacity="0.6"/>';
+                if (item.bodyType === "Karavan") return '<path d="M80 178 H456 Q506 178 506 230 V292 H80 Z" fill="' + accent + '"/><rect x="150" y="210" width="80" height="50" rx="8" fill="#0f172a" opacity="0.55"/><rect x="278" y="210" width="96" height="50" rx="8" fill="#0f172a" opacity="0.55"/><circle cx="170" cy="304" r="32" fill="#020617"/><circle cx="420" cy="304" r="32" fill="#020617"/>';
+                return '<path d="M88 256 C116 188 168 160 252 160 H336 C408 160 456 194 492 256 L480 292 H100 Z" fill="' + accent + '"/><path d="M200 176 H336 C376 176 404 204 424 244 H144 C160 208 176 188 200 176 Z" fill="#e2e8f0" opacity="0.9"/><circle cx="176" cy="296" r="36" fill="#020617"/><circle cx="404" cy="296" r="36" fill="#020617"/><path d="M126 252 H460" stroke="#ffffff" stroke-opacity="0.35" stroke-width="8"/>';
+            }
+
+            function vehicleImage(item, index) {
+                var titles = ["Dış görünüm", "Kabin", "Detay", "Profil"];
+                var svg = '<svg xmlns="http://www.w3.org/2000/svg" width="900" height="620" viewBox="0 0 600 400">' +
+                    '<defs><linearGradient id="bg" x1="0" x2="1" y1="0" y2="1"><stop stop-color="#0f172a"/><stop offset="1" stop-color="#020617"/></linearGradient><radialGradient id="glow" cx="' + (60 + index * 8) + '%" cy="24%" r="70%"><stop stop-color="#38bdf8" stop-opacity="0.46"/><stop offset="1" stop-color="#38bdf8" stop-opacity="0"/></radialGradient></defs>' +
+                    '<rect width="600" height="400" fill="url(#bg)"/><rect width="600" height="400" fill="url(#glow)"/><path d="M70 330 H530" stroke="#334155" stroke-width="8" stroke-linecap="round"/>' +
+                    vehicleShape(item, index) +
+                    '<text x="64" y="70" fill="#e2e8f0" font-family="Inter, Arial" font-size="28" font-weight="700">' + escapeHtml(item.brand) + '</text>' +
+                    '<text x="64" y="106" fill="#94a3b8" font-family="Inter, Arial" font-size="18">' + escapeHtml(item.model + " • " + titles[index % titles.length]) + '</text>' +
+                    '</svg>';
+                return "data:image/svg+xml;charset=UTF-8," + encodeURIComponent(svg);
+            }
+
+            function stat(label, value, icon) {
+                return '<div class="rounded-lg bg-surface-container-high/50 border border-glass-border p-3"><div class="flex items-center gap-2 text-slate-gray font-label-caps text-label-caps"><span class="material-symbols-outlined text-[16px]">' + icon + '</span>' + label + '</div><div class="text-on-surface font-mono-data text-mono-data mt-1">' + escapeHtml(value) + '</div></div>';
+            }
+
+            function spec(label, value) {
+                return '<div class="rounded-lg bg-surface-container-high/50 border border-glass-border p-3"><div class="font-label-caps text-label-caps text-slate-gray">' + label + '</div><div class="text-on-surface mt-1">' + escapeHtml(value) + '</div></div>';
+            }
+
+            function yesNo(value) {
+                return value ? "Var" : "Yok";
+            }
+
+            function cleanDirty(value) {
+                return value ? "Temiz" : "Kontrol";
+            }
+
+            function maskedPhone(phone) {
+                return phone.replace(/(\d{4}) \d{3} \d{2} (\d{2})/, "$1 *** ** $2");
+            }
+
+            function imageUrl(index) {
+                return listing.images && listing.images[index] && listing.images[index].url ? listing.images[index].url : vehicleImage(listing, index);
+            }
+
+            function imageAlt(index) {
+                return listing.images && listing.images[index] && listing.images[index].alt ? listing.images[index].alt : listing.title + " görseli";
+            }
+
+            function renderGallery() {
+                var hero = document.getElementById("detail-hero-image");
+                var currentImage = listing.images && listing.images[activeImage] ? listing.images[activeImage] : null;
+                var label = document.getElementById("detail-image-label");
+                hero.src = imageUrl(activeImage);
+                hero.alt = imageAlt(activeImage);
+                hero.onerror = function () {
+                    hero.onerror = null;
+                    hero.src = vehicleImage(listing, activeImage);
+                };
+                if (label) {
+                    label.textContent = currentImage && currentImage.isRepresentative ? "Temsili görsel • " + currentImage.source : currentImage && currentImage.source ? currentImage.source : "";
+                    label.classList.toggle("hidden", !currentImage);
+                }
+                document.getElementById("detail-thumbnails").innerHTML = listing.images.map(function (_, index) {
+                    return '<button data-thumb="' + index + '" class="w-20 h-14 rounded-lg overflow-hidden border ' + (index === activeImage ? "border-primary" : "border-glass-border") + ' bg-surface-container-high shrink-0 relative"><img class="w-full h-full object-cover" src="' + imageUrl(index) + '" alt="' + escapeHtml(imageAlt(index)) + '"/>' + (listing.images[index].isRepresentative ? '<span class="absolute bottom-1 left-1 px-1.5 py-0.5 rounded bg-surface/80 text-[9px] text-on-surface-variant">Temsili</span>' : "") + '</button>';
+                }).join("");
+                document.querySelectorAll("#detail-thumbnails img").forEach(function (img, index) {
+                    img.onerror = function () {
+                        img.onerror = null;
+                        img.src = vehicleImage(listing, index);
+                    };
+                });
+                document.querySelectorAll("[data-thumb]").forEach(function (button) {
+                    button.addEventListener("click", function () {
+                        activeImage = Number(button.getAttribute("data-thumb"));
+                        renderGallery();
+                    });
+                });
+            }
+
+            function renderSeller() {
+                var seller = listing.seller;
+                document.getElementById("seller-card").innerHTML =
+                    '<div class="flex items-start justify-between gap-3 mb-5"><div><div class="font-label-caps text-label-caps text-primary">SATICI BİLGİLERİ</div><h2 class="font-headline-md text-headline-md text-on-surface mt-1">' + escapeHtml(seller.displayName) + '</h2><p class="text-on-surface-variant text-sm">' + escapeHtml(seller.sellerType) + '</p></div><div class="w-12 h-12 rounded-full bg-primary/10 border border-primary/30 flex items-center justify-center text-primary"><span class="material-symbols-outlined">person</span></div></div>' +
+                    '<div class="space-y-3 text-sm">' +
+                    spec("Konum", listing.location.city + " / " + listing.location.district + " / " + listing.location.neighborhood) +
+                    spec("Telefon", phoneVisible ? seller.phone : maskedPhone(seller.phone)) +
+                    spec("Üyelik", seller.memberSince) +
+                    spec("Puan", seller.rating + " / 5") +
+                    spec("Aktif İlan", seller.totalListings) +
+                    spec("Cevaplama", seller.responseRate) +
+                    '</div>' +
+                    '<div class="flex flex-wrap gap-2 mt-4">' +
+                    (seller.verifiedPhone ? '<span class="px-2 py-1 rounded-full bg-primary/10 text-primary text-[11px]">Telefon doğrulandı</span>' : "") +
+                    (seller.verifiedIdentity ? '<span class="px-2 py-1 rounded-full bg-secondary/10 text-secondary text-[11px]">Kimlik doğrulandı</span>' : "") +
+                    '</div>' +
+                    '<div class="grid grid-cols-1 gap-3 mt-5">' +
+                    '<button id="show-phone" class="py-3 rounded-lg bg-primary text-on-primary font-medium">Telefonu Göster</button>' +
+                    '<button id="open-message-box" class="py-3 rounded-lg border border-primary/30 text-primary hover:bg-primary/10 transition-colors">Mesaj Gönder</button>' +
+                    '<button onclick="window.top.location.href=\'/ara\'" class="py-3 rounded-lg border border-glass-border text-on-surface-variant hover:text-on-surface transition-colors">Satıcının Diğer İlanları</button>' +
+                    '</div>';
+                document.getElementById("show-phone").addEventListener("click", function () {
+                    phoneVisible = true;
+                    renderSeller();
+                });
+                document.getElementById("open-message-box").addEventListener("click", openMessageBox);
+            }
+
+            function renderSections() {
+                var specs = listing.technicalSpecs;
+                document.title = listing.title + " - Vasıtan";
+                document.getElementById("detail-title").innerHTML = escapeHtml(listing.title) + ' <span class="text-surface-variant font-light">(' + listing.year + ')</span>';
+                document.getElementById("detail-price").textContent = formatPrice(listing.price);
+                document.getElementById("detail-listing-code").textContent = "İlan No: " + listing.listingCode;
+                document.getElementById("detail-location").textContent = listing.location.city + " / " + listing.location.district;
+                document.getElementById("detail-ai-score").textContent = listing.aiScore + "/100";
+                document.getElementById("detail-trust-score").textContent = listing.trustScore + "/100";
+                document.getElementById("detail-quick-stats").innerHTML =
+                    stat("Şehir", listing.location.city, "location_on") +
+                    stat("KM", formatKm(listing.km), "speed") +
+                    stat("Yıl", listing.year, "calendar_month") +
+                    stat("Yakıt", listing.fuel, "local_gas_station") +
+                    stat("Kasa", listing.bodyType, "directions_car");
+                document.getElementById("technical-specs").innerHTML = [
+                    ["Marka", specs.brand], ["Model", specs.model], ["Paket", specs.trim], ["Yıl", specs.year],
+                    ["Kasa Tipi", specs.bodyType], ["Yakıt", specs.fuel], ["Vites", specs.transmission],
+                    ["Motor", specs.engineDisplacement], ["Güç", specs.horsepower], ["Tork", specs.torque],
+                    ["Aktarma", specs.drivetrain], ["Kapı", specs.doors], ["Koltuk", specs.seats],
+                    ["Ortalama Tüketim", specs.averageFuelConsumption], ["Bagaj", specs.trunkVolume],
+                    ["Motor Tipi", specs.engineType], ["Silindir", specs.cylinders]
+                ].map(function (item) { return spec(item[0], item[1]); }).join("");
+                var ex = listing.expertise;
+                document.getElementById("expertise-grid").innerHTML = [
+                    ["Tramer", ex.damageRecord ? formatPrice(ex.damageRecord) : "Yok"], ["Boya", ex.paintedParts],
+                    ["Değişen", ex.changedParts], ["Ağır Hasar", yesNo(ex.hasHeavyDamage)],
+                    ["Pert", yesNo(ex.hasPertRecord)], ["Kaput", ex.isHoodOriginal ? "Orijinal" : "Kontrol"],
+                    ["Tavan", ex.isRoofOriginal ? "Orijinal" : "Kontrol"], ["Şase / Podye", ex.isChassisClean ? "Temiz" : "Kontrol"],
+                    ["Servis Geçmişi", cleanDirty(ex.hasServiceHistory)], ["Ekspertiz Raporu", cleanDirty(ex.hasExpertiseReport)],
+                    ["İlk Sahip", yesNo(ex.isFirstOwner)], ["Kazasız", cleanDirty(ex.isAccidentFree)]
+                ].map(function (item) { return spec(item[0], item[1]); }).join("");
+                document.getElementById("features-grid").innerHTML = listing.features.map(function (feature) {
+                    return '<span class="px-3 py-2 rounded-full bg-surface-container-high border border-glass-border text-on-surface-variant text-sm">' + escapeHtml(feature) + '</span>';
+                }).join("");
+                document.getElementById("ai-review").innerHTML =
+                    spec("Özet", listing.aiReview.summary) +
+                    spec("Fiyat Analizi", listing.aiReview.priceAnalysis) +
+                    spec("Uygun Kullanım", listing.aiReview.suitableFor.join(", ")) +
+                    '<div class="grid grid-cols-1 md:grid-cols-2 gap-3"><div>' + spec("Artılar", listing.aiReview.pros.join(" • ")) + '</div><div>' + spec("Eksiler", listing.aiReview.cons.join(" • ")) + '</div></div>' +
+                    '<div class="rounded-lg border border-error/30 bg-error-container/20 p-4 text-on-error-container text-sm">' + escapeHtml(listing.aiReview.warning) + '</div>';
+                document.getElementById("similar-listings").innerHTML = listings.filter(function (item) {
+                    return item.id !== listing.id && (item.brand === listing.brand || item.category === listing.category);
+                }).slice(0, 4).map(function (item) {
+                    return '<button onclick="window.top.location.href=\'/ilan/' + item.id + '\'" class="w-full text-left rounded-lg border border-glass-border bg-surface-container-high/40 p-3 hover:border-primary/40 transition-colors"><div class="text-on-surface font-medium">' + escapeHtml(item.title) + '</div><div class="text-on-surface-variant text-xs mt-1">' + formatPrice(item.price) + " • " + formatKm(item.km) + '</div></button>';
+                }).join("");
+            }
+
+            function openMessageBox() {
+                var modal = document.getElementById("message-modal");
+                modal.classList.remove("hidden");
+                modal.classList.add("flex");
+                document.getElementById("message-modal-title").textContent = listing.seller.displayName + " • " + listing.title;
+                document.getElementById("message-status").classList.add("hidden");
+            }
+
+            function closeMessageBox() {
+                var modal = document.getElementById("message-modal");
+                modal.classList.add("hidden");
+                modal.classList.remove("flex");
+            }
+
+            function renderMessageBox() {
+                var suggestions = ["Araç hâlâ satılık mı?", "Son fiyatınız nedir?", "Ekspertiz raporu var mı?", "Aracı görmek için ne zaman müsaitsiniz?", "Takas düşünür müsünüz?"];
+                document.getElementById("message-suggestions").innerHTML = suggestions.map(function (text) {
+                    return '<button data-message-suggestion="' + escapeHtml(text) + '" class="px-3 py-2 rounded-full bg-surface-container-high border border-glass-border text-on-surface-variant text-xs hover:text-primary">' + escapeHtml(text) + '</button>';
+                }).join("");
+                document.querySelectorAll("[data-message-suggestion]").forEach(function (button) {
+                    button.addEventListener("click", function () {
+                        document.getElementById("seller-message-input").value = button.getAttribute("data-message-suggestion");
+                    });
+                });
+                document.getElementById("open-message-box-side").addEventListener("click", openMessageBox);
+                document.getElementById("close-message-box").addEventListener("click", closeMessageBox);
+                document.getElementById("cancel-message-box").addEventListener("click", closeMessageBox);
+                document.getElementById("send-seller-message").addEventListener("click", function () {
+                    var status = document.getElementById("message-status");
+                    status.textContent = "Mesajınız demo olarak oluşturuldu. Gerçek mesajlaşma yakında aktif olacak.";
+                    status.classList.remove("hidden");
+                });
+            }
+
+            renderGallery();
+            renderSections();
+            renderSeller();
+            renderMessageBox();
+        })();
+    </script>
+</body></html>

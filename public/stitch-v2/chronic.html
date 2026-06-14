@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Kronik Sorun Takibi - Vasıtan</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "background": "#0b1326",
+                      "secondary-fixed-dim": "#c0c1ff",
+                      "secondary": "#c0c1ff",
+                      "on-tertiary-container": "#303436",
+                      "tertiary-fixed": "#e0e3e5",
+                      "primary-container": "#0ea5e9",
+                      "surface-dark": "#020617",
+                      "primary-fixed-dim": "#89ceff",
+                      "inverse-surface": "#dae2fd",
+                      "surface-container-highest": "#2d3449",
+                      "on-secondary-container": "#b0b2ff",
+                      "on-primary": "#00344d",
+                      "surface": "#0b1326",
+                      "on-primary-fixed-variant": "#004c6e",
+                      "on-tertiary-fixed-variant": "#444749",
+                      "on-surface": "#dae2fd",
+                      "on-secondary-fixed": "#07006c",
+                      "tertiary": "#c4c7c9",
+                      "on-error": "#690005",
+                      "primary": "#89ceff",
+                      "secondary-container": "#3131c0",
+                      "slate-gray": "#64748B",
+                      "surface-container": "#171f33",
+                      "on-primary-fixed": "#001e2f",
+                      "surface-container-lowest": "#060e20",
+                      "surface-bright": "#31394d",
+                      "error-container": "#93000a",
+                      "surface-variant": "#2d3449",
+                      "surface-tint": "#89ceff",
+                      "on-primary-container": "#003751",
+                      "on-background": "#dae2fd",
+                      "on-secondary": "#1000a9",
+                      "error": "#ffb4ab",
+                      "outline-variant": "#3e4850",
+                      "tertiary-fixed-dim": "#c4c7c9",
+                      "tertiary-container": "#999c9e",
+                      "surface-dim": "#0b1326",
+                      "on-tertiary": "#2d3133",
+                      "inverse-on-surface": "#283044",
+                      "glass-border": "rgba(255, 255, 255, 0.1)",
+                      "primary-fixed": "#c9e6ff",
+                      "on-secondary-fixed-variant": "#2f2ebe",
+                      "secondary-fixed": "#e1e0ff",
+                      "on-tertiary-fixed": "#191c1e",
+                      "surface-container-high": "#222a3d",
+                      "outline": "#88929b",
+                      "on-surface-variant": "#bec8d2",
+                      "surface-container-low": "#131b2e",
+                      "on-error-container": "#ffdad6",
+                      "inverse-primary": "#006591"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "gutter": "24px",
+                      "section-gap": "80px",
+                      "base": "8px",
+                      "margin-mobile": "20px",
+                      "margin-desktop": "40px",
+                      "container-max-width": "1280px"
+              },
+              "fontFamily": {
+                      "label-caps": ["Inter"],
+                      "headline-lg": ["Inter"],
+                      "body-lg": ["Inter"],
+                      "mono-data": ["Inter"],
+                      "display-hero": ["Inter"],
+                      "headline-md": ["Inter"],
+                      "body-md": ["Inter"],
+                      "headline-lg-mobile": ["Inter"]
+              },
+              "fontSize": {
+                      "label-caps": ["12px", {"lineHeight": "1.2", "letterSpacing": "0.1em", "fontWeight": "600"}],
+                      "headline-lg": ["48px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                      "body-lg": ["18px", {"lineHeight": "1.6", "letterSpacing": "0em", "fontWeight": "400"}],
+                      "mono-data": ["14px", {"lineHeight": "1.4", "letterSpacing": "0.02em", "fontWeight": "500"}],
+                      "display-hero": ["72px", {"lineHeight": "1.1", "letterSpacing": "-0.04em", "fontWeight": "700"}],
+                      "headline-md": ["32px", {"lineHeight": "1.3", "letterSpacing": "-0.01em", "fontWeight": "500"}],
+                      "body-md": ["16px", {"lineHeight": "1.5", "letterSpacing": "0em", "fontWeight": "400"}],
+                      "headline-lg-mobile": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "600"}]
+              }
+            }
+          }
+        }
+    </script>
+<style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+        
+        .glass-panel {
+            background: rgba(11, 19, 38, 0.6);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .issue-card-hover {
+            transition: all 0.2s ease;
+        }
+        .issue-card-hover:hover {
+            transform: translateY(-2px);
+            background: rgba(45, 52, 73, 0.5);
+            border-color: rgba(137, 206, 255, 0.3);
+        }
+
+        /* Pulse animation for live status */
+        @keyframes pulse-ring {
+            0% { transform: scale(0.8); opacity: 0.5; }
+            100% { transform: scale(2); opacity: 0; }
+        }
+        .status-dot-container { relative; flex items-center justify-center; }
+        .status-pulse {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-color: theme('colors.primary');
+            border-radius: 50%;
+            animation: pulse-ring 2s cubic-bezier(0.215, 0.61, 0.355, 1) infinite;
+        }
+    </style>
+<link href="/stitch-v2/theme.css" rel="stylesheet"/>
+<script src="/stitch-v2/theme.js"></script>
+</head>
+<body class="bg-background text-on-background font-body-md text-body-md min-h-screen antialiased">
+<!-- TopNavBar -->
+<header class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-margin-desktop h-16 bg-background/80 backdrop-blur-md text-primary font-body-md text-body-md border-b border-glass-border shadow-sm">
+<div class="flex items-center gap-4">
+<a class="text-headline-md font-headline-md text-primary tracking-tight" href="/" target="_top">Vasıtan</a>
+</div>
+<!-- Search Bar (on_left configuration visually, but placed in center for balance in layout) -->
+<div class="hidden md:flex flex-1 max-w-md mx-8 relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant">search</span>
+<input class="w-full bg-surface-container-highest/50 border border-glass-border rounded-full py-2 pl-10 pr-4 text-on-surface focus:outline-none focus:border-primary/50 focus:ring-1 focus:ring-primary/50 transition-all font-mono-data text-mono-data" placeholder="Araç zekasında ara..." type="text"/>
+</div>
+<div class="flex items-center gap-4">
+<button onclick="location.href='/topluluk'" class="p-2 text-on-surface-variant hover:text-on-surface transition-colors hover:bg-surface-container-highest/50 rounded-full scale-102 hover:brightness-110 active:scale-98">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button data-theme-toggle type="button" class="p-2 text-on-surface-variant hover:text-on-surface transition-colors hover:bg-surface-container-highest/50 rounded-full scale-102 hover:brightness-110 active:scale-98">
+<span class="material-symbols-outlined">settings</span>
+</button>
+<div class="w-8 h-8 rounded-full bg-surface-variant border border-glass-border overflow-hidden">
+<img alt="User profile" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDoLxLbZX3QTCPPrQqPI89aT2J5zDxTOfouTlk9n300Sns3A2VzD3SJXMzxtQ1PqNgXj-gtjKnzy9LrNeyrUVCkLuKiGu_RS7afggZIiulzTlvpBFsQumTCDNC2l854jpCgyODfhDGQP8bJclYV6ANlySTF3nXWhn8oQSMedXlz-ebYPlktr2IZ2Y9AKG3s5bv_gRNpdbuHWESFh7GDSWl6yK2YD8ZEVFeLBTEyrMuG7ic2U-Ya1CH388FM0m_o43eRRPyy3IMfs74"/>
+</div>
+</div>
+</header>
+<!-- SideNavBar -->
+<nav class="hidden md:flex fixed left-0 top-16 h-[calc(100vh-64px)] z-40 flex-col pt-8 bg-surface-container-lowest/90 backdrop-blur-xl text-primary font-label-caps text-label-caps border-r border-glass-border shadow-2xl w-64">
+<div class="px-6 mb-8">
+<div class="flex items-center gap-3 mb-2">
+<div class="w-10 h-10 rounded-lg bg-surface-container-highest flex items-center justify-center border border-glass-border">
+<span class="material-symbols-outlined text-primary">directions_car</span>
+</div>
+<div>
+<a class="text-body-lg font-headline-md text-secondary-fixed-dim leading-none" href="/" target="_top">Vasıtan OS</a>
+<p class="text-on-surface-variant opacity-70 text-[10px] mt-1 uppercase tracking-wider">Araç AI v4.2</p>
+</div>
+</div>
+</div>
+<div class="flex-1 flex flex-col gap-1">
+<!-- Inactive Tab -->
+<a class="text-on-surface-variant hover:text-on-surface px-4 py-3 flex items-center gap-3 transition-all hover:translate-x-1 duration-300" href="/ai-danisman">
+<span class="material-symbols-outlined">insights</span>
+                Akıllı Analiz
+            </a>
+<!-- Inactive Tab -->
+<a class="text-on-surface-variant hover:text-on-surface px-4 py-3 flex items-center gap-3 transition-all hover:translate-x-1 duration-300" href="/arac-wiki">
+<span class="material-symbols-outlined">menu_book</span>
+                Wiki
+            </a>
+<!-- Active Tab -->
+<a class="bg-primary-container/20 text-primary border-r-4 border-primary px-4 py-3 flex items-center gap-3 Active: opacity-80 scale-98" href="/kronik-sorunlar">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">report_problem</span>
+                Kronik Sorunlar
+            </a>
+</div>
+<div class="mt-auto border-t border-glass-border py-4">
+<a class="text-on-surface-variant hover:text-on-surface px-4 py-3 flex items-center gap-3 transition-all hover:translate-x-1 duration-300" href="/topluluk">
+<span class="material-symbols-outlined">help</span>
+                Destek
+            </a>
+<a class="text-on-surface-variant hover:text-on-surface px-4 py-3 flex items-center gap-3 transition-all hover:translate-x-1 duration-300" href="/arac-wiki">
+<span class="material-symbols-outlined">code</span>
+                API
+            </a>
+</div>
+</nav>
+<!-- Main Canvas -->
+<main class="ml-0 md:ml-64 mt-16 p-margin-mobile md:p-margin-desktop max-w-container-max-width mx-auto pb-section-gap">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter">
+<!-- 1. Header (Spans 12 columns) -->
+<header class="lg:col-span-12 flex flex-col md:flex-row justify-between items-start md:items-end mb-8 gap-4 border-b border-glass-border pb-6">
+<div>
+<div class="flex items-center gap-3 mb-2">
+<h1 class="font-display-hero text-display-hero text-on-surface m-0 leading-none">BMW 320i</h1>
+<div class="bg-surface-container-high border border-outline/30 px-3 py-1 rounded-full flex items-center gap-1">
+<span class="material-symbols-outlined text-primary text-sm" style="font-variation-settings: 'FILL' 1;">verified</span>
+<span class="font-label-caps text-label-caps text-on-surface-variant">Doğrulanmış Model</span>
+</div>
+</div>
+<p class="font-mono-data text-mono-data text-on-surface-variant">F30 Nesli (2012-2018) • N20/B48 Motor</p>
+</div>
+<div class="glass-panel px-6 py-4 rounded-xl flex items-center gap-4">
+<div class="text-right">
+<div class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider mb-1">AI Sağlık Skoru</div>
+<div class="font-headline-md text-headline-md text-primary">78<span class="text-body-md text-on-surface-variant">/100</span></div>
+</div>
+<div class="w-12 h-12 relative flex items-center justify-center">
+<svg class="w-full h-full transform -rotate-90" viewbox="0 0 36 36">
+<path class="text-surface-container-highest" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="currentColor" stroke-width="3"></path>
+<path class="text-primary" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="currentColor" stroke-dasharray="78, 100" stroke-width="3"></path>
+</svg>
+<span class="material-symbols-outlined absolute text-primary text-sm">speed</span>
+</div>
+</div>
+</header>
+<!-- Main Content Area (Cols 1-8) -->
+<div class="lg:col-span-8 flex flex-col gap-6">
+<!-- 2. AI Intelligence Summary -->
+<div class="glass-panel p-6 rounded-xl relative overflow-hidden">
+<div class="absolute top-0 right-0 w-64 h-64 bg-primary/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/4 pointer-events-none"></div>
+<div class="flex items-start gap-4 relative z-10">
+<div class="p-3 bg-surface-container-highest rounded-lg border border-glass-border mt-1">
+<span class="material-symbols-outlined text-secondary" style="font-variation-settings: 'FILL' 1;">insights</span>
+</div>
+<div>
+<h3 class="font-label-caps text-label-caps text-secondary mb-2 uppercase tracking-widest">Analiz Özeti</h3>
+<p class="font-body-lg text-body-lg text-on-surface leading-relaxed">
+                                F30 320i genel olarak güvenilir; ancak yüksek kilometrede N20 triger zinciri kılavuzu ve soğutma sistemi zafiyetleri sık görülür. Büyük arızaları önlemek için sensör verisiyle erken kontrol önerilir.
+                            </p>
+</div>
+</div>
+</div>
+<!-- 3. Issue Categories (GitHub Style) -->
+<div class="flex items-center gap-3 overflow-x-auto pb-2 scrollbar-hide">
+<button onclick="location.href='/kronik-sorunlar'" class="bg-surface-container-high border border-outline-variant hover:border-primary/50 text-on-surface px-4 py-2 rounded-lg flex items-center gap-2 transition-colors whitespace-nowrap">
+<span class="material-symbols-outlined text-sm">build</span>
+<span class="font-mono-data text-mono-data">Motor</span>
+<span class="bg-surface-container-lowest px-2 py-0.5 rounded text-xs text-on-surface-variant">24</span>
+</button>
+<button onclick="location.href='/kronik-sorunlar'" class="glass-panel text-on-surface px-4 py-2 rounded-lg flex items-center gap-2 transition-colors whitespace-nowrap">
+<span class="material-symbols-outlined text-sm">settings_input_component</span>
+<span class="font-mono-data text-mono-data">Elektronik</span>
+<span class="bg-surface-container-lowest px-2 py-0.5 rounded text-xs text-on-surface-variant">18</span>
+</button>
+<button onclick="location.href='/kronik-sorunlar'" class="glass-panel text-on-surface px-4 py-2 rounded-lg flex items-center gap-2 transition-colors whitespace-nowrap">
+<span class="material-symbols-outlined text-sm">water_drop</span>
+<span class="font-mono-data text-mono-data">Soğutma</span>
+<span class="bg-surface-container-lowest px-2 py-0.5 rounded text-xs text-on-surface-variant">12</span>
+</button>
+<button onclick="location.href='/kronik-sorunlar'" class="glass-panel text-on-surface px-4 py-2 rounded-lg flex items-center gap-2 transition-colors whitespace-nowrap">
+<span class="material-symbols-outlined text-sm">airline_seat_recline_normal</span>
+<span class="font-mono-data text-mono-data">İç Mekan</span>
+<span class="bg-surface-container-lowest px-2 py-0.5 rounded text-xs text-on-surface-variant">5</span>
+</button>
+</div>
+<!-- 4. Issue Feed -->
+<div class="flex flex-col gap-4">
+<div class="flex justify-between items-center mb-2">
+<h3 class="font-headline-md text-headline-md text-on-surface text-xl">Aktif Raporlar</h3>
+<div class="font-mono-data text-mono-data text-on-surface-variant">59 sorundan 4’ü gösteriliyor</div>
+</div>
+<!-- Issue Item 1 -->
+<div class="glass-panel p-5 rounded-xl issue-card-hover flex flex-col gap-3">
+<div class="flex justify-between items-start">
+<div class="flex gap-3">
+<span class="material-symbols-outlined text-error mt-1" style="font-variation-settings: 'FILL' 1;">error</span>
+<div>
+<h4 onclick="location.href='/kronik-sorunlar'" class="font-body-lg text-body-lg text-on-surface font-semibold mb-1 cursor-pointer hover:text-primary transition-colors">Triger Zinciri Kılavuz Arızası (N20)</h4>
+<div class="flex flex-wrap items-center gap-2 font-mono-data text-mono-data text-on-surface-variant text-sm">
+<span>#1042</span>
+<span>•</span>
+<span>Sistem açtı</span>
+<span>•</span>
+<span class="text-primary-fixed-dim">70k mil üstü araçların %18’inde raporlandı</span>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-on-surface-variant text-sm">chat_bubble</span>
+<span class="font-mono-data text-mono-data text-on-surface-variant">42</span>
+</div>
+</div>
+<div class="flex gap-2 ml-9">
+<span class="px-2 py-1 rounded bg-error-container/20 text-error border border-error/20 font-label-caps text-label-caps text-[10px]">KRİTİK</span>
+<span class="px-2 py-1 rounded bg-primary-container/20 text-primary border border-primary/20 font-label-caps text-label-caps text-[10px] flex items-center gap-1">
+<span class="material-symbols-outlined text-[12px]">verified</span> AI Onaylı
+                            </span>
+</div>
+</div>
+<!-- Issue Item 2 -->
+<div class="glass-panel p-5 rounded-xl issue-card-hover flex flex-col gap-3">
+<div class="flex justify-between items-start">
+<div class="flex gap-3">
+<span class="material-symbols-outlined text-secondary mt-1">warning</span>
+<div>
+<h4 onclick="location.href='/kronik-sorunlar'" class="font-body-lg text-body-lg text-on-surface font-semibold mb-1 cursor-pointer hover:text-primary transition-colors">Vanos Solenoid Arızası</h4>
+<div class="flex flex-wrap items-center gap-2 font-mono-data text-mono-data text-on-surface-variant text-sm">
+<span>#0891</span>
+<span>•</span>
+<span>Kullanıcı filosu açtı</span>
+<span>•</span>
+<span class="text-primary-fixed-dim">Araçların %12’sinde raporlandı</span>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-on-surface-variant text-sm">chat_bubble</span>
+<span class="font-mono-data text-mono-data text-on-surface-variant">15</span>
+</div>
+</div>
+<div class="flex gap-2 ml-9">
+<span class="px-2 py-1 rounded bg-secondary-container/30 text-secondary border border-secondary/30 font-label-caps text-label-caps text-[10px]">YÜKSEK</span>
+</div>
+</div>
+</div>
+</div>
+<!-- 5. Analytics Sidebar (Cols 9-12) -->
+<aside class="lg:col-span-4 flex flex-col gap-6">
+<!-- Frequency over mileage -->
+<div class="glass-panel p-6 rounded-xl">
+<h3 class="font-label-caps text-label-caps text-on-surface-variant mb-6 flex items-center gap-2 uppercase">
+<span class="material-symbols-outlined text-sm">show_chart</span>
+                        Kilometreye Göre Sıklık
+                    </h3>
+<div class="flex flex-col gap-4">
+<!-- Bar 1 -->
+<div>
+<div class="flex justify-between font-mono-data text-mono-data text-sm mb-1 text-on-surface">
+<span>0 - 40k mi</span>
+<span>2%</span>
+</div>
+<div class="w-full bg-surface-container-highest rounded-full h-2 overflow-hidden">
+<div class="bg-surface-variant h-full rounded-full w-[2%]"></div>
+</div>
+</div>
+<!-- Bar 2 -->
+<div>
+<div class="flex justify-between font-mono-data text-mono-data text-sm mb-1 text-on-surface">
+<span>40k - 80k mi</span>
+<span>14%</span>
+</div>
+<div class="w-full bg-surface-container-highest rounded-full h-2 overflow-hidden">
+<div class="bg-secondary h-full rounded-full w-[14%]"></div>
+</div>
+</div>
+<!-- Bar 3 -->
+<div>
+<div class="flex justify-between font-mono-data text-mono-data text-sm mb-1 text-on-surface">
+<span>80k - 120k mi</span>
+<span class="text-primary">45%</span>
+</div>
+<div class="w-full bg-surface-container-highest rounded-full h-2 overflow-hidden relative">
+<div class="bg-primary h-full rounded-full w-[45%] shadow-[0_0_10px_rgba(137,206,255,0.5)]"></div>
+</div>
+</div>
+<!-- Bar 4 -->
+<div>
+<div class="flex justify-between font-mono-data text-mono-data text-sm mb-1 text-on-surface">
+<span>120k+ mi</span>
+<span>39%</span>
+</div>
+<div class="w-full bg-surface-container-highest rounded-full h-2 overflow-hidden">
+<div class="bg-error/70 h-full rounded-full w-[39%]"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Repair Costs -->
+<div class="glass-panel p-6 rounded-xl">
+<h3 class="font-label-caps text-label-caps text-on-surface-variant mb-6 flex items-center gap-2 uppercase">
+<span class="material-symbols-outlined text-sm">payments</span>
+                        Tahmini Onarım Maliyeti
+                    </h3>
+<div class="flex items-baseline gap-2 mb-4">
+<span class="font-display-hero text-[40px] leading-none text-on-surface">$2,450</span>
+<span class="font-mono-data text-mono-data text-on-surface-variant">70k mil sonrası yıllık ort.</span>
+</div>
+<ul class="flex flex-col gap-3 font-mono-data text-mono-data text-sm border-t border-glass-border pt-4">
+<li class="flex justify-between items-center">
+<span class="text-on-surface-variant">Triger Zinciri Servisi</span>
+<span class="text-on-surface">$1,800 - $3,200</span>
+</li>
+<li class="flex justify-between items-center">
+<span class="text-on-surface-variant">Soğutma Revizyonu</span>
+<span class="text-on-surface">$900 - $1,400</span>
+</li>
+<li class="flex justify-between items-center">
+<span class="text-on-surface-variant">Vanos Solenoidleri</span>
+<span class="text-on-surface">$400 - $600</span>
+</li>
+</ul>
+</div>
+</aside>
+</div>
+</main>
+<!-- Footer -->
+<footer class="w-full py-8 px-margin-desktop flex flex-col md:flex-row justify-between items-center gap-gutter bg-surface-dim border-t border-glass-border font-mono-data text-mono-data text-tertiary ml-0 md:ml-64 relative z-10 w-[calc(100%-0px)] md:w-[calc(100%-256px)]">
+<div class="text-label-caps font-bold text-on-surface-variant uppercase">Vasıtan Araç Zekası</div>
+<div class="flex gap-6">
+<a class="text-on-tertiary-container hover:text-secondary transition-colors hover:text-primary" href="/arac-wiki">Teknik Doküman</a>
+<a class="text-on-tertiary-container hover:text-secondary transition-colors hover:text-primary" href="/arac-wiki">API Protokolleri</a>
+<a class="text-on-tertiary-container hover:text-secondary transition-colors hover:text-primary" href="/garajim">Sistem Durumu</a>
+<a class="text-on-tertiary-container hover:text-secondary transition-colors hover:text-primary" href="/">Gizlilik</a>
+</div>
+<div class="text-on-surface-variant opacity-60">© 2024 Vasıtan Araç Zekası. Tüm hakları saklıdır.</div>
+</footer>
+</body></html>

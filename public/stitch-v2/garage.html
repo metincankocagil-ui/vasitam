@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Vasıtan - Garaj Kontrol Merkezi</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container-lowest": "#060e20",
+                        "inverse-primary": "#006591",
+                        "tertiary-fixed-dim": "#c4c7c9",
+                        "outline": "#88929b",
+                        "on-secondary-fixed-variant": "#2f2ebe",
+                        "surface-variant": "#2d3449",
+                        "surface-container-highest": "#2d3449",
+                        "outline-variant": "#3e4850",
+                        "on-tertiary-fixed-variant": "#444749",
+                        "error-container": "#93000a",
+                        "primary-fixed-dim": "#89ceff",
+                        "surface-container-low": "#131b2e",
+                        "on-surface-variant": "#bec8d2",
+                        "inverse-on-surface": "#283044",
+                        "on-error-container": "#ffdad6",
+                        "on-secondary": "#1000a9",
+                        "tertiary-container": "#999c9e",
+                        "surface-tint": "#89ceff",
+                        "on-tertiary-container": "#303436",
+                        "secondary-fixed-dim": "#c0c1ff",
+                        "secondary-fixed": "#e1e0ff",
+                        "on-primary-fixed": "#001e2f",
+                        "on-secondary-container": "#b0b2ff",
+                        "error": "#ffb4ab",
+                        "slate-gray": "#64748B",
+                        "glass-border": "rgba(255, 255, 255, 0.1)",
+                        "surface-dark": "#020617",
+                        "on-background": "#dae2fd",
+                        "surface-container-high": "#222a3d",
+                        "on-tertiary-fixed": "#191c1e",
+                        "surface-container": "#171f33",
+                        "on-primary": "#00344d",
+                        "on-error": "#690005",
+                        "tertiary": "#c4c7c9",
+                        "on-secondary-fixed": "#07006c",
+                        "surface-bright": "#31394d",
+                        "secondary-container": "#3131c0",
+                        "primary-fixed": "#c9e6ff",
+                        "primary": "#89ceff",
+                        "on-primary-container": "#003751",
+                        "inverse-surface": "#dae2fd",
+                        "primary-container": "#0ea5e9",
+                        "background": "#0b1326",
+                        "on-surface": "#dae2fd",
+                        "secondary": "#c0c1ff",
+                        "tertiary-fixed": "#e0e3e5",
+                        "surface-dim": "#0b1326",
+                        "on-tertiary": "#2d3133",
+                        "on-primary-fixed-variant": "#004c6e",
+                        "surface": "#0b1326"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "margin-mobile": "20px",
+                        "section-gap": "80px",
+                        "margin-desktop": "40px",
+                        "gutter": "24px",
+                        "container-max-width": "1280px",
+                        "base": "8px"
+                    },
+                    "fontFamily": {
+                        "body-md": ["Inter"],
+                        "headline-lg-mobile": ["Inter"],
+                        "label-caps": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "mono-data": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "display-hero": ["Inter"],
+                        "body-lg": ["Inter"]
+                    },
+                    "fontSize": {
+                        "body-md": ["16px", { "lineHeight": "1.5", "letterSpacing": "0em", "fontWeight": "400" }],
+                        "headline-lg-mobile": ["32px", { "lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "label-caps": ["12px", { "lineHeight": "1.2", "letterSpacing": "0.1em", "fontWeight": "600" }],
+                        "headline-md": ["32px", { "lineHeight": "1.3", "letterSpacing": "-0.01em", "fontWeight": "500" }],
+                        "mono-data": ["14px", { "lineHeight": "1.4", "letterSpacing": "0.02em", "fontWeight": "500" }],
+                        "headline-lg": ["48px", { "lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "600" }],
+                        "display-hero": ["72px", { "lineHeight": "1.1", "letterSpacing": "-0.04em", "fontWeight": "700" }],
+                        "body-lg": ["18px", { "lineHeight": "1.6", "letterSpacing": "0em", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .glass-card {
+            background-color: rgba(45, 52, 73, 0.4);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .text-gradient {
+            background: linear-gradient(90deg, #89ceff, #c0c1ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+    </style>
+<link href="/stitch-v2/theme.css" rel="stylesheet"/>
+<script src="/stitch-v2/theme.js"></script>
+</head>
+<body class="bg-background text-on-surface font-body-md min-h-screen flex flex-col md:flex-row overflow-x-hidden">
+<!-- SideNavBar (Desktop) -->
+<nav aria-label="Side Navigation" class="hidden md:flex flex-col bg-surface-container-lowest/90 backdrop-blur-xl h-full w-64 border-r border-glass-border shadow-2xl fixed left-0 top-16 z-40 pt-8">
+<div class="px-4 mb-8">
+<a class="text-body-lg font-headline-md text-secondary-fixed-dim" href="/" target="_top">Vasıtan OS</a>
+<p class="font-label-caps text-label-caps text-on-surface-variant mt-1">Araç AI v4.2</p>
+</div>
+<div class="flex flex-col gap-2 flex-grow">
+<!-- Active State Navigation -->
+<a class="bg-primary-container/20 text-primary border-r-4 border-primary px-4 py-3 flex items-center gap-3 font-label-caps text-label-caps opacity-80 scale-98 hover:brightness-110 active:scale-98 transition-all" href="/ai-danisman">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">insights</span>
+                Akıllı Analiz
+            </a>
+<a class="text-on-surface-variant hover:text-on-surface px-4 py-3 flex items-center gap-3 transition-all font-label-caps text-label-caps hover:translate-x-1 duration-300" href="/arac-wiki">
+<span class="material-symbols-outlined">menu_book</span>
+                Wiki
+            </a>
+<a class="text-on-surface-variant hover:text-on-surface px-4 py-3 flex items-center gap-3 transition-all font-label-caps text-label-caps hover:translate-x-1 duration-300" href="/kronik-sorunlar">
+<span class="material-symbols-outlined">report_problem</span>
+                Kronik Sorunlar
+            </a>
+</div>
+<div class="mt-auto pb-8 flex flex-col gap-2 border-t border-glass-border pt-4">
+<a class="text-on-surface-variant hover:text-on-surface px-4 py-3 flex items-center gap-3 transition-all font-label-caps text-label-caps hover:translate-x-1 duration-300" href="/topluluk">
+<span class="material-symbols-outlined">help</span>
+                Destek
+            </a>
+<a class="text-on-surface-variant hover:text-on-surface px-4 py-3 flex items-center gap-3 transition-all font-label-caps text-label-caps hover:translate-x-1 duration-300" href="/arac-wiki">
+<span class="material-symbols-outlined">code</span>
+                API
+            </a>
+</div>
+</nav>
+<!-- TopNavBar -->
+<header class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-margin-desktop h-16 bg-background/80 backdrop-blur-md border-b border-glass-border shadow-sm">
+<div class="flex items-center gap-4">
+<a class="text-headline-md font-headline-md text-primary tracking-tight font-bold" href="/" target="_top">Vasıtan</a>
+</div>
+<div class="flex items-center gap-6">
+<button onclick="location.href='/topluluk'" class="text-on-surface-variant hover:text-on-surface transition-colors hover:bg-surface-container-highest/50 p-2 rounded-full scale-102 hover:brightness-110 active:scale-98">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button data-theme-toggle type="button" class="text-on-surface-variant hover:text-on-surface transition-colors hover:bg-surface-container-highest/50 p-2 rounded-full scale-102 hover:brightness-110 active:scale-98">
+<span class="material-symbols-outlined">settings</span>
+</button>
+<div class="w-8 h-8 rounded-full bg-surface-variant overflow-hidden border border-glass-border">
+<img alt="User profile" class="w-full h-full object-cover" data-alt="A close up portrait photo of a professional user smiling slightly in a modern setting. The lighting is soft and flattering, highlighting the person's features against a blurred, abstract high-tech background composed of deep blue and slate tones. The overall aesthetic implies trust and technological sophistication." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAtUDaRvNurD1aNsDbfYc2AXNsFB43VBnLk-WGNq0Yn9OTtTEulfRcB81rcWdzrQWytuWvoHAguOPdGlmrRm4vaBVbJkX7LYIMuyOgDf46Gt8mI6UiGmjEQ7R1pU7lhH7AcOMRWfgRgJ1y4CFBZhowU5jTq73S6S3OSFJTCCFupoBemWKeIa2K1vNy3NlFaUi0aWWSIr7uqJW5XmOkQXxr20TuRfKHi5gVRsCWGano1PAn5UDR6oNuZk3NsEs8iE1Nx7OMo4wNKM3E"/>
+</div>
+</div>
+</header>
+<!-- Main Canvas -->
+<main class="mt-16 md:ml-64 flex-1 p-margin-mobile md:p-margin-desktop max-w-[container-max-width] mx-auto w-full flex flex-col gap-section-gap">
+<!-- Header Section -->
+<section class="flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
+<div>
+<h2 class="font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-surface">Garaj Analizi</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant mt-2 max-w-2xl">Araç sağlığı, bakım ve performansı tek ekranda.</p>
+</div>
+<div class="flex gap-4">
+<button onclick="location.href='/garajim'" class="glass-card px-6 py-3 rounded-lg font-label-caps text-label-caps text-on-surface hover:bg-surface-container-highest transition-all duration-200 flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">add</span> Araç Ekle
+                </button>
+<button onclick="location.href='/garajim'" class="bg-primary-container text-on-primary-container px-6 py-3 rounded-lg font-label-caps text-label-caps hover:brightness-110 active:scale-98 transition-all duration-200 flex items-center gap-2 shadow-[0_0_15px_rgba(14,165,233,0.3)]">
+<span class="material-symbols-outlined text-[18px]">health_and_safety</span> Tanı Başlat
+                </button>
+</div>
+</section>
+<!-- Vehicle Overview Grids -->
+<section class="grid grid-cols-1 lg:grid-cols-2 gap-gutter">
+<!-- Vehicle Card 1 -->
+<div class="glass-card rounded-xl p-6 relative overflow-hidden group hover:border-primary/50 transition-colors duration-300">
+<div class="absolute top-0 right-0 p-4">
+<span class="bg-primary/20 text-primary px-3 py-1 rounded-full font-mono-data text-mono-data border border-primary/30 flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">bolt</span> %94 Sağlık
+                    </span>
+</div>
+<div class="flex items-center gap-6 mb-6">
+<div class="w-24 h-24 rounded-lg overflow-hidden border border-glass-border">
+<img alt="BMW 330i" class="w-full h-full object-cover" data-alt="A sleek, modern dark silver BMW sedan parked in a minimalist, high-tech garage environment. The lighting emphasizes the car's aerodynamic curves against a deep slate background. The atmosphere is premium, technical, and luxurious, matching an automotive intelligence dashboard." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBtarkTVot-LuCIQIRst91TwXFPpWsxYs02G8vwqBOe3vdCcSZmEMhq4rb3BsKZGnTS0YICfOWKj73KJjNFsXUBK5EmWvsK3lHhr102RHOgAnoSx8Uck5S4PEA7jmqBWRIXy51kR8WVgw3ee9AXaJriOSACx1PNA0lVGx0kBZ3_ry4NhsQBabSdxVFtL9NXAVPiwifdTrFsmcx7xq63VmMqubD6T3R1-KmRjFDO3jSTWi85t1M5tEFWQgeQxa4lD5_Gjqc5yOtnySM"/>
+</div>
+<div>
+<h3 class="font-headline-md text-headline-md text-on-surface">BMW 330i xDrive</h3>
+<p class="font-mono-data text-mono-data text-on-surface-variant mt-1">VIN: WBA53...9182</p>
+</div>
+</div>
+<div class="grid grid-cols-3 gap-4">
+<div class="bg-surface-container/50 p-4 rounded-lg">
+<p class="font-label-caps text-label-caps text-on-surface-variant mb-1 flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">speed</span> Kilometre</p>
+<p class="font-body-lg text-body-lg text-on-surface">42,500 <span class="text-on-surface-variant text-sm">mi</span></p>
+</div>
+<div class="bg-surface-container/50 p-4 rounded-lg">
+<p class="font-label-caps text-label-caps text-on-surface-variant mb-1 flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">local_gas_station</span> Yakıt</p>
+<p class="font-body-lg text-body-lg text-on-surface">68%</p>
+<div class="w-full bg-surface-variant h-1 mt-2 rounded-full overflow-hidden"><div class="bg-primary h-full w-[68%]"></div></div>
+</div>
+<div class="bg-surface-container/50 p-4 rounded-lg">
+<p class="font-label-caps text-label-caps text-on-surface-variant mb-1 flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">sensors</span> Menzil</p>
+<p class="font-body-lg text-body-lg text-on-surface">310 <span class="text-on-surface-variant text-sm">mi</span></p>
+</div>
+</div>
+</div>
+<!-- Vehicle Card 2 -->
+<div class="glass-card rounded-xl p-6 relative overflow-hidden group hover:border-primary/50 transition-colors duration-300">
+<div class="absolute top-0 right-0 p-4">
+<span class="bg-secondary-container/30 text-secondary-fixed px-3 py-1 rounded-full font-mono-data text-mono-data border border-secondary/30 flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">battery_charging_full</span> Şarjda
+                    </span>
+</div>
+<div class="flex items-center gap-6 mb-6">
+<div class="w-24 h-24 rounded-lg overflow-hidden border border-glass-border">
+<img alt="Tesla Model Y" class="w-full h-full object-cover" data-alt="A clean white Tesla Model Y positioned in a dark, moody automotive showroom setting. Subtle blue underglow lighting reflects off the polished concrete floor, emphasizing the electric vehicle aesthetic. The scene feels futuristic, crisp, and high-performance." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDphOi2th2b4PLFslWGAWCX13g5blUBOEI9sj5x82sMRLmoo_CXXVR8Q7TUu_NoiDo25Bx5FG3aCoStTpK2AZhXPyoxXOS9yVsMheWAleZyinYsfgO0dEK3j7kj6jQ7YZlYAcLQHAqx8Q0pBlvbWWz0fjpTg0LDjK8R3XhWaGx39L9t12Aui5e1TsxpWv8ASc0wcKcTPdftFMA5iTheLB7trdmKRBL4x98i3v47MqIlyZlyiDbReca73iTmYiAgi6mcsFrrDPUZe40"/>
+</div>
+<div>
+<h3 class="font-headline-md text-headline-md text-on-surface">Tesla Model Y LR</h3>
+<p class="font-mono-data text-mono-data text-on-surface-variant mt-1">VIN: 5YJYG...4412</p>
+</div>
+</div>
+<div class="grid grid-cols-3 gap-4">
+<div class="bg-surface-container/50 p-4 rounded-lg">
+<p class="font-label-caps text-label-caps text-on-surface-variant mb-1 flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">speed</span> Kilometre</p>
+<p class="font-body-lg text-body-lg text-on-surface">12,200 <span class="text-on-surface-variant text-sm">mi</span></p>
+</div>
+<div class="bg-surface-container/50 p-4 rounded-lg">
+<p class="font-label-caps text-label-caps text-on-surface-variant mb-1 flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">battery_std</span> Battery</p>
+<p class="font-body-lg text-body-lg text-on-surface">42%</p>
+<div class="w-full bg-surface-variant h-1 mt-2 rounded-full overflow-hidden"><div class="bg-secondary-fixed h-full w-[42%] animate-pulse"></div></div>
+</div>
+<div class="bg-surface-container/50 p-4 rounded-lg">
+<p class="font-label-caps text-label-caps text-on-surface-variant mb-1 flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">sensors</span> Tah. Menzil</p>
+<p class="font-body-lg text-body-lg text-on-surface">138 <span class="text-on-surface-variant text-sm">mi</span></p>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-surface-dim border-t border-glass-border w-full py-8 px-margin-desktop flex flex-col md:flex-row justify-between items-center gap-gutter z-30 relative mt-auto md:ml-64 w-[calc(100%-16rem)]">
+<p class="font-mono-data text-mono-data text-tertiary">© 2024 Vasıtan Araç Zekası. Tüm hakları saklıdır.</p>
+<div class="flex gap-6">
+<a class="font-mono-data text-mono-data text-on-tertiary-container hover:text-secondary hover:text-primary transition-colors transition-opacity duration-200" href="/arac-wiki">Teknik Doküman</a>
+<a class="font-mono-data text-mono-data text-on-tertiary-container hover:text-secondary hover:text-primary transition-colors transition-opacity duration-200" href="/arac-wiki">API Protokolleri</a>
+<a class="font-mono-data text-mono-data text-on-tertiary-container hover:text-secondary hover:text-primary transition-colors transition-opacity duration-200" href="/garajim">Sistem Durumu</a>
+<a class="font-mono-data text-mono-data text-on-tertiary-container hover:text-secondary hover:text-primary transition-colors transition-opacity duration-200" href="/">Gizlilik</a>
+</div>
+</footer>
+</body></html>

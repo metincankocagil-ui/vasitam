@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Vasıtan - Topluluk</title>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "slate-gray": "#64748B",
+                        "surface-container-low": "#131b2e",
+                        "surface-container": "#171f33",
+                        "on-primary-fixed": "#001e2f",
+                        "surface-bright": "#31394d",
+                        "on-secondary": "#1000a9",
+                        "error": "#ffb4ab",
+                        "surface": "#0b1326",
+                        "secondary-fixed-dim": "#c0c1ff",
+                        "on-tertiary-fixed-variant": "#444749",
+                        "secondary": "#c0c1ff",
+                        "secondary-fixed": "#e1e0ff",
+                        "on-primary-container": "#003751",
+                        "outline-variant": "#3e4850",
+                        "on-secondary-fixed-variant": "#2f2ebe",
+                        "on-background": "#dae2fd",
+                        "on-primary": "#00344d",
+                        "on-tertiary-container": "#303436",
+                        "on-surface-variant": "#bec8d2",
+                        "on-tertiary": "#2d3133",
+                        "on-error": "#690005",
+                        "tertiary-fixed": "#e0e3e5",
+                        "surface-container-lowest": "#060e20",
+                        "on-tertiary-fixed": "#191c1e",
+                        "background": "#0b1326",
+                        "outline": "#88929b",
+                        "tertiary-fixed-dim": "#c4c7c9",
+                        "glass-border": "rgba(255, 255, 255, 0.1)",
+                        "on-primary-fixed-variant": "#004c6e",
+                        "secondary-container": "#3131c0",
+                        "primary-container": "#0ea5e9",
+                        "on-error-container": "#ffdad6",
+                        "surface-container-highest": "#2d3449",
+                        "inverse-primary": "#006591",
+                        "surface-dark": "#020617",
+                        "tertiary": "#c4c7c9",
+                        "surface-dim": "#0b1326",
+                        "surface-container-high": "#222a3d",
+                        "primary-fixed-dim": "#89ceff",
+                        "tertiary-container": "#999c9e",
+                        "error-container": "#93000a",
+                        "inverse-surface": "#dae2fd",
+                        "on-secondary-container": "#b0b2ff",
+                        "surface-tint": "#89ceff",
+                        "primary-fixed": "#c9e6ff",
+                        "on-secondary-fixed": "#07006c",
+                        "inverse-on-surface": "#283044",
+                        "surface-variant": "#2d3449",
+                        "on-surface": "#dae2fd",
+                        "primary": "#89ceff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "gutter": "24px",
+                        "section-gap": "80px",
+                        "margin-desktop": "40px",
+                        "margin-mobile": "20px",
+                        "container-max-width": "1280px",
+                        "base": "8px"
+                    },
+                    "fontFamily": {
+                        "headline-lg": ["Inter"],
+                        "display-hero": ["Inter"],
+                        "body-md": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "label-caps": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "mono-data": ["Inter"],
+                        "headline-lg-mobile": ["Inter"]
+                    },
+                    "fontSize": {
+                        "headline-lg": ["48px", { "lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "600" }],
+                        "display-hero": ["72px", { "lineHeight": "1.1", "letterSpacing": "-0.04em", "fontWeight": "700" }],
+                        "body-md": ["16px", { "lineHeight": "1.5", "letterSpacing": "0em", "fontWeight": "400" }],
+                        "body-lg": ["18px", { "lineHeight": "1.6", "letterSpacing": "0em", "fontWeight": "400" }],
+                        "label-caps": ["12px", { "lineHeight": "1.2", "letterSpacing": "0.1em", "fontWeight": "600" }],
+                        "headline-md": ["32px", { "lineHeight": "1.3", "letterSpacing": "-0.01em", "fontWeight": "500" }],
+                        "mono-data": ["14px", { "lineHeight": "1.4", "letterSpacing": "0.02em", "fontWeight": "500" }],
+                        "headline-lg-mobile": ["32px", { "lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "600" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
+        .material-symbols-outlined.fill {
+            font-variation-settings: 'FILL' 1;
+        }
+        .glass-panel {
+            background-color: rgba(19, 27, 46, 0.5); /* surface-container-low with opacity */
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        .vote-btn.active-upvote { color: #0ea5e9; } /* primary-container */
+        .vote-btn.active-downvote { color: #ffb4ab; } /* error */
+        
+        /* Custom scrollbar for webkit */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #3e4850; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: #64748B; }
+    </style>
+<link href="/stitch-v2/theme.css" rel="stylesheet"/>
+<script src="/stitch-v2/theme.js"></script>
+</head>
+<body class="bg-background text-on-surface font-body-md text-body-md antialiased min-h-screen flex flex-col selection:bg-primary/30 selection:text-primary-fixed">
+<nav class="w-full top-0 sticky border-b border-glass-border shadow-sm bg-surface/80 backdrop-blur-xl z-50">
+<div class="flex justify-between items-center px-margin-desktop py-4 max-w-container-max-width mx-auto">
+<div class="flex items-center gap-8">
+<a class="font-headline-md text-headline-md font-bold text-primary tracking-tighter" href="/" target="_top">Vasıtan</a>
+<div class="hidden md:flex items-center gap-2">
+<a class="px-3 py-2 text-on-surface-variant hover:text-on-surface transition-colors hover:bg-surface-bright/20 rounded-lg transition-all duration-200 active:scale-95 transition-transform font-body-md text-body-md" href="/ai-danisman">Akıllı Analiz</a>
+<a class="px-3 py-2 text-on-surface-variant hover:text-on-surface transition-colors hover:bg-surface-bright/20 rounded-lg transition-all duration-200 active:scale-95 transition-transform font-body-md text-body-md" href="/ara">Vitrin</a>
+<a class="px-3 py-2 text-on-surface-variant hover:text-on-surface transition-colors hover:bg-surface-bright/20 rounded-lg transition-all duration-200 active:scale-95 transition-transform font-body-md text-body-md" href="/arac-wiki">Wiki</a>
+<a class="px-3 py-2 text-primary font-bold border-b-2 border-primary pb-1 hover:bg-surface-bright/20 rounded-lg transition-all duration-200 active:scale-95 transition-transform font-body-md text-body-md" href="/topluluk">Topluluk</a>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button onclick="location.href='/topluluk'" class="text-on-surface-variant hover:text-on-surface transition-colors hover:bg-surface-bright/20 rounded-lg p-2 duration-200 active:scale-95">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button data-theme-toggle type="button" class="text-on-surface-variant hover:text-on-surface transition-colors hover:bg-surface-bright/20 rounded-lg p-2 duration-200 active:scale-95">
+<span class="material-symbols-outlined">settings</span>
+</button>
+<div onclick="location.href='/garajim'" class="w-8 h-8 rounded-full bg-surface-bright overflow-hidden border border-outline-variant cursor-pointer hover:border-primary transition-colors">
+<img alt="User profile" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDPrMqpEp1n3QTx51S9VL3W3p6qEGHULjHgYcukPTDxDZhNcyH_kQ1JRwp3WjMIG7cDsa4tr3L-ERZo69z4b3aOwWtTVRd_k2KwNd7POHRUhn1npJc6XSmkzMxjrOQ45jWjgObJrnvoyel1B9xQp8mcgDeue7EyLe5YrTYXs3Faq5L7rUEVxPHQl2dimUmVT2HAtYxdQ1FF277bCC0q7OzMpQ-dxec5BD-c-l1kO-7yhTJjMbcH9zfYwNyY0Qy4GgTJ5-u8RZkNnDs"/>
+</div>
+</div>
+</div>
+</nav>
+<main class="flex-grow max-w-container-max-width mx-auto w-full px-margin-mobile md:px-margin-desktop py-8 grid grid-cols-1 lg:grid-cols-12 gap-gutter">
+<aside class="hidden lg:block lg:col-span-3 space-y-8 sticky top-24 self-start h-[calc(100vh-8rem)] overflow-y-auto pr-2">
+<div class="relative mb-6">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-lg">search</span>
+<input class="w-full bg-surface-container border border-outline-variant rounded-full py-2 pl-10 pr-4 text-on-surface focus:border-primary focus:ring-1 focus:ring-primary transition-all font-body-md text-body-md placeholder-on-surface-variant" placeholder="Topluluk ara..." type="text"/>
+</div>
+<div class="space-y-3">
+<h3 class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider pl-2">Katıldıkların</h3>
+<nav class="flex flex-col space-y-1">
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg bg-surface-container-highest/30 text-primary border border-glass-border" href="/topluluk">
+<span class="material-symbols-outlined fill text-xl">directions_car</span>
+<span class="font-body-md text-body-md font-medium">BMW 3 Series</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-on-surface hover:bg-surface-container-highest/30 transition-colors" href="/topluluk">
+<span class="material-symbols-outlined text-xl text-slate-gray">electric_car</span>
+<span class="font-body-md text-body-md">Tesla Model 3</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-on-surface hover:bg-surface-container-highest/30 transition-colors" href="/topluluk">
+<span class="material-symbols-outlined text-xl text-slate-gray">build</span>
+<span class="font-body-md text-body-md">DIY Mekanik</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-on-surface hover:bg-surface-container-highest/30 transition-colors" href="/topluluk">
+<span class="material-symbols-outlined text-xl text-slate-gray">memory</span>
+<span class="font-body-md text-body-md">EV Yazılım</span>
+</a>
+</nav>
+</div>
+<div class="space-y-3">
+<h3 class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider pl-2">Trendler</h3>
+<nav class="flex flex-col space-y-1">
+<a class="flex items-center justify-between px-3 py-2 rounded-lg text-on-surface hover:bg-surface-container-highest/30 transition-colors" href="/topluluk">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-xl text-primary-container">trending_up</span>
+<span class="font-body-md text-body-md">Rivian Sahipleri</span>
+</div>
+</a>
+<a class="flex items-center justify-between px-3 py-2 rounded-lg text-on-surface hover:bg-surface-container-highest/30 transition-colors" href="/topluluk">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-xl text-slate-gray">forum</span>
+<span class="font-body-md text-body-md">Detay Uzmanları</span>
+</div>
+</a>
+<a class="flex items-center justify-between px-3 py-2 rounded-lg text-on-surface hover:bg-surface-container-highest/30 transition-colors" href="/topluluk">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-xl text-slate-gray">speed</span>
+<span class="font-body-md text-body-md">Pist Ayarları</span>
+</div>
+</a>
+</nav>
+</div>
+</aside>
+<section class="col-span-1 lg:col-span-6 space-y-6">
+<div class="relative h-48 md:h-64 rounded-xl overflow-hidden glass-panel group">
+<div class="absolute inset-0 bg-gradient-to-t from-background via-surface/80 to-transparent z-10"></div>
+<img class="absolute inset-0 w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700" data-alt="A sleek, dark modern sports sedan, heavily implied to be a premium German engineering model like a 3 Series, parked in a sophisticated, minimalist dark studio environment. The lighting is cinematic and moody, with sharp edge lights highlighting the vehicle's aerodynamic curves and metallic paint. The scene exudes a sense of technical luxury, high performance, and precision engineering. Deep slate and midnight blues dominate the background, perfectly complimenting a dark mode digital interface aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAhKZlFyJOhfG2RoiZCt-N4qJC27tJcidUBz8VPbRq3nxUzc-c4VnbfrteQLHc4mDLtJKTdqD2jZUEi_EKitVLdY9HshuMhGooGhADRsgK3TbuooCpUVs3DEakBBbhgrjdiGUkcbbjdTY7Z9BHpytU6LAYS0PL81-gGSDtWxJ7WNDdZ0hu_yYDBTvpyaQsOFIdgOUp7v1LfvjjFV7iwJ6pJdIhk92EWcdCBCsopCNk-AvthpCpIpJQ2otf7oTFJsFqWpmCMaZfKY60"/>
+<div class="absolute bottom-0 left-0 w-full p-6 z-20 flex justify-between items-end">
+<div>
+<h1 class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-surface mb-1 shadow-sm">BMW 3 Series</h1>
+<p class="font-body-md text-body-md text-on-surface-variant flex items-center gap-2">
+<span>r/BMW3Series</span>
+<span class="w-1 h-1 rounded-full bg-outline-variant"></span>
+<span>Premium sürüş topluluğu.</span>
+</p>
+</div>
+<button onclick="location.href='/topluluk'" class="bg-primary text-on-primary font-mono-data text-mono-data px-4 py-2 rounded-full hover:bg-primary-fixed transition-colors shadow-lg active:scale-95">
+                        Katıldın
+                    </button>
+</div>
+</div>
+<div class="glass-panel rounded-xl p-4 flex items-center gap-4">
+<div class="w-10 h-10 rounded-full bg-surface-bright overflow-hidden border border-outline-variant shrink-0">
+<img alt="Current User" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDJS20ys3iykSiihGO1px2QWNLAxP0TWvE9EmajHdqtUOwSQLGF9fi9yRREhmMM7XoYb8Mgvq6CGAnKgMRCt_6h1kw0qq96g7jKlQZvQwYjxWbmdC7FTp3Z5u2y-CB-b0P1-bKrr7wy9-n5BKTqHgnkHTEFxGbfP-s91w7ttNvplLEvI9eZylD4Y79b7OU4oMp5CRzuU5cL2dZeZDBqKnwPssx8WzLNPG8K-7SrKX_vKQpw6Wi8_k6Q-Sl7uLyZacST-yA2k0sregY"/>
+</div>
+<input class="flex-grow bg-surface-container border border-outline-variant rounded-full py-2.5 px-4 text-on-surface focus:border-primary focus:ring-1 focus:ring-primary transition-all font-body-md text-body-md placeholder-on-surface-variant hover:bg-surface-bright/50 cursor-text" placeholder="Yeni gönderi oluştur veya AI analizi iste..." type="text"/>
+<div class="flex gap-1">
+<button onclick="location.href='/topluluk'" class="p-2 text-on-surface-variant hover:text-primary hover:bg-primary/10 rounded-full transition-colors" title="Görsel Ekle">
+<span class="material-symbols-outlined">image</span>
+</button>
+<button onclick="location.href='/topluluk'" class="p-2 text-on-surface-variant hover:text-primary hover:bg-primary/10 rounded-full transition-colors" title="Link Ekle">
+<span class="material-symbols-outlined">link</span>
+</button>
+</div>
+</div>
+<div class="flex items-center gap-2 border-b border-glass-border pb-4 overflow-x-auto scrollbar-hide">
+<button onclick="location.href='/topluluk'" class="flex items-center gap-2 px-4 py-1.5 rounded-full bg-surface-container-highest text-on-surface font-mono-data text-mono-data whitespace-nowrap border border-outline-variant">
+<span class="material-symbols-outlined text-sm">local_fire_department</span> Popüler
+                </button>
+<button onclick="location.href='/topluluk'" class="flex items-center gap-2 px-4 py-1.5 rounded-full text-on-surface-variant hover:bg-surface-container hover:text-on-surface font-mono-data text-mono-data whitespace-nowrap transition-colors">
+<span class="material-symbols-outlined text-sm">new_releases</span> Yeni
+                </button>
+<button onclick="location.href='/topluluk'" class="flex items-center gap-2 px-4 py-1.5 rounded-full text-on-surface-variant hover:bg-surface-container hover:text-on-surface font-mono-data text-mono-data whitespace-nowrap transition-colors">
+<span class="material-symbols-outlined text-sm">trending_up</span> En İyi
+                </button>
+<button onclick="location.href='/topluluk'" class="flex items-center gap-2 px-4 py-1.5 rounded-full text-on-surface-variant hover:bg-surface-container hover:text-on-surface font-mono-data text-mono-data whitespace-nowrap transition-colors">
+<span class="material-symbols-outlined text-sm">smart_toy</span> AI İstekleri
+                </button>
+</div>
+<div class="space-y-4">
+<!-- Post Type: Problem Report -->
+<article class="glass-panel rounded-xl p-0 hover:border-outline-variant transition-colors group">
+<div class="p-5 flex gap-4">
+<div class="flex flex-col items-center gap-1 w-12 shrink-0">
+<button class="vote-btn hover:text-primary hover:bg-primary/10 p-1 rounded transition-colors" onclick="location.href='/topluluk'">
+<span class="material-symbols-outlined">expand_less</span>
+</button>
+<span class="font-mono-data text-mono-data text-on-surface font-bold">342</span>
+<button class="vote-btn hover:text-error hover:bg-error/10 p-1 rounded transition-colors" onclick="location.href='/topluluk'">
+<span class="material-symbols-outlined">expand_more</span>
+</button>
+</div>
+<div class="flex-grow min-w-0">
+<div class="flex items-center gap-2 mb-2 flex-wrap">
+<span class="font-label-caps text-label-caps text-on-surface-variant">u/GearHead99 paylaştı</span>
+<span class="text-outline-variant text-xs">•</span>
+<span class="font-label-caps text-label-caps text-on-surface-variant">4 saat önce</span>
+<span class="px-2 py-0.5 rounded text-[10px] font-bold tracking-wider bg-primary/10 text-primary flex items-center gap-1 uppercase">
+<span class="material-symbols-outlined text-[12px] fill">verified</span> Doğrulanmış Sahip
+                                </span>
+</div>
+<h2 onclick="location.href='/topluluk'" class="font-body-lg text-body-lg font-bold text-on-surface mb-2 pr-4 leading-tight group-hover:text-primary transition-colors cursor-pointer">
+                                60 mph üstünde sağ önden metalik ses. Yaşayan var mı?
+                            </h2>
+<div class="flex gap-2 mb-3">
+<span class="px-2.5 py-1 rounded-full text-[11px] font-bold tracking-wider bg-error/10 text-error border border-error/20 uppercase">
+                                    Sorun Raporu
+                                </span>
+<span class="px-2.5 py-1 rounded-full text-[11px] font-bold tracking-wider bg-surface-container-highest text-on-surface-variant border border-outline-variant uppercase">
+                                    Süspansiyon
+                                </span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant mb-4 line-clamp-3">
+                                2022 M340i kullanıyorum. Son haftalarda sağ ön taraftan 60 mph üstünde metalik bir ses geliyor; küçük darbelerde artıyor. Servis tekrar edemedi. Alt paneller sağlam görünüyor. Salıncak burcu veya amortisör olabilir mi? Sesli video ekledim.
+                            </p>
+<div class="flex items-center gap-4 text-on-surface-variant font-mono-data text-mono-data">
+<button onclick="location.href='/topluluk'" class="flex items-center gap-1.5 hover:bg-surface-bright/50 px-2 py-1.5 rounded transition-colors">
+<span class="material-symbols-outlined text-[18px]">chat_bubble</span>
+<span>84 Yorum</span>
+</button>
+<button onclick="location.href='/topluluk'" class="flex items-center gap-1.5 hover:bg-surface-bright/50 px-2 py-1.5 rounded transition-colors">
+<span class="material-symbols-outlined text-[18px]">share</span>
+<span>Paylaş</span>
+</button>
+<button onclick="location.href='/topluluk'" class="flex items-center gap-1.5 hover:bg-surface-bright/50 px-2 py-1.5 rounded transition-colors ml-auto">
+<span class="material-symbols-outlined text-[18px]">bookmark</span>
+<span>Kaydet</span>
+</button>
+</div>
+</div>
+</div>
+</article>
+<!-- Post Type: AI Analysis Request -->
+<article class="glass-panel rounded-xl p-0 hover:border-outline-variant transition-colors group relative overflow-hidden">
+<div class="absolute left-0 top-0 bottom-0 w-1 bg-primary-container/80 shadow-[0_0_15px_rgba(14,165,233,0.5)]"></div>
+<div class="p-5 flex gap-4">
+<div class="flex flex-col items-center gap-1 w-12 shrink-0">
+<button class="vote-btn hover:text-primary hover:bg-primary/10 p-1 rounded transition-colors" onclick="location.href='/topluluk'">
+<span class="material-symbols-outlined">expand_less</span>
+</button>
+<span class="font-mono-data text-mono-data text-on-surface font-bold">1.2k</span>
+<button class="vote-btn hover:text-error hover:bg-error/10 p-1 rounded transition-colors" onclick="location.href='/topluluk'">
+<span class="material-symbols-outlined">expand_more</span>
+</button>
+</div>
+<div class="flex-grow min-w-0">
+<div class="flex items-center gap-2 mb-2 flex-wrap">
+<span class="font-label-caps text-label-caps text-on-surface-variant">u/TechDriver paylaştı</span>
+<span class="text-outline-variant text-xs">•</span>
+<span class="font-label-caps text-label-caps text-on-surface-variant">8 saat önce</span>
+</div>
+<h2 onclick="location.href='/topluluk'" class="font-body-lg text-body-lg font-bold text-on-surface mb-2 pr-4 leading-tight group-hover:text-primary transition-colors cursor-pointer">
+                                P0171 hata kodu için AI tanı: Bank 1 fakir karışım
+                            </h2>
+<div class="flex gap-2 mb-3">
+<span class="px-2.5 py-1 rounded-full text-[11px] font-bold tracking-wider bg-primary-container/20 text-primary-container border border-primary-container/30 uppercase flex items-center gap-1">
+<span class="material-symbols-outlined text-[12px]">smart_toy</span> AI Analiz İsteği
+                                </span>
+<span class="px-2.5 py-1 rounded-full text-[11px] font-bold tracking-wider bg-surface-container-highest text-on-surface-variant border border-outline-variant uppercase">
+                                    Motor
+                                </span>
+</div>
+<div class="mb-4 rounded-lg border border-outline-variant/50 overflow-hidden">
+<img class="w-full h-48 object-cover" data-alt="A close-up, high-resolution shot of a modern car's digital diagnostic tool displaying complex telemetry data and an error code. The screen glows with bright blue and subtle red warning indicators against a deep black background. The device is held by a mechanic in a dimly lit, high-tech garage setting. The overall mood is serious, analytical, and highly technical, fitting a premium automotive software interface." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCIZK_DW53HQrtAlAgRBWXFA_krsFL6-9jVWEJUVC6MMKK-_YfCUWHqQRHgqIcMVeEjdjWz4k0zBo5JCuJKxEtZG1dx2W9htrq_Ex6fZqanrFCW3TdK7abM2LzQIOxR0jzIcDSK_sqgf04XDMxVcCDcQQLCc9h8O7s3s7_jP_JgCpXNoFzuAARemwtHEGc0U0iOAZYINvc0LhauUtL0-1pf_E_zkWdA31ru6bgMtPBZTE3wzx1x_DFOjc6b0QH2bSXk3KVaPUCBJec"/>
+</div>
+<div class="bg-surface-container-low border border-glass-border rounded-lg p-4 mb-4">
+<div class="flex items-center gap-2 mb-2">
+<span class="material-symbols-outlined text-primary">psychology</span>
+<span class="font-label-caps text-label-caps text-primary uppercase">Vasıtan Analiz Yanıtı</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant text-sm">
+                                    F30 N55 telemetrisine göre P0171 kodu vakum kaçağı veya MAF sensörü ihtimalini gösteriyor. Rölanti düşüşüyle birlikte çatlak charge pipe olasılığı %82. Sensör değişiminden önce plastik bağlantılar görsel olarak kontrol edilmeli.
+                                </p>
+</div>
+<div class="flex items-center gap-4 text-on-surface-variant font-mono-data text-mono-data">
+<button onclick="location.href='/topluluk'" class="flex items-center gap-1.5 hover:bg-surface-bright/50 px-2 py-1.5 rounded transition-colors">
+<span class="material-symbols-outlined text-[18px]">chat_bubble</span>
+<span>215 Yorum</span>
+</button>
+<button onclick="location.href='/topluluk'" class="flex items-center gap-1.5 hover:bg-surface-bright/50 px-2 py-1.5 rounded transition-colors">
+<span class="material-symbols-outlined text-[18px]">share</span>
+<span>Paylaş</span>
+</button>
+</div>
+</div>
+</div>
+</article>
+<!-- Post Type: Owner Review / Discussion -->
+<article class="glass-panel rounded-xl p-0 hover:border-outline-variant transition-colors group">
+<div class="p-5 flex gap-4">
+<div class="flex flex-col items-center gap-1 w-12 shrink-0">
+<button class="vote-btn hover:text-primary hover:bg-primary/10 p-1 rounded transition-colors" onclick="location.href='/topluluk'">
+<span class="material-symbols-outlined">expand_less</span>
+</button>
+<span class="font-mono-data text-mono-data text-on-surface font-bold">89</span>
+<button class="vote-btn hover:text-error hover:bg-error/10 p-1 rounded transition-colors" onclick="location.href='/topluluk'">
+<span class="material-symbols-outlined">expand_more</span>
+</button>
+</div>
+<div class="flex-grow min-w-0">
+<div class="flex items-center gap-2 mb-2 flex-wrap">
+<span class="font-label-caps text-label-caps text-on-surface-variant">u/AutoAesthete paylaştı</span>
+<span class="text-outline-variant text-xs">•</span>
+<span class="font-label-caps text-label-caps text-on-surface-variant">12 saat önce</span>
+</div>
+<h2 onclick="location.href='/topluluk'" class="font-body-lg text-body-lg font-bold text-on-surface mb-2 pr-4 leading-tight group-hover:text-primary transition-colors cursor-pointer">
+                                10.000 mil yorumu: iyi, kötü ve lastikler.
+                            </h2>
+<div class="flex gap-2 mb-3">
+<span class="px-2.5 py-1 rounded-full text-[11px] font-bold tracking-wider bg-secondary/10 text-secondary border border-secondary/20 uppercase">
+                                    Sahip Yorumu
+                                </span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant mb-4 line-clamp-2">
+                                G20 ile 10 bin mili geçtim. Genel deneyim çok iyi; ama alıcıların bilmesi gereken birkaç nokta var. Standart run-flat lastikler bozuk yolda sert. Michelin PS4’e geçince sürüş belirgin değişti...
+                            </p>
+<div class="flex items-center gap-4 text-on-surface-variant font-mono-data text-mono-data">
+<button onclick="location.href='/topluluk'" class="flex items-center gap-1.5 hover:bg-surface-bright/50 px-2 py-1.5 rounded transition-colors">
+<span class="material-symbols-outlined text-[18px]">chat_bubble</span>
+<span>42 Yorum</span>
+</button>
+<button onclick="location.href='/topluluk'" class="flex items-center gap-1.5 hover:bg-surface-bright/50 px-2 py-1.5 rounded transition-colors">
+<span class="material-symbols-outlined text-[18px]">share</span>
+<span>Paylaş</span>
+</button>
+</div>
+</div>
+</div>
+</article>
+<button onclick="location.href='/topluluk'" class="w-full py-4 glass-panel rounded-xl text-primary font-mono-data text-mono-data font-bold hover:bg-surface-container transition-colors">
+                    Daha Fazla Yükle...
+                </button>
+</div>
+</section>
+<aside class="hidden lg:block lg:col-span-3 space-y-6">
+<div class="glass-panel rounded-xl p-6">
+<h3 class="font-headline-md text-headline-md text-on-surface text-xl mb-4">Topluluk Hakkında</h3>
+<p class="font-body-md text-body-md text-on-surface-variant text-sm mb-6">
+                    BMW 3 Series sahipleri ve meraklıları için dijital showroom ve analiz merkezi. Tanı paylaşın, uzman görüşü alın, araç sağlığını birlikte takip edin.
+                </p>
+<div class="grid grid-cols-2 gap-4 mb-6">
+<div>
+<div class="font-headline-md text-headline-md text-on-surface text-2xl font-bold">124k</div>
+<div class="font-label-caps text-label-caps text-on-surface-variant uppercase text-[10px]">Toplam Üye</div>
+</div>
+<div>
+<div class="font-headline-md text-headline-md text-primary text-2xl font-bold flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+                            1.2k
+                        </div>
+<div class="font-label-caps text-label-caps text-on-surface-variant uppercase text-[10px]">Çevrimiçi</div>
+</div>
+<div class="col-span-2 pt-2 border-t border-glass-border">
+<div class="font-headline-md text-headline-md text-on-surface text-xl font-bold">45k</div>
+<div class="font-label-caps text-label-caps text-on-surface-variant uppercase text-[10px] flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px] text-primary">verified</span>
+                            Doğrulanmış Sahip
+                        </div>
+</div>
+</div>
+<button onclick="location.href='/topluluk'" class="w-full py-2 bg-primary text-on-primary font-body-md text-body-md font-bold rounded-lg hover:bg-primary-fixed transition-colors shadow-lg active:scale-95 mb-3">
+                    Gönderi Oluştur
+                </button>
+<button onclick="location.href='/topluluk'" class="w-full py-2 bg-surface-container border border-outline-variant text-on-surface font-body-md text-body-md font-bold rounded-lg hover:bg-surface-bright transition-colors active:scale-95">
+                    AI Tanı İste
+                </button>
+</div>
+<div class="glass-panel rounded-xl p-6">
+<div class="flex items-center gap-2 mb-4 text-on-surface">
+<span class="material-symbols-outlined">gavel</span>
+<h3 class="font-headline-md text-headline-md text-lg">Topluluk Protokolü</h3>
+</div>
+<ul class="space-y-3 font-body-md text-body-md text-sm text-on-surface-variant">
+<li class="flex gap-3">
+<span class="text-primary font-bold">1.</span>
+<span>AI telemetri erişimi için tanı isteklerinde sahipliği doğrulayın.</span>
+</li>
+<li class="flex gap-3">
+<span class="text-primary font-bold">2.</span>
+<span>Teknik sorularda kasa kodunu ekleyin (örn. E90, F30, G20).</span>
+</li>
+<li class="flex gap-3">
+<span class="text-primary font-bold">3.</span>
+<span>Tanı kaydı olmadan servis veya usta karalaması yapmayın.</span>
+</li>
+<li class="flex gap-3">
+<span class="text-primary font-bold">4.</span>
+<span>Tartışmaları teknik kalite ve performans odağında tutun.</span>
+</li>
+</ul>
+</div>
+<div class="text-center font-label-caps text-label-caps text-outline-variant mt-8">
+                Vasıtan Analiz Ağı © 2024
+            </div>
+</aside>
+</main>
+<script>
+        function toggleVote(btn, direction) {
+            const container = btn.parentElement;
+            const upBtn = container.children[0];
+            const countSpan = container.children[1];
+            const downBtn = container.children[2];
+            
+            let count = countSpan.innerText;
+            let isK = count.includes('k');
+            let num = parseFloat(count);
+
+            if (direction === 'up') {
+                if (btn.classList.contains('active-upvote')) {
+                    btn.classList.remove('active-upvote');
+                    upBtn.querySelector('span').classList.remove('fill');
+                } else {
+                    btn.classList.add('active-upvote');
+                    upBtn.querySelector('span').classList.add('fill');
+                    downBtn.classList.remove('active-downvote');
+                    downBtn.querySelector('span').classList.remove('fill');
+                }
+            } else {
+                if (btn.classList.contains('active-downvote')) {
+                    btn.classList.remove('active-downvote');
+                    downBtn.querySelector('span').classList.remove('fill');
+                } else {
+                    btn.classList.add('active-downvote');
+                    downBtn.querySelector('span').classList.add('fill');
+                    upBtn.classList.remove('active-upvote');
+                    upBtn.querySelector('span').classList.remove('fill');
+                }
+            }
+        }
+    </script>
+</body></html>

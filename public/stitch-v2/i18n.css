@@ -1,0 +1,51 @@
+.language-menu {
+  position: absolute;
+  right: 0;
+  top: calc(100% + 12px);
+  z-index: 80;
+  display: none;
+  width: 220px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 16px;
+  background: rgba(11, 19, 38, 0.94);
+  padding: 10px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
+  backdrop-filter: blur(24px);
+}
+
+.language-menu.is-open {
+  display: grid;
+}
+
+.language-option {
+  border-radius: 999px;
+  padding: 8px 10px;
+  color: #bec8d2;
+  font: 700 12px/1.2 Inter, sans-serif;
+  text-align: center;
+  transition: background-color 160ms ease, color 160ms ease;
+}
+
+.language-option:hover,
+.language-option.is-active {
+  background: rgba(137, 206, 255, 0.14);
+  color: #89ceff;
+}
+
+html.light .language-menu {
+  border-color: rgba(15, 23, 42, 0.1);
+  background: rgba(255, 255, 255, 0.94);
+  box-shadow: 0 20px 60px rgba(15, 23, 42, 0.12);
+}
+
+html.light .language-option {
+  color: #64748b;
+}
+
+html.light .language-option:hover,
+html.light .language-option.is-active {
+  background: rgba(14, 165, 233, 0.12);
+  color: #006591;
+}

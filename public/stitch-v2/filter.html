@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Vasıtan - Gelişmiş Akıllı Filtre</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                            "on-secondary": "#1000a9",
+                            "inverse-on-surface": "#283044",
+                            "surface-dim": "#0b1326",
+                            "secondary-fixed": "#e1e0ff",
+                            "secondary": "#c0c1ff",
+                            "surface-container-low": "#131b2e",
+                            "tertiary": "#c4c7c9",
+                            "background": "#0b1326",
+                            "surface-variant": "#2d3449",
+                            "surface-dark": "#020617",
+                            "on-surface": "#dae2fd",
+                            "on-secondary-fixed": "#07006c",
+                            "secondary-container": "#3131c0",
+                            "on-secondary-fixed-variant": "#2f2ebe",
+                            "on-tertiary": "#2d3133",
+                            "inverse-surface": "#dae2fd",
+                            "secondary-fixed-dim": "#c0c1ff",
+                            "primary-fixed": "#c9e6ff",
+                            "on-error-container": "#ffdad6",
+                            "on-error": "#690005",
+                            "surface": "#0b1326",
+                            "surface-container-highest": "#2d3449",
+                            "inverse-primary": "#006591",
+                            "tertiary-fixed": "#e0e3e5",
+                            "outline": "#88929b",
+                            "error-container": "#93000a",
+                            "tertiary-container": "#999c9e",
+                            "surface-container-lowest": "#060e20",
+                            "on-primary": "#00344d",
+                            "error": "#ffb4ab",
+                            "on-tertiary-container": "#303436",
+                            "on-tertiary-fixed": "#191c1e",
+                            "on-primary-container": "#003751",
+                            "surface-tint": "#89ceff",
+                            "on-primary-fixed-variant": "#004c6e",
+                            "on-primary-fixed": "#001e2f",
+                            "glass-border": "rgba(255, 255, 255, 0.1)",
+                            "on-tertiary-fixed-variant": "#444749",
+                            "surface-container-high": "#222a3d",
+                            "on-background": "#dae2fd",
+                            "primary-fixed-dim": "#89ceff",
+                            "surface-container": "#171f33",
+                            "slate-gray": "#64748B",
+                            "primary": "#89ceff",
+                            "primary-container": "#0ea5e9",
+                            "on-secondary-container": "#b0b2ff",
+                            "on-surface-variant": "#bec8d2",
+                            "tertiary-fixed-dim": "#c4c7c9",
+                            "surface-bright": "#31394d",
+                            "outline-variant": "#3e4850"
+                    },
+                    "borderRadius": {
+                            "DEFAULT": "0.25rem",
+                            "lg": "0.5rem",
+                            "xl": "0.75rem",
+                            "full": "9999px"
+                    },
+                    "spacing": {
+                            "container-max-width": "1280px",
+                            "gutter": "24px",
+                            "margin-desktop": "40px",
+                            "margin-mobile": "20px",
+                            "section-gap": "80px",
+                            "base": "8px"
+                    },
+                    "fontFamily": {
+                            "headline-lg": ["Inter"],
+                            "headline-md": ["Inter"],
+                            "body-lg": ["Inter"],
+                            "display-hero": ["Inter"],
+                            "mono-data": ["Inter"],
+                            "body-md": ["Inter"],
+                            "label-caps": ["Inter"],
+                            "headline-lg-mobile": ["Inter"]
+                    },
+                    "fontSize": {
+                            "headline-lg": ["48px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                            "headline-md": ["32px", {"lineHeight": "1.3", "letterSpacing": "-0.01em", "fontWeight": "500"}],
+                            "body-lg": ["18px", {"lineHeight": "1.6", "letterSpacing": "0em", "fontWeight": "400"}],
+                            "display-hero": ["72px", {"lineHeight": "1.1", "letterSpacing": "-0.04em", "fontWeight": "700"}],
+                            "mono-data": ["14px", {"lineHeight": "1.4", "letterSpacing": "0.02em", "fontWeight": "500"}],
+                            "body-md": ["16px", {"lineHeight": "1.5", "letterSpacing": "0em", "fontWeight": "400"}],
+                            "label-caps": ["12px", {"lineHeight": "1.2", "letterSpacing": "0.1em", "fontWeight": "600"}],
+                            "headline-lg-mobile": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "600"}]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .glass-panel {
+            background-color: rgba(19, 27, 46, 0.5); /* surface-container-low with opacity */
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .ai-glow:focus-within {
+            box-shadow: inset 0 0 20px rgba(137, 206, 255, 0.2), 0 0 30px rgba(137, 206, 255, 0.1);
+            border-color: rgba(137, 206, 255, 0.5);
+        }
+        
+        /* Custom Scrollbar for sleek technical look */
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: rgba(6, 14, 32, 0.5); 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: rgba(136, 146, 155, 0.3); 
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(137, 206, 255, 0.5); 
+        }
+    </style>
+<link href="/stitch-v2/theme.css" rel="stylesheet"/>
+<script src="/stitch-v2/theme.js"></script>
+<script src="/stitch-v2/demo-listings.js"></script>
+</head>
+<body class="bg-background text-on-background min-h-screen font-body-md text-body-md overflow-x-hidden">
+<!-- TopNavBar -->
+<header class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-gutter h-16 bg-background/80 backdrop-blur-md border-b border-glass-border">
+<div class="flex items-center gap-4">
+<a class="font-display-hero text-[24px] font-bold text-primary tracking-tighter leading-none" href="/" target="_top">Vasıtan</a>
+<span class="font-label-caps text-label-caps text-on-surface-variant border border-glass-border rounded-full px-2 py-0.5 ml-2">ANALİZ</span>
+</div>
+<!-- Center Nav Items (Hidden on mobile) -->
+<nav class="hidden md:flex items-center gap-8">
+<a class="text-on-surface-variant font-medium hover:text-primary transition-colors duration-200" href="/ai-danisman">Akıllı Analiz</a>
+<a class="text-primary font-bold border-b-2 border-primary pb-1 hover:text-primary transition-colors duration-200" href="/ara">Vitrin</a>
+<a class="text-on-surface-variant font-medium hover:text-primary transition-colors duration-200" href="/ara">Karşılaştırma</a>
+</nav>
+<div class="flex items-center gap-4">
+<button onclick="location.href='/topluluk'" class="text-on-surface-variant hover:text-primary transition-colors duration-200 scale-102 active:scale-95 transition-all">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">notifications</span>
+</button>
+<button data-theme-toggle type="button" class="text-on-surface-variant hover:text-primary transition-colors duration-200 scale-102 active:scale-95 transition-all">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">settings</span>
+</button>
+<div onclick="location.href='/garajim'" class="h-8 w-8 rounded-full bg-surface-container-high border border-glass-border overflow-hidden cursor-pointer">
+<!-- User Profile Placeholder -->
+<div class="w-full h-full flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[20px]">person</span>
+</div>
+</div>
+</div>
+</header>
+<!-- SideNavBar (Desktop only, fixed left) -->
+<aside class="hidden lg:flex flex-col h-screen fixed left-0 top-0 pt-20 pb-8 px-4 bg-surface-container-low/50 backdrop-blur-xl border-r border-glass-border w-64 z-40 translate-x-1 duration-300">
+<div class="mb-8 px-4">
+<a class="font-headline-md text-primary font-bold text-[20px]" href="/" target="_top">Vasıtan</a>
+<div class="text-on-surface-variant text-[12px]">Araç Zekası</div>
+</div>
+<nav class="flex-1 flex flex-col gap-2">
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant hover:bg-surface-variant/50 hover:text-on-surface transition-all group" href="/ai-danisman">
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary transition-colors">auto_awesome</span>
+<span class="font-body-md text-body-md">Akıllı Analiz</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-primary font-semibold bg-surface-container-highest/30 rounded-lg group" href="/ara">
+<span class="material-symbols-outlined text-primary">directions_car</span>
+<span class="font-body-md text-body-md">Vitrin</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant hover:bg-surface-variant/50 hover:text-on-surface transition-all group" href="/ara">
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary transition-colors">compare_arrows</span>
+<span class="font-body-md text-body-md">Karşılaştırma</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant hover:bg-surface-variant/50 hover:text-on-surface transition-all group" href="/arac-wiki">
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary transition-colors">speed</span>
+<span class="font-body-md text-body-md">Performans</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant hover:bg-surface-variant/50 hover:text-on-surface transition-all group" href="/garajim">
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary transition-colors">analytics</span>
+<span class="font-body-md text-body-md">Garaj</span>
+</a>
+</nav>
+<div class="mt-auto">
+<button onclick="location.href='/ilan-ver'" class="w-full mb-6 py-3 px-4 rounded-lg bg-surface-variant/50 border border-primary/30 text-primary font-medium hover:bg-primary/10 transition-all text-left flex justify-between items-center">
+<span>Pro’ya Geç</span>
+<span class="material-symbols-outlined text-[18px]">bolt</span>
+</button>
+<div class="flex flex-col gap-2 border-t border-glass-border pt-4">
+<a class="flex items-center gap-3 px-4 py-2 rounded-lg text-on-surface-variant hover:bg-surface-variant/50 hover:text-on-surface transition-all group" href="/topluluk">
+<span class="material-symbols-outlined text-[20px]">help_outline</span>
+<span class="font-body-md text-body-md text-[14px]">Destek</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2 rounded-lg text-on-surface-variant hover:bg-surface-variant/50 hover:text-on-surface transition-all group" href="/arac-wiki">
+<span class="material-symbols-outlined text-[20px]">description</span>
+<span class="font-body-md text-body-md text-[14px]">Dokümantasyon</span>
+</a>
+</div>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="pt-24 pb-12 lg:pl-64 px-gutter max-w-container-max-width mx-auto flex flex-col gap-section-gap">
+<!-- Hero AI Command Bar -->
+<section class="flex flex-col items-center justify-center pt-8 pb-4">
+<h1 class="font-headline-lg text-headline-lg text-on-surface mb-8 text-center hidden md:block">Araç Zekası Çerçevesi</h1>
+<div class="w-full max-w-3xl relative">
+<!-- AI Search Input -->
+<div class="glass-panel rounded-full p-2 flex items-center gap-3 border border-outline-variant/50 ai-glow transition-all duration-300">
+<div class="pl-4 text-primary">
+<span class="material-symbols-outlined animate-pulse" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
+</div>
+<input class="w-full bg-transparent border-none focus:ring-0 text-on-surface placeholder-on-surface-variant/50 font-body-lg text-body-lg" placeholder="Örn. 'Boyasız, otomatik, 50 bin altı Tramer, aileye uygun'" type="text"/>
+<button onclick="location.href='/ara'" class="bg-primary text-on-primary rounded-full px-6 py-3 font-medium hover:scale-105 transition-transform flex items-center gap-2">
+<span>Analiz Et</span>
+<span class="material-symbols-outlined text-[20px]">arrow_forward</span>
+</button>
+</div>
+<!-- Quick Filter Chips -->
+<div class="flex flex-wrap justify-center gap-3 mt-6">
+<button onclick="location.href='/ara'" class="glass-panel px-4 py-1.5 rounded-full text-on-surface-variant font-mono-data text-mono-data hover:text-primary hover:border-primary/50 transition-all text-[12px] flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">close</span>
+                        DSG Yok
+                    </button>
+<button onclick="location.href='/ara'" class="glass-panel px-4 py-1.5 rounded-full text-on-surface-variant font-mono-data text-mono-data hover:text-primary hover:border-primary/50 transition-all text-[12px] flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">trending_up</span>
+                        Yüksek Değer
+                    </button>
+<button onclick="location.href='/ara'" class="glass-panel px-4 py-1.5 rounded-full text-on-surface-variant font-mono-data text-mono-data hover:text-primary hover:border-primary/50 transition-all text-[12px] flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">build</span>
+                        Düşük Masraf
+                    </button>
+<button onclick="location.href='/ara'" class="glass-panel px-4 py-1.5 rounded-full text-on-surface-variant font-mono-data text-mono-data hover:text-primary hover:border-primary/50 transition-all text-[12px] flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">person</span>
+                        İlk Sahip
+                    </button>
+</div>
+</div>
+</section>
+<!-- Main Layout: Sidebar Filters + Smart Results -->
+<button id="mobile-filter-toggle" type="button" class="lg:hidden glass-panel rounded-lg px-4 py-3 text-primary font-medium flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-[18px]">tune</span>
+<span>Filtreleri Aç</span>
+</button>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+<!-- Left Column: Technical Filters -->
+<div id="filter-panel" class="lg:col-span-3 space-y-6 hidden lg:block">
+<div class="flex items-center justify-between mb-4">
+<h2 class="font-label-caps text-label-caps text-on-surface-variant">PARAMETRELER</h2>
+<button id="reset-filters" type="button" class="text-primary text-[12px] font-medium hover:underline">Sıfırla</button>
+</div>
+<div class="glass-panel rounded-xl p-5 space-y-6">
+<div id="active-filters" class="hidden flex flex-wrap gap-2"></div>
+<div class="space-y-3">
+<label class="font-label-caps text-label-caps text-on-surface block">Temel Filtreler</label>
+<select data-filter="category" class="w-full rounded-lg bg-surface-container-high border border-glass-border text-on-surface text-[13px]">
+<option value="">Tüm Kategoriler</option>
+</select>
+<select data-filter="brand" class="w-full rounded-lg bg-surface-container-high border border-glass-border text-on-surface text-[13px]"><option value="">Marka</option></select>
+<select data-filter="model" class="w-full rounded-lg bg-surface-container-high border border-glass-border text-on-surface text-[13px]"><option value="">Model</option></select>
+<input data-filter="package" class="w-full rounded-lg bg-surface-container-high border border-glass-border text-on-surface text-[13px]" placeholder="Paket / Donanım" type="text"/>
+<div class="grid grid-cols-2 gap-2">
+<input data-filter="yearMin" class="rounded-lg bg-surface-container-high border border-glass-border text-on-surface text-[13px]" placeholder="Yıl min" type="number"/>
+<input data-filter="yearMax" class="rounded-lg bg-surface-container-high border border-glass-border text-on-surface text-[13px]" placeholder="Yıl max" type="number"/>
+<input data-filter="priceMin" class="rounded-lg bg-surface-container-high border border-glass-border text-on-surface text-[13px]" placeholder="Fiyat min" type="number"/>
+<input data-filter="priceMax" class="rounded-lg bg-surface-container-high border border-glass-border text-on-surface text-[13px]" placeholder="Fiyat max" type="number"/>
+<input data-filter="kmMin" class="rounded-lg bg-surface-container-high border border-glass-border text-on-surface text-[13px]" placeholder="KM min" type="number"/>
+<input data-filter="kmMax" class="rounded-lg bg-surface-container-high border border-glass-border text-on-surface text-[13px]" placeholder="KM max" type="number"/>
+</div>
+<select data-filter="city" class="w-full rounded-lg bg-surface-container-high border border-glass-border text-on-surface text-[13px]"><option value="">Şehir</option></select>
+<select data-filter="district" class="w-full rounded-lg bg-surface-container-high border border-glass-border text-on-surface text-[13px]"><option value="">İlçe</option></select>
+<select data-filter="sellerType" class="w-full rounded-lg bg-surface-container-high border border-glass-border text-on-surface text-[13px]"><option value="">Satıcı Tipi</option></select>
+</div>
+<div class="h-px w-full bg-glass-border"></div>
+<div class="space-y-3">
+<label class="font-label-caps text-label-caps text-on-surface block">Araç Teknik</label>
+<select data-filter="fuel" class="w-full rounded-lg bg-surface-container-high border border-glass-border text-on-surface text-[13px]"><option value="">Yakıt</option></select>
+<select data-filter="transmission" class="w-full rounded-lg bg-surface-container-high border border-glass-border text-on-surface text-[13px]"><option value="">Vites / Şanzıman</option></select>
+<select data-filter="bodyType" class="w-full rounded-lg bg-surface-container-high border border-glass-border text-on-surface text-[13px]"><option value="">Kasa Tipi</option></select>
+<select data-filter="drivetrain" class="w-full rounded-lg bg-surface-container-high border border-glass-border text-on-surface text-[13px]"><option value="">Aktarma</option></select>
+<select data-filter="color" class="w-full rounded-lg bg-surface-container-high border border-glass-border text-on-surface text-[13px]"><option value="">Renk</option></select>
+<div class="grid grid-cols-2 gap-2">
+<input data-filter="engineMin" class="rounded-lg bg-surface-container-high border border-glass-border text-on-surface text-[13px]" placeholder="Motor min" type="number" step="0.1"/>
+<input data-filter="engineMax" class="rounded-lg bg-surface-container-high border border-glass-border text-on-surface text-[13px]" placeholder="Motor max" type="number" step="0.1"/>
+<input data-filter="hpMin" class="rounded-lg bg-surface-container-high border border-glass-border text-on-surface text-[13px]" placeholder="HP min" type="number"/>
+<input data-filter="hpMax" class="rounded-lg bg-surface-container-high border border-glass-border text-on-surface text-[13px]" placeholder="HP max" type="number"/>
+<input data-filter="doors" class="rounded-lg bg-surface-container-high border border-glass-border text-on-surface text-[13px]" placeholder="Kapı" type="number"/>
+<input data-filter="seats" class="rounded-lg bg-surface-container-high border border-glass-border text-on-surface text-[13px]" placeholder="Koltuk" type="number"/>
+</div>
+</div>
+<div class="h-px w-full bg-glass-border"></div>
+<div class="space-y-3">
+<label class="font-label-caps text-label-caps text-on-surface block">Hasar / Ekspertiz</label>
+<input data-filter="damageMax" class="w-full rounded-lg bg-surface-container-high border border-glass-border text-on-surface text-[13px]" placeholder="Tramer maksimum" type="number"/>
+<div class="grid grid-cols-1 gap-2 text-[13px] text-on-surface-variant">
+<label class="flex items-center gap-2"><input data-filter="noDamage" class="form-checkbox h-4 w-4 text-primary bg-surface-dim border-outline-variant rounded" type="checkbox"/>Tramer yok</label>
+<label class="flex items-center gap-2"><input data-filter="noPaint" class="form-checkbox h-4 w-4 text-primary bg-surface-dim border-outline-variant rounded" type="checkbox"/>Boyasız araç</label>
+<label class="flex items-center gap-2"><input data-filter="noChanged" class="form-checkbox h-4 w-4 text-primary bg-surface-dim border-outline-variant rounded" type="checkbox"/>Değişensiz araç</label>
+<label class="flex items-center gap-2"><input data-filter="hoodOriginal" class="form-checkbox h-4 w-4 text-primary bg-surface-dim border-outline-variant rounded" type="checkbox"/>Kaput boyasız</label>
+<label class="flex items-center gap-2"><input data-filter="roofOriginal" class="form-checkbox h-4 w-4 text-primary bg-surface-dim border-outline-variant rounded" type="checkbox"/>Tavan boyasız</label>
+<label class="flex items-center gap-2"><input data-filter="noStructuralDamage" class="form-checkbox h-4 w-4 text-primary bg-surface-dim border-outline-variant rounded" type="checkbox"/>Şase / podye işlem görmemiş</label>
+<label class="flex items-center gap-2"><input data-filter="noHeavyDamage" class="form-checkbox h-4 w-4 text-primary bg-surface-dim border-outline-variant rounded" type="checkbox"/>Ağır hasar yok</label>
+<label class="flex items-center gap-2"><input data-filter="noTotalLoss" class="form-checkbox h-4 w-4 text-primary bg-surface-dim border-outline-variant rounded" type="checkbox"/>Pert kaydı yok</label>
+<label class="flex items-center gap-2"><input data-filter="accidentFree" class="form-checkbox h-4 w-4 text-primary bg-surface-dim border-outline-variant rounded" type="checkbox"/>Kazasız</label>
+<label class="flex items-center gap-2"><input data-filter="firstOwner" class="form-checkbox h-4 w-4 text-primary bg-surface-dim border-outline-variant rounded" type="checkbox"/>İlk sahibinden</label>
+<label class="flex items-center gap-2"><input data-filter="serviceHistory" class="form-checkbox h-4 w-4 text-primary bg-surface-dim border-outline-variant rounded" type="checkbox"/>Servis bakımlı</label>
+<label class="flex items-center gap-2"><input data-filter="expertise" class="form-checkbox h-4 w-4 text-primary bg-surface-dim border-outline-variant rounded" type="checkbox"/>Ekspertiz raporlu</label>
+</div>
+</div>
+<div class="h-px w-full bg-glass-border"></div>
+<div class="space-y-3">
+<label class="font-label-caps text-label-caps text-on-surface block">Donanım</label>
+<div id="feature-filters" class="grid grid-cols-1 gap-2 text-[13px] text-on-surface-variant"></div>
+</div>
+<div class="h-px w-full bg-glass-border"></div>
+<div class="space-y-3">
+<label class="font-label-caps text-label-caps text-on-surface block">AI / Akıllı</label>
+<div class="grid grid-cols-2 gap-2">
+<input data-filter="aiMin" class="rounded-lg bg-surface-container-high border border-glass-border text-on-surface text-[13px]" placeholder="AI min" type="number"/>
+<input data-filter="trustMin" class="rounded-lg bg-surface-container-high border border-glass-border text-on-surface text-[13px]" placeholder="Güven min" type="number"/>
+</div>
+<div class="grid grid-cols-1 gap-2 text-[13px] text-on-surface-variant">
+<label class="flex items-center gap-2"><input data-filter="family" class="form-checkbox h-4 w-4 text-primary bg-surface-dim border-outline-variant rounded" type="checkbox"/>Aileye uygun</label>
+<label class="flex items-center gap-2"><input data-filter="firstCar" class="form-checkbox h-4 w-4 text-primary bg-surface-dim border-outline-variant rounded" type="checkbox"/>İlk araç için uygun</label>
+<label class="flex items-center gap-2"><input data-filter="efficient" class="form-checkbox h-4 w-4 text-primary bg-surface-dim border-outline-variant rounded" type="checkbox"/>Yakıt tasarruflu</label>
+<label class="flex items-center gap-2"><input data-filter="longRoad" class="form-checkbox h-4 w-4 text-primary bg-surface-dim border-outline-variant rounded" type="checkbox"/>Uzun yol için uygun</label>
+<label class="flex items-center gap-2"><input data-filter="cityUse" class="form-checkbox h-4 w-4 text-primary bg-surface-dim border-outline-variant rounded" type="checkbox"/>Şehir içi için uygun</label>
+<label class="flex items-center gap-2"><input data-filter="lowMaintenance" class="form-checkbox h-4 w-4 text-primary bg-surface-dim border-outline-variant rounded" type="checkbox"/>Düşük bakım maliyeti</label>
+<label class="flex items-center gap-2"><input data-filter="highResale" class="form-checkbox h-4 w-4 text-primary bg-surface-dim border-outline-variant rounded" type="checkbox"/>Yüksek ikinci el değeri</label>
+<label class="flex items-center gap-2"><input data-filter="lowChronic" class="form-checkbox h-4 w-4 text-primary bg-surface-dim border-outline-variant rounded" type="checkbox"/>Kronik sorunu az</label>
+<label class="flex items-center gap-2"><input data-filter="performance" class="form-checkbox h-4 w-4 text-primary bg-surface-dim border-outline-variant rounded" type="checkbox"/>Performans odaklı</label>
+<label class="flex items-center gap-2"><input data-filter="offroad" class="form-checkbox h-4 w-4 text-primary bg-surface-dim border-outline-variant rounded" type="checkbox"/>Off-road uygun</label>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Column: Smart Results Dashboard -->
+<div class="lg:col-span-9 space-y-4">
+<div class="flex flex-col gap-3 mb-4">
+<div class="flex flex-col md:flex-row md:items-center md:justify-between gap-3">
+<div>
+<h2 class="font-label-caps text-label-caps text-on-surface-variant" id="listing-count">AKILLI SONUÇLAR (50 İLAN)</h2>
+<div class="text-[12px] text-primary mt-1" id="active-category">Tüm kategoriler</div>
+</div>
+<div class="flex flex-wrap gap-2">
+<select id="sort-select" class="glass-panel rounded-md text-on-surface-variant text-[12px] border border-glass-border">
+<option value="recommended">Önerilen</option>
+<option value="priceAsc">Fiyat düşükten yükseğe</option>
+<option value="priceDesc">Fiyat yüksekten düşüğe</option>
+<option value="yearDesc">Yıl yeniye göre</option>
+<option value="kmAsc">KM düşükten yükseğe</option>
+<option value="aiDesc">AI skoru yüksekten düşüğe</option>
+<option value="trustDesc">Güven skoru yüksekten düşüğe</option>
+</select>
+<button id="clear-active-filters" type="button" class="glass-panel px-3 py-1.5 rounded-md text-on-surface-variant hover:text-primary transition-colors text-[12px]">Filtreleri Temizle</button>
+<button onclick="location.href='/ara'" class="glass-panel px-3 py-1.5 rounded-md text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-[18px]">view_list</span>
+</button>
+<button onclick="location.href='/ara'" class="glass-panel px-3 py-1.5 rounded-md text-primary bg-primary/10 border-primary/30 transition-colors">
+<span class="material-symbols-outlined text-[18px]">table_rows</span>
+</button>
+</div>
+</div>
+<div class="hidden flex-wrap gap-2" id="active-filter-summary"></div>
+</div>
+<!-- Interactive List/Table Structure (Notion-like) -->
+<div class="glass-panel rounded-xl overflow-hidden border border-glass-border">
+<!-- Table Header -->
+<div class="grid grid-cols-12 gap-4 p-4 border-b border-glass-border bg-surface-container-high/30 font-label-caps text-label-caps text-on-surface-variant">
+<div class="col-span-5 pl-2">İlan</div>
+<div class="col-span-2 text-right">Fiyat</div>
+<div class="col-span-3 text-right">Araç Bilgisi</div>
+<div class="col-span-2 text-right pr-2">Skor</div>
+</div>
+<div id="listing-results"></div>
+</div>
+</div>
+</div>
+</main>
+<script>
+        (function () {
+            var listings = window.VASITAN_DEMO_LISTINGS || [];
+            var categoryGroups = window.VASITAN_CATEGORY_GROUPS || {};
+            var categoryLabels = window.VASITAN_CATEGORY_LABELS || {};
+            var target = document.getElementById("listing-results");
+            var count = document.getElementById("listing-count");
+            var activeCategory = document.getElementById("active-category");
+            var activeSummary = document.getElementById("active-filter-summary");
+            var sortSelect = document.getElementById("sort-select");
+            var filterPanel = document.getElementById("filter-panel");
+            var mobileFilterToggle = document.getElementById("mobile-filter-toggle");
+            var params = new URLSearchParams(window.location.search);
+            var initialCategory = params.get("kategori") || "";
+            var controls = {};
+
+            function formatPrice(value) {
+                return "₺" + Number(value).toLocaleString("tr-TR");
+            }
+
+            function formatKm(value) {
+                return Number(value).toLocaleString("tr-TR") + " km";
+            }
+
+            function vehicleIcon(item) {
+                if (item.bodyType === "Motosiklet" || item.bodyType === "Scooter") return "🏍️";
+                if (item.bodyType === "Tekne" || item.bodyType === "Yat" || item.bodyType === "Jet Ski") return "🛥️";
+                if (item.bodyType === "Hava Aracı") return "✈️";
+                if (item.bodyType === "Traktör" || item.bodyType === "İş Makinası") return "🚜";
+                if (item.bodyType === "Çekici" || item.bodyType === "Ticari" || item.bodyType === "Panelvan") return "🚚";
+                if (item.bodyType === "Karavan") return "🚐";
+                return "🚘";
+            }
+
+            function vehicleColor(item) {
+                var color = String(item.color || "").toLowerCase();
+                if (color.indexOf("siyah") >= 0) return "#111827";
+                if (color.indexOf("beyaz") >= 0 || color.indexOf("inci") >= 0 || color.indexOf("sedef") >= 0) return "#f8fafc";
+                if (color.indexOf("gri") >= 0 || color.indexOf("füme") >= 0 || color.indexOf("gümüş") >= 0) return "#64748b";
+                if (color.indexOf("kırmızı") >= 0 || color.indexOf("rosso") >= 0) return "#dc2626";
+                if (color.indexOf("mavi") >= 0 || color.indexOf("lacivert") >= 0) return "#1d4ed8";
+                if (color.indexOf("yeşil") >= 0 || color.indexOf("haki") >= 0) return "#15803d";
+                if (color.indexOf("sarı") >= 0 || color.indexOf("turuncu") >= 0) return "#f59e0b";
+                return "#0ea5e9";
+            }
+
+            function vehicleShape(item) {
+                var type = item.bodyType;
+                if (type === "Motosiklet" || type === "Scooter") {
+                    return '<circle cx="34" cy="78" r="10" fill="#020617" stroke="#cbd5e1" stroke-width="3"/><circle cx="104" cy="78" r="10" fill="#020617" stroke="#cbd5e1" stroke-width="3"/><path d="M36 72 C52 54 72 54 91 70 L106 70" fill="none" stroke="' + vehicleColor(item) + '" stroke-width="10" stroke-linecap="round"/><path d="M64 54 L76 39 L88 56" fill="none" stroke="#e2e8f0" stroke-width="5" stroke-linecap="round"/>';
+                }
+                if (type === "Tekne" || type === "Yat" || type === "Jet Ski") {
+                    return '<path d="M22 74 H116 L102 90 H38 Z" fill="' + vehicleColor(item) + '"/><path d="M45 56 H86 L98 74 H34 Z" fill="#e2e8f0" opacity="0.9"/><path d="M20 94 C39 87 57 101 76 94 C95 87 111 101 124 94" fill="none" stroke="#38bdf8" stroke-width="4" stroke-linecap="round"/>';
+                }
+                if (type === "Hava Aracı") {
+                    return '<path d="M22 66 L70 52 L122 65 L70 78 Z" fill="' + vehicleColor(item) + '"/><path d="M64 35 H78 L86 102 H56 Z" fill="#e2e8f0" opacity="0.9"/><circle cx="70" cy="65" r="7" fill="#020617"/>';
+                }
+                if (type === "Traktör" || type === "İş Makinası") {
+                    return '<circle cx="39" cy="82" r="17" fill="#020617" stroke="#cbd5e1" stroke-width="4"/><circle cx="96" cy="84" r="11" fill="#020617" stroke="#cbd5e1" stroke-width="4"/><path d="M32 63 H72 L84 80 H108 V61 H91 L81 47 H55 L50 61 H32 Z" fill="' + vehicleColor(item) + '"/><path d="M84 58 L120 45" stroke="#eab308" stroke-width="6" stroke-linecap="round"/>';
+                }
+                if (type === "Çekici" || type === "Ticari" || type === "Panelvan" || type === "Minibüs" || type === "Pickup") {
+                    return '<path d="M18 62 H82 V82 H18 Z" fill="' + vehicleColor(item) + '"/><path d="M82 52 H111 L124 68 V82 H82 Z" fill="#e2e8f0"/><circle cx="39" cy="84" r="8" fill="#020617"/><circle cx="103" cy="84" r="8" fill="#020617"/><path d="M88 58 H106 L114 68 H88 Z" fill="#0f172a" opacity="0.6"/>';
+                }
+                if (type === "Karavan") {
+                    return '<path d="M20 54 H111 Q122 54 122 66 V83 H20 Z" fill="' + vehicleColor(item) + '"/><rect x="36" y="62" width="20" height="13" rx="2" fill="#0f172a" opacity="0.55"/><rect x="68" y="62" width="24" height="13" rx="2" fill="#0f172a" opacity="0.55"/><circle cx="42" cy="86" r="8" fill="#020617"/><circle cx="100" cy="86" r="8" fill="#020617"/>';
+                }
+                return '<path d="M22 75 C29 58 42 51 63 51 H83 C100 51 112 59 121 75 L118 84 H25 Z" fill="' + vehicleColor(item) + '"/><path d="M50 55 H84 C94 55 101 61 106 72 H36 C40 63 44 58 50 55 Z" fill="#e2e8f0" opacity="0.9"/><circle cx="44" cy="84" r="9" fill="#020617"/><circle cx="101" cy="84" r="9" fill="#020617"/><path d="M31 74 H114" stroke="#ffffff" stroke-opacity="0.35" stroke-width="2"/>';
+            }
+
+            function vehicleImage(item) {
+                var svg = '<svg xmlns="http://www.w3.org/2000/svg" width="160" height="112" viewBox="0 0 160 112">' +
+                    '<defs><linearGradient id="bg" x1="0" x2="1" y1="0" y2="1"><stop stop-color="#0f172a"/><stop offset="1" stop-color="#020617"/></linearGradient><radialGradient id="glow" cx="70%" cy="25%" r="70%"><stop stop-color="#38bdf8" stop-opacity="0.42"/><stop offset="1" stop-color="#38bdf8" stop-opacity="0"/></radialGradient></defs>' +
+                    '<rect width="160" height="112" rx="18" fill="url(#bg)"/><rect width="160" height="112" rx="18" fill="url(#glow)"/>' +
+                    '<path d="M18 90 H142" stroke="#334155" stroke-width="2" stroke-linecap="round"/>' +
+                    vehicleShape(item) +
+                    '<text x="16" y="22" fill="#cbd5e1" font-family="Inter, Arial" font-size="10" font-weight="700">' + item.brand + '</text>' +
+                    '<text x="16" y="36" fill="#94a3b8" font-family="Inter, Arial" font-size="8">' + item.bodyType + '</text>' +
+                    '</svg>';
+                return "data:image/svg+xml;charset=UTF-8," + encodeURIComponent(svg);
+            }
+
+            function primaryImage(item) {
+                return item.images && item.images[0] && item.images[0].url ? item.images[0] : null;
+            }
+
+            function chip(text) {
+                return '<span class="px-2 py-1 rounded bg-surface-container text-[11px] text-on-surface-variant">' + text + '</span>';
+            }
+
+            function unique(field) {
+                return Array.from(new Set(listings.map(function (item) { return item[field]; }).filter(Boolean))).sort(function (a, b) {
+                    return String(a).localeCompare(String(b), "tr");
+                });
+            }
+
+            function option(select, value, label) {
+                if (!select) return;
+                var item = document.createElement("option");
+                item.value = value;
+                item.textContent = label || value;
+                select.appendChild(item);
+            }
+
+            function escapeHtml(value) {
+                return String(value).replace(/[&<>"']/g, function (char) {
+                    return {"&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#039;"}[char];
+                });
+            }
+
+            function bindControls() {
+                document.querySelectorAll("[data-filter]").forEach(function (control) {
+                    controls[control.getAttribute("data-filter")] = control;
+                });
+                Object.keys(categoryLabels).forEach(function (key) {
+                    option(controls.category, key, categoryLabels[key]);
+                });
+                var fixedOptions = {
+                    sellerType: ["Bireysel", "Galeri", "Kurumsal"],
+                    fuel: ["Benzin", "Dizel", "Hybrid", "Elektrik", "LPG", "Avgas", "Yok"],
+                    transmission: ["Manuel", "Otomatik", "Yarı Otomatik", "CVT", "DSG", "EAT8", "ZF8", "Deniz Motoru", "Hidrolik", "Uçak", "Helikopter", "Yok"],
+                    bodyType: ["Sedan", "Hatchback", "SUV", "Crossover", "Pickup", "Coupe", "Station Wagon", "Cabrio", "Panelvan", "Minibüs", "Kamyonet", "Çekici", "Scooter", "Motosiklet", "Traktör", "Tarım Ekipmanı", "Karavan", "Tekne", "Yat", "Jet Ski", "Hava Aracı", "İş Makinası"],
+                    drivetrain: ["Önden Çekiş", "Arkadan İtiş", "AWD", "4x4", "Şaft Aktarma", "Zincir Aktarma", "Kayış Aktarma", "Jet Tahrik", "Paletli", "İçten Takma", "Rotor", "Pervane", "Yok"]
+                };
+                ["brand", "model", "city", "district", "sellerType", "fuel", "transmission", "bodyType", "drivetrain", "color"].forEach(function (field) {
+                    Array.from(new Set((fixedOptions[field] || []).concat(unique(field)))).forEach(function (value) {
+                        option(controls[field], value);
+                    });
+                });
+                var featureTarget = document.getElementById("feature-filters");
+                var features = ["Sunroof", "Panoramik cam tavan", "Deri koltuk", "Isıtmalı koltuk", "Soğutmalı koltuk", "Hafızalı koltuk", "Adaptif cruise control", "Şerit takip", "Kör nokta uyarı", "360 kamera", "Geri görüş kamerası", "Park sensörü", "CarPlay", "Android Auto", "Navigasyon", "Elektrikli bagaj", "Head-up display", "Matrix LED far", "Hayalet gösterge"];
+                if (featureTarget) {
+                    featureTarget.innerHTML = features.map(function (feature) {
+                        return '<label class="flex items-center gap-2"><input data-feature="' + feature + '" class="form-checkbox h-4 w-4 text-primary bg-surface-dim border-outline-variant rounded" type="checkbox"/>' + feature + '</label>';
+                    }).join("");
+                }
+                if (initialCategory && controls.category) {
+                    controls.category.value = initialCategory;
+                }
+                document.querySelectorAll("[data-filter], [data-feature], #sort-select").forEach(function (control) {
+                    control.addEventListener("input", render);
+                    control.addEventListener("change", render);
+                });
+                document.getElementById("reset-filters")?.addEventListener("click", clearFilters);
+                document.getElementById("clear-active-filters")?.addEventListener("click", clearFilters);
+                mobileFilterToggle?.addEventListener("click", function () {
+                    if (!filterPanel) return;
+                    var isHidden = filterPanel.classList.toggle("hidden");
+                    mobileFilterToggle.querySelector("span:last-child").textContent = isHidden ? "Filtreleri Aç" : "Filtreleri Kapat";
+                });
+            }
+
+            function value(name) {
+                return controls[name]?.type === "checkbox" ? controls[name].checked : (controls[name]?.value || "");
+            }
+
+            function numberValue(name) {
+                var raw = value(name);
+                return raw === "" ? null : Number(raw);
+            }
+
+            function matchNumber(itemValue, minName, maxName) {
+                var min = numberValue(minName);
+                var max = numberValue(maxName);
+                return (min === null || itemValue >= min) && (max === null || itemValue <= max);
+            }
+
+            function selectedFeatures() {
+                return Array.from(document.querySelectorAll("[data-feature]:checked")).map(function (item) {
+                    return item.getAttribute("data-feature");
+                });
+            }
+
+            function matches(item) {
+                var category = value("category");
+                if (category && (categoryGroups[category] || []).indexOf(item.bodyType) === -1) return false;
+                if (value("brand") && item.brand !== value("brand")) return false;
+                if (value("model") && item.model !== value("model")) return false;
+                if (value("city") && item.city !== value("city")) return false;
+                if (value("district") && item.district !== value("district")) return false;
+                if (value("sellerType") && item.sellerType !== value("sellerType")) return false;
+                if (value("fuel") && item.fuel !== value("fuel")) return false;
+                if (value("transmission") && item.transmission !== value("transmission")) return false;
+                if (value("bodyType") && item.bodyType !== value("bodyType")) return false;
+                if (value("drivetrain") && item.drivetrain !== value("drivetrain")) return false;
+                if (value("color") && item.color !== value("color")) return false;
+                if (value("package") && item.package.toLowerCase().indexOf(value("package").toLowerCase()) === -1) return false;
+                if (!matchNumber(item.year, "yearMin", "yearMax")) return false;
+                if (!matchNumber(item.price, "priceMin", "priceMax")) return false;
+                if (!matchNumber(item.km, "kmMin", "kmMax")) return false;
+                if (!matchNumber(item.engineDisplacement, "engineMin", "engineMax")) return false;
+                if (!matchNumber(item.horsepower, "hpMin", "hpMax")) return false;
+                if (numberValue("doors") !== null && item.doors !== numberValue("doors")) return false;
+                if (numberValue("seats") !== null && item.seats !== numberValue("seats")) return false;
+                if (numberValue("damageMax") !== null && item.damageRecord > numberValue("damageMax")) return false;
+                if (numberValue("aiMin") !== null && item.aiScore < numberValue("aiMin")) return false;
+                if (numberValue("trustMin") !== null && item.trustScore < numberValue("trustMin")) return false;
+                if (value("noDamage") && item.damageRecord !== 0) return false;
+                if (value("noPaint") && !item.isNoPaint) return false;
+                if (value("noChanged") && !item.isNoChangedPart) return false;
+                if (value("hoodOriginal") && !item.isHoodOriginal) return false;
+                if (value("roofOriginal") && !item.isRoofOriginal) return false;
+                if (value("noStructuralDamage") && !item.hasNoStructuralDamage) return false;
+                if (value("noHeavyDamage") && !item.hasNoHeavyDamage) return false;
+                if (value("noTotalLoss") && !item.hasNoTotalLoss) return false;
+                if (value("accidentFree") && !item.isAccidentFree) return false;
+                if (value("firstOwner") && !item.isFirstOwner) return false;
+                if (value("serviceHistory") && !item.hasServiceHistory) return false;
+                if (value("expertise") && !item.hasExpertiseReport) return false;
+                if (value("family") && item.familyScore < 85) return false;
+                if (value("firstCar") && (item.price > 1500000 || item.maintenanceCostScore < 80)) return false;
+                if (value("efficient") && ["Dizel", "Hybrid", "Elektrik", "Yok"].indexOf(item.fuel) === -1) return false;
+                if (value("longRoad") && item.longRoadScore < 84) return false;
+                if (value("cityUse") && item.cityScore < 84) return false;
+                if (value("lowMaintenance") && item.maintenanceCostScore < 82) return false;
+                if (value("highResale") && item.resaleValueScore < 85) return false;
+                if (value("lowChronic") && item.chronicIssueScore < 84) return false;
+                if (value("performance") && item.horsepower < 170) return false;
+                if (value("offroad") && ["4x4", "AWD", "Paletli"].indexOf(item.drivetrain) === -1) return false;
+                return selectedFeatures().every(function (feature) {
+                    return item.features.indexOf(feature) >= 0;
+                });
+            }
+
+            function sortListings(items) {
+                var mode = sortSelect?.value || "recommended";
+                return items.slice().sort(function (a, b) {
+                    if (mode === "priceAsc") return a.price - b.price;
+                    if (mode === "priceDesc") return b.price - a.price;
+                    if (mode === "yearDesc") return b.year - a.year;
+                    if (mode === "kmAsc") return a.km - b.km;
+                    if (mode === "aiDesc") return b.aiScore - a.aiScore;
+                    if (mode === "trustDesc") return b.trustScore - a.trustScore;
+                    return (b.aiScore + b.trustScore) - (a.aiScore + a.trustScore);
+                });
+            }
+
+            function activeFilters() {
+                var result = [];
+                if (value("category")) result.push(categoryLabels[value("category")] || value("category"));
+                Object.keys(controls).forEach(function (name) {
+                    if (name === "category") return;
+                    var current = value(name);
+                    if (current) result.push(current === true ? name : current);
+                });
+                selectedFeatures().forEach(function (feature) { result.push(feature); });
+                return result;
+            }
+
+            function renderSummary(items) {
+                var filters = activeFilters();
+                if (count) count.textContent = "AKILLI SONUÇLAR (" + items.length + " İLAN)";
+                if (activeCategory) activeCategory.textContent = value("category") ? "Aktif kategori: " + (categoryLabels[value("category")] || value("category")) : "Tüm kategoriler";
+                if (activeSummary) {
+                    activeSummary.classList.toggle("hidden", filters.length === 0);
+                    activeSummary.classList.toggle("flex", filters.length > 0);
+                    activeSummary.innerHTML = filters.map(function (item) {
+                        return '<span class="px-2 py-1 rounded-full bg-primary/10 text-primary text-[11px]">' + escapeHtml(item) + '</span>';
+                    }).join("");
+                }
+            }
+
+            function renderRows(items) {
+                if (!target) return;
+                if (items.length === 0) {
+                    target.innerHTML = '<div class="p-8 text-center text-on-surface-variant">Bu filtrelere uygun ilan bulunamadı.</div>';
+                    return;
+                }
+                target.innerHTML = items.map(function (item) {
+                var image = primaryImage(item);
+                return '<div data-listing-row class="grid grid-cols-12 gap-4 p-4 border-b border-glass-border hover:bg-surface-variant/30 transition-colors group cursor-pointer items-center">' +
+                    '<div class="col-span-12 md:col-span-5 pl-2 flex items-start gap-3">' +
+                        '<div class="w-24 h-16 rounded-xl bg-surface-container-high border border-glass-border overflow-hidden shrink-0 relative">' +
+                            '<img data-listing-image="' + item.id + '" class="w-full h-full object-cover" src="' + (image ? image.url : vehicleImage(item)) + '" alt="' + escapeHtml(image ? image.alt : item.title + " görseli") + '"/>' +
+                            (image && image.isRepresentative ? '<div class="absolute top-1 left-1 px-1.5 py-0.5 rounded bg-surface/80 text-[9px] text-on-surface-variant">Temsili</div>' : "") +
+                            '<div class="absolute bottom-1 right-1 text-[16px] leading-none">' + vehicleIcon(item) + '</div>' +
+                        '</div>' +
+                        '<div class="flex flex-col gap-1 min-w-0">' +
+                            '<div class="font-headline-md text-[16px] text-on-surface font-semibold flex items-center gap-2">' +
+                                '<span>' + escapeHtml(item.title) + '</span>' +
+                                '<span class="material-symbols-outlined text-primary text-[14px]">verified</span>' +
+                            '</div>' +
+                            '<div class="text-[12px] text-on-surface-variant flex flex-wrap gap-1.5">' +
+                                chip(escapeHtml(item.brand)) + chip(escapeHtml(item.model)) + chip(String(item.year)) + chip(escapeHtml(item.city)) + chip(escapeHtml(item.color)) +
+                            '</div>' +
+                            '<div class="text-[12px] text-primary flex items-start gap-1 mt-1">' +
+                                '<span class="material-symbols-outlined text-[14px] mt-0.5">smart_toy</span>' +
+                                '<span>' + escapeHtml(item.description) + '</span>' +
+                            '</div>' +
+                        '</div>' +
+                    '</div>' +
+                    '<div class="col-span-6 md:col-span-2 text-right font-mono-data text-mono-data text-on-surface-variant flex flex-col">' +
+                        '<span class="text-on-surface">' + formatPrice(item.price) + '</span>' +
+                        '<span class="text-[12px]">' + formatKm(item.km) + '</span>' +
+                    '</div>' +
+                    '<div class="col-span-6 md:col-span-3 text-right font-mono-data text-mono-data text-on-surface-variant flex flex-col">' +
+                        '<span class="text-on-surface">' + escapeHtml(item.fuel) + " • " + escapeHtml(item.transmission) + '</span>' +
+                        '<span class="text-[12px]">' + escapeHtml(item.bodyType) + " • " + escapeHtml(item.engine) + " • " + escapeHtml(item.power) + '</span>' +
+                        '<span class="text-[12px]">' + escapeHtml(item.sellerType) + " • " + escapeHtml(item.paintedParts) + '</span>' +
+                    '</div>' +
+                    '<div class="col-span-12 md:col-span-2 text-right pr-2 flex justify-end gap-2 font-mono-data text-mono-data">' +
+                        '<span class="px-2 py-1 rounded bg-primary/10 text-primary">AI ' + item.aiScore + '</span>' +
+                        '<span class="px-2 py-1 rounded bg-surface-container text-on-surface-variant">Güven ' + item.trustScore + '</span>' +
+                    '</div>' +
+                '</div>';
+                }).join("");
+
+                target.querySelectorAll("[data-listing-image]").forEach(function (img) {
+                    var listingId = Number(img.getAttribute("data-listing-image"));
+                    var item = items.find(function (candidate) { return candidate.id === listingId; });
+                    img.onerror = function () {
+                        img.onerror = null;
+                        if (item) img.src = vehicleImage(item);
+                    };
+                });
+
+                target.querySelectorAll("[data-listing-row]").forEach(function (row, index) {
+                row.addEventListener("click", function () {
+                    window.top.location.href = "/ilan/" + items[index].id;
+                });
+            });
+            }
+
+            function render() {
+                var filtered = sortListings(listings.filter(matches));
+                var category = value("category");
+                var nextUrl = category ? "/ara?kategori=" + encodeURIComponent(category) : "/ara";
+                history.replaceState(null, "", nextUrl);
+                renderSummary(filtered);
+                renderRows(filtered);
+            }
+
+            function clearFilters() {
+                Object.keys(controls).forEach(function (name) {
+                    if (controls[name].type === "checkbox") controls[name].checked = false;
+                    else controls[name].value = "";
+                });
+                document.querySelectorAll("[data-feature]").forEach(function (item) { item.checked = false; });
+                if (sortSelect) sortSelect.value = "recommended";
+                history.replaceState(null, "", "/ara");
+                render();
+            }
+
+            bindControls();
+            render();
+        })();
+    </script>
+</body></html>

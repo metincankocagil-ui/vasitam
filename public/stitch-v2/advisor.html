@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Vasıtan AI Araç Danışmanı</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-error-container": "#ffdad6",
+                    "secondary-container": "#3131c0",
+                    "on-error": "#690005",
+                    "surface-container-lowest": "#060e20",
+                    "inverse-surface": "#dae2fd",
+                    "tertiary-fixed": "#e0e3e5",
+                    "on-surface": "#dae2fd",
+                    "on-secondary-container": "#b0b2ff",
+                    "secondary-fixed": "#e1e0ff",
+                    "on-tertiary-container": "#303436",
+                    "on-secondary-fixed-variant": "#2f2ebe",
+                    "error": "#ffb4ab",
+                    "tertiary-container": "#999c9e",
+                    "on-primary-fixed": "#001e2f",
+                    "on-primary": "#00344d",
+                    "surface-dim": "#0b1326",
+                    "on-secondary-fixed": "#07006c",
+                    "secondary": "#c0c1ff",
+                    "secondary-fixed-dim": "#c0c1ff",
+                    "tertiary-fixed-dim": "#c4c7c9",
+                    "primary-fixed": "#c9e6ff",
+                    "surface-container-highest": "#2d3449",
+                    "surface-bright": "#31394d",
+                    "primary": "#89ceff",
+                    "inverse-on-surface": "#283044",
+                    "surface-container-high": "#222a3d",
+                    "outline": "#88929b",
+                    "surface": "#0b1326",
+                    "surface-container-low": "#131b2e",
+                    "tertiary": "#c4c7c9",
+                    "error-container": "#93000a",
+                    "surface-tint": "#89ceff",
+                    "on-tertiary": "#2d3133",
+                    "surface-dark": "#020617",
+                    "on-primary-fixed-variant": "#004c6e",
+                    "on-tertiary-fixed-variant": "#444749",
+                    "on-secondary": "#1000a9",
+                    "on-background": "#dae2fd",
+                    "background": "#0b1326",
+                    "primary-fixed-dim": "#89ceff",
+                    "outline-variant": "#3e4850",
+                    "on-tertiary-fixed": "#191c1e",
+                    "surface-container": "#171f33",
+                    "on-primary-container": "#003751",
+                    "glass-border": "rgba(255, 255, 255, 0.1)",
+                    "surface-variant": "#2d3449",
+                    "inverse-primary": "#006591",
+                    "primary-container": "#0ea5e9",
+                    "on-surface-variant": "#bec8d2",
+                    "slate-gray": "#64748B"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "margin-mobile": "20px",
+                    "gutter": "24px",
+                    "margin-desktop": "40px",
+                    "section-gap": "80px",
+                    "container-max-width": "1280px",
+                    "base": "8px"
+            },
+            "fontFamily": {
+                    "mono-data": ["Inter"],
+                    "headline-lg": ["Inter"],
+                    "display-hero": ["Inter"],
+                    "body-md": ["Inter"],
+                    "body-lg": ["Inter"],
+                    "headline-md": ["Inter"],
+                    "headline-lg-mobile": ["Inter"],
+                    "label-caps": ["Inter"]
+            },
+            "fontSize": {
+                    "mono-data": ["14px", {"lineHeight": "1.4", "letterSpacing": "0.02em", "fontWeight": "500"}],
+                    "headline-lg": ["48px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                    "display-hero": ["72px", {"lineHeight": "1.1", "letterSpacing": "-0.04em", "fontWeight": "700"}],
+                    "body-md": ["16px", {"lineHeight": "1.5", "letterSpacing": "0em", "fontWeight": "400"}],
+                    "body-lg": ["18px", {"lineHeight": "1.6", "letterSpacing": "0em", "fontWeight": "400"}],
+                    "headline-md": ["32px", {"lineHeight": "1.3", "letterSpacing": "-0.01em", "fontWeight": "500"}],
+                    "headline-lg-mobile": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                    "label-caps": ["12px", {"lineHeight": "1.2", "letterSpacing": "0.1em", "fontWeight": "600"}]
+            }
+          }
+        }
+      }
+    </script>
+<style type="text/tailwindcss">
+        @layer utilities {
+            .glass-panel {
+                @apply bg-surface-container/50 backdrop-blur-[20px] border border-glass-border;
+            }
+            .glass-panel-heavy {
+                @apply bg-surface-container-high/60 backdrop-blur-[40px] border border-glass-border shadow-[0_20px_50px_rgba(0,0,0,0.3)];
+            }
+            .material-symbols-outlined {
+              font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+            }
+            .material-symbols-outlined.filled {
+              font-variation-settings: 'FILL' 1;
+            }
+        }
+    </style>
+<link href="/stitch-v2/theme.css" rel="stylesheet"/>
+<script src="/stitch-v2/theme.js"></script>
+</head>
+<body class="bg-background text-on-surface font-body-md min-h-screen flex flex-col antialiased selection:bg-primary/30 selection:text-primary-fixed">
+<!-- TopNavBar Component -->
+<nav class="fixed top-0 w-full z-50 bg-surface/80 backdrop-blur-xl border-b border-glass-border shadow-sm">
+<div class="flex justify-between items-center h-16 px-margin-desktop max-w-container-max-width mx-auto">
+<a class="font-headline-md text-headline-md font-bold text-primary tracking-tight" href="/" target="_top">Vasıtan</a>
+<div class="hidden md:flex items-center space-x-gutter">
+<a class="text-primary font-semibold border-b-2 border-primary pb-1 hover:text-primary transition-colors duration-200 active:scale-95 transition-transform font-body-md text-body-md" href="/ai-danisman">Danışman</a>
+<a class="text-on-surface-variant font-medium hover:text-primary transition-colors duration-200 active:scale-95 transition-transform font-body-md text-body-md" href="/ara">İlanlar</a>
+<a class="text-on-surface-variant font-medium hover:text-primary transition-colors duration-200 active:scale-95 transition-transform font-body-md text-body-md" href="/ara">Karşılaştır</a>
+<a class="text-on-surface-variant font-medium hover:text-primary transition-colors duration-200 active:scale-95 transition-transform font-body-md text-body-md" href="/topluluk">Servisler</a>
+</div>
+<div class="flex items-center space-x-base">
+<button onclick="location.href='/topluluk'" class="text-on-surface-variant hover:text-primary transition-colors duration-200 p-2 rounded-full hover:bg-surface-container active:scale-95 transition-transform">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button data-theme-toggle type="button" class="text-on-surface-variant hover:text-primary transition-colors duration-200 p-2 rounded-full hover:bg-surface-container active:scale-95 transition-transform">
+<span class="material-symbols-outlined">settings</span>
+</button>
+<div onclick="location.href='/garajim'" class="w-8 h-8 rounded-full overflow-hidden ml-2 border border-glass-border cursor-pointer">
+<img alt="User profile" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuABxbVdWGhGiDh-0GbaEnn9aMZ1WOh7al7QFhVDPMXE78OVRKQI3HXONldzKBL3jqvGDh7_ojWWBzdcT1xeyG7_zxsv4n5Y7aA7a-InZyf2RUanuHeJO6QqDAGUW4TK7pUmUt-wOzbZYuqlU6iwWvXkgEQjezsNZMrGAaadbccKz_OkG_d43q5KrquLmTXDBNAcKZxRKqq4CuaQ_28WQqp0zHiIA6eb6hi2r8jHRq7E4Nzyp1UQ5fxFQ3aD3ac7r0lAs49namTMFlw"/>
+</div>
+</div>
+</div>
+</nav>
+<!-- Main Chat Interface -->
+<main class="flex-grow flex pt-16 h-screen overflow-hidden">
+<!-- Sidebar History -->
+<aside class="hidden md:flex flex-col w-80 border-r border-glass-border bg-surface-container-lowest/50 backdrop-blur-md">
+<div class="p-6">
+<button onclick="location.href='/ai-danisman'" class="w-full flex items-center justify-center space-x-2 bg-primary/10 hover:bg-primary/20 text-primary border border-primary/20 rounded-lg py-3 px-4 transition-all duration-200 group">
+<span class="material-symbols-outlined group-hover:rotate-90 transition-transform">add</span>
+<span class="font-mono-data text-mono-data">Yeni Danışma</span>
+</button>
+</div>
+<div class="flex-1 overflow-y-auto px-4 pb-6 space-y-6">
+<div>
+<h3 class="font-label-caps text-label-caps text-on-surface-variant mb-3 px-2">Bugün</h3>
+<ul class="space-y-1">
+<li>
+<button onclick="location.href='/ai-danisman'" class="w-full text-left px-3 py-2 rounded-lg bg-surface-container text-on-surface flex items-center space-x-3 group">
+<span class="material-symbols-outlined text-primary text-sm opacity-70">chat_bubble</span>
+<span class="truncate text-sm font-medium">1.5M altı aile SUV’u</span>
+</button>
+</li>
+<li>
+<button onclick="location.href='/ai-danisman'" class="w-full text-left px-3 py-2 rounded-lg hover:bg-surface-container/50 text-on-surface-variant flex items-center space-x-3 transition-colors">
+<span class="material-symbols-outlined text-sm opacity-50">chat_bubble</span>
+<span class="truncate text-sm">Elektrikli günlük araç</span>
+</button>
+</li>
+</ul>
+</div>
+<div>
+<h3 class="font-label-caps text-label-caps text-on-surface-variant mb-3 px-2">Son 7 Gün</h3>
+<ul class="space-y-1">
+<li>
+<button onclick="location.href='/ai-danisman'" class="w-full text-left px-3 py-2 rounded-lg hover:bg-surface-container/50 text-on-surface-variant flex items-center space-x-3 transition-colors">
+<span class="material-symbols-outlined text-sm opacity-50">chat_bubble</span>
+<span class="truncate text-sm">Değeri güçlü sedanlar</span>
+</button>
+</li>
+</ul>
+</div>
+</div>
+</aside>
+<!-- Chat Canvas -->
+<section class="flex-1 flex flex-col relative bg-surface">
+<!-- Decorative Background Shader -->
+<div class="absolute inset-0 pointer-events-none opacity-20">
+<div class="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-secondary-container/5"></div>
+</div>
+<!-- Scrollable Messages Area -->
+<div id="advisor-scroll" class="flex-1 overflow-y-auto p-4 md:p-margin-desktop space-y-section-gap relative z-10 scroll-smooth">
+<div id="advisor-messages" class="max-w-4xl mx-auto space-y-12">
+<!-- AI Welcome -->
+<div class="flex items-start space-x-4">
+<div class="w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center border border-primary/30 flex-shrink-0 mt-1">
+<span class="material-symbols-outlined text-primary">smart_toy</span>
+</div>
+<div class="flex-1">
+<div class="glass-panel p-6 rounded-2xl rounded-tl-sm inline-block max-w-[85%]">
+<p class="text-on-surface font-body-lg text-body-lg mb-2">Merhaba. Ben Vasıtan, AI araç danışmanın.</p>
+<p class="text-on-surface-variant">Pazar verisi, telemetri ve sahiplik maliyetlerini analiz ederim. Bugün nasıl bir araç arıyoruz?</p>
+</div>
+</div>
+</div>
+<!-- User Query -->
+<div class="flex items-start space-x-4 flex-row-reverse space-x-reverse">
+<div class="w-10 h-10 rounded-full bg-surface-container-highest flex items-center justify-center border border-glass-border flex-shrink-0 mt-1 overflow-hidden">
+<img alt="User profile" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAPrvyhEErapd7gNAS1iyRRWCIcYF_nf6hJ3xsq8RTowvefb8DS2K3Bpoqgu3spPjRftXx2_p70n-g45MChVgKOOewzF1w9tTHQrgOp3qjY0IolSTKwu0Ipy7cHdHlDqucEtwuljHiIIJvdpuD9x3PnH6fjTnyQ1nAILuiHRAZSJgD1DEWMFDARPJ64aqJttaziQqGGqKhsLfJKVAAKdHC5Mzvr4yrBJXAP9T_Qk0ClGk6d9mwmuU5PXLlmYIiWu2gn76-Q5BZ5v8s"/>
+</div>
+<div class="flex-1 flex justify-end">
+<div class="bg-primary-container/10 border border-primary/20 p-5 rounded-2xl rounded-tr-sm inline-block max-w-[85%]">
+<p class="text-on-surface">4 kişilik aileye uygun bir araç arıyorum. Bütçem yaklaşık 1.5M TL. İş yerinde şarj imkanım olduğu için EV öncelikli; çok avantajlıysa verimli hibritlere de açığım.</p>
+</div>
+</div>
+</div>
+<!-- AI Processing Indicator (Simulated) -->
+<div class="flex items-center justify-center py-4">
+<div class="inline-flex items-center space-x-2 px-4 py-2 rounded-full glass-panel text-on-surface-variant font-mono-data text-mono-data text-xs">
+<span class="material-symbols-outlined text-[16px] animate-spin text-primary">sync</span>
+<span>2.400+ ilan analiz ediliyor... kriterler eşleşiyor...</span>
+</div>
+</div>
+<!-- AI Response & Recommendations -->
+<div class="flex items-start space-x-4">
+<div class="w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center border border-primary/30 flex-shrink-0 mt-1">
+<span class="material-symbols-outlined text-primary">smart_toy</span>
+</div>
+<div class="flex-1 w-full max-w-[calc(100%-3rem)]">
+<div class="glass-panel p-6 rounded-2xl rounded-tl-sm mb-6 inline-block">
+<p class="text-on-surface mb-4">Kriterlerine göre pazarı filtreledim: ~1.5M TL bütçe, 4+ kişi, öncelik EV. Elektrikli SUV’lar aile kullanımı ve şarj erişiminle en iyi uyumu veriyor.</p>
+<p class="text-on-surface-variant">Toplam sahiplik maliyeti ve güvenlik skoruna göre en güçlü 3 eşleşme:</p>
+</div>
+<!-- Horizontal Scrolling Recommendations (Bento-ish row) -->
+<div class="flex overflow-x-auto pb-8 -mx-4 px-4 md:mx-0 md:px-0 space-x-6 hide-scrollbar w-full">
+<!-- Card 1: Tesla Model Y -->
+<div class="glass-panel rounded-xl overflow-hidden min-w-[320px] max-w-[320px] flex-shrink-0 flex flex-col group hover:border-primary/50 transition-colors duration-300">
+<div class="h-40 bg-surface-container relative overflow-hidden">
+<div class="absolute top-3 left-3 bg-surface/80 backdrop-blur-md px-2 py-1 rounded-md border border-glass-border z-10 flex items-center space-x-1">
+<span class="material-symbols-outlined text-primary text-[14px]">bolt</span>
+<span class="font-mono-data text-mono-data text-xs text-primary">%98 Uyum</span>
+</div>
+<img alt="White Tesla Model Y electric SUV parked in a sleek, modern garage setting. The lighting is cinematic and moody, emphasizing the smooth, aerodynamic curves of the vehicle against a dark, minimalist architectural background with subtle blue neon accents reflecting off the car's surface. High-tech automotive luxury aesthetic." class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="White Tesla Model Y electric SUV parked in a sleek, modern garage setting. The lighting is cinematic and moody, emphasizing the smooth, aerodynamic curves of the vehicle against a dark, minimalist architectural background with subtle blue neon accents reflecting off the car's surface. High-tech automotive luxury aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCgL39ntkywmUnUXVIVDBQYTL-9agZP37XI_QiwMrt8R2srVl4M3L6aj7Ip0iSdSEmL9lEphdnP61fTSs8QQayEXaGJIqDn9hhGGzQxkSQYbfw8Op1KQEuRc3Bnv_TTuOOIjyO8y5sfTkY158orJauxGZahK7nJ5sOtoT7zPcHqBtm5tlqB5OXXwvLQekncoZ3_EDKZ954hZFrnxO86p4atsdGV5Fzy6tyn-l4B8FQDVkYlIDFgJ4EDBOI0mqc8P2NKjwa-OHvYTPk"/>
+</div>
+<div class="p-5 flex-1 flex flex-col">
+<div class="flex justify-between items-start mb-2">
+<div>
+<h4 class="font-body-lg text-body-lg font-semibold text-on-surface">Tesla Model Y</h4>
+<p class="text-sm text-on-surface-variant">RWD Standard Range</p>
+</div>
+<span class="font-mono-data text-mono-data text-primary">~1.45M TL</span>
+</div>
+<div class="mb-4">
+<span class="font-label-caps text-label-caps text-secondary mb-1 block">Neden?</span>
+<p class="text-sm text-on-surface-variant leading-relaxed">Güçlü şarj ağı, gelişmiş yazılım ve 4 kişi için geniş bagaj.</p>
+</div>
+<div class="grid grid-cols-2 gap-2 mb-4 text-xs">
+<div class="bg-surface-container-high/50 p-2 rounded border border-glass-border">
+<span class="block text-error/80 mb-1 flex items-center"><span class="material-symbols-outlined text-[14px] mr-1">remove</span> Eksi</span>
+<span class="text-on-surface-variant">Sert sürüş</span>
+</div>
+<div class="bg-surface-container-high/50 p-2 rounded border border-glass-border">
+<span class="block text-primary mb-1 flex items-center"><span class="material-symbols-outlined text-[14px] mr-1">add</span> Artı</span>
+<span class="text-on-surface-variant">Supercharger erişimi</span>
+</div>
+</div>
+<div class="mt-auto pt-4 border-t border-glass-border">
+<button onclick="location.href='/ilan/1'" class="w-full py-2 bg-transparent border border-outline text-on-surface rounded-lg hover:bg-surface-container transition-colors text-sm font-medium">Detayları Gör</button>
+</div>
+</div>
+</div>
+<!-- Card 2: Hyundai Ioniq 5 -->
+<div class="glass-panel rounded-xl overflow-hidden min-w-[320px] max-w-[320px] flex-shrink-0 flex flex-col group hover:border-primary/50 transition-colors duration-300">
+<div class="h-40 bg-surface-container relative overflow-hidden">
+<div class="absolute top-3 left-3 bg-surface/80 backdrop-blur-md px-2 py-1 rounded-md border border-glass-border z-10 flex items-center space-x-1">
+<span class="material-symbols-outlined text-primary text-[14px]">bolt</span>
+<span class="font-mono-data text-mono-data text-xs text-primary">%94 Uyum</span>
+</div>
+<img alt="Silver Hyundai Ioniq 5 electric car charging at night under a futuristic, glowing canopy. The scene features a high-contrast cyberpunk aesthetic with neon reflections on the vehicle's angular, retro-futuristic bodywork. The lighting highlights the distinct pixelated LED taillights. Professional automotive photography style." class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Silver Hyundai Ioniq 5 electric car charging at night under a futuristic, glowing canopy. The scene features a high-contrast cyberpunk aesthetic with neon reflections on the vehicle's angular, retro-futuristic bodywork. The lighting highlights the distinct pixelated LED taillights. Professional automotive photography style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBUO_Y0hnxQ_RRtvosA-2tO6G0fhgWgAXnAXfYtYHRSwI8r-kAhs4U8ST-soqiosNUNN0APZlYuD3VRDssxEpTm-Z0pOG3ozeAGiPgbkPWLTZYzPWqBQRjvyfB4SgS61BpPOhxqGohUUqe8TcupoQrTIjkTTIUAZylQQarWAKnPL0jJ_nUx0GUb5q_w_-Im2xmJQLjKeCwBmMHm61pFi5eKFgQOr_9sP4K6PJHfg6eEZ4PaqxSjOrVYFwuPrmLBmQkEr9W7_PHtQyQ"/>
+</div>
+<div class="p-5 flex-1 flex flex-col">
+<div class="flex justify-between items-start mb-2">
+<div>
+<h4 class="font-body-lg text-body-lg font-semibold text-on-surface">Hyundai Ioniq 5</h4>
+<p class="text-sm text-on-surface-variant">Progressive 58 kWh</p>
+</div>
+<span class="font-mono-data text-mono-data text-primary">~1.52M TL</span>
+</div>
+<div class="mb-4">
+<span class="font-label-caps text-label-caps text-secondary mb-1 block">Neden?</span>
+<p class="text-sm text-on-surface-variant leading-relaxed">800V hızlı şarj, ferah kabin ve aile konforu.</p>
+</div>
+<div class="grid grid-cols-2 gap-2 mb-4 text-xs">
+<div class="bg-surface-container-high/50 p-2 rounded border border-glass-border">
+<span class="block text-error/80 mb-1 flex items-center"><span class="material-symbols-outlined text-[14px] mr-1">remove</span> Eksi</span>
+<span class="text-on-surface-variant">Daha küçük bagaj</span>
+</div>
+<div class="bg-surface-container-high/50 p-2 rounded border border-glass-border">
+<span class="block text-primary mb-1 flex items-center"><span class="material-symbols-outlined text-[14px] mr-1">add</span> Artı</span>
+<span class="text-on-surface-variant">Hızlı şarj</span>
+</div>
+</div>
+<div class="mt-auto pt-4 border-t border-glass-border">
+<button onclick="location.href='/ilan/1'" class="w-full py-2 bg-transparent border border-outline text-on-surface rounded-lg hover:bg-surface-container transition-colors text-sm font-medium">Detayları Gör</button>
+</div>
+</div>
+</div>
+<!-- Card 3: Volvo XC40 -->
+<div class="glass-panel rounded-xl overflow-hidden min-w-[320px] max-w-[320px] flex-shrink-0 flex flex-col group hover:border-primary/50 transition-colors duration-300">
+<div class="h-40 bg-surface-container relative overflow-hidden">
+<div class="absolute top-3 left-3 bg-surface/80 backdrop-blur-md px-2 py-1 rounded-md border border-glass-border z-10 flex items-center space-x-1">
+<span class="material-symbols-outlined text-primary text-[14px]">bolt</span>
+<span class="font-mono-data text-mono-data text-xs text-primary">%89 Uyum</span>
+</div>
+<img alt="Dark blue Volvo XC40 Recharge electric SUV driving on a winding coastal road at dusk. The vehicle is slightly blurred to convey motion, while the background features dramatic ocean cliffs and a twilight sky. The image emphasizes safety, Scandinavian design, and premium automotive engineering." class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Dark blue Volvo XC40 Recharge electric SUV driving on a winding coastal road at dusk. The vehicle is slightly blurred to convey motion, while the background features dramatic ocean cliffs and a twilight sky. The image emphasizes safety, Scandinavian design, and premium automotive engineering." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCQGDEzAd8RD3r0a-PRl6aFK1Ur8ptwy5oQF1XlCZ3ju1xM6Vnoc11v_DiLDSeHQgP5-3NIYGbdIOkI0sC149eMNiTWMvlmAIkh-NUHg-vg6FB6WrQQW4SlYMD_ET8DpblfYEgAM23fGo3IgJoX0HqCkdchpdQrjQn4zdnoATyNGdgeL17avYwGxk7vTTGIwN-c0_CgHjnxDpyOsZHVoTRNp7uQHe73F08b5HvhpZpgOk1MJLl5LDfKntSkYdqfJ76BoOUhQqS1dHE"/>
+</div>
+<div class="p-5 flex-1 flex flex-col">
+<div class="flex justify-between items-start mb-2">
+<div>
+<h4 class="font-body-lg text-body-lg font-semibold text-on-surface">Volvo XC40</h4>
+<p class="text-sm text-on-surface-variant">Recharge Single Motor</p>
+</div>
+<span class="font-mono-data text-mono-data text-primary">~1.60M TL</span>
+</div>
+<div class="mb-4">
+<span class="font-label-caps text-label-caps text-secondary mb-1 block">Neden?</span>
+<p class="text-sm text-on-surface-variant leading-relaxed">Üst seviye güvenlik, kaliteli kabin ve sezgisel Google tabanlı ekran.</p>
+</div>
+<div class="grid grid-cols-2 gap-2 mb-4 text-xs">
+<div class="bg-surface-container-high/50 p-2 rounded border border-glass-border">
+<span class="block text-error/80 mb-1 flex items-center"><span class="material-symbols-outlined text-[14px] mr-1">remove</span> Eksi</span>
+<span class="text-on-surface-variant">Bütçeyi aşıyor</span>
+</div>
+<div class="bg-surface-container-high/50 p-2 rounded border border-glass-border">
+<span class="block text-primary mb-1 flex items-center"><span class="material-symbols-outlined text-[14px] mr-1">add</span> Artı</span>
+<span class="text-on-surface-variant">Yüksek güvenlik</span>
+</div>
+</div>
+<div class="mt-auto pt-4 border-t border-glass-border">
+<button onclick="location.href='/ilan/1'" class="w-full py-2 bg-transparent border border-outline text-on-surface rounded-lg hover:bg-surface-container transition-colors text-sm font-medium">Detayları Gör</button>
+</div>
+</div>
+</div>
+</div>
+<!-- AI Follow up -->
+<div class="glass-panel p-4 rounded-2xl rounded-tl-sm inline-block mt-4">
+<p class="text-on-surface-variant text-sm">Model Y ve Ioniq 5’i karşılaştıralım mı, yoksa bütçeyi güncelleyelim mi?</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Input Area -->
+<div class="p-4 md:p-6 bg-surface-container-lowest/80 backdrop-blur-xl border-t border-glass-border relative z-20">
+<div class="max-w-4xl mx-auto">
+<!-- Quick Actions -->
+<div class="flex overflow-x-auto pb-4 space-x-2 hide-scrollbar">
+<button onclick="location.href='/ara'" class="flex-shrink-0 px-4 py-2 rounded-full border border-glass-border bg-surface-container hover:bg-surface-container-high text-xs font-mono-data text-on-surface-variant transition-colors whitespace-nowrap">
+                            Model Y ile Ioniq 5’i Karşılaştır
+                        </button>
+<button onclick="location.href='/ara'" class="flex-shrink-0 px-4 py-2 rounded-full border border-glass-border bg-surface-container hover:bg-surface-container-high text-xs font-mono-data text-on-surface-variant transition-colors whitespace-nowrap">
+                            Verimli Hibrit Öner
+                        </button>
+<button onclick="location.href='/ara'" class="flex-shrink-0 px-4 py-2 rounded-full border border-glass-border bg-surface-container hover:bg-surface-container-high text-xs font-mono-data text-on-surface-variant transition-colors whitespace-nowrap">
+                            Değer Kaybı Nasıl?
+                        </button>
+</div>
+<!-- Search Input Component -->
+<div class="relative flex items-end bg-surface-container-high/40 backdrop-blur-[30px] border border-glass-border rounded-[24px] p-2 focus-within:shadow-[inset_0_0_20px_rgba(137,206,255,0.1)] focus-within:border-primary/50 transition-all duration-300">
+<button onclick="location.href='/ai-danisman'" class="p-3 text-on-surface-variant hover:text-primary transition-colors rounded-full">
+<span class="material-symbols-outlined">attach_file</span>
+</button>
+<textarea id="advisor-input" class="w-full bg-transparent border-none text-on-surface placeholder-on-surface-variant/50 focus:ring-0 resize-none py-3 px-2 font-body-md min-h-[48px] max-h-[150px]" placeholder="Vasıtan’a araçla ilgili sor..." rows="1"></textarea>
+<button id="advisor-send" type="button" class="p-3 text-surface-container-lowest bg-primary hover:bg-primary-fixed transition-colors rounded-full m-1 shadow-[0_0_15px_rgba(137,206,255,0.3)] hover:scale-105 active:scale-95">
+<span class="material-symbols-outlined">arrow_upward</span>
+</button>
+</div>
+<div class="text-center mt-2">
+<span class="text-[10px] text-on-surface-variant/50 font-mono-data">Vasıtan AI hata yapabilir. Önemli verileri doğrulayın.</span>
+</div>
+</div>
+</div>
+</section>
+</main>
+<script>
+        (function () {
+            var messages = document.getElementById("advisor-messages");
+            var scrollArea = document.getElementById("advisor-scroll");
+            var input = document.getElementById("advisor-input");
+            var send = document.getElementById("advisor-send");
+            var isLoading = false;
+
+            function scrollToBottom() {
+                if (!scrollArea) return;
+                scrollArea.scrollTop = scrollArea.scrollHeight;
+            }
+
+            function setLoading(nextValue) {
+                isLoading = nextValue;
+                if (!send || !input) return;
+                send.disabled = nextValue;
+                input.disabled = nextValue;
+                send.classList.toggle("opacity-60", nextValue);
+                send.classList.toggle("cursor-not-allowed", nextValue);
+            }
+
+            function appendMessage(role, text) {
+                if (!messages) return null;
+                var row = document.createElement("div");
+                var isUser = role === "user";
+                row.className = isUser
+                    ? "flex items-start space-x-4 flex-row-reverse space-x-reverse"
+                    : "flex items-start space-x-4";
+
+                var avatar = document.createElement("div");
+                avatar.className = isUser
+                    ? "w-10 h-10 rounded-full bg-surface-container-highest flex items-center justify-center border border-glass-border flex-shrink-0 mt-1 overflow-hidden"
+                    : "w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center border border-primary/30 flex-shrink-0 mt-1";
+
+                var icon = document.createElement("span");
+                icon.className = isUser ? "material-symbols-outlined text-on-surface-variant" : "material-symbols-outlined text-primary";
+                icon.textContent = isUser ? "person" : "smart_toy";
+                avatar.appendChild(icon);
+
+                var wrap = document.createElement("div");
+                wrap.className = isUser ? "flex-1 flex justify-end" : "flex-1";
+
+                var bubble = document.createElement("div");
+                bubble.className = isUser
+                    ? "bg-primary-container/10 border border-primary/20 p-5 rounded-2xl rounded-tr-sm inline-block max-w-[85%]"
+                    : "glass-panel p-6 rounded-2xl rounded-tl-sm inline-block max-w-[85%]";
+
+                var paragraph = document.createElement("p");
+                paragraph.className = "text-on-surface whitespace-pre-line";
+                paragraph.textContent = text;
+                bubble.appendChild(paragraph);
+                wrap.appendChild(bubble);
+                row.appendChild(avatar);
+                row.appendChild(wrap);
+                messages.appendChild(row);
+                scrollToBottom();
+                return row;
+            }
+
+            function appendLoading() {
+                if (!messages) return null;
+                var row = document.createElement("div");
+                row.className = "flex items-center justify-center py-4";
+                row.innerHTML = '<div class="inline-flex items-center space-x-2 px-4 py-2 rounded-full glass-panel text-on-surface-variant font-mono-data text-mono-data text-xs"><span class="material-symbols-outlined text-[16px] animate-spin text-primary">sync</span><span>AI danışman yanıt hazırlıyor...</span></div>';
+                messages.appendChild(row);
+                scrollToBottom();
+                return row;
+            }
+
+            async function sendMessage() {
+                if (!input || isLoading) return;
+                var message = input.value.trim();
+                if (!message) return;
+
+                input.value = "";
+                input.style.height = "auto";
+                appendMessage("user", message);
+                var loading = appendLoading();
+                setLoading(true);
+
+                try {
+                    var response = await fetch("/api/ai-advisor", {
+                        method: "POST",
+                        headers: {"Content-Type": "application/json"},
+                        body: JSON.stringify({message: message})
+                    });
+                    var data = await response.json();
+                    if (!response.ok) {
+                        throw new Error(data && data.error ? data.error : "AI cevabı alınamadı.");
+                    }
+                    if (loading) loading.remove();
+                    appendMessage("assistant", data.answer || "Kısa süre sonra tekrar deneyin.");
+                } catch (error) {
+                    if (loading) loading.remove();
+                    appendMessage("assistant", error.message || "AI danışman şu an yanıt veremiyor.");
+                } finally {
+                    setLoading(false);
+                    input.focus();
+                }
+            }
+
+            if (input) {
+                input.addEventListener("input", function () {
+                    input.style.height = "auto";
+                    input.style.height = Math.min(input.scrollHeight, 150) + "px";
+                });
+                input.addEventListener("keydown", function (event) {
+                    if (event.key === "Enter" && !event.shiftKey) {
+                        event.preventDefault();
+                        sendMessage();
+                    }
+                });
+            }
+
+            if (send) {
+                send.addEventListener("click", sendMessage);
+            }
+        })();
+    </script>
+<!-- Footer Component -->
+<footer class="w-full py-12 border-t border-glass-border bg-surface-container-lowest text-secondary font-label-caps text-label-caps flat no shadows">
+<div class="flex flex-col md:flex-row justify-between items-center px-margin-desktop max-w-container-max-width mx-auto gap-base">
+<div class="font-headline-md text-headline-md text-on-surface mb-4 md:mb-0">
+                Vasıtan
+            </div>
+<div class="flex flex-wrap justify-center gap-6 mb-4 md:mb-0">
+<a class="text-on-tertiary-fixed-variant hover:text-primary transition-all opacity-80 hover:opacity-100" href="/">Gizlilik</a>
+<a class="text-on-tertiary-fixed-variant hover:text-primary transition-all opacity-80 hover:opacity-100" href="/">Koşullar</a>
+<a class="text-on-tertiary-fixed-variant hover:text-primary transition-all opacity-80 hover:opacity-100" href="/topluluk">Destek</a>
+<a class="text-on-tertiary-fixed-variant hover:text-primary transition-all opacity-80 hover:opacity-100" href="/arac-wiki">Araç Veri API</a>
+</div>
+<div class="text-on-tertiary-fixed-variant opacity-80">
+                © 2024 Vasıtan AI Otomotiv. Tüm hakları saklıdır.
+            </div>
+</div>
+</footer>
+<style>
+        /* Hide scrollbar for horizontal scrolling areas but keep functionality */
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</body></html>

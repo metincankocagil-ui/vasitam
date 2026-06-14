@@ -183,6 +183,7 @@ export default function ListingImageUploader({ initialImages = [] }: ListingImag
                 }`}
               >
                 <div className="aspect-video overflow-hidden rounded-xl bg-gray-100">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
                     src={image.dataUrl}
                     alt={image.name}

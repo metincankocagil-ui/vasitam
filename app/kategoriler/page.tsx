@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { prisma } from "@/lib/prisma";
-import { VEHICLE_CATEGORIES } from "@/lib/categories";
+import { VEHICLE_CATEGORIES, type VehicleCategoryKey } from "@/lib/categories";
 import { absoluteUrl } from "@/lib/seo";
 
 export const revalidate = 300;
@@ -38,7 +38,7 @@ async function getCategoryData() {
           district: true,
           createdAt: true,
         },
-        where: { vehicleType: key as any },
+        where: { vehicleType: key as VehicleCategoryKey },
         orderBy: { createdAt: "desc" },
         take: 3,
       });

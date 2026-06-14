@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Vasıtan - AI Destekli Araç Zekası</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "tertiary-fixed-dim": "#c4c7c9",
+                        "primary-fixed-dim": "#89ceff",
+                        "outline-variant": "#3e4850",
+                        "on-secondary-fixed": "#07006c",
+                        "on-tertiary-container": "#303436",
+                        "surface-dim": "#0b1326",
+                        "inverse-primary": "#006591",
+                        "surface-tint": "#89ceff",
+                        "surface-variant": "#2d3449",
+                        "inverse-surface": "#dae2fd",
+                        "surface-dark": "#020617",
+                        "secondary-fixed-dim": "#c0c1ff",
+                        "on-secondary": "#1000a9",
+                        "tertiary-fixed": "#e0e3e5",
+                        "on-background": "#dae2fd",
+                        "background": "#0b1326",
+                        "surface-container-lowest": "#060e20",
+                        "on-surface-variant": "#bec8d2",
+                        "tertiary": "#c4c7c9",
+                        "surface-container": "#171f33",
+                        "secondary": "#c0c1ff",
+                        "slate-gray": "#64748B",
+                        "glass-border": "rgba(255, 255, 255, 0.1)",
+                        "surface-bright": "#31394d",
+                        "secondary-container": "#3131c0",
+                        "on-tertiary": "#2d3133",
+                        "primary": "#89ceff",
+                        "on-error": "#690005",
+                        "surface-container-high": "#222a3d",
+                        "on-tertiary-fixed": "#191c1e",
+                        "on-secondary-fixed-variant": "#2f2ebe",
+                        "on-primary-fixed": "#001e2f",
+                        "on-error-container": "#ffdad6",
+                        "surface-container-low": "#131b2e",
+                        "on-tertiary-fixed-variant": "#444749",
+                        "on-surface": "#dae2fd",
+                        "error-container": "#93000a",
+                        "on-primary-container": "#003751",
+                        "secondary-fixed": "#e1e0ff",
+                        "surface-container-highest": "#2d3449",
+                        "outline": "#88929b",
+                        "surface": "#0b1326",
+                        "primary-container": "#0ea5e9",
+                        "tertiary-container": "#999c9e",
+                        "on-primary-fixed-variant": "#004c6e",
+                        "error": "#ffb4ab",
+                        "on-secondary-container": "#b0b2ff",
+                        "inverse-on-surface": "#283044",
+                        "primary-fixed": "#c9e6ff",
+                        "on-primary": "#00344d"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "margin-mobile": "20px",
+                        "margin-desktop": "40px",
+                        "gutter": "24px",
+                        "section-gap": "80px",
+                        "base": "8px",
+                        "container-max-width": "1280px"
+                    },
+                    "fontFamily": {
+                        "display-hero": ["Inter"],
+                        "headline-lg-mobile": ["Inter"],
+                        "mono-data": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "label-caps": ["Inter"],
+                        "body-md": ["Inter"]
+                    },
+                    "fontSize": {
+                        "display-hero": ["72px", { "lineHeight": "1.1", "letterSpacing": "-0.04em", "fontWeight": "700" }],
+                        "headline-lg-mobile": ["32px", { "lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "mono-data": ["14px", { "lineHeight": "1.4", "letterSpacing": "0.02em", "fontWeight": "500" }],
+                        "headline-md": ["32px", { "lineHeight": "1.3", "letterSpacing": "-0.01em", "fontWeight": "500" }],
+                        "headline-lg": ["48px", { "lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "600" }],
+                        "body-lg": ["18px", { "lineHeight": "1.6", "letterSpacing": "0em", "fontWeight": "400" }],
+                        "label-caps": ["12px", { "lineHeight": "1.2", "letterSpacing": "0.1em", "fontWeight": "600" }],
+                        "body-md": ["16px", { "lineHeight": "1.5", "letterSpacing": "0em", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .glass-panel {
+            background: rgba(11, 19, 38, 0.6);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .ai-glow-focus:focus-within {
+            box-shadow: inset 0 0 20px rgba(137, 206, 255, 0.15), 0 0 30px rgba(137, 206, 255, 0.1);
+            border-color: rgba(137, 206, 255, 0.3);
+        }
+        .text-gradient-primary {
+            background: linear-gradient(135deg, #dae2fd 0%, #89ceff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            color: transparent;
+        }
+        .pulse-dot {
+            animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: .5; }
+        }
+    </style>
+<link href="/stitch-v2/theme.css" rel="stylesheet"/>
+<link href="/stitch-v2/i18n.css" rel="stylesheet"/>
+<script src="/stitch-v2/theme.js"></script>
+<script src="/stitch-v2/i18n.js"></script>
+</head>
+<body class="bg-background text-on-background font-body-md antialiased min-h-screen flex flex-col">
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 backdrop-blur-xl bg-background/80 border-b border-glass-border shadow-sm">
+<div class="flex justify-between items-center max-w-container-max-width mx-auto px-margin-mobile md:px-margin-desktop h-16">
+<div class="flex items-center gap-8">
+<a class="font-display-hero text-headline-md tracking-tighter text-on-background" href="/" target="_top">Vasıtan</a>
+<div class="hidden md:flex items-center gap-6">
+<a class="text-on-surface-variant hover:text-primary transition-colors duration-300 active:scale-95 transition-transform" data-i18n="nav_inventory" href="/ara">İlanlar</a>
+<a class="text-primary font-semibold border-b-2 border-primary active:scale-95 transition-transform py-5" data-i18n="nav_intelligence" href="/ai-danisman">Akıllı Analiz</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors duration-300 active:scale-95 transition-transform" data-i18n="nav_valuation" href="/arac-wiki">Değerleme</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors duration-300 active:scale-95 transition-transform" data-i18n="nav_garage" href="/garajim">Garaj</a>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<div class="relative">
+<button data-language-selector type="button" class="text-on-surface-variant hover:text-primary transition-colors duration-300 active:scale-95 transition-transform flex items-center">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">language</span>
+<span class="ml-1 text-xs font-semibold" data-language-current>TR</span>
+</button>
+<div aria-label="Dil seçimi" class="language-menu" data-language-menu>
+<button class="language-option" data-language-option="TR" type="button">TR</button>
+<button class="language-option" data-language-option="EN" type="button">EN</button>
+<button class="language-option" data-language-option="DE" type="button">DE</button>
+<button class="language-option" data-language-option="FR" type="button">FR</button>
+<button class="language-option" data-language-option="IT" type="button">IT</button>
+<button class="language-option" data-language-option="ES" type="button">ES</button>
+<button class="language-option" data-language-option="PT" type="button">PT</button>
+<button class="language-option" data-language-option="AR" type="button">AR</button>
+<button class="language-option" data-language-option="ZH" type="button">ZH</button>
+<button class="language-option" data-language-option="JA" type="button">JA</button>
+</div>
+</div>
+<button data-theme-toggle type="button" class="text-on-surface-variant hover:text-primary transition-colors duration-300 active:scale-95 transition-transform hidden sm:block">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">dark_mode</span>
+</button>
+<a class="hidden sm:inline-flex items-center justify-center px-4 py-2 rounded-full border border-glass-border text-on-background hover:bg-surface-container-high transition-colors text-body-md font-body-md" data-i18n="login" href="/giris">Giriş</a>
+<a class="inline-flex items-center justify-center px-4 py-2 rounded-full bg-primary-container text-on-primary-container hover:bg-primary-fixed transition-colors text-body-md font-body-md active:scale-95 transition-transform" data-i18n="list_vehicle" href="/ilan-ver">İlan Ver</a>
+</div>
+</div>
+</nav>
+<!-- Main Content -->
+<main class="flex-grow pt-24 pb-section-gap flex flex-col items-center">
+<!-- Hero Section -->
+<section class="w-full max-w-container-max-width mx-auto px-margin-mobile md:px-margin-desktop pt-16 md:pt-32 pb-section-gap flex flex-col items-center text-center">
+<h1 class="font-display-hero text-headline-lg-mobile md:text-display-hero text-gradient-primary mb-6 max-w-4xl" data-i18n="hero_title">
+                Mobilite zekayla buluşur.
+            </h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant mb-12 max-w-2xl" data-i18n="hero_subtitle">
+                Modern araç ekosistemi için AI destekli arama.
+            </p>
+<!-- AI Search Input -->
+<div class="w-full max-w-3xl relative ai-glow-focus rounded-full transition-all duration-500 glass-panel">
+<div class="absolute inset-y-0 left-0 pl-6 flex items-center pointer-events-none">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 0;">search</span>
+</div>
+<input class="w-full bg-transparent border-none rounded-full py-5 pl-14 pr-16 text-body-lg font-body-lg text-on-background placeholder-on-surface-variant/50 focus:ring-0 focus:outline-none" data-i18n-placeholder="search_placeholder" placeholder="1.5M TL altı, düşük masraflı aile SUV’u" type="text"/>
+<button onclick="location.href='/ara'" class="absolute inset-y-2 right-2 px-4 rounded-full bg-primary text-on-primary hover:bg-primary-fixed transition-colors flex items-center justify-center active:scale-95">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">send</span>
+</button>
+</div>
+<!-- Quick Action Chips -->
+<div class="flex flex-wrap justify-center gap-3 mt-8">
+<button onclick="window.top.location.href='/ara?kategori=otomobil'" class="px-4 py-2 rounded-full glass-panel text-body-md font-body-md text-on-surface-variant hover:text-primary hover:border-primary/50 transition-all active:scale-95">Otomobil</button>
+<button onclick="window.top.location.href='/ara?kategori=suv-pickup'" class="px-4 py-2 rounded-full glass-panel text-body-md font-body-md text-on-surface-variant hover:text-primary hover:border-primary/50 transition-all active:scale-95">SUV & Pickup</button>
+<button onclick="window.top.location.href='/ara?kategori=motosiklet'" class="px-4 py-2 rounded-full glass-panel text-body-md font-body-md text-on-surface-variant hover:text-primary hover:border-primary/50 transition-all active:scale-95">Motosiklet</button>
+<button onclick="window.top.location.href='/ara?kategori=ticari'" class="px-4 py-2 rounded-full glass-panel text-body-md font-body-md text-on-surface-variant hover:text-primary hover:border-primary/50 transition-all active:scale-95">Ticari</button>
+<button onclick="window.top.location.href='/ara?kategori=karavan'" class="px-4 py-2 rounded-full glass-panel text-body-md font-body-md text-on-surface-variant hover:text-primary hover:border-primary/50 transition-all active:scale-95">Karavan</button>
+<button onclick="window.top.location.href='/ara?kategori=deniz'" class="px-4 py-2 rounded-full glass-panel text-body-md font-body-md text-on-surface-variant hover:text-primary hover:border-primary/50 transition-all active:scale-95">Deniz Araçları</button>
+<button onclick="window.top.location.href='/ara?kategori=tarim'" class="px-4 py-2 rounded-full glass-panel text-body-md font-body-md text-on-surface-variant hover:text-primary hover:border-primary/50 transition-all active:scale-95">Tarım</button>
+<button onclick="window.top.location.href='/ara?kategori=is-makinalari'" class="px-4 py-2 rounded-full glass-panel text-body-md font-body-md text-on-surface-variant hover:text-primary hover:border-primary/50 transition-all active:scale-95">İş Makinaları</button>
+<button onclick="window.top.location.href='/ara?kategori=hava-araclari'" class="px-4 py-2 rounded-full glass-panel text-body-md font-body-md text-on-surface-variant hover:text-primary hover:border-primary/50 transition-all active:scale-95">Hava Araçları</button>
+</div>
+</section>
+<!-- Bento Grid Layout for Main Content -->
+<div class="w-full max-w-container-max-width mx-auto px-margin-mobile md:px-margin-desktop grid grid-cols-1 md:grid-cols-12 gap-gutter mb-section-gap">
+<!-- Trending Vehicles (Spans 8 columns) -->
+<section class="md:col-span-8 flex flex-col gap-6">
+<div class="flex items-center justify-between">
+<h2 class="font-headline-md text-headline-md text-on-background flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">trending_up</span>
+<span data-i18n="section_trending">Öne Çıkan Araçlar</span>
+                    </h2>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+<!-- Card 1 -->
+<div onclick="location.href='/ilan/1'" class="glass-panel rounded-xl overflow-hidden group cursor-pointer hover:-translate-y-1 transition-transform duration-300 flex flex-col h-full">
+<div class="relative h-48 bg-surface-container-high overflow-hidden">
+<img alt="Tesla Model 3" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-80 mix-blend-luminosity hover:mix-blend-normal" data-alt="A sleek, modern electric sedan parked in a minimalist, dimly lit underground garage. The dark environment is illuminated by harsh, cool white overhead LED lights, creating dramatic reflections on the car's metallic grey surface. The mood is high-tech, premium, and futuristic, aligning perfectly with a sophisticated dark-mode UI aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBp6M9TOmd-XeSB8Wap9y7BaQrEzBo1fHNhet3xrZrcrXqjyD4jerwonDfMatq56Wniob3isZwS5P-heVg5aH8eoZVzgHbyiRYfFBpNiLWZ2USnoAHRkHJ9jPVUU57QZiyM8_9P56sQkEwvN033SL4DTjHwreiVrLIxohJ9FXJLtg3BZdccb6LGjxahJ2rNxbr0FfoTmYKSmT7vhYDQzOpD7_e9CaF4prGFkMHfg4A_hiUME1tBEcIrW-ZaFMnerM6Jt-3YMYIrSMw"/>
+<div class="absolute top-3 left-3 bg-surface-dark/80 backdrop-blur-md border border-primary/30 px-3 py-1 rounded-full flex items-center gap-1.5">
+<div class="w-2 h-2 rounded-full bg-primary pulse-dot"></div>
+<span class="font-label-caps text-label-caps text-primary tracking-wider uppercase" data-i18n="badge_demand">+12% Talep</span>
+</div>
+</div>
+<div class="p-5 flex flex-col flex-grow">
+<div class="flex justify-between items-start mb-2">
+<h3 class="font-headline-md text-body-lg font-semibold text-on-background">2023 Tesla Model 3</h3>
+<span class="font-mono-data text-mono-data text-on-surface-variant">₺1.85M</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant mb-4 flex-grow line-clamp-2" data-i18n="card_1_desc">Long Range AWD. Son 48 saatte güçlü piyasa ilgisi.</p>
+<div class="flex gap-2">
+<span class="px-2 py-1 bg-surface-container rounded text-label-caps font-label-caps text-on-surface-variant uppercase">EV</span>
+<span class="px-2 py-1 bg-surface-container rounded text-label-caps font-label-caps text-on-surface-variant uppercase">Sedan</span>
+</div>
+</div>
+</div>
+<!-- Card 2 -->
+<div onclick="location.href='/ilan/1'" class="glass-panel rounded-xl overflow-hidden group cursor-pointer hover:-translate-y-1 transition-transform duration-300 flex flex-col h-full">
+<div class="relative h-48 bg-surface-container-high overflow-hidden">
+<img alt="Volvo XC90" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-80 mix-blend-luminosity hover:mix-blend-normal" data-alt="A premium luxury SUV situated on a slick, dark wet asphalt road at night. Street lamps cast a neon-blue and cold-white glow, reflecting off the deep navy paint of the vehicle. The overall atmosphere is moody, secure, and technologically advanced, fitting seamlessly into a high-end dark-mode design system." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAnBQqBYKRuX5OdiMYOXgzzSWul7hx0DjbPeFI2-04lShmqhq6Okr9CKHwtpReueGIYwZMUSNIyPPQ-IoKpyJq7ZULNWIV_8ViPdU0y9qHEqQYw2HbnVnxDwAfYFUOf6dOMB5-44OL0CX2sXwQv3hoLtM00KVmOZeUxvLIgHTLP-h0zuLyXgS09NvbAcYjx6fT-pkZY-fyMY_SV4gKCuFLqK8VT-kOMBj2rndF1udzScchDKUZF1LqYYeou4YkaTc9UA-MEmk6BgUA"/>
+<div class="absolute top-3 left-3 bg-surface-dark/80 backdrop-blur-md border border-tertiary-fixed-dim/30 px-3 py-1 rounded-full flex items-center gap-1.5">
+<span class="material-symbols-outlined text-tertiary-fixed-dim text-sm" style="font-variation-settings: 'FILL' 1;">local_fire_department</span>
+<span class="font-label-caps text-label-caps text-tertiary-fixed-dim tracking-wider uppercase" data-i18n="badge_hot">Popüler İlan</span>
+</div>
+</div>
+<div class="p-5 flex flex-col flex-grow">
+<div class="flex justify-between items-start mb-2">
+<h3 class="font-headline-md text-body-lg font-semibold text-on-background">2022 Volvo XC90</h3>
+<span class="font-mono-data text-mono-data text-on-surface-variant">₺2.4M</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant mb-4 flex-grow line-clamp-2" data-i18n="card_2_desc">B5 Inscription. Segmentine göre çok düşük kilometre.</p>
+<div class="flex gap-2">
+<span class="px-2 py-1 bg-surface-container rounded text-label-caps font-label-caps text-on-surface-variant uppercase" data-i18n="hybrid">Hibrit</span>
+<span class="px-2 py-1 bg-surface-container rounded text-label-caps font-label-caps text-on-surface-variant uppercase">SUV</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- AI Recommended (Spans 4 columns) -->
+<section class="md:col-span-4 flex flex-col gap-6">
+<div class="flex items-center justify-between">
+<h2 class="font-headline-md text-headline-md text-on-background flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary">smart_toy</span>
+<span data-i18n="ai_matches">AI Eşleşmeleri</span>
+                    </h2>
+</div>
+<div class="glass-panel rounded-xl p-5 flex flex-col gap-4 relative overflow-hidden h-full">
+<!-- Subtle ambient glow background -->
+<div class="absolute top-0 right-0 w-32 h-32 bg-secondary-container/20 rounded-full blur-3xl -z-10"></div>
+<div class="flex justify-between items-start">
+<div>
+<span class="font-label-caps text-label-caps text-secondary tracking-wider uppercase mb-1 block" data-i18n="top_reco">En İyi Öneri</span>
+<h3 class="font-headline-md text-body-lg font-semibold text-on-background">2021 Peugeot 3008</h3>
+</div>
+<div class="flex flex-col items-end">
+<div class="flex items-baseline gap-1 text-secondary">
+<span class="font-mono-data text-headline-md font-bold">98</span>
+<span class="font-mono-data text-label-caps">/100</span>
+</div>
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase" data-i18n="trust_score">Güven Skoru</span>
+</div>
+</div>
+<div class="h-32 rounded-lg bg-surface-container-high overflow-hidden my-2">
+<img alt="Peugeot 3008" class="w-full h-full object-cover opacity-80" data-alt="A compact crossover SUV photographed in a studio setting against a seamless, matte dark charcoal background. The vehicle is side-lit to emphasize its aggressive, geometric design lines and sharp LED light signatures. The image is crisp, high-contrast, and exudes a modern, technical aesthetic suitable for a premium dark-mode interface." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBJ62hbxldCg4HbNsnmWaujVKmPjwSSc_44wi3fvKPCZJD_UXqFdncfYQ4GijFcrZqqLAC2CGpGNrexs_YWJvqtMIswVrVIBxdjlvkf-IsPdV6nKrpTOk6Dsff5N4rj9KiFLRGi62vO0KxzuifQ0gXPXoE4xcOAKTr_1ylPXWOSboyecQq0j3RjNlkW17B7oxLHMQl5WywfnkFI9aLsDx5qUFuNc_CVpaWFBLAPIT-9dEvyCpRvudOa2w_kswqbp9ZrgLu29-9Y_eI"/>
+</div>
+<ul class="flex flex-col gap-3 flex-grow">
+<li class="flex items-start gap-2">
+<span class="material-symbols-outlined text-primary text-sm mt-0.5" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<span class="font-body-md text-body-md text-on-surface-variant text-sm" data-i18n="ai_reason_1">Bütçeye tam uyumlu (ortalama 1.42M TL).</span>
+</li>
+<li class="flex items-start gap-2">
+<span class="material-symbols-outlined text-primary text-sm mt-0.5" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<span class="font-body-md text-body-md text-on-surface-variant text-sm" data-i18n="ai_reason_2">Bakım maliyeti rakiplerinden %15 düşük.</span>
+</li>
+<li class="flex items-start gap-2">
+<span class="material-symbols-outlined text-primary text-sm mt-0.5" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<span class="font-body-md text-body-md text-on-surface-variant text-sm" data-i18n="ai_reason_3">Aile kullanım puanı yüksek.</span>
+</li>
+</ul>
+<button onclick="location.href='/ara'" class="w-full py-3 rounded-lg border border-glass-border hover:bg-surface-container-high transition-colors font-body-md text-body-md text-on-background mt-4">
+<span data-i18n="view_analysis">Analizi Gör</span>
+                    </button>
+</div>
+</section>
+</div>
+</main>
+<!-- Footer -->
+<footer class="bg-surface-container-lowest dark:bg-surface-dark w-full py-section-gap border-t border-glass-border mt-auto">
+<div class="max-w-container-max-width mx-auto px-margin-desktop grid grid-cols-1 md:grid-cols-4 gap-gutter">
+<div class="col-span-1">
+<a class="font-display-hero text-headline-md text-on-background mb-4 block" href="/" target="_top">Vasıtan</a>
+<p class="font-body-md text-body-md text-on-surface-variant">© 2024 Vasıtan Analiz.<br/><span data-i18n="footer_rights">Tüm hakları saklıdır.</span></p>
+</div>
+<div class="col-span-1 md:col-span-3 grid grid-cols-2 md:grid-cols-3 gap-8">
+<div class="flex flex-col gap-3">
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary dark:hover:text-primary-fixed-dim transition-colors" data-i18n="marketplace" href="/ara">Pazar Yeri</a>
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary dark:hover:text-primary-fixed-dim transition-colors" data-i18n="performance_data" href="/arac-wiki">Performans Verisi</a>
+</div>
+<div class="flex flex-col gap-3">
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary dark:hover:text-primary-fixed-dim transition-colors" data-i18n="ai_diagnostics" href="/ai-danisman">AI Tanı</a>
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary dark:hover:text-primary-fixed-dim transition-colors" data-i18n="support_center" href="/topluluk">Destek Merkezi</a>
+</div>
+<div class="flex flex-col gap-3">
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary dark:hover:text-primary-fixed-dim transition-colors" data-i18n="privacy" href="/">Gizlilik</a>
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary dark:hover:text-primary-fixed-dim transition-colors" data-i18n="terms" href="/">Koşullar</a>
+</div>
+</div>
+</div>
+</footer>
+</body></html>

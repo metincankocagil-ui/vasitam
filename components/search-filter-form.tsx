@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
-import SavedSearchForm from "./saved-search-form";
 
 type VehicleTypeValue =
   | "AUTOMOBILE"
@@ -169,7 +168,7 @@ export default function SearchFilterForm() {
             setBrand(filtered[0].Make_Name);
           }
         }
-      } catch (err) {
+      } catch {
         if (!ignore) {
           setError("Marka listesi yüklenemedi, elle giriş yapabilirsiniz.");
         }
@@ -199,7 +198,7 @@ export default function SearchFilterForm() {
             setDistrict(list[0].districts?.[0]?.name ?? "");
           }
         }
-      } catch (err) {
+      } catch {
         if (!ignore) {
           setError((prev) =>
             prev
@@ -240,7 +239,7 @@ export default function SearchFilterForm() {
           setModels(sorted);
           setModel(sorted[0]?.Model_Name ?? "");
         }
-      } catch (err) {
+      } catch {
         if (!ignore) {
           setError((prev) =>
             prev ? prev + " | Model listesi yüklenemedi." : "Model listesi yüklenemedi.",

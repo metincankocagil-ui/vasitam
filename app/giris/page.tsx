@@ -1,99 +1,76 @@
-// app/giris/page.tsx
 import Link from "next/link";
-import { loginAction } from "@/lib/actions";
 
-const fieldClass =
-  "w-full rounded-2xl border border-slate-200 bg-white/80 px-4 py-3 text-sm text-slate-900 placeholder:text-slate-400 focus:border-indigo-400 focus:outline-none focus:ring-2 focus:ring-indigo-100";
-
-const errorMessages: Record<string, string> = {
-  missing: "E-posta ve şifre zorunludur.",
-  invalid: "E-posta veya şifre hatalı.",
-};
-
-interface LoginPageProps {
-  searchParams?: { error?: string };
-}
-
-export default function LoginPage({ searchParams }: LoginPageProps) {
-  const errorKey = searchParams?.error ?? "";
-  const errorMessage = errorKey ? errorMessages[errorKey] ?? "Giriş yapılamadı." : "";
-
+export default function GirisPage() {
   return (
-    <div className="space-y-6">
-      <section className="space-y-3 text-center">
-        <p className="text-xs uppercase tracking-[0.4em] text-slate-500">Giriş</p>
-        <h1 className="text-3xl font-semibold text-slate-900">Hesabınıza giriş yapın</h1>
-        <p className="text-sm text-slate-600">
-          Kayıtlı ilanlarınızı yönetin, yeni ilan yayınlayın ve favorilerinizi takip edin.
-        </p>
+    <main className="min-h-screen bg-slate-950 text-slate-100">
+      <section className="mx-auto flex min-h-screen w-full max-w-6xl items-center px-6 py-16">
+        <div className="grid w-full gap-10 lg:grid-cols-[1fr_440px] lg:items-center">
+          <div>
+            <Link
+              href="/"
+              className="mb-10 inline-flex text-2xl font-semibold tracking-tight text-white"
+            >
+              Vasıtan
+            </Link>
+            <p className="mb-4 text-sm font-semibold uppercase tracking-[0.24em] text-sky-300">
+              Güvenli erişim
+            </p>
+            <h1 className="max-w-2xl text-4xl font-semibold tracking-tight text-white md:text-6xl">
+              Garajına ve akıllı araç verilerine devam et.
+            </h1>
+            <p className="mt-6 max-w-xl text-base leading-7 text-slate-400">
+              Favori ilanlar, AI analizleri ve kayıtlı aramalar tek panelde.
+            </p>
+          </div>
+
+          <div className="rounded-3xl border border-white/10 bg-white/[0.04] p-6 shadow-2xl shadow-black/30 backdrop-blur">
+            <div className="mb-8">
+              <h2 className="text-2xl font-semibold text-white">Giriş Yap</h2>
+              <p className="mt-2 text-sm text-slate-400">
+                E-posta ve şifrenle hesabına gir.
+              </p>
+            </div>
+
+            <form className="space-y-5">
+              <label className="block">
+                <span className="text-sm font-medium text-slate-300">
+                  E-posta
+                </span>
+                <input
+                  className="mt-2 w-full rounded-2xl border border-white/10 bg-slate-900/80 px-4 py-3 text-sm text-white outline-none transition focus:border-sky-300"
+                  placeholder="ornek@vasitan.com"
+                  type="email"
+                />
+              </label>
+
+              <label className="block">
+                <span className="text-sm font-medium text-slate-300">
+                  Şifre
+                </span>
+                <input
+                  className="mt-2 w-full rounded-2xl border border-white/10 bg-slate-900/80 px-4 py-3 text-sm text-white outline-none transition focus:border-sky-300"
+                  placeholder="Şifren"
+                  type="password"
+                />
+              </label>
+
+              <button
+                className="w-full rounded-2xl bg-sky-300 px-5 py-3 text-sm font-semibold text-slate-950 transition hover:bg-sky-200"
+                type="button"
+              >
+                Giriş Yap
+              </button>
+            </form>
+
+            <p className="mt-6 text-center text-sm text-slate-400">
+              Hesabın yok mu?{" "}
+              <Link className="font-semibold text-sky-300" href="/kayit">
+                Kayıt Ol
+              </Link>
+            </p>
+          </div>
+        </div>
       </section>
-
-      {errorMessage && (
-        <div className="rounded-2xl border border-red-200 bg-red-50 px-4 py-2 text-sm text-red-700">
-          {errorMessage}
-        </div>
-      )}
-
-      <form
-        action={loginAction}
-        className="space-y-5 rounded-2xl border border-slate-200 bg-white/90 p-6 shadow-sm md:max-w-xl md:mx-auto"
-      >
-        <div className="space-y-1.5">
-          <label htmlFor="email" className="text-sm font-medium text-slate-700">
-            E-posta
-          </label>
-          <input
-            id="email"
-            name="email"
-            type="email"
-            required
-            placeholder="ornek@vasitan.com"
-            className={fieldClass}
-          />
-        </div>
-
-        <div className="space-y-1.5">
-          <label htmlFor="password" className="text-sm font-medium text-slate-700">
-            Şifre
-          </label>
-          <input
-            id="password"
-            name="password"
-            type="password"
-            required
-            placeholder="••••••••"
-            className={fieldClass}
-          />
-        </div>
-
-        <div className="flex items-center justify-between text-sm text-slate-600">
-          <label className="flex items-center gap-2">
-            <input
-              type="checkbox"
-              name="remember"
-              className="h-4 w-4 rounded border-slate-300 text-indigo-600 focus:ring-indigo-500"
-            />
-            Beni hatırla
-          </label>
-          <Link className="text-indigo-600 hover:underline" href="/sifre-sifirla">
-            Şifremi unuttum
-          </Link>
-        </div>
-
-        <button
-          type="submit"
-          className="w-full rounded-2xl bg-slate-900 px-4 py-3 text-sm font-semibold text-white transition hover:bg-slate-800"
-        >
-          Giriş Yap
-        </button>
-      </form>
-
-      <div className="text-center text-sm text-slate-600">
-        Henüz hesabın yok mu?{" "}
-        <Link className="font-semibold text-indigo-600 hover:text-indigo-700" href="/kayit">
-          Kayıt ol
-        </Link>
-      </div>
-    </div>
+    </main>
   );
 }

@@ -1,35 +1,29 @@
-import { prisma } from "@/lib/prisma";
+import type { MetadataRoute } from "next";
+
 import { SITE_URL } from "@/lib/seo";
-import { VEHICLE_CATEGORIES } from "@/lib/categories";
 
-export default async function sitemap() {
-  const staticRoutes = [
-    "",
-    "/ilan-ver",
-    "/giris",
-    "/kayit",
-    "/panel/ilanlarim",
-    "/kategoriler",
-  ].map((path) => ({
-    url: `${SITE_URL}${path}`,
-    lastModified: new Date().toISOString(),
+const routes = [
+  "",
+  "/ara",
+  "/ai-danisman",
+  "/arac-wiki",
+  "/garajim",
+  "/kronik-sorunlar",
+  "/topluluk",
+  "/giris",
+  "/kayit",
+  "/ilan-ver",
+  "/hakkimizda",
+  "/iletisim",
+  "/hukuk/gizlilik",
+  "/hukuk/kullanim-kosullari",
+];
+
+export default function sitemap(): MetadataRoute.Sitemap {
+  const lastModified = new Date();
+
+  return routes.map((route) => ({
+    url: `${SITE_URL}${route}`,
+    lastModified,
   }));
-
-  const categoryRoutes = Object.values(VEHICLE_CATEGORIES).map((category) => ({
-    url: `${SITE_URL}/kategori/${category.slug}`,
-    lastModified: new Date().toISOString(),
-  }));
-
-  const listings = await prisma.listing.findMany({
-    select: { id: true, updatedAt: true },
-    orderBy: { updatedAt: "desc" },
-    take: 500,
-  });
-
-  const listingRoutes = listings.map((listing) => ({
-    url: `${SITE_URL}/ilan/${listing.id}`,
-    lastModified: listing.updatedAt.toISOString(),
-  }));
-
-  return [...staticRoutes, ...categoryRoutes, ...listingRoutes];
 }

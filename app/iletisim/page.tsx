@@ -1,78 +1,84 @@
-import type { Metadata } from "next";
-import { absoluteUrl } from "@/lib/seo";
+import Link from "next/link";
 
-export const metadata: Metadata = {
-  title: "İletişim | Vasıtan.com",
-  description:
-    "Vasıtan.com destek ekibiyle iletişime geçin. Destek, iş birliği ve basın talepleriniz için iletişim bilgileri.",
-  alternates: {
-    canonical: "/iletisim",
-  },
-  openGraph: {
-    url: absoluteUrl("/iletisim"),
-    title: "İletişim | Vasıtan.com",
-    description:
-      "Vasıtan.com destek ekibiyle iletişime geçin. Destek, iş birliği ve basın talepleriniz için iletişim bilgileri.",
-  },
-};
-
-const contacts = [
-  {
-    label: "Destek",
-    email: "destek@vasitan.com",
-    description: "İlanlarınız ve üyelik işlemleriniz için bize yazın.",
-  },
-  {
-    label: "İş Ortaklığı",
-    email: "partner@vasitan.com",
-    description: "Kurumsal iş birlikleri ve API entegrasyonları için iletişime geçin.",
-  },
-  {
-    label: "Basın",
-    email: "press@vasitan.com",
-    description: "Medya kitleri ve röportaj talepleriniz için bize ulaşın.",
-  },
-];
-
-export default function ContactPage() {
+export default function IletisimPage() {
   return (
-    <div className="space-y-10">
-      <section className="rounded-3xl border border-slate-200 bg-white/90 p-8 shadow">
-        <p className="text-xs uppercase tracking-[0.4em] text-slate-500">İletişim</p>
-        <h1 className="mt-4 text-4xl font-semibold text-slate-900">7/24 yanınızdayız</h1>
-        <p className="mt-3 max-w-2xl text-sm text-slate-600">
-          Destek ekibimiz, ilan doğrulama ve kullanıcı deneyimi için haftanın her günü hizmetinizde.
-          Size en uygun iletişim kanalını seçin.
-        </p>
-      </section>
+    <main className="min-h-screen bg-slate-950 text-slate-100">
+      <section className="mx-auto w-full max-w-6xl px-6 py-12 md:py-20">
+        <Link
+          href="/"
+          className="mb-10 inline-flex text-2xl font-semibold tracking-tight text-white"
+        >
+          Vasıtan
+        </Link>
 
-      <section className="grid gap-5 md:grid-cols-3">
-        {contacts.map((contact) => (
-          <div key={contact.email} className="rounded-3xl border border-slate-200 bg-white/80 p-6 shadow-sm">
-            <p className="text-xs uppercase tracking-[0.4em] text-indigo-500">{contact.label}</p>
-            <a href={`mailto:${contact.email}`} className="mt-3 block text-lg font-semibold text-slate-900 hover:text-indigo-600">
-              {contact.email}
-            </a>
-            <p className="mt-2 text-sm text-slate-600">{contact.description}</p>
-          </div>
-        ))}
-      </section>
+        <div className="grid gap-10 lg:grid-cols-[0.9fr_1.1fr]">
+          <div>
+            <p className="mb-4 text-sm font-semibold uppercase tracking-[0.24em] text-sky-300">
+              İletişim
+            </p>
+            <h1 className="text-4xl font-semibold tracking-tight text-white md:text-6xl">
+              Sana yardımcı olmak için buradayız.
+            </h1>
+            <p className="mt-6 text-base leading-7 text-slate-400">
+              Platform, iş birliği veya ilan süreçleri için bize kısa bir mesaj
+              bırak.
+            </p>
 
-      <section className="rounded-3xl border border-slate-200 bg-slate-50/80 p-6">
-        <h2 className="text-lg font-semibold text-slate-900">Ofislerimiz</h2>
-        <div className="mt-4 grid gap-4 md:grid-cols-2">
-          <div className="rounded-2xl border border-slate-200 bg-white p-4 text-sm text-slate-600">
-            <p className="font-semibold text-slate-900">İstanbul</p>
-            <p>Maslak Mah. Büyükdere Cad. No:12</p>
-            <p>+90 212 000 00 00</p>
+            <div className="mt-8 space-y-4">
+              <div className="rounded-2xl border border-white/10 bg-white/[0.04] p-5">
+                <p className="text-sm text-slate-400">E-posta</p>
+                <p className="mt-1 font-semibold text-white">
+                  destek@vasitan.com
+                </p>
+              </div>
+              <div className="rounded-2xl border border-white/10 bg-white/[0.04] p-5">
+                <p className="text-sm text-slate-400">Merkez</p>
+                <p className="mt-1 font-semibold text-white">İstanbul</p>
+              </div>
+            </div>
           </div>
-          <div className="rounded-2xl border border-slate-200 bg-white p-4 text-sm text-slate-600">
-            <p className="font-semibold text-slate-900">Ankara</p>
-            <p>Gürsel Mah. Güçbirliği Sok. No:4</p>
-            <p>+90 312 000 00 00</p>
-          </div>
+
+          <form className="rounded-3xl border border-white/10 bg-white/[0.04] p-6 shadow-2xl shadow-black/30 backdrop-blur">
+            <div className="grid gap-5">
+              <label className="block">
+                <span className="text-sm font-medium text-slate-300">
+                  Ad Soyad
+                </span>
+                <input
+                  className="mt-2 w-full rounded-2xl border border-white/10 bg-slate-900/80 px-4 py-3 text-sm text-white outline-none transition focus:border-sky-300"
+                  placeholder="Adın Soyadın"
+                  type="text"
+                />
+              </label>
+              <label className="block">
+                <span className="text-sm font-medium text-slate-300">
+                  E-posta
+                </span>
+                <input
+                  className="mt-2 w-full rounded-2xl border border-white/10 bg-slate-900/80 px-4 py-3 text-sm text-white outline-none transition focus:border-sky-300"
+                  placeholder="ornek@vasitan.com"
+                  type="email"
+                />
+              </label>
+              <label className="block">
+                <span className="text-sm font-medium text-slate-300">
+                  Mesaj
+                </span>
+                <textarea
+                  className="mt-2 min-h-36 w-full rounded-2xl border border-white/10 bg-slate-900/80 px-4 py-3 text-sm text-white outline-none transition focus:border-sky-300"
+                  placeholder="Mesajını yaz"
+                />
+              </label>
+            </div>
+            <button
+              className="mt-6 w-full rounded-2xl bg-sky-300 px-5 py-3 text-sm font-semibold text-slate-950 transition hover:bg-sky-200"
+              type="button"
+            >
+              Mesaj Gönder
+            </button>
+          </form>
         </div>
       </section>
-    </div>
+    </main>
   );
 }

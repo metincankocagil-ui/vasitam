@@ -169,7 +169,7 @@ export default function CarQueryVehicleFields({
             .map((item) => item.make);
           setMakes(filtered);
         }
-      } catch (err) {
+      } catch {
         if (!ignore) {
           setError("Marka listesi yüklenemedi. Elle giriş yapabilirsiniz.");
         }
@@ -200,7 +200,7 @@ export default function CarQueryVehicleFields({
         if (!ignore) {
           setModels(data.sort((a, b) => a.Model_Name.localeCompare(b.Model_Name)));
         }
-      } catch (err) {
+      } catch {
         if (!ignore) {
           setError("Model listesi yüklenemedi. Elle giriş yapabilirsiniz.");
         }

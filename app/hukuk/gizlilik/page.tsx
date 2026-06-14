@@ -1,61 +1,57 @@
-import type { Metadata } from "next";
-import { absoluteUrl } from "@/lib/seo";
+import Link from "next/link";
 
-export const metadata: Metadata = {
-  title: "Gizlilik Politikası | Vasıtan.com",
-  description: "Vasıtan.com kullanıcı bilgilerinin nasıl korunduğunu ve işlendiğini öğrenin.",
-  alternates: {
-    canonical: "/hukuk/gizlilik",
-  },
-  openGraph: {
-    url: absoluteUrl("/hukuk/gizlilik"),
-    title: "Gizlilik Politikası | Vasıtan.com",
-    description: "Vasıtan.com kullanıcı bilgilerinin nasıl korunduğunu ve işlendiğini öğrenin.",
-  },
-};
-
-const policies = [
-  {
-    title: "Veri Toplama",
-    body:
-      "Kayıt, ilan yayınlama ve destek süreçlerinde paylaştığınız temel iletişim bilgilerini, güvenlik amacıyla IP adreslerini toplarız.",
-  },
-  {
-    title: "Veri Kullanımı",
-    body:
-      "Toplanan veriler, ilan deneyimini iyileştirmek, sahteciliği önlemek ve kullanıcıya özel bildirimler göndermek için kullanılır.",
-  },
-  {
-    title: "Veri Saklama",
-    body:
-      "Hesabınızı silme talebinde bulunduğunuzda verileriniz yasal zorunluluklar dışında sistemden kaldırılır. Yedekler belirli periyotlarda imha edilir.",
-  },
-  {
-    title: "Çerezler",
-    body:
-      "Site performansını ölçmek ve kişiselleştirilmiş içerik sunmak için çerezler kullanılır. Tarayıcı ayarlarınızdan çerez tercihlerinizi yönetebilirsiniz.",
-  },
-];
-
-export default function PrivacyPage() {
+export default function GizlilikPage() {
   return (
-    <div className="space-y-8">
-      <section className="rounded-3xl border border-slate-200 bg-white/90 p-8 shadow">
-        <p className="text-xs uppercase tracking-[0.4em] text-slate-500">Hukuk</p>
-        <h1 className="mt-4 text-4xl font-semibold text-slate-900">Gizlilik Politikası</h1>
-        <p className="mt-3 max-w-3xl text-sm text-slate-600">
-          Kişisel verilerinizi nasıl topladığımız, sakladığımız ve koruduğumuz hakkında detaylı bilgi.
-        </p>
-      </section>
+    <main className="min-h-screen bg-slate-950 text-slate-100">
+      <article className="mx-auto w-full max-w-4xl px-6 py-12 md:py-24">
+        <Link
+          href="/"
+          className="mb-14 inline-flex text-2xl font-semibold tracking-tight text-white"
+        >
+          Vasıtan
+        </Link>
 
-      <section className="space-y-4">
-        {policies.map((policy) => (
-          <article key={policy.title} className="rounded-3xl border border-slate-200 bg-white/80 p-6 shadow-sm">
-            <h2 className="text-lg font-semibold text-slate-900">{policy.title}</h2>
-            <p className="mt-2 text-sm text-slate-600">{policy.body}</p>
-          </article>
-        ))}
-      </section>
-    </div>
+        <p className="mb-4 text-sm font-semibold uppercase tracking-[0.24em] text-sky-300">
+          Hukuk
+        </p>
+        <h1 className="text-4xl font-semibold tracking-tight text-white md:text-6xl">
+          Gizlilik Politikası
+        </h1>
+        <p className="mt-6 text-base leading-7 text-slate-400">
+          Vasıtan, kullanıcı verilerini güvenli ve şeffaf biçimde işlemeyi
+          temel prensip kabul eder. Bu sayfa, platformdaki veri yaklaşımımızın
+          kısa özetidir.
+        </p>
+
+        <div className="mt-10 space-y-5">
+          {[
+            [
+              "Toplanan Bilgiler",
+              "Hesap, iletişim ve araç tercihleri gibi hizmet için gerekli temel bilgiler işlenir.",
+            ],
+            [
+              "Kullanım Amacı",
+              "Veriler deneyimi kişiselleştirmek, ilan süreçlerini iyileştirmek ve güvenliği artırmak için kullanılır.",
+            ],
+            [
+              "Güvenlik",
+              "Yetkisiz erişimi önlemek için teknik ve idari koruma önlemleri uygulanır.",
+            ],
+            [
+              "Haklarınız",
+              "Verilerinizle ilgili erişim, düzeltme ve silme taleplerinizi bize iletebilirsiniz.",
+            ],
+          ].map(([title, text]) => (
+            <section
+              className="rounded-3xl border border-white/10 bg-white/[0.04] p-6"
+              key={title}
+            >
+              <h2 className="text-lg font-semibold text-white">{title}</h2>
+              <p className="mt-3 text-sm leading-6 text-slate-400">{text}</p>
+            </section>
+          ))}
+        </div>
+      </article>
+    </main>
   );
 }
