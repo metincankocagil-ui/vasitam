@@ -57,18 +57,31 @@ const vehicleFilters = [
 
 const formatNumber = (value: number) => value.toLocaleString("tr-TR");
 
+type ShowcaseShortcut =
+  | { label: string; icon: string; accent?: string; badge?: string; links?: never }
+  | { label: string; icon: string; accent?: string; badge?: string; links: readonly string[] };
+
+const showcaseShortcuts: readonly ShowcaseShortcut[] = [
+  {
+    label: "Vasıtalar",
+    icon: "🚗",
+    accent: "text-[#00B3E6]",
+    links: ["Otomobil", "SUV & Pickup", "Elektrikli", "Motosiklet"] as const,
+  },
+] as const;
+
 const showcaseCategoryGroups = [
   {
     label: "Vasıta",
     count: 799068,
     icon: "🚙",
     items: [
-      { label: "Otomobil", count: 394118, href: "/kategori/otomobil" },
-      { label: "SUV", count: 104527, href: "/kategori/suv" },
-      { label: "Motosiklet", count: 56298, href: "/kategori/motosiklet" },
-      { label: "Ticari", count: 23217, href: "/kategori/ticari" },
-      { label: "Kamyon / Pickup", count: 18000, href: "/kategori/pickup-kamyon" },
-      { label: "Diğer", count: 8866, href: "/kategori/diger" },
+      { label: "Otomobil", count: 394118 },
+      { label: "Motosiklet", count: 56298 },
+      { label: "SUV & Pickup", count: 104527 },
+      { label: "Elektrikli Araçlar", count: 8866 },
+      { label: "Ağır Vasıta", count: 23217 },
+      { label: "Kiralık Araçlar", count: 11844 },
     ],
   },
 ] as const;
@@ -136,42 +149,35 @@ export default async function HomePage({ searchParams }: HomePageProps) {
 
   return (
     <div className="space-y-12">
-      <section className="rounded-3xl border border-slate-200 bg-white/80 px-6 py-10 text-slate-900 shadow-sm dark-mode:border-slate-700 dark-mode:bg-slate-900/80 dark-mode:text-white">
+      <section className="rounded-3xl border border-slate-200 bg-white/80 px-6 py-10 text-slate-900 shadow-sm">
         <div className="grid gap-8 md:grid-cols-[minmax(0,1.1fr)_minmax(0,.9fr)]">
           <div className="space-y-4">
-            <p className="text-sm font-semibold text-slate-600 dark-mode:text-slate-200">Türkiye&apos;nin vasıta merkezi</p>
-            <h1 className="text-4xl font-semibold leading-tight text-slate-900 dark-mode:text-white md:text-5xl">
+            <p className="text-sm font-semibold text-slate-600">Türkiye&apos;nin vasıta merkezi</p>
+            <h1 className="text-4xl font-semibold leading-tight md:text-5xl">
               Marka ve modele göre saniyeler içinde araç ara.
             </h1>
-            <p className="text-sm text-slate-600 dark-mode:text-slate-300 md:text-base">
+            <p className="text-sm text-slate-600 md:text-base">
               Tüm vasıta segmentlerinde güncel ilanlar, tek ekranda sade bir arama deneyimi.
             </p>
             <div className="flex flex-wrap gap-3">
               <Link
                 href="/ilan-ver"
-                className="rounded-full bg-slate-900 px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-slate-800 dark-mode:bg-indigo-500 dark-mode:hover:bg-indigo-400"
+                className="rounded-full bg-slate-900 px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-slate-800"
               >
                 İlan oluştur
               </Link>
               <Link
                 href="#listings"
-                className="rounded-full border border-slate-200 px-5 py-2.5 text-sm font-semibold text-slate-700 transition hover:border-slate-300 dark-mode:border-slate-600 dark-mode:text-slate-200"
+                className="rounded-full border border-slate-200 px-5 py-2.5 text-sm font-semibold text-slate-700 transition hover:border-slate-300"
               >
                 Son ilanlar
               </Link>
             </div>
             <dl className="grid gap-4 sm:grid-cols-3">
               {stats.map((stat) => (
-                <div
-                  key={stat.label}
-                  className="rounded-2xl border border-slate-100 bg-white p-4  dark-mode:border-slate-600 dark-mode:bg-slate-800/70 "
-                >
-                  <dt className="text-xs uppercase tracking-wider text-slate-500 dark-mode:text-slate-300">
-                    {stat.label}
-                  </dt>
-                  <dd className="mt-1 text-2xl font-semibold text-slate-900 dark-mode:text-slate-50">
-                    {stat.value}
-                  </dd>
+                <div key={stat.label} className="rounded-2xl border border-slate-100 bg-slate-50/80 p-3">
+                  <dt className="text-xs uppercase tracking-wider text-slate-500">{stat.label}</dt>
+                  <dd className="mt-1 text-2xl font-semibold">{stat.value}</dd>
                 </div>
               ))}
             </dl>
@@ -183,33 +189,68 @@ export default async function HomePage({ searchParams }: HomePageProps) {
       {showcaseListings.length > 0 && (
         <section className="space-y-5 rounded-3xl border border-slate-200 bg-white/80 p-4 shadow-sm">
           <div className="grid gap-6 lg:grid-cols-[240px_1fr]">
-            <aside className="space-y-4 rounded-3xl border border-slate-200 bg-slate-100/10 p-4 text-slate-800">
-              {showcaseCategoryGroups.map((group) => (
-                <div
-                  key={group.label}
-                  className="space-y-3 rounded-2xl border border-slate-100 bg-white/70 p-4 text-sm shadow"
-                >
-                  <div className="flex items-center justify-between text-xs uppercase tracking-wide text-slate-400">
-                    <div className="flex items-center gap-2 text-base font-semibold text-slate-900">
-                      <span>{group.icon}</span>
-                      <span>{group.label}</span>
+            <aside className="space-y-6 rounded-3xl border border-[#00A1CC]/50 bg-[#00B3E6]/90 p-4 text-white shadow-inner">
+              <div className="space-y-3">
+                {showcaseShortcuts.map((item) => (
+                  <div
+                    key={item.label}
+                    className="rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-sm backdrop-blur transition hover:border-white/30 hover:bg-white/10"
+                  >
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-2 font-semibold">
+                        <span>{item.icon}</span>
+                        <span className={item.accent ?? "text-white"}>{item.label}</span>
+                      </div>
+                      {item.badge && (
+                        <span className="rounded-full bg-white/90 px-2 py-0.5 text-[10px] font-semibold uppercase text-slate-900">
+                          {item.badge}
+                        </span>
+                      )}
                     </div>
-                    <span>{formatNumber(group.count)}</span>
+                    {item.links && (
+                      <div className="mt-3 flex flex-wrap gap-2 text-xs text-indigo-200">
+                        {item.links.map((link) => (
+                          <button
+                            key={link}
+                            type="button"
+                            className="rounded-full border border-white/20 px-3 py-1 font-semibold text-white transition hover:border-white/50 hover:text-indigo-100"
+                          >
+                            {link}
+                          </button>
+                        ))}
+                      </div>
+                    )}
                   </div>
-                  <div className="grid gap-2">
-                    {group.items.map((item) => (
-                      <Link
-                        key={item.label}
-                        href={item.href}
-                        className="flex items-center justify-between rounded-xl border border-slate-100 bg-white px-3 py-2 text-xs font-semibold text-slate-700 transition hover:border-slate-300 hover:bg-slate-50"
-                      >
-                        <span>{item.label}</span>
-                        <span className="text-slate-500">{formatNumber(item.count)}</span>
-                      </Link>
-                    ))}
+                ))}
+              </div>
+              <div className="space-y-4">
+                {showcaseCategoryGroups.map((group) => (
+                  <div
+                    key={group.label}
+                    className="space-y-3 rounded-2xl border border-white/10 bg-gradient-to-b from-[#008DB1]/70 to-[#006987]/80 p-4 text-sm shadow-lg"
+                  >
+                    <div className="flex items-center justify-between text-xs uppercase tracking-wide text-slate-300">
+                      <div className="flex items-center gap-2 text-base font-semibold text-white">
+                        <span>{group.icon}</span>
+                        <span>{group.label}</span>
+                      </div>
+                      <span>{formatNumber(group.count)}</span>
+                    </div>
+                    <div className="grid gap-2">
+                      {group.items.map((item) => (
+                        <button
+                          key={item.label}
+                          type="button"
+                          className="flex items-center justify-between rounded-xl border border-white/10 bg-white/10 px-3 py-2 text-xs font-semibold text-white transition hover:border-white/40 hover:bg-white/20"
+                        >
+                          <span>{item.label}</span>
+                          <span className="text-slate-400">{formatNumber(item.count)}</span>
+                        </button>
+                      ))}
+                    </div>
                   </div>
-                </div>
-              ))}
+                ))}
+              </div>
             </aside>
             <div className="space-y-4">
               <div className="flex flex-wrap items-center justify-between gap-4">

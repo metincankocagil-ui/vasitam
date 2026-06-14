@@ -66,13 +66,24 @@ export default async function RootLayout({
     <html lang="tr">
       <body className="min-h-screen bg-gradient-to-b from-slate-50 via-white to-white text-slate-900 antialiased">
         <div className="pointer-events-none fixed inset-x-0 top-0 -z-10 h-full bg-[radial-gradient(circle_at_top,_rgba(180,198,252,0.65),_rgba(255,255,255,0))]" />
-        <header className="sticky top-0 z-20 border-b border-slate-200/70 bg-white/90 backdrop-blur">
-          <div className="mx-auto flex h-20 max-w-6xl items-center justify-between gap-6 px-4">
-            <Link href="/" className="text-2xl font-semibold tracking-tight text-slate-900">
-              Vasıtan<span className="text-indigo-500">.com</span>
-            </Link>
-            <div className="flex flex-1 justify-center px-4">
-              <form action="/ara" className="relative w-full max-w-xl" method="GET">
+        <header className="sticky top-0 z-20 border-b border-slate-200/70 bg-white/90 px-4 py-4 backdrop-blur sm:px-0 sm:py-0">
+          <div className="mx-auto flex w-full max-w-6xl flex-col gap-3 sm:h-20 sm:flex-row sm:items-center sm:justify-between sm:gap-6 sm:px-4">
+            <div className="flex items-center justify-between gap-3 sm:justify-start">
+              <Link href="/" className="text-2xl font-semibold tracking-tight text-slate-900">
+                Vasıtan<span className="text-indigo-500">.com</span>
+              </Link>
+              <div className="flex items-center gap-3 sm:hidden">
+                <Link
+                  href="/ilan-ver"
+                  className="rounded-full bg-indigo-500/90 px-4 py-2 text-sm font-semibold text-white transition hover:bg-indigo-400"
+                >
+                  İlan Ver
+                </Link>
+                <ThemeToggle />
+              </div>
+            </div>
+            <div className="flex w-full flex-1 sm:justify-center sm:px-4">
+              <form action="/ara" className="relative w-full sm:max-w-xl" method="GET">
                 <label htmlFor="global-search" className="sr-only">
                   Ara
                 </label>
@@ -95,7 +106,7 @@ export default async function RootLayout({
                 </svg>
               </form>
             </div>
-            <div className="flex items-center gap-3 text-sm font-medium">
+            <div className="hidden items-center gap-3 text-sm font-medium sm:flex">
               <Link
                 href="/ilan-ver"
                 className="hidden rounded-full bg-indigo-500/90 px-4 py-2 font-semibold text-white transition hover:bg-indigo-400 sm:inline-flex"
