@@ -116,3 +116,112 @@ html.light img.mix-blend-luminosity {
 [data-theme-toggle]:active .material-symbols-outlined {
   transform: scale(0.92);
 }
+
+html,
+body {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+img,
+video,
+iframe,
+svg {
+  max-width: 100%;
+}
+
+img,
+video {
+  height: auto;
+}
+
+input,
+select,
+textarea,
+button,
+a,
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+span,
+div {
+  min-width: 0;
+}
+
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+span,
+a,
+button,
+label {
+  overflow-wrap: anywhere;
+}
+
+@media (max-width: 767px) {
+  body {
+    width: 100%;
+  }
+
+  header,
+  nav,
+  main,
+  footer,
+  section,
+  aside {
+    max-width: 100vw;
+  }
+
+  .text-display-hero {
+    font-size: 2.25rem !important;
+    line-height: 1.15 !important;
+    letter-spacing: 0 !important;
+  }
+
+  .text-headline-lg,
+  .text-headline-md {
+    font-size: 1.75rem !important;
+    line-height: 1.2 !important;
+    letter-spacing: 0 !important;
+  }
+
+  .px-margin-desktop {
+    padding-left: 20px !important;
+    padding-right: 20px !important;
+  }
+
+  .py-section-gap {
+    padding-top: 48px !important;
+    padding-bottom: 48px !important;
+  }
+
+  .gap-section-gap {
+    gap: 48px !important;
+  }
+
+  .mb-section-gap {
+    margin-bottom: 48px !important;
+  }
+
+  .mt-section-gap {
+    margin-top: 48px !important;
+  }
+
+  .w-\[calc\(100\%-16rem\)\],
+  .md\:w-\[calc\(100\%-256px\)\] {
+    width: 100% !important;
+  }
+
+}

@@ -134,11 +134,11 @@
 <script src="/stitch-v2/theme.js"></script>
 <script src="/stitch-v2/i18n.js"></script>
 </head>
-<body class="bg-background text-on-background font-body-md antialiased min-h-screen flex flex-col">
+<body class="bg-background text-on-background font-body-md antialiased min-h-screen flex flex-col overflow-x-hidden">
 <!-- TopNavBar -->
 <nav class="fixed top-0 w-full z-50 backdrop-blur-xl bg-background/80 border-b border-glass-border shadow-sm">
-<div class="flex justify-between items-center max-w-container-max-width mx-auto px-margin-mobile md:px-margin-desktop h-16">
-<div class="flex items-center gap-8">
+<div class="flex justify-between items-center max-w-container-max-width mx-auto px-margin-mobile md:px-margin-desktop h-16 gap-3">
+<div class="flex items-center gap-4 md:gap-8 min-w-0">
 <a class="font-display-hero text-headline-md tracking-tighter text-on-background" href="/" target="_top">Vasıtan</a>
 <div class="hidden md:flex items-center gap-6">
 <a class="text-on-surface-variant hover:text-primary transition-colors duration-300 active:scale-95 transition-transform" data-i18n="nav_inventory" href="/ara">İlanlar</a>
@@ -147,7 +147,7 @@
 <a class="text-on-surface-variant hover:text-primary transition-colors duration-300 active:scale-95 transition-transform" data-i18n="nav_garage" href="/garajim">Garaj</a>
 </div>
 </div>
-<div class="flex items-center gap-4">
+<div class="flex items-center gap-2 sm:gap-4 shrink-0">
 <div class="relative">
 <button data-language-selector type="button" class="text-on-surface-variant hover:text-primary transition-colors duration-300 active:scale-95 transition-transform flex items-center">
 <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">language</span>
@@ -170,14 +170,14 @@
 <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">dark_mode</span>
 </button>
 <a class="hidden sm:inline-flex items-center justify-center px-4 py-2 rounded-full border border-glass-border text-on-background hover:bg-surface-container-high transition-colors text-body-md font-body-md" data-i18n="login" href="/giris">Giriş</a>
-<a class="inline-flex items-center justify-center px-4 py-2 rounded-full bg-primary-container text-on-primary-container hover:bg-primary-fixed transition-colors text-body-md font-body-md active:scale-95 transition-transform" data-i18n="list_vehicle" href="/ilan-ver">İlan Ver</a>
+<a class="inline-flex items-center justify-center px-3 sm:px-4 py-2 rounded-full bg-primary-container text-on-primary-container hover:bg-primary-fixed transition-colors text-sm sm:text-body-md font-body-md active:scale-95 transition-transform whitespace-nowrap" data-i18n="list_vehicle" href="/ilan-ver">İlan Ver</a>
 </div>
 </div>
 </nav>
 <!-- Main Content -->
-<main class="flex-grow pt-24 pb-section-gap flex flex-col items-center">
+<main class="flex-grow pt-20 md:pt-24 pb-section-gap flex flex-col items-center overflow-x-hidden">
 <!-- Hero Section -->
-<section class="w-full max-w-container-max-width mx-auto px-margin-mobile md:px-margin-desktop pt-16 md:pt-32 pb-section-gap flex flex-col items-center text-center">
+<section class="w-full max-w-container-max-width mx-auto px-margin-mobile md:px-margin-desktop pt-10 md:pt-32 pb-section-gap flex flex-col items-center text-center">
 <h1 class="font-display-hero text-headline-lg-mobile md:text-display-hero text-gradient-primary mb-6 max-w-4xl" data-i18n="hero_title">
                 Mobilite zekayla buluşur.
             </h1>
@@ -185,11 +185,11 @@
                 Modern araç ekosistemi için AI destekli arama.
             </p>
 <!-- AI Search Input -->
-<div class="w-full max-w-3xl relative ai-glow-focus rounded-full transition-all duration-500 glass-panel">
+<div class="w-full max-w-3xl relative ai-glow-focus rounded-2xl sm:rounded-full transition-all duration-500 glass-panel">
 <div class="absolute inset-y-0 left-0 pl-6 flex items-center pointer-events-none">
 <span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 0;">search</span>
 </div>
-<input class="w-full bg-transparent border-none rounded-full py-5 pl-14 pr-16 text-body-lg font-body-lg text-on-background placeholder-on-surface-variant/50 focus:ring-0 focus:outline-none" data-i18n-placeholder="search_placeholder" placeholder="1.5M TL altı, düşük masraflı aile SUV’u" type="text"/>
+<input class="w-full bg-transparent border-none rounded-2xl sm:rounded-full py-4 sm:py-5 pl-12 sm:pl-14 pr-14 sm:pr-16 text-base sm:text-body-lg font-body-lg text-on-background placeholder-on-surface-variant/50 focus:ring-0 focus:outline-none" data-i18n-placeholder="search_placeholder" placeholder="1.5M TL altı, düşük masraflı aile SUV’u" type="text"/>
 <button onclick="location.href='/ara'" class="absolute inset-y-2 right-2 px-4 rounded-full bg-primary text-on-primary hover:bg-primary-fixed transition-colors flex items-center justify-center active:scale-95">
 <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">send</span>
 </button>
@@ -228,7 +228,7 @@
 </div>
 </div>
 <div class="p-5 flex flex-col flex-grow">
-<div class="flex justify-between items-start mb-2">
+<div class="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-1 mb-2">
 <h3 class="font-headline-md text-body-lg font-semibold text-on-background">2023 Tesla Model 3</h3>
 <span class="font-mono-data text-mono-data text-on-surface-variant">₺1.85M</span>
 </div>
@@ -249,7 +249,7 @@
 </div>
 </div>
 <div class="p-5 flex flex-col flex-grow">
-<div class="flex justify-between items-start mb-2">
+<div class="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-1 mb-2">
 <h3 class="font-headline-md text-body-lg font-semibold text-on-background">2022 Volvo XC90</h3>
 <span class="font-mono-data text-mono-data text-on-surface-variant">₺2.4M</span>
 </div>
@@ -312,12 +312,12 @@
 </main>
 <!-- Footer -->
 <footer class="bg-surface-container-lowest dark:bg-surface-dark w-full py-section-gap border-t border-glass-border mt-auto">
-<div class="max-w-container-max-width mx-auto px-margin-desktop grid grid-cols-1 md:grid-cols-4 gap-gutter">
+<div class="max-w-container-max-width mx-auto px-margin-mobile md:px-margin-desktop grid grid-cols-1 md:grid-cols-4 gap-gutter">
 <div class="col-span-1">
 <a class="font-display-hero text-headline-md text-on-background mb-4 block" href="/" target="_top">Vasıtan</a>
 <p class="font-body-md text-body-md text-on-surface-variant">© 2024 Vasıtan Analiz.<br/><span data-i18n="footer_rights">Tüm hakları saklıdır.</span></p>
 </div>
-<div class="col-span-1 md:col-span-3 grid grid-cols-2 md:grid-cols-3 gap-8">
+<div class="col-span-1 md:col-span-3 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
 <div class="flex flex-col gap-3">
 <a class="font-body-md text-body-md text-on-surface-variant hover:text-primary dark:hover:text-primary-fixed-dim transition-colors" data-i18n="marketplace" href="/ara">Pazar Yeri</a>
 <a class="font-body-md text-body-md text-on-surface-variant hover:text-primary dark:hover:text-primary-fixed-dim transition-colors" data-i18n="performance_data" href="/arac-wiki">Performans Verisi</a>

@@ -139,10 +139,10 @@
 <link href="/stitch-v2/theme.css" rel="stylesheet"/>
 <script src="/stitch-v2/theme.js"></script>
 </head>
-<body class="bg-background text-on-background font-body-md text-body-md min-h-screen antialiased">
+<body class="bg-background text-on-background font-body-md text-body-md min-h-screen antialiased overflow-x-hidden">
 <!-- TopNavBar -->
-<header class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-margin-desktop h-16 bg-background/80 backdrop-blur-md text-primary font-body-md text-body-md border-b border-glass-border shadow-sm">
-<div class="flex items-center gap-4">
+<header class="fixed top-0 left-0 w-full z-50 flex justify-between items-center gap-3 px-margin-mobile md:px-margin-desktop h-16 bg-background/80 backdrop-blur-md text-primary font-body-md text-body-md border-b border-glass-border shadow-sm">
+<div class="flex items-center gap-2 sm:gap-4 shrink-0">
 <a class="text-headline-md font-headline-md text-primary tracking-tight" href="/" target="_top">Vasıtan</a>
 </div>
 <!-- Search Bar (on_left configuration visually, but placed in center for balance in layout) -->
@@ -204,13 +204,13 @@
 </div>
 </nav>
 <!-- Main Canvas -->
-<main class="ml-0 md:ml-64 mt-16 p-margin-mobile md:p-margin-desktop max-w-container-max-width mx-auto pb-section-gap">
+<main class="ml-0 md:ml-64 mt-16 p-margin-mobile md:p-margin-desktop max-w-container-max-width mx-auto pb-section-gap overflow-x-hidden">
 <div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter">
 <!-- 1. Header (Spans 12 columns) -->
 <header class="lg:col-span-12 flex flex-col md:flex-row justify-between items-start md:items-end mb-8 gap-4 border-b border-glass-border pb-6">
 <div>
-<div class="flex items-center gap-3 mb-2">
-<h1 class="font-display-hero text-display-hero text-on-surface m-0 leading-none">BMW 320i</h1>
+<div class="flex flex-col sm:flex-row sm:items-center gap-3 mb-2">
+<h1 class="font-display-hero text-headline-lg-mobile md:text-display-hero text-on-surface m-0 leading-none">BMW 320i</h1>
 <div class="bg-surface-container-high border border-outline/30 px-3 py-1 rounded-full flex items-center gap-1">
 <span class="material-symbols-outlined text-primary text-sm" style="font-variation-settings: 'FILL' 1;">verified</span>
 <span class="font-label-caps text-label-caps text-on-surface-variant">Doğrulanmış Model</span>
@@ -218,7 +218,7 @@
 </div>
 <p class="font-mono-data text-mono-data text-on-surface-variant">F30 Nesli (2012-2018) • N20/B48 Motor</p>
 </div>
-<div class="glass-panel px-6 py-4 rounded-xl flex items-center gap-4">
+<div class="glass-panel px-4 sm:px-6 py-4 rounded-xl flex items-center gap-4 w-full md:w-auto">
 <div class="text-right">
 <div class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider mb-1">AI Sağlık Skoru</div>
 <div class="font-headline-md text-headline-md text-primary">78<span class="text-body-md text-on-surface-variant">/100</span></div>
@@ -274,14 +274,14 @@
 </div>
 <!-- 4. Issue Feed -->
 <div class="flex flex-col gap-4">
-<div class="flex justify-between items-center mb-2">
+<div class="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-2 mb-2">
 <h3 class="font-headline-md text-headline-md text-on-surface text-xl">Aktif Raporlar</h3>
 <div class="font-mono-data text-mono-data text-on-surface-variant">59 sorundan 4’ü gösteriliyor</div>
 </div>
 <!-- Issue Item 1 -->
 <div class="glass-panel p-5 rounded-xl issue-card-hover flex flex-col gap-3">
-<div class="flex justify-between items-start">
-<div class="flex gap-3">
+<div class="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-3">
+<div class="flex gap-3 min-w-0">
 <span class="material-symbols-outlined text-error mt-1" style="font-variation-settings: 'FILL' 1;">error</span>
 <div>
 <h4 onclick="location.href='/kronik-sorunlar'" class="font-body-lg text-body-lg text-on-surface font-semibold mb-1 cursor-pointer hover:text-primary transition-colors">Triger Zinciri Kılavuz Arızası (N20)</h4>
@@ -299,7 +299,7 @@
 <span class="font-mono-data text-mono-data text-on-surface-variant">42</span>
 </div>
 </div>
-<div class="flex gap-2 ml-9">
+<div class="flex flex-wrap gap-2 sm:ml-9">
 <span class="px-2 py-1 rounded bg-error-container/20 text-error border border-error/20 font-label-caps text-label-caps text-[10px]">KRİTİK</span>
 <span class="px-2 py-1 rounded bg-primary-container/20 text-primary border border-primary/20 font-label-caps text-label-caps text-[10px] flex items-center gap-1">
 <span class="material-symbols-outlined text-[12px]">verified</span> AI Onaylı
@@ -308,8 +308,8 @@
 </div>
 <!-- Issue Item 2 -->
 <div class="glass-panel p-5 rounded-xl issue-card-hover flex flex-col gap-3">
-<div class="flex justify-between items-start">
-<div class="flex gap-3">
+<div class="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-3">
+<div class="flex gap-3 min-w-0">
 <span class="material-symbols-outlined text-secondary mt-1">warning</span>
 <div>
 <h4 onclick="location.href='/kronik-sorunlar'" class="font-body-lg text-body-lg text-on-surface font-semibold mb-1 cursor-pointer hover:text-primary transition-colors">Vanos Solenoid Arızası</h4>
@@ -327,7 +327,7 @@
 <span class="font-mono-data text-mono-data text-on-surface-variant">15</span>
 </div>
 </div>
-<div class="flex gap-2 ml-9">
+<div class="flex flex-wrap gap-2 sm:ml-9">
 <span class="px-2 py-1 rounded bg-secondary-container/30 text-secondary border border-secondary/30 font-label-caps text-label-caps text-[10px]">YÜKSEK</span>
 </div>
 </div>
@@ -413,9 +413,9 @@
 </div>
 </main>
 <!-- Footer -->
-<footer class="w-full py-8 px-margin-desktop flex flex-col md:flex-row justify-between items-center gap-gutter bg-surface-dim border-t border-glass-border font-mono-data text-mono-data text-tertiary ml-0 md:ml-64 relative z-10 w-[calc(100%-0px)] md:w-[calc(100%-256px)]">
+<footer class="w-full py-8 px-margin-mobile md:px-margin-desktop flex flex-col md:flex-row justify-between items-center gap-gutter bg-surface-dim border-t border-glass-border font-mono-data text-mono-data text-tertiary ml-0 md:ml-64 relative z-10 md:w-[calc(100%-256px)] text-center md:text-left">
 <div class="text-label-caps font-bold text-on-surface-variant uppercase">Vasıtan Araç Zekası</div>
-<div class="flex gap-6">
+<div class="flex flex-wrap justify-center md:justify-end gap-4 md:gap-6">
 <a class="text-on-tertiary-container hover:text-secondary transition-colors hover:text-primary" href="/arac-wiki">Teknik Doküman</a>
 <a class="text-on-tertiary-container hover:text-secondary transition-colors hover:text-primary" href="/arac-wiki">API Protokolleri</a>
 <a class="text-on-tertiary-container hover:text-secondary transition-colors hover:text-primary" href="/garajim">Sistem Durumu</a>

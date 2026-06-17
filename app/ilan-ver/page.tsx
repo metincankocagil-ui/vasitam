@@ -2,8 +2,8 @@ import Link from "next/link";
 
 export default function IlanVerPage() {
   return (
-    <main className="min-h-screen bg-slate-950 text-slate-100">
-      <section className="mx-auto w-full max-w-6xl px-6 py-12 md:py-20">
+    <main className="min-h-screen overflow-x-hidden bg-slate-950 text-slate-100">
+      <section className="mx-auto w-full max-w-6xl px-4 py-8 sm:px-6 md:py-20">
         <Link
           href="/"
           className="mb-10 inline-flex text-2xl font-semibold tracking-tight text-white"
@@ -11,12 +11,12 @@ export default function IlanVerPage() {
           Vasıtan
         </Link>
 
-        <div className="grid gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
-          <div className="rounded-3xl border border-sky-300/20 bg-sky-300/10 p-8">
+        <div className="grid min-w-0 gap-6 md:gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
+          <div className="rounded-3xl border border-sky-300/20 bg-sky-300/10 p-5 sm:p-8">
             <p className="text-sm font-semibold uppercase tracking-[0.24em] text-sky-300">
               İlan Ver
             </p>
-            <h1 className="mt-4 text-4xl font-semibold tracking-tight text-white md:text-5xl">
+            <h1 className="mt-4 text-3xl font-semibold tracking-tight text-white sm:text-4xl md:text-5xl">
               Yakında gelişmiş ilan oluşturma sistemi aktif olacak.
             </h1>
             <p className="mt-5 text-base leading-7 text-slate-300">
@@ -25,9 +25,9 @@ export default function IlanVerPage() {
             </p>
           </div>
 
-          <form className="rounded-3xl border border-white/10 bg-white/[0.04] p-6 shadow-2xl shadow-black/30 backdrop-blur">
-            <div className="grid gap-5 md:grid-cols-2">
-              <label className="block md:col-span-2">
+          <form className="min-w-0 rounded-3xl border border-white/10 bg-white/[0.04] p-4 shadow-2xl shadow-black/30 backdrop-blur sm:p-6">
+            <div className="grid gap-5 sm:grid-cols-2">
+              <label className="block sm:col-span-2">
                 <span className="text-sm font-medium text-slate-300">
                   İlan Başlığı
                 </span>
@@ -80,7 +80,7 @@ export default function IlanVerPage() {
                 />
               </label>
 
-              <label className="block md:col-span-2">
+              <label className="block sm:col-span-2">
                 <span className="text-sm font-medium text-slate-300">
                   Açıklama
                 </span>

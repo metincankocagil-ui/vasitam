@@ -122,10 +122,10 @@
 <link href="/stitch-v2/theme.css" rel="stylesheet"/>
 <script src="/stitch-v2/theme.js"></script>
 </head>
-<body class="bg-background text-on-surface font-body-md min-h-screen flex flex-col antialiased selection:bg-primary/30 selection:text-primary-fixed">
+<body class="bg-background text-on-surface font-body-md min-h-screen flex flex-col antialiased selection:bg-primary/30 selection:text-primary-fixed overflow-x-hidden">
 <!-- TopNavBar Component -->
 <nav class="fixed top-0 w-full z-50 bg-surface/80 backdrop-blur-xl border-b border-glass-border shadow-sm">
-<div class="flex justify-between items-center h-16 px-margin-desktop max-w-container-max-width mx-auto">
+<div class="flex justify-between items-center h-16 gap-3 px-margin-mobile md:px-margin-desktop max-w-container-max-width mx-auto">
 <a class="font-headline-md text-headline-md font-bold text-primary tracking-tight" href="/" target="_top">Vasıtan</a>
 <div class="hidden md:flex items-center space-x-gutter">
 <a class="text-primary font-semibold border-b-2 border-primary pb-1 hover:text-primary transition-colors duration-200 active:scale-95 transition-transform font-body-md text-body-md" href="/ai-danisman">Danışman</a>
@@ -133,7 +133,7 @@
 <a class="text-on-surface-variant font-medium hover:text-primary transition-colors duration-200 active:scale-95 transition-transform font-body-md text-body-md" href="/ara">Karşılaştır</a>
 <a class="text-on-surface-variant font-medium hover:text-primary transition-colors duration-200 active:scale-95 transition-transform font-body-md text-body-md" href="/topluluk">Servisler</a>
 </div>
-<div class="flex items-center space-x-base">
+<div class="flex items-center space-x-base shrink-0">
 <button onclick="location.href='/topluluk'" class="text-on-surface-variant hover:text-primary transition-colors duration-200 p-2 rounded-full hover:bg-surface-container active:scale-95 transition-transform">
 <span class="material-symbols-outlined">notifications</span>
 </button>
@@ -147,7 +147,7 @@
 </div>
 </nav>
 <!-- Main Chat Interface -->
-<main class="flex-grow flex pt-16 h-screen overflow-hidden">
+<main class="flex-grow flex pt-16 min-h-screen overflow-x-hidden">
 <!-- Sidebar History -->
 <aside class="hidden md:flex flex-col w-80 border-r border-glass-border bg-surface-container-lowest/50 backdrop-blur-md">
 <div class="p-6">
@@ -194,27 +194,27 @@
 <div class="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-secondary-container/5"></div>
 </div>
 <!-- Scrollable Messages Area -->
-<div id="advisor-scroll" class="flex-1 overflow-y-auto p-4 md:p-margin-desktop space-y-section-gap relative z-10 scroll-smooth">
+<div id="advisor-scroll" class="flex-1 overflow-y-auto p-4 md:p-margin-desktop space-y-8 md:space-y-section-gap relative z-10 scroll-smooth">
 <div id="advisor-messages" class="max-w-4xl mx-auto space-y-12">
 <!-- AI Welcome -->
-<div class="flex items-start space-x-4">
+<div class="flex items-start gap-3 sm:space-x-4">
 <div class="w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center border border-primary/30 flex-shrink-0 mt-1">
 <span class="material-symbols-outlined text-primary">smart_toy</span>
 </div>
 <div class="flex-1">
-<div class="glass-panel p-6 rounded-2xl rounded-tl-sm inline-block max-w-[85%]">
+<div class="glass-panel p-4 sm:p-6 rounded-2xl rounded-tl-sm inline-block max-w-full sm:max-w-[85%]">
 <p class="text-on-surface font-body-lg text-body-lg mb-2">Merhaba. Ben Vasıtan, AI araç danışmanın.</p>
 <p class="text-on-surface-variant">Pazar verisi, telemetri ve sahiplik maliyetlerini analiz ederim. Bugün nasıl bir araç arıyoruz?</p>
 </div>
 </div>
 </div>
 <!-- User Query -->
-<div class="flex items-start space-x-4 flex-row-reverse space-x-reverse">
+<div class="flex items-start gap-3 sm:space-x-4 flex-row-reverse sm:space-x-reverse">
 <div class="w-10 h-10 rounded-full bg-surface-container-highest flex items-center justify-center border border-glass-border flex-shrink-0 mt-1 overflow-hidden">
 <img alt="User profile" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAPrvyhEErapd7gNAS1iyRRWCIcYF_nf6hJ3xsq8RTowvefb8DS2K3Bpoqgu3spPjRftXx2_p70n-g45MChVgKOOewzF1w9tTHQrgOp3qjY0IolSTKwu0Ipy7cHdHlDqucEtwuljHiIIJvdpuD9x3PnH6fjTnyQ1nAILuiHRAZSJgD1DEWMFDARPJ64aqJttaziQqGGqKhsLfJKVAAKdHC5Mzvr4yrBJXAP9T_Qk0ClGk6d9mwmuU5PXLlmYIiWu2gn76-Q5BZ5v8s"/>
 </div>
 <div class="flex-1 flex justify-end">
-<div class="bg-primary-container/10 border border-primary/20 p-5 rounded-2xl rounded-tr-sm inline-block max-w-[85%]">
+<div class="bg-primary-container/10 border border-primary/20 p-4 sm:p-5 rounded-2xl rounded-tr-sm inline-block max-w-full sm:max-w-[85%]">
 <p class="text-on-surface">4 kişilik aileye uygun bir araç arıyorum. Bütçem yaklaşık 1.5M TL. İş yerinde şarj imkanım olduğu için EV öncelikli; çok avantajlıysa verimli hibritlere de açığım.</p>
 </div>
 </div>
@@ -227,19 +227,19 @@
 </div>
 </div>
 <!-- AI Response & Recommendations -->
-<div class="flex items-start space-x-4">
+<div class="flex items-start gap-3 sm:space-x-4">
 <div class="w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center border border-primary/30 flex-shrink-0 mt-1">
 <span class="material-symbols-outlined text-primary">smart_toy</span>
 </div>
-<div class="flex-1 w-full max-w-[calc(100%-3rem)]">
-<div class="glass-panel p-6 rounded-2xl rounded-tl-sm mb-6 inline-block">
+<div class="flex-1 w-full min-w-0 sm:max-w-[calc(100%-3rem)]">
+<div class="glass-panel p-4 sm:p-6 rounded-2xl rounded-tl-sm mb-6 inline-block">
 <p class="text-on-surface mb-4">Kriterlerine göre pazarı filtreledim: ~1.5M TL bütçe, 4+ kişi, öncelik EV. Elektrikli SUV’lar aile kullanımı ve şarj erişiminle en iyi uyumu veriyor.</p>
 <p class="text-on-surface-variant">Toplam sahiplik maliyeti ve güvenlik skoruna göre en güçlü 3 eşleşme:</p>
 </div>
 <!-- Horizontal Scrolling Recommendations (Bento-ish row) -->
-<div class="flex overflow-x-auto pb-8 -mx-4 px-4 md:mx-0 md:px-0 space-x-6 hide-scrollbar w-full">
+<div class="flex overflow-x-auto pb-8 -mx-4 px-4 md:mx-0 md:px-0 gap-4 sm:gap-6 hide-scrollbar w-full snap-x">
 <!-- Card 1: Tesla Model Y -->
-<div class="glass-panel rounded-xl overflow-hidden min-w-[320px] max-w-[320px] flex-shrink-0 flex flex-col group hover:border-primary/50 transition-colors duration-300">
+<div class="glass-panel rounded-xl overflow-hidden w-[calc(100vw-2rem)] max-w-[calc(100vw-2rem)] sm:w-[320px] sm:min-w-[320px] sm:max-w-[320px] flex-shrink-0 flex flex-col group hover:border-primary/50 transition-colors duration-300 snap-start">
 <div class="h-40 bg-surface-container relative overflow-hidden">
 <div class="absolute top-3 left-3 bg-surface/80 backdrop-blur-md px-2 py-1 rounded-md border border-glass-border z-10 flex items-center space-x-1">
 <span class="material-symbols-outlined text-primary text-[14px]">bolt</span>
@@ -275,7 +275,7 @@
 </div>
 </div>
 <!-- Card 2: Hyundai Ioniq 5 -->
-<div class="glass-panel rounded-xl overflow-hidden min-w-[320px] max-w-[320px] flex-shrink-0 flex flex-col group hover:border-primary/50 transition-colors duration-300">
+<div class="glass-panel rounded-xl overflow-hidden w-[calc(100vw-2rem)] max-w-[calc(100vw-2rem)] sm:w-[320px] sm:min-w-[320px] sm:max-w-[320px] flex-shrink-0 flex flex-col group hover:border-primary/50 transition-colors duration-300 snap-start">
 <div class="h-40 bg-surface-container relative overflow-hidden">
 <div class="absolute top-3 left-3 bg-surface/80 backdrop-blur-md px-2 py-1 rounded-md border border-glass-border z-10 flex items-center space-x-1">
 <span class="material-symbols-outlined text-primary text-[14px]">bolt</span>
@@ -311,7 +311,7 @@
 </div>
 </div>
 <!-- Card 3: Volvo XC40 -->
-<div class="glass-panel rounded-xl overflow-hidden min-w-[320px] max-w-[320px] flex-shrink-0 flex flex-col group hover:border-primary/50 transition-colors duration-300">
+<div class="glass-panel rounded-xl overflow-hidden w-[calc(100vw-2rem)] max-w-[calc(100vw-2rem)] sm:w-[320px] sm:min-w-[320px] sm:max-w-[320px] flex-shrink-0 flex flex-col group hover:border-primary/50 transition-colors duration-300 snap-start">
 <div class="h-40 bg-surface-container relative overflow-hidden">
 <div class="absolute top-3 left-3 bg-surface/80 backdrop-blur-md px-2 py-1 rounded-md border border-glass-border z-10 flex items-center space-x-1">
 <span class="material-symbols-outlined text-primary text-[14px]">bolt</span>
@@ -371,7 +371,7 @@
                         </button>
 </div>
 <!-- Search Input Component -->
-<div class="relative flex items-end bg-surface-container-high/40 backdrop-blur-[30px] border border-glass-border rounded-[24px] p-2 focus-within:shadow-[inset_0_0_20px_rgba(137,206,255,0.1)] focus-within:border-primary/50 transition-all duration-300">
+<div class="relative flex items-end bg-surface-container-high/40 backdrop-blur-[30px] border border-glass-border rounded-[24px] p-2 focus-within:shadow-[inset_0_0_20px_rgba(137,206,255,0.1)] focus-within:border-primary/50 transition-all duration-300 max-w-full">
 <button onclick="location.href='/ai-danisman'" class="p-3 text-on-surface-variant hover:text-primary transition-colors rounded-full">
 <span class="material-symbols-outlined">attach_file</span>
 </button>
@@ -414,8 +414,8 @@
                 var row = document.createElement("div");
                 var isUser = role === "user";
                 row.className = isUser
-                    ? "flex items-start space-x-4 flex-row-reverse space-x-reverse"
-                    : "flex items-start space-x-4";
+                    ? "flex items-start gap-3 sm:space-x-4 flex-row-reverse sm:space-x-reverse"
+                    : "flex items-start gap-3 sm:space-x-4";
 
                 var avatar = document.createElement("div");
                 avatar.className = isUser
@@ -432,8 +432,8 @@
 
                 var bubble = document.createElement("div");
                 bubble.className = isUser
-                    ? "bg-primary-container/10 border border-primary/20 p-5 rounded-2xl rounded-tr-sm inline-block max-w-[85%]"
-                    : "glass-panel p-6 rounded-2xl rounded-tl-sm inline-block max-w-[85%]";
+                    ? "bg-primary-container/10 border border-primary/20 p-4 sm:p-5 rounded-2xl rounded-tr-sm inline-block max-w-full sm:max-w-[85%]"
+                    : "glass-panel p-4 sm:p-6 rounded-2xl rounded-tl-sm inline-block max-w-full sm:max-w-[85%]";
 
                 var paragraph = document.createElement("p");
                 paragraph.className = "text-on-surface whitespace-pre-line";
@@ -509,7 +509,7 @@
     </script>
 <!-- Footer Component -->
 <footer class="w-full py-12 border-t border-glass-border bg-surface-container-lowest text-secondary font-label-caps text-label-caps flat no shadows">
-<div class="flex flex-col md:flex-row justify-between items-center px-margin-desktop max-w-container-max-width mx-auto gap-base">
+<div class="flex flex-col md:flex-row justify-between items-center px-margin-mobile md:px-margin-desktop max-w-container-max-width mx-auto gap-base text-center md:text-left">
 <div class="font-headline-md text-headline-md text-on-surface mb-4 md:mb-0">
                 Vasıtan
             </div>

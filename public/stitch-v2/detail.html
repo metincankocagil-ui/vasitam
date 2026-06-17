@@ -117,10 +117,10 @@
 <script src="/stitch-v2/theme.js"></script>
 <script src="/stitch-v2/demo-listings.js"></script>
 </head>
-<body class="bg-background text-on-background min-h-screen font-body-md">
+<body class="bg-background text-on-background min-h-screen font-body-md overflow-x-hidden">
 <!-- TopNavBar -->
 <nav class="fixed top-0 w-full bg-surface/80 dark:bg-surface/80 backdrop-blur-xl border-b border-glass-border shadow-sm z-50">
-<div class="flex justify-between items-center px-margin-desktop py-4 max-w-container-max-width mx-auto">
+<div class="flex justify-between items-center gap-3 px-margin-mobile md:px-margin-desktop py-4 max-w-container-max-width mx-auto">
 <a class="font-display-hero text-headline-md tracking-tighter text-primary dark:text-primary" href="/" target="_top">
                 Vasıtan
             </a>
@@ -130,7 +130,7 @@
 <a class="text-on-surface-variant hover:text-primary transition-colors hover:scale-105 transition-transform duration-200 active:scale-95" href="/ai-danisman">Akıllı Analiz</a>
 <a class="text-on-surface-variant hover:text-primary transition-colors hover:scale-105 transition-transform duration-200 active:scale-95" href="/garajim">Lojistik</a>
 </div>
-<div class="flex space-x-4">
+<div class="flex space-x-2 sm:space-x-4 shrink-0">
 <button data-theme-toggle type="button" class="text-on-surface-variant hover:text-primary transition-colors hover:scale-105 transition-transform duration-200 active:scale-95">
 <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">language</span>
 </button>
@@ -143,32 +143,32 @@
 </div>
 </div>
 </nav>
-<main class="pt-[100px] pb-section-gap px-margin-mobile md:px-margin-desktop max-w-container-max-width mx-auto">
+<main class="pt-20 md:pt-[100px] pb-section-gap px-margin-mobile md:px-margin-desktop max-w-container-max-width mx-auto overflow-x-hidden">
 <section class="grid grid-cols-1 lg:grid-cols-12 gap-gutter mb-10">
 <div class="lg:col-span-8 space-y-4">
-<div class="relative h-[360px] md:h-[560px] rounded-xl overflow-hidden glass-panel">
+<div class="relative h-[260px] sm:h-[360px] md:h-[560px] rounded-xl overflow-hidden glass-panel">
 <img id="detail-hero-image" alt="İlan görseli" class="absolute inset-0 w-full h-full object-cover" src=""/>
-<div class="absolute top-4 left-4 flex flex-wrap gap-2">
+<div class="absolute top-3 sm:top-4 left-3 sm:left-4 right-3 sm:right-auto flex flex-wrap gap-2">
 <span id="detail-listing-code" class="px-3 py-1 rounded-full bg-surface/80 border border-glass-border text-primary font-mono-data text-xs">İlan No</span>
 <span id="detail-location" class="px-3 py-1 rounded-full bg-surface/80 border border-glass-border text-on-surface-variant font-mono-data text-xs">Konum</span>
 </div>
 <div class="absolute top-4 right-4">
 <span id="detail-image-label" class="hidden px-3 py-1 rounded-full bg-surface/80 border border-glass-border text-on-surface-variant font-mono-data text-xs">Temsili görsel</span>
 </div>
-<div class="absolute bottom-0 left-0 w-full p-5 bg-gradient-to-t from-background via-background/70 to-transparent">
+<div class="absolute bottom-0 left-0 w-full p-3 sm:p-5 bg-gradient-to-t from-background via-background/70 to-transparent">
 <div id="detail-thumbnails" class="flex gap-2 overflow-x-auto pb-1"></div>
 </div>
 </div>
 <div class="glass-panel rounded-xl p-5">
 <h1 id="detail-title" class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-surface mb-3">İlan başlığı</h1>
-<div class="grid grid-cols-2 md:grid-cols-5 gap-3" id="detail-quick-stats"></div>
+<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-3" id="detail-quick-stats"></div>
 </div>
 </div>
 <aside class="lg:col-span-4 flex flex-col gap-gutter">
 <div class="glass-panel p-6 rounded-xl">
 <div class="font-label-caps text-label-caps text-slate-gray mb-2">FİYAT</div>
 <div id="detail-price" class="font-display-hero text-headline-md text-primary">0 TL</div>
-<div class="grid grid-cols-2 gap-3 mt-5">
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-5">
 <div class="rounded-lg bg-surface-container-high/50 border border-glass-border p-3">
 <div class="font-label-caps text-label-caps text-slate-gray">AI SKOR</div>
 <div id="detail-ai-score" class="font-headline-md text-headline-md text-primary">0</div>
@@ -184,19 +184,19 @@
 </section>
 <section class="grid grid-cols-1 lg:grid-cols-12 gap-gutter">
 <div class="lg:col-span-8 space-y-gutter">
-<section class="glass-panel p-6 rounded-xl">
+<section class="glass-panel p-4 sm:p-6 rounded-xl">
 <h2 class="font-headline-md text-headline-md text-on-surface mb-5">Teknik Özellikler</h2>
 <div id="technical-specs" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3"></div>
 </section>
-<section class="glass-panel p-6 rounded-xl">
+<section class="glass-panel p-4 sm:p-6 rounded-xl">
 <h2 class="font-headline-md text-headline-md text-on-surface mb-5">Ekspertiz Durumu</h2>
 <div id="expertise-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3"></div>
 </section>
-<section class="glass-panel p-6 rounded-xl">
+<section class="glass-panel p-4 sm:p-6 rounded-xl">
 <h2 class="font-headline-md text-headline-md text-on-surface mb-5">Donanım Özellikleri</h2>
-<div id="features-grid" class="flex flex-wrap gap-2"></div>
+<div id="features-grid" class="flex flex-wrap gap-2 min-w-0"></div>
 </section>
-<section class="glass-panel p-6 rounded-xl ai-glow">
+<section class="glass-panel p-4 sm:p-6 rounded-xl ai-glow">
 <div class="flex items-center gap-2 mb-5">
 <span class="material-symbols-outlined text-primary">smart_toy</span>
 <h2 class="font-headline-md text-headline-md text-on-surface">AI Değerlendirmesi</h2>
@@ -217,8 +217,8 @@
 </aside>
 </section>
 </main>
-<div id="message-modal" class="fixed inset-0 z-[80] hidden items-center justify-center bg-surface-dark/70 backdrop-blur-sm px-4">
-<div class="glass-panel rounded-xl p-6 w-full max-w-lg">
+<div id="message-modal" class="fixed inset-0 z-[80] hidden items-center justify-center bg-surface-dark/70 backdrop-blur-sm px-4 py-4">
+<div class="glass-panel rounded-xl p-4 sm:p-6 w-full max-w-lg max-h-[calc(100vh-2rem)] overflow-y-auto">
 <div class="flex items-start justify-between gap-4 mb-4">
 <div>
 <div class="font-label-caps text-label-caps text-primary">MESAJ GÖNDER</div>
@@ -231,15 +231,15 @@
 <div id="message-suggestions" class="flex flex-wrap gap-2 mb-4"></div>
 <textarea id="seller-message-input" class="w-full min-h-[120px] rounded-lg bg-surface-container-high border border-glass-border text-on-surface resize-none" placeholder="Mesajınızı yazın..."></textarea>
 <div id="message-status" class="hidden mt-3 text-sm text-primary"></div>
-<div class="flex justify-end gap-3 mt-5">
-<button id="cancel-message-box" class="px-4 py-2 rounded-lg border border-glass-border text-on-surface-variant hover:text-on-surface">Kapat</button>
-<button id="send-seller-message" class="px-4 py-2 rounded-lg bg-primary text-on-primary">Gönder</button>
+<div class="flex flex-col sm:flex-row sm:justify-end gap-3 mt-5">
+<button id="cancel-message-box" class="w-full sm:w-auto px-4 py-2 rounded-lg border border-glass-border text-on-surface-variant hover:text-on-surface">Kapat</button>
+<button id="send-seller-message" class="w-full sm:w-auto px-4 py-2 rounded-lg bg-primary text-on-primary">Gönder</button>
 </div>
 </div>
 </div>
 <!-- Footer -->
 <footer class="w-full mt-section-gap bg-surface-container-lowest dark:bg-surface-container-lowest border-t border-glass-border">
-<div class="grid grid-cols-1 md:grid-cols-4 gap-gutter px-margin-desktop py-section-gap max-w-container-max-width mx-auto">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-gutter px-margin-mobile md:px-margin-desktop py-section-gap max-w-container-max-width mx-auto">
 <div>
 <div class="font-display-hero text-headline-md text-primary mb-4">Vasıtan</div>
 <div class="font-body-md text-body-md text-slate-gray">

@@ -125,9 +125,9 @@
 <link href="/stitch-v2/theme.css" rel="stylesheet"/>
 <script src="/stitch-v2/theme.js"></script>
 </head>
-<body class="bg-background text-on-background font-body-md min-h-screen flex flex-col">
+<body class="bg-background text-on-background font-body-md min-h-screen flex flex-col overflow-x-hidden">
 <!-- TopNavBar -->
-<nav class="fixed top-0 w-full z-50 flex justify-between items-center px-margin-desktop h-16 bg-surface/80 backdrop-blur-xl border-b border-glass-border shadow-sm transition-all duration-200">
+<nav class="fixed top-0 w-full z-50 flex justify-between items-center gap-3 px-margin-mobile md:px-margin-desktop h-16 bg-surface/80 backdrop-blur-xl border-b border-glass-border shadow-sm transition-all duration-200">
 <div class="flex items-center gap-4">
 <a class="font-headline-md text-headline-md font-bold text-primary" href="/" target="_top">Vasıtan Wiki</a>
 </div>
@@ -137,8 +137,8 @@
 <a class="text-on-surface-variant hover:text-primary transition-colors font-body-md text-body-md" href="/arac-wiki">Teknik Veri</a>
 <a class="text-on-surface-variant hover:text-primary transition-colors font-body-md text-body-md" href="/arac-wiki">Sözlük</a>
 </div>
-<div class="flex items-center gap-4">
-<div class="relative w-64 ai-input rounded-full px-4 py-2 flex items-center transition-all duration-200">
+<div class="flex items-center gap-2 sm:gap-4 shrink-0">
+<div class="relative w-64 ai-input rounded-full px-4 py-2 hidden lg:flex items-center transition-all duration-200">
 <span class="material-symbols-outlined text-slate-gray mr-2 text-sm">search</span>
 <input class="bg-transparent border-none outline-none text-on-surface w-full font-body-md text-sm placeholder-slate-gray focus:ring-0" placeholder="Teknik veri ara..." type="text"/>
 </div>
@@ -195,7 +195,7 @@
 <!-- 1. HERO OVERVIEW -->
 <section class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
 <div class="lg:col-span-7 flex flex-col gap-6">
-<h1 class="font-display-hero text-display-hero text-on-surface">BMW 3 Series (G20)</h1>
+<h1 class="font-display-hero text-headline-lg-mobile md:text-display-hero text-on-surface">BMW 3 Series (G20)</h1>
 <div class="glass-panel p-6 rounded-xl relative overflow-hidden group">
 <div class="absolute inset-0 bg-primary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
 <div class="flex items-start gap-4">
@@ -210,7 +210,7 @@
 </div>
 </div>
 </div>
-<div class="grid grid-cols-3 gap-4">
+<div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
 <div class="glass-panel p-4 rounded-lg flex flex-col items-center justify-center text-center">
 <span class="material-symbols-outlined text-slate-gray mb-2">date_range</span>
 <span class="font-label-caps text-label-caps text-on-surface-variant mb-1">Üretim</span>
@@ -228,7 +228,7 @@
 </div>
 </div>
 </div>
-<div class="lg:col-span-5 h-[400px] rounded-xl overflow-hidden glass-panel relative group">
+<div class="lg:col-span-5 h-[260px] md:h-[400px] rounded-xl overflow-hidden glass-panel relative group">
 <img alt="BMW 3 Series G20 front quarter view" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="A striking digital render of a modern luxury sedan in a dark, moody studio environment. The vehicle is finished in a metallic deep blue, illuminated by thin, technical light strips that highlight its aggressive body lines and aerodynamic profile. The setting is minimal, echoing a high-tech laboratory or aerospace facility, with a floor made of polished black glass reflecting the car. The lighting creates a high-contrast, technical aesthetic emphasizing precision engineering." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAHrpfFwujogkHOWLWsyOg7UExOZjke6_Qz3yUm0xuyGj_62hRIfiUXxzP64BolY7lDLJdLsWmjx68D8LP6cFxtsBhu1UbyLIwZOKNJaTm0tAfJ6zVMmb8Zqp0DaM5qMryDbfFHIk8sBdfhwIuwrnkx4Xt-eAz6bsvwneKU1FPj3tEkK81UFYkYM19vpaqhQPs0oamIh2Nsuwtv0K8ANeRO72GuYaBcYghs56B3pl8mTvmfMczpqUQRO9T00F3rLnMaxPIW3RfG8oE"/>
 <div class="absolute inset-0 bg-gradient-to-t from-surface-dark via-transparent to-transparent opacity-80"></div>
 </div>
