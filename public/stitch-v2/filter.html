@@ -109,9 +109,72 @@
             backdrop-filter: blur(20px);
             border: 1px solid rgba(255, 255, 255, 0.1);
         }
+        .velocity-shell {
+            background:
+                radial-gradient(circle at 54% -10%, rgba(137, 206, 255, 0.18), transparent 32rem),
+                radial-gradient(circle at 88% 12%, rgba(168, 85, 247, 0.2), transparent 30rem),
+                radial-gradient(circle at 6% 32%, rgba(14, 165, 233, 0.12), transparent 24rem),
+                linear-gradient(180deg, #05070d 0%, #0b1326 44%, #060e20 100%);
+        }
+        .glass-panel-velocity {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.13), rgba(255, 255, 255, 0.045));
+            backdrop-filter: blur(28px);
+            -webkit-backdrop-filter: blur(28px);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.12), 0 28px 70px rgba(0, 0, 0, 0.24);
+        }
+        .filter-control {
+            background: rgba(6, 14, 32, 0.72) !important;
+            border-color: rgba(255, 255, 255, 0.1) !important;
+            border-radius: 14px !important;
+        }
+        .filter-control:focus {
+            border-color: rgba(137, 206, 255, 0.52) !important;
+            box-shadow: 0 0 0 1px rgba(137, 206, 255, 0.25), 0 0 22px rgba(137, 206, 255, 0.12) !important;
+        }
+        .filter-section-title {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #89ceff;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+        }
+        .filter-section-title::before {
+            content: "";
+            width: 6px;
+            height: 6px;
+            border-radius: 9999px;
+            background: #89ceff;
+            box-shadow: 0 0 16px rgba(137, 206, 255, 0.85);
+        }
+        .result-shell {
+            background:
+                linear-gradient(135deg, rgba(137, 206, 255, 0.1), rgba(192, 193, 255, 0.04)),
+                rgba(11, 19, 38, 0.62);
+            backdrop-filter: blur(22px);
+            -webkit-backdrop-filter: blur(22px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
         .ai-glow:focus-within {
-            box-shadow: inset 0 0 20px rgba(137, 206, 255, 0.2), 0 0 30px rgba(137, 206, 255, 0.1);
+            box-shadow: inset 0 0 28px rgba(137, 206, 255, 0.18), 0 0 55px rgba(137, 206, 255, 0.18);
             border-color: rgba(137, 206, 255, 0.5);
+        }
+        html.light .velocity-shell {
+            background:
+                radial-gradient(circle at 50% 0%, rgba(31, 188, 245, 0.17), transparent 32rem),
+                radial-gradient(circle at 88% 12%, rgba(168, 85, 247, 0.11), transparent 28rem),
+                linear-gradient(180deg, #f8fafc 0%, #eef4ff 46%, #f8fafc 100%);
+        }
+        html.light .glass-panel-velocity,
+        html.light .result-shell {
+            background: rgba(255, 255, 255, 0.84);
+            border-color: rgba(15, 23, 42, 0.12);
+            box-shadow: 0 20px 50px rgba(15, 23, 42, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.85);
+        }
+        html.light .filter-control {
+            background: rgba(255, 255, 255, 0.92) !important;
+            border-color: rgba(15, 23, 42, 0.12) !important;
         }
         
         /* Custom Scrollbar for sleek technical look */
@@ -134,12 +197,15 @@
 <script src="/stitch-v2/theme.js"></script>
 <script src="/stitch-v2/demo-listings.js"></script>
 </head>
-<body class="bg-background text-on-background min-h-screen font-body-md text-body-md overflow-x-hidden">
+<body class="velocity-shell bg-background text-on-background min-h-screen font-body-md text-body-md overflow-x-hidden">
 <!-- TopNavBar -->
-<header class="fixed top-0 left-0 w-full z-50 flex justify-between items-center gap-3 px-margin-mobile md:px-gutter h-16 bg-background/80 backdrop-blur-md border-b border-glass-border">
+<header class="fixed top-0 left-0 w-full z-50 flex justify-between items-center gap-3 px-margin-mobile md:px-gutter h-16 bg-background/70 backdrop-blur-xl border-b border-white/10">
 <div class="flex items-center gap-2 sm:gap-4 min-w-0">
-<a class="font-display-hero text-[24px] font-bold text-primary tracking-tighter leading-none" href="/" target="_top">Vasıtan</a>
-<span class="hidden sm:inline-flex font-label-caps text-label-caps text-on-surface-variant border border-glass-border rounded-full px-2 py-0.5 sm:ml-2">ANALİZ</span>
+<a class="font-display-hero text-[24px] font-bold text-primary tracking-tighter leading-none flex items-center gap-2" href="/" target="_top">
+<span class="inline-flex h-2.5 w-2.5 rounded-full bg-primary shadow-[0_0_18px_rgba(137,206,255,0.8)]"></span>
+<span>Vasıtan</span>
+</a>
+<span class="hidden sm:inline-flex font-label-caps text-label-caps text-primary border border-primary/30 rounded-full px-2 py-0.5 sm:ml-2 bg-primary/10">INTELLIGENCE</span>
 </div>
 <!-- Center Nav Items (Hidden on mobile) -->
 <nav class="hidden md:flex items-center gap-8">
@@ -163,7 +229,7 @@
 </div>
 </header>
 <!-- SideNavBar (Desktop only, fixed left) -->
-<aside class="hidden lg:flex flex-col h-screen fixed left-0 top-0 pt-20 pb-8 px-4 bg-surface-container-low/50 backdrop-blur-xl border-r border-glass-border w-64 z-40 translate-x-1 duration-300">
+<aside class="hidden lg:flex flex-col h-screen fixed left-0 top-0 pt-20 pb-8 px-4 bg-surface-container-low/40 backdrop-blur-xl border-r border-white/10 w-64 z-40 translate-x-1 duration-300">
 <div class="mb-8 px-4">
 <a class="font-headline-md text-primary font-bold text-[20px]" href="/" target="_top">Vasıtan</a>
 <div class="text-on-surface-variant text-[12px]">Araç Zekası</div>
@@ -208,18 +274,23 @@
 </div>
 </aside>
 <!-- Main Content Area -->
-<main class="pt-20 md:pt-24 pb-12 lg:pl-64 px-margin-mobile md:px-gutter max-w-container-max-width mx-auto flex flex-col gap-section-gap overflow-x-hidden">
+<main class="pt-20 md:pt-24 pb-12 lg:pl-64 px-margin-mobile md:px-gutter max-w-container-max-width mx-auto flex flex-col gap-10 md:gap-section-gap overflow-x-hidden">
 <!-- Hero AI Command Bar -->
-<section class="flex flex-col items-center justify-center pt-8 pb-4">
-<h1 class="font-headline-lg text-headline-lg text-on-surface mb-8 text-center hidden md:block">Araç Zekası Çerçevesi</h1>
-<div class="w-full max-w-3xl relative">
+<section class="relative flex flex-col items-center justify-center pt-8 pb-4 overflow-hidden">
+<div class="absolute left-1/2 top-0 h-72 w-72 -translate-x-1/2 rounded-full bg-primary/15 blur-3xl pointer-events-none"></div>
+<div class="relative z-10 mb-4 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.06] px-4 py-2 text-xs font-semibold uppercase tracking-[0.18em] text-primary">
+<span class="h-1.5 w-1.5 rounded-full bg-primary animate-pulse"></span>
+<span>Vasıtan Search OS</span>
+</div>
+<h1 class="relative z-10 font-display-hero text-[34px] leading-tight md:text-headline-lg text-on-surface mb-6 text-center">AI ile ara, filtrele, güven skoruyla karar ver.</h1>
+<div class="w-full max-w-4xl relative z-10">
 <!-- AI Search Input -->
-<div class="glass-panel rounded-2xl sm:rounded-full p-2 flex flex-col sm:flex-row sm:items-center gap-3 border border-outline-variant/50 ai-glow transition-all duration-300">
+<div class="glass-panel-velocity rounded-[28px] sm:rounded-full p-2 flex flex-col sm:flex-row sm:items-center gap-3 ai-glow transition-all duration-300">
 <div class="pl-4 text-primary">
 <span class="material-symbols-outlined animate-pulse" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
 </div>
-<input class="w-full bg-transparent border-none focus:ring-0 text-on-surface placeholder-on-surface-variant/50 font-body-lg text-base sm:text-body-lg" placeholder="Örn. 'Boyasız, otomatik, 50 bin altı Tramer, aileye uygun'" type="text"/>
-<button onclick="location.href='/ara'" class="w-full sm:w-auto bg-primary text-on-primary rounded-full px-6 py-3 font-medium hover:scale-105 transition-transform flex items-center justify-center gap-2">
+<input id="smart-search-input" class="w-full bg-transparent border-none focus:ring-0 text-on-surface placeholder-on-surface-variant/50 font-body-lg text-base sm:text-body-lg" placeholder="AI ile ara veya 6 haneli ilan no yaz" type="text"/>
+<button id="smart-search-button" type="button" class="w-full sm:w-auto bg-gradient-to-r from-primary to-secondary-fixed text-on-primary rounded-full px-6 py-3 font-medium hover:brightness-110 transition-transform flex items-center justify-center gap-2 shadow-[0_0_28px_rgba(137,206,255,0.22)]">
 <span>Analiz Et</span>
 <span class="material-symbols-outlined text-[20px]">arrow_forward</span>
 </button>
@@ -246,7 +317,7 @@
 </div>
 </section>
 <!-- Main Layout: Sidebar Filters + Smart Results -->
-<button id="mobile-filter-toggle" type="button" class="lg:hidden glass-panel rounded-lg px-4 py-3 text-primary font-medium flex items-center justify-center gap-2">
+<button id="mobile-filter-toggle" type="button" class="lg:hidden glass-panel-velocity rounded-2xl px-4 py-3 text-primary font-medium flex items-center justify-center gap-2">
 <span class="material-symbols-outlined text-[18px]">tune</span>
 <span>Filtreleri Aç</span>
 </button>
@@ -254,52 +325,52 @@
 <!-- Left Column: Technical Filters -->
 <div id="filter-panel" class="lg:col-span-3 space-y-6 hidden lg:block">
 <div class="flex items-center justify-between mb-4">
-<h2 class="font-label-caps text-label-caps text-on-surface-variant">PARAMETRELER</h2>
+<h2 class="font-label-caps text-label-caps text-primary tracking-[0.18em]">FİLTRE PANELİ</h2>
 <button id="reset-filters" type="button" class="text-primary text-[12px] font-medium hover:underline">Sıfırla</button>
 </div>
-<div class="glass-panel rounded-xl p-5 space-y-6">
+<div class="glass-panel-velocity rounded-[24px] p-5 space-y-6 lg:sticky lg:top-24 lg:max-h-[calc(100vh-7rem)] lg:overflow-y-auto">
 <div id="active-filters" class="hidden flex flex-wrap gap-2"></div>
 <div class="space-y-3">
-<label class="font-label-caps text-label-caps text-on-surface block">Temel Filtreler</label>
-<select data-filter="category" class="w-full rounded-lg bg-surface-container-high border border-glass-border text-on-surface text-[13px]">
+<label class="filter-section-title font-label-caps text-label-caps block">Temel Bilgiler</label>
+<select data-filter="category" class="filter-control w-full rounded-lg bg-surface-container-high border border-glass-border text-on-surface text-[13px]">
 <option value="">Tüm Kategoriler</option>
 </select>
-<select data-filter="brand" class="w-full rounded-lg bg-surface-container-high border border-glass-border text-on-surface text-[13px]"><option value="">Marka</option></select>
-<select data-filter="model" class="w-full rounded-lg bg-surface-container-high border border-glass-border text-on-surface text-[13px]"><option value="">Model</option></select>
-<input data-filter="package" class="w-full rounded-lg bg-surface-container-high border border-glass-border text-on-surface text-[13px]" placeholder="Paket / Donanım" type="text"/>
+<select data-filter="brand" class="filter-control w-full rounded-lg bg-surface-container-high border border-glass-border text-on-surface text-[13px]"><option value="">Marka</option></select>
+<select data-filter="model" class="filter-control w-full rounded-lg bg-surface-container-high border border-glass-border text-on-surface text-[13px]"><option value="">Model</option></select>
+<input data-filter="package" class="filter-control w-full rounded-lg bg-surface-container-high border border-glass-border text-on-surface text-[13px]" placeholder="Paket / Donanım" type="text"/>
 <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
-<input data-filter="yearMin" class="rounded-lg bg-surface-container-high border border-glass-border text-on-surface text-[13px]" placeholder="Yıl min" type="number"/>
-<input data-filter="yearMax" class="rounded-lg bg-surface-container-high border border-glass-border text-on-surface text-[13px]" placeholder="Yıl max" type="number"/>
-<input data-filter="priceMin" class="rounded-lg bg-surface-container-high border border-glass-border text-on-surface text-[13px]" placeholder="Fiyat min" type="number"/>
-<input data-filter="priceMax" class="rounded-lg bg-surface-container-high border border-glass-border text-on-surface text-[13px]" placeholder="Fiyat max" type="number"/>
-<input data-filter="kmMin" class="rounded-lg bg-surface-container-high border border-glass-border text-on-surface text-[13px]" placeholder="KM min" type="number"/>
-<input data-filter="kmMax" class="rounded-lg bg-surface-container-high border border-glass-border text-on-surface text-[13px]" placeholder="KM max" type="number"/>
+<input data-filter="yearMin" class="filter-control rounded-lg bg-surface-container-high border border-glass-border text-on-surface text-[13px]" placeholder="Yıl min" type="number"/>
+<input data-filter="yearMax" class="filter-control rounded-lg bg-surface-container-high border border-glass-border text-on-surface text-[13px]" placeholder="Yıl max" type="number"/>
+<input data-filter="priceMin" class="filter-control rounded-lg bg-surface-container-high border border-glass-border text-on-surface text-[13px]" placeholder="Fiyat min" type="number"/>
+<input data-filter="priceMax" class="filter-control rounded-lg bg-surface-container-high border border-glass-border text-on-surface text-[13px]" placeholder="Fiyat max" type="number"/>
+<input data-filter="kmMin" class="filter-control rounded-lg bg-surface-container-high border border-glass-border text-on-surface text-[13px]" placeholder="KM min" type="number"/>
+<input data-filter="kmMax" class="filter-control rounded-lg bg-surface-container-high border border-glass-border text-on-surface text-[13px]" placeholder="KM max" type="number"/>
 </div>
-<select data-filter="city" class="w-full rounded-lg bg-surface-container-high border border-glass-border text-on-surface text-[13px]"><option value="">Şehir</option></select>
-<select data-filter="district" class="w-full rounded-lg bg-surface-container-high border border-glass-border text-on-surface text-[13px]"><option value="">İlçe</option></select>
-<select data-filter="sellerType" class="w-full rounded-lg bg-surface-container-high border border-glass-border text-on-surface text-[13px]"><option value="">Satıcı Tipi</option></select>
+<select data-filter="city" class="filter-control w-full rounded-lg bg-surface-container-high border border-glass-border text-on-surface text-[13px]"><option value="">Şehir</option></select>
+<select data-filter="district" class="filter-control w-full rounded-lg bg-surface-container-high border border-glass-border text-on-surface text-[13px]"><option value="">İlçe</option></select>
+<select data-filter="sellerType" class="filter-control w-full rounded-lg bg-surface-container-high border border-glass-border text-on-surface text-[13px]"><option value="">Satıcı Tipi</option></select>
 </div>
 <div class="h-px w-full bg-glass-border"></div>
 <div class="space-y-3">
-<label class="font-label-caps text-label-caps text-on-surface block">Araç Teknik</label>
-<select data-filter="fuel" class="w-full rounded-lg bg-surface-container-high border border-glass-border text-on-surface text-[13px]"><option value="">Yakıt</option></select>
-<select data-filter="transmission" class="w-full rounded-lg bg-surface-container-high border border-glass-border text-on-surface text-[13px]"><option value="">Vites / Şanzıman</option></select>
-<select data-filter="bodyType" class="w-full rounded-lg bg-surface-container-high border border-glass-border text-on-surface text-[13px]"><option value="">Kasa Tipi</option></select>
-<select data-filter="drivetrain" class="w-full rounded-lg bg-surface-container-high border border-glass-border text-on-surface text-[13px]"><option value="">Aktarma</option></select>
-<select data-filter="color" class="w-full rounded-lg bg-surface-container-high border border-glass-border text-on-surface text-[13px]"><option value="">Renk</option></select>
+<label class="filter-section-title font-label-caps text-label-caps block">Teknik Özellikler</label>
+<select data-filter="fuel" class="filter-control w-full rounded-lg bg-surface-container-high border border-glass-border text-on-surface text-[13px]"><option value="">Yakıt</option></select>
+<select data-filter="transmission" class="filter-control w-full rounded-lg bg-surface-container-high border border-glass-border text-on-surface text-[13px]"><option value="">Vites / Şanzıman</option></select>
+<select data-filter="bodyType" class="filter-control w-full rounded-lg bg-surface-container-high border border-glass-border text-on-surface text-[13px]"><option value="">Kasa Tipi</option></select>
+<select data-filter="drivetrain" class="filter-control w-full rounded-lg bg-surface-container-high border border-glass-border text-on-surface text-[13px]"><option value="">Aktarma</option></select>
+<select data-filter="color" class="filter-control w-full rounded-lg bg-surface-container-high border border-glass-border text-on-surface text-[13px]"><option value="">Renk</option></select>
 <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
-<input data-filter="engineMin" class="rounded-lg bg-surface-container-high border border-glass-border text-on-surface text-[13px]" placeholder="Motor min" type="number" step="0.1"/>
-<input data-filter="engineMax" class="rounded-lg bg-surface-container-high border border-glass-border text-on-surface text-[13px]" placeholder="Motor max" type="number" step="0.1"/>
-<input data-filter="hpMin" class="rounded-lg bg-surface-container-high border border-glass-border text-on-surface text-[13px]" placeholder="HP min" type="number"/>
-<input data-filter="hpMax" class="rounded-lg bg-surface-container-high border border-glass-border text-on-surface text-[13px]" placeholder="HP max" type="number"/>
-<input data-filter="doors" class="rounded-lg bg-surface-container-high border border-glass-border text-on-surface text-[13px]" placeholder="Kapı" type="number"/>
-<input data-filter="seats" class="rounded-lg bg-surface-container-high border border-glass-border text-on-surface text-[13px]" placeholder="Koltuk" type="number"/>
+<input data-filter="engineMin" class="filter-control rounded-lg bg-surface-container-high border border-glass-border text-on-surface text-[13px]" placeholder="Motor min" type="number" step="0.1"/>
+<input data-filter="engineMax" class="filter-control rounded-lg bg-surface-container-high border border-glass-border text-on-surface text-[13px]" placeholder="Motor max" type="number" step="0.1"/>
+<input data-filter="hpMin" class="filter-control rounded-lg bg-surface-container-high border border-glass-border text-on-surface text-[13px]" placeholder="HP min" type="number"/>
+<input data-filter="hpMax" class="filter-control rounded-lg bg-surface-container-high border border-glass-border text-on-surface text-[13px]" placeholder="HP max" type="number"/>
+<input data-filter="doors" class="filter-control rounded-lg bg-surface-container-high border border-glass-border text-on-surface text-[13px]" placeholder="Kapı" type="number"/>
+<input data-filter="seats" class="filter-control rounded-lg bg-surface-container-high border border-glass-border text-on-surface text-[13px]" placeholder="Koltuk" type="number"/>
 </div>
 </div>
 <div class="h-px w-full bg-glass-border"></div>
 <div class="space-y-3">
-<label class="font-label-caps text-label-caps text-on-surface block">Hasar / Ekspertiz</label>
-<input data-filter="damageMax" class="w-full rounded-lg bg-surface-container-high border border-glass-border text-on-surface text-[13px]" placeholder="Tramer maksimum" type="number"/>
+<label class="filter-section-title font-label-caps text-label-caps block">Hasar / Ekspertiz</label>
+<input data-filter="damageMax" class="filter-control w-full rounded-lg bg-surface-container-high border border-glass-border text-on-surface text-[13px]" placeholder="Tramer maksimum" type="number"/>
 <div class="grid grid-cols-1 gap-2 text-[13px] text-on-surface-variant">
 <label class="flex items-center gap-2"><input data-filter="noDamage" class="form-checkbox h-4 w-4 text-primary bg-surface-dim border-outline-variant rounded" type="checkbox"/>Tramer yok</label>
 <label class="flex items-center gap-2"><input data-filter="noPaint" class="form-checkbox h-4 w-4 text-primary bg-surface-dim border-outline-variant rounded" type="checkbox"/>Boyasız araç</label>
@@ -317,15 +388,15 @@
 </div>
 <div class="h-px w-full bg-glass-border"></div>
 <div class="space-y-3">
-<label class="font-label-caps text-label-caps text-on-surface block">Donanım</label>
+<label class="filter-section-title font-label-caps text-label-caps block">Donanım</label>
 <div id="feature-filters" class="grid grid-cols-1 gap-2 text-[13px] text-on-surface-variant"></div>
 </div>
 <div class="h-px w-full bg-glass-border"></div>
 <div class="space-y-3">
-<label class="font-label-caps text-label-caps text-on-surface block">AI / Akıllı</label>
+<label class="filter-section-title font-label-caps text-label-caps block">AI Filtreleri</label>
 <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
-<input data-filter="aiMin" class="rounded-lg bg-surface-container-high border border-glass-border text-on-surface text-[13px]" placeholder="AI min" type="number"/>
-<input data-filter="trustMin" class="rounded-lg bg-surface-container-high border border-glass-border text-on-surface text-[13px]" placeholder="Güven min" type="number"/>
+<input data-filter="aiMin" class="filter-control rounded-lg bg-surface-container-high border border-glass-border text-on-surface text-[13px]" placeholder="AI min" type="number"/>
+<input data-filter="trustMin" class="filter-control rounded-lg bg-surface-container-high border border-glass-border text-on-surface text-[13px]" placeholder="Güven min" type="number"/>
 </div>
 <div class="grid grid-cols-1 gap-2 text-[13px] text-on-surface-variant">
 <label class="flex items-center gap-2"><input data-filter="family" class="form-checkbox h-4 w-4 text-primary bg-surface-dim border-outline-variant rounded" type="checkbox"/>Aileye uygun</label>
@@ -344,14 +415,15 @@
 </div>
 <!-- Right Column: Smart Results Dashboard -->
 <div class="lg:col-span-9 space-y-4">
-<div class="flex flex-col gap-3 mb-4">
+<div class="result-shell rounded-[24px] p-4 md:p-5 flex flex-col gap-4 mb-4">
 <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-3">
 <div>
-<h2 class="font-label-caps text-label-caps text-on-surface-variant" id="listing-count">AKILLI SONUÇLAR (50 İLAN)</h2>
-<div class="text-[12px] text-primary mt-1" id="active-category">Tüm kategoriler</div>
+<div class="font-label-caps text-label-caps text-primary tracking-[0.18em]">CANLI PAZAR AKIŞI</div>
+<h2 class="font-headline-md text-[24px] text-on-surface mt-1" id="listing-count">AKILLI SONUÇLAR (50 İLAN)</h2>
+<div class="text-[12px] text-on-surface-variant mt-1" id="active-category">Tüm kategoriler</div>
 </div>
 <div class="flex flex-col sm:flex-row sm:flex-wrap gap-2">
-<select id="sort-select" class="glass-panel rounded-md text-on-surface-variant text-[12px] border border-glass-border w-full sm:w-auto">
+<select id="sort-select" class="filter-control glass-panel rounded-md text-on-surface-variant text-[12px] border border-glass-border w-full sm:w-auto">
 <option value="recommended">Önerilen</option>
 <option value="priceAsc">Fiyat düşükten yükseğe</option>
 <option value="priceDesc">Fiyat yüksekten düşüğe</option>
@@ -360,11 +432,11 @@
 <option value="aiDesc">AI skoru yüksekten düşüğe</option>
 <option value="trustDesc">Güven skoru yüksekten düşüğe</option>
 </select>
-<button id="clear-active-filters" type="button" class="glass-panel px-3 py-1.5 rounded-md text-on-surface-variant hover:text-primary transition-colors text-[12px] w-full sm:w-auto">Filtreleri Temizle</button>
-<button onclick="location.href='/ara'" class="glass-panel px-3 py-1.5 rounded-md text-on-surface-variant hover:text-primary transition-colors">
+<button id="clear-active-filters" type="button" class="glass-panel-velocity px-3 py-1.5 rounded-full text-on-surface-variant hover:text-primary transition-colors text-[12px] w-full sm:w-auto">Filtreleri Temizle</button>
+<button onclick="location.href='/ara'" class="glass-panel-velocity px-3 py-1.5 rounded-full text-on-surface-variant hover:text-primary transition-colors">
 <span class="material-symbols-outlined text-[18px]">view_list</span>
 </button>
-<button onclick="location.href='/ara'" class="glass-panel px-3 py-1.5 rounded-md text-primary bg-primary/10 border-primary/30 transition-colors">
+<button onclick="location.href='/ara'" class="glass-panel-velocity px-3 py-1.5 rounded-full text-primary bg-primary/10 border-primary/30 transition-colors">
 <span class="material-symbols-outlined text-[18px]">table_rows</span>
 </button>
 </div>
@@ -372,9 +444,9 @@
 <div class="hidden flex-wrap gap-2" id="active-filter-summary"></div>
 </div>
 <!-- Interactive List/Table Structure (Notion-like) -->
-<div class="glass-panel rounded-xl overflow-hidden border border-glass-border">
+<div class="result-shell rounded-[24px] overflow-hidden border border-white/10">
 <!-- Table Header -->
-<div class="hidden md:grid grid-cols-12 gap-4 p-4 border-b border-glass-border bg-surface-container-high/30 font-label-caps text-label-caps text-on-surface-variant">
+<div class="hidden md:grid grid-cols-12 gap-4 p-4 border-b border-white/10 bg-white/[0.04] font-label-caps text-label-caps text-on-surface-variant">
 <div class="col-span-5 pl-2">İlan</div>
 <div class="col-span-2 text-right">Fiyat</div>
 <div class="col-span-3 text-right">Araç Bilgisi</div>
@@ -471,7 +543,7 @@
             }
 
             function chip(text) {
-                return '<span class="px-2 py-1 rounded bg-surface-container text-[11px] text-on-surface-variant">' + text + '</span>';
+                return '<span class="px-2 py-1 rounded-full bg-white/10 border border-white/10 text-[11px] text-on-surface-variant">' + text + '</span>';
             }
 
             function unique(field) {
@@ -517,7 +589,7 @@
                 var features = ["Sunroof", "Panoramik cam tavan", "Deri koltuk", "Isıtmalı koltuk", "Soğutmalı koltuk", "Hafızalı koltuk", "Adaptif cruise control", "Şerit takip", "Kör nokta uyarı", "360 kamera", "Geri görüş kamerası", "Park sensörü", "CarPlay", "Android Auto", "Navigasyon", "Elektrikli bagaj", "Head-up display", "Matrix LED far", "Hayalet gösterge"];
                 if (featureTarget) {
                     featureTarget.innerHTML = features.map(function (feature) {
-                        return '<label class="flex items-center gap-2"><input data-feature="' + feature + '" class="form-checkbox h-4 w-4 text-primary bg-surface-dim border-outline-variant rounded" type="checkbox"/>' + feature + '</label>';
+                        return '<label class="flex items-center gap-2 rounded-xl border border-white/10 bg-white/[0.03] px-3 py-2"><input data-feature="' + feature + '" class="form-checkbox h-4 w-4 text-primary bg-surface-dim border-outline-variant rounded" type="checkbox"/>' + feature + '</label>';
                     }).join("");
                 }
                 if (initialCategory && controls.category) {
@@ -529,11 +601,34 @@
                 });
                 document.getElementById("reset-filters")?.addEventListener("click", clearFilters);
                 document.getElementById("clear-active-filters")?.addEventListener("click", clearFilters);
+                document.getElementById("smart-search-button")?.addEventListener("click", handleSmartSearch);
+                document.getElementById("smart-search-input")?.addEventListener("keydown", function (event) {
+                    if (event.key === "Enter") {
+                        event.preventDefault();
+                        handleSmartSearch();
+                    }
+                });
                 mobileFilterToggle?.addEventListener("click", function () {
                     if (!filterPanel) return;
                     var isHidden = filterPanel.classList.toggle("hidden");
                     mobileFilterToggle.querySelector("span:last-child").textContent = isHidden ? "Filtreleri Aç" : "Filtreleri Kapat";
                 });
+            }
+
+            function handleSmartSearch() {
+                var input = document.getElementById("smart-search-input");
+                var query = input ? input.value.trim() : "";
+                var code = query.replace(/\D/g, "");
+                if (code.length === 6) {
+                    var listing = listings.find(function (item) {
+                        return String(item.listingCode) === code;
+                    });
+                    if (listing) {
+                        window.top.location.href = "/ilan/" + listing.id;
+                        return;
+                    }
+                }
+                window.top.location.href = "/ara";
             }
 
             function value(name) {
@@ -641,7 +736,7 @@
                     activeSummary.classList.toggle("hidden", filters.length === 0);
                     activeSummary.classList.toggle("flex", filters.length > 0);
                     activeSummary.innerHTML = filters.map(function (item) {
-                        return '<span class="px-2 py-1 rounded-full bg-primary/10 text-primary text-[11px]">' + escapeHtml(item) + '</span>';
+                        return '<span class="px-3 py-1.5 rounded-full bg-primary/10 border border-primary/20 text-primary text-[11px]">' + escapeHtml(item) + '</span>';
                     }).join("");
                 }
             }
@@ -654,39 +749,44 @@
                 }
                 target.innerHTML = items.map(function (item) {
                 var image = primaryImage(item);
-                return '<div data-listing-row class="grid grid-cols-1 md:grid-cols-12 gap-3 md:gap-4 p-4 border-b border-glass-border hover:bg-surface-variant/30 transition-colors group cursor-pointer items-start md:items-center">' +
-                    '<div class="md:col-span-5 md:pl-2 flex flex-col sm:flex-row items-start gap-3 min-w-0">' +
-                        '<div class="w-full sm:w-24 h-44 sm:h-16 rounded-xl bg-surface-container-high border border-glass-border overflow-hidden shrink-0 relative">' +
+                return '<div data-listing-row class="grid grid-cols-1 md:grid-cols-12 gap-4 p-4 md:p-5 border-b border-white/10 hover:bg-white/[0.045] transition-colors group cursor-pointer items-start md:items-center">' +
+                    '<div class="md:col-span-5 md:pl-2 flex flex-col sm:flex-row items-start gap-4 min-w-0">' +
+                        '<div class="w-full sm:w-32 h-52 sm:h-24 rounded-2xl bg-surface-container-high border border-white/10 overflow-hidden shrink-0 relative shadow-[0_18px_42px_rgba(0,0,0,0.24)]">' +
                             '<img data-listing-image="' + item.id + '" class="w-full h-full object-cover" src="' + (image ? image.url : vehicleImage(item)) + '" alt="' + escapeHtml(image ? image.alt : item.title + " görseli") + '"/>' +
                             (image && image.isRepresentative ? '<div class="absolute top-1 left-1 px-1.5 py-0.5 rounded bg-surface/80 text-[9px] text-on-surface-variant">Temsili</div>' : "") +
-                            '<div class="absolute bottom-1 right-1 text-[16px] leading-none">' + vehicleIcon(item) + '</div>' +
+                            '<div class="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-surface-dark/90 to-transparent"></div>' +
+                            '<div class="absolute bottom-2 right-2 text-[18px] leading-none">' + vehicleIcon(item) + '</div>' +
                         '</div>' +
-                        '<div class="flex flex-col gap-1 min-w-0">' +
-                            '<div class="font-headline-md text-[16px] text-on-surface font-semibold flex items-start gap-2 min-w-0">' +
+                        '<div class="flex flex-col gap-2 min-w-0">' +
+                            '<div class="flex items-center gap-2 text-[11px] font-mono-data text-primary">' +
+                                '<span class="rounded-full bg-primary/10 border border-primary/20 px-2 py-1">İlan No ' + escapeHtml(item.listingCode) + '</span>' +
+                                '<span class="rounded-full bg-white/10 border border-white/10 px-2 py-1">' + escapeHtml(item.city) + '</span>' +
+                            '</div>' +
+                            '<div class="font-headline-md text-[17px] text-on-surface font-semibold flex items-start gap-2 min-w-0">' +
                                 '<span>' + escapeHtml(item.title) + '</span>' +
                                 '<span class="material-symbols-outlined text-primary text-[14px]">verified</span>' +
                             '</div>' +
                             '<div class="text-[12px] text-on-surface-variant flex flex-wrap gap-1.5">' +
-                                chip(escapeHtml(item.brand)) + chip(escapeHtml(item.model)) + chip(String(item.year)) + chip(escapeHtml(item.city)) + chip(escapeHtml(item.color)) +
+                                chip(escapeHtml(item.brand)) + chip(escapeHtml(item.model)) + chip(String(item.year)) + chip(escapeHtml(item.color)) +
                             '</div>' +
-                            '<div class="text-[12px] text-primary flex items-start gap-1 mt-1">' +
+                            '<div class="text-[12px] text-primary flex items-start gap-1 mt-1 leading-relaxed">' +
                                 '<span class="material-symbols-outlined text-[14px] mt-0.5">smart_toy</span>' +
                                 '<span>' + escapeHtml(item.description) + '</span>' +
                             '</div>' +
                         '</div>' +
                     '</div>' +
-                    '<div class="md:col-span-2 text-left md:text-right font-mono-data text-mono-data text-on-surface-variant flex flex-col min-w-0">' +
-                        '<span class="text-on-surface">' + formatPrice(item.price) + '</span>' +
-                        '<span class="text-[12px]">' + formatKm(item.km) + '</span>' +
+                    '<div class="md:col-span-2 text-left md:text-right font-mono-data text-mono-data text-on-surface-variant flex flex-col min-w-0 rounded-2xl bg-white/[0.04] border border-white/10 p-3 md:border-0 md:bg-transparent md:p-0">' +
+                        '<span class="text-primary font-bold">' + formatPrice(item.price) + '</span>' +
+                        '<span class="text-[12px]">' + formatKm(item.km) + " • " + item.year + '</span>' +
                     '</div>' +
-                    '<div class="md:col-span-3 text-left md:text-right font-mono-data text-mono-data text-on-surface-variant flex flex-col min-w-0">' +
+                    '<div class="md:col-span-3 text-left md:text-right font-mono-data text-mono-data text-on-surface-variant flex flex-col min-w-0 rounded-2xl bg-white/[0.04] border border-white/10 p-3 md:border-0 md:bg-transparent md:p-0">' +
                         '<span class="text-on-surface">' + escapeHtml(item.fuel) + " • " + escapeHtml(item.transmission) + '</span>' +
                         '<span class="text-[12px]">' + escapeHtml(item.bodyType) + " • " + escapeHtml(item.engine) + " • " + escapeHtml(item.power) + '</span>' +
                         '<span class="text-[12px]">' + escapeHtml(item.sellerType) + " • " + escapeHtml(item.paintedParts) + '</span>' +
                     '</div>' +
                     '<div class="md:col-span-2 text-left md:text-right md:pr-2 flex justify-start md:justify-end flex-wrap gap-2 font-mono-data text-mono-data">' +
-                        '<span class="px-2 py-1 rounded bg-primary/10 text-primary">AI ' + item.aiScore + '</span>' +
-                        '<span class="px-2 py-1 rounded bg-surface-container text-on-surface-variant">Güven ' + item.trustScore + '</span>' +
+                        '<span class="px-3 py-1.5 rounded-full bg-primary/10 border border-primary/20 text-primary">AI ' + item.aiScore + '</span>' +
+                        '<span class="px-3 py-1.5 rounded-full bg-secondary-container/20 border border-secondary/20 text-secondary-fixed">Güven ' + item.trustScore + '</span>' +
                     '</div>' +
                 '</div>';
                 }).join("");

@@ -109,21 +109,72 @@
             backdrop-filter: blur(20px);
             border: 1px solid rgba(255, 255, 255, 0.1);
         }
+        .velocity-shell {
+            background:
+                radial-gradient(circle at 48% -10%, rgba(137, 206, 255, 0.2), transparent 34rem),
+                radial-gradient(circle at 90% 14%, rgba(168, 85, 247, 0.2), transparent 30rem),
+                radial-gradient(circle at 8% 34%, rgba(14, 165, 233, 0.12), transparent 24rem),
+                linear-gradient(180deg, #05070d 0%, #0b1326 42%, #060e20 100%);
+        }
+        .glass-panel-velocity {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.13), rgba(255, 255, 255, 0.045));
+            backdrop-filter: blur(28px);
+            -webkit-backdrop-filter: blur(28px);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.12), 0 28px 70px rgba(0, 0, 0, 0.24);
+        }
+        .hero-vehicle-frame {
+            box-shadow: 0 35px 90px rgba(0, 0, 0, 0.42), inset 0 1px 0 rgba(255, 255, 255, 0.14);
+        }
+        .section-title {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .section-title::before {
+            content: "";
+            width: 7px;
+            height: 7px;
+            border-radius: 9999px;
+            background: #89ceff;
+            box-shadow: 0 0 18px rgba(137, 206, 255, 0.85);
+        }
+        .premium-chip {
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.055);
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
+        }
         .ai-glow {
-            box-shadow: inset 0 0 20px rgba(137, 206, 255, 0.1);
+            box-shadow: inset 0 0 28px rgba(137, 206, 255, 0.15), 0 0 55px rgba(137, 206, 255, 0.12);
+        }
+        html.light .velocity-shell {
+            background:
+                radial-gradient(circle at 50% 0%, rgba(31, 188, 245, 0.17), transparent 34rem),
+                radial-gradient(circle at 88% 12%, rgba(168, 85, 247, 0.11), transparent 28rem),
+                linear-gradient(180deg, #f8fafc 0%, #eef4ff 46%, #f8fafc 100%);
+        }
+        html.light .glass-panel-velocity {
+            background: rgba(255, 255, 255, 0.84);
+            border-color: rgba(15, 23, 42, 0.12);
+            box-shadow: 0 20px 50px rgba(15, 23, 42, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.85);
+        }
+        html.light .premium-chip {
+            background: rgba(255, 255, 255, 0.9);
+            border-color: rgba(15, 23, 42, 0.12);
         }
     </style>
 <link href="/stitch-v2/theme.css" rel="stylesheet"/>
 <script src="/stitch-v2/theme.js"></script>
 <script src="/stitch-v2/demo-listings.js"></script>
 </head>
-<body class="bg-background text-on-background min-h-screen font-body-md overflow-x-hidden">
+<body class="velocity-shell bg-background text-on-background min-h-screen font-body-md overflow-x-hidden">
 <!-- TopNavBar -->
-<nav class="fixed top-0 w-full bg-surface/80 dark:bg-surface/80 backdrop-blur-xl border-b border-glass-border shadow-sm z-50">
+<nav class="fixed top-0 w-full bg-surface/70 dark:bg-surface/70 backdrop-blur-xl border-b border-white/10 shadow-sm z-50">
 <div class="flex justify-between items-center gap-3 px-margin-mobile md:px-margin-desktop py-4 max-w-container-max-width mx-auto">
-<a class="font-display-hero text-headline-md tracking-tighter text-primary dark:text-primary" href="/" target="_top">
-                Vasıtan
-            </a>
+<a class="font-display-hero text-headline-md tracking-tighter text-primary dark:text-primary flex items-center gap-2" href="/" target="_top">
+<span class="inline-flex h-2.5 w-2.5 rounded-full bg-primary shadow-[0_0_18px_rgba(137,206,255,0.8)]"></span>
+<span>Vasıtan</span>
+</a>
 <div class="hidden md:flex space-x-8">
 <a class="text-primary font-semibold border-b-2 border-primary pb-1 hover:scale-105 transition-transform duration-200 active:scale-95" href="/ara">İlanlar</a>
 <a class="text-on-surface-variant hover:text-primary transition-colors hover:scale-105 transition-transform duration-200 active:scale-95" href="/arac-wiki">Değerleme</a>
@@ -144,73 +195,78 @@
 </div>
 </nav>
 <main class="pt-20 md:pt-[100px] pb-section-gap px-margin-mobile md:px-margin-desktop max-w-container-max-width mx-auto overflow-x-hidden">
+<div class="mb-6 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.06] px-4 py-2 text-xs font-semibold uppercase tracking-[0.18em] text-primary">
+<span class="h-1.5 w-1.5 rounded-full bg-primary animate-pulse"></span>
+<span>Vehicle Intelligence Detail</span>
+</div>
 <section class="grid grid-cols-1 lg:grid-cols-12 gap-gutter mb-10">
 <div class="lg:col-span-8 space-y-4">
-<div class="relative h-[260px] sm:h-[360px] md:h-[560px] rounded-xl overflow-hidden glass-panel">
+<div class="relative h-[300px] sm:h-[420px] md:h-[620px] rounded-[28px] overflow-hidden glass-panel-velocity hero-vehicle-frame">
 <img id="detail-hero-image" alt="İlan görseli" class="absolute inset-0 w-full h-full object-cover" src=""/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface-dark via-surface-dark/10 to-transparent pointer-events-none"></div>
 <div class="absolute top-3 sm:top-4 left-3 sm:left-4 right-3 sm:right-auto flex flex-wrap gap-2">
-<span id="detail-listing-code" class="px-3 py-1 rounded-full bg-surface/80 border border-glass-border text-primary font-mono-data text-xs">İlan No</span>
-<span id="detail-location" class="px-3 py-1 rounded-full bg-surface/80 border border-glass-border text-on-surface-variant font-mono-data text-xs">Konum</span>
+<span id="detail-listing-code" class="px-3 py-1 rounded-full bg-surface/80 border border-primary/30 text-primary font-mono-data text-xs shadow-[0_0_20px_rgba(137,206,255,0.16)]">İlan No</span>
+<span id="detail-location" class="px-3 py-1 rounded-full bg-surface/80 border border-white/10 text-on-surface-variant font-mono-data text-xs">Konum</span>
 </div>
 <div class="absolute top-4 right-4">
-<span id="detail-image-label" class="hidden px-3 py-1 rounded-full bg-surface/80 border border-glass-border text-on-surface-variant font-mono-data text-xs">Temsili görsel</span>
+<span id="detail-image-label" class="hidden px-3 py-1 rounded-full bg-surface/80 border border-white/10 text-on-surface-variant font-mono-data text-xs">Temsili görsel</span>
 </div>
-<div class="absolute bottom-0 left-0 w-full p-3 sm:p-5 bg-gradient-to-t from-background via-background/70 to-transparent">
+<div class="absolute bottom-0 left-0 w-full p-3 sm:p-5">
 <div id="detail-thumbnails" class="flex gap-2 overflow-x-auto pb-1"></div>
 </div>
 </div>
-<div class="glass-panel rounded-xl p-5">
+<div class="glass-panel-velocity rounded-[24px] p-5 md:p-6">
 <h1 id="detail-title" class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-surface mb-3">İlan başlığı</h1>
 <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-3" id="detail-quick-stats"></div>
 </div>
 </div>
 <aside class="lg:col-span-4 flex flex-col gap-gutter">
-<div class="glass-panel p-6 rounded-xl">
-<div class="font-label-caps text-label-caps text-slate-gray mb-2">FİYAT</div>
-<div id="detail-price" class="font-display-hero text-headline-md text-primary">0 TL</div>
+<div class="glass-panel-velocity p-6 rounded-[24px]">
+<div class="font-label-caps text-label-caps text-primary tracking-[0.18em] mb-2">FİYAT</div>
+<div id="detail-price" class="font-display-hero text-[36px] leading-none text-primary">0 TL</div>
 <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-5">
-<div class="rounded-lg bg-surface-container-high/50 border border-glass-border p-3">
+<div class="rounded-2xl bg-white/[0.055] border border-white/10 p-3">
 <div class="font-label-caps text-label-caps text-slate-gray">AI SKOR</div>
 <div id="detail-ai-score" class="font-headline-md text-headline-md text-primary">0</div>
 </div>
-<div class="rounded-lg bg-surface-container-high/50 border border-glass-border p-3">
+<div class="rounded-2xl bg-white/[0.055] border border-white/10 p-3">
 <div class="font-label-caps text-label-caps text-slate-gray">GÜVEN</div>
 <div id="detail-trust-score" class="font-headline-md text-headline-md text-secondary">0</div>
 </div>
 </div>
 </div>
-<div id="seller-card" class="glass-panel p-6 rounded-xl"></div>
+<div id="seller-card" class="glass-panel-velocity p-6 rounded-[24px]"></div>
 </aside>
 </section>
 <section class="grid grid-cols-1 lg:grid-cols-12 gap-gutter">
 <div class="lg:col-span-8 space-y-gutter">
-<section class="glass-panel p-4 sm:p-6 rounded-xl">
-<h2 class="font-headline-md text-headline-md text-on-surface mb-5">Teknik Özellikler</h2>
+<section class="glass-panel-velocity p-4 sm:p-6 rounded-[24px]">
+<h2 class="section-title font-headline-md text-headline-md text-on-surface mb-5">Teknik Özellikler</h2>
 <div id="technical-specs" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3"></div>
 </section>
-<section class="glass-panel p-4 sm:p-6 rounded-xl">
-<h2 class="font-headline-md text-headline-md text-on-surface mb-5">Ekspertiz Durumu</h2>
+<section class="glass-panel-velocity p-4 sm:p-6 rounded-[24px]">
+<h2 class="section-title font-headline-md text-headline-md text-on-surface mb-5">Ekspertiz Durumu</h2>
 <div id="expertise-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3"></div>
 </section>
-<section class="glass-panel p-4 sm:p-6 rounded-xl">
-<h2 class="font-headline-md text-headline-md text-on-surface mb-5">Donanım Özellikleri</h2>
+<section class="glass-panel-velocity p-4 sm:p-6 rounded-[24px]">
+<h2 class="section-title font-headline-md text-headline-md text-on-surface mb-5">Donanım Özellikleri</h2>
 <div id="features-grid" class="flex flex-wrap gap-2 min-w-0"></div>
 </section>
-<section class="glass-panel p-4 sm:p-6 rounded-xl ai-glow">
+<section class="glass-panel-velocity p-4 sm:p-6 rounded-[24px] ai-glow">
 <div class="flex items-center gap-2 mb-5">
 <span class="material-symbols-outlined text-primary">smart_toy</span>
-<h2 class="font-headline-md text-headline-md text-on-surface">AI Değerlendirmesi</h2>
+<h2 class="font-headline-md text-headline-md text-on-surface">Vasıtan AI Analizi</h2>
 </div>
 <div id="ai-review" class="space-y-5"></div>
 </section>
 </div>
 <aside class="lg:col-span-4 space-y-gutter">
-<section class="glass-panel p-6 rounded-xl">
+<section class="glass-panel-velocity p-6 rounded-[24px]">
 <h2 class="font-headline-md text-headline-md text-on-surface mb-5">Satıcıya Mesaj</h2>
 <p class="text-on-surface-variant text-sm mb-4">Hazır mesajlardan seç veya kendi mesajını yaz.</p>
-<button id="open-message-box-side" class="w-full py-3 rounded-lg border border-primary/30 text-primary hover:bg-primary/10 transition-colors">Mesaj Gönder</button>
+<button id="open-message-box-side" class="w-full py-3 rounded-full border border-primary/30 text-primary hover:bg-primary/10 transition-colors">Mesaj Gönder</button>
 </section>
-<section class="glass-panel p-6 rounded-xl">
+<section class="glass-panel-velocity p-6 rounded-[24px]">
 <h2 class="font-headline-md text-headline-md text-on-surface mb-5">Benzer İlanlar</h2>
 <div id="similar-listings" class="space-y-3"></div>
 </section>
@@ -218,7 +274,7 @@
 </section>
 </main>
 <div id="message-modal" class="fixed inset-0 z-[80] hidden items-center justify-center bg-surface-dark/70 backdrop-blur-sm px-4 py-4">
-<div class="glass-panel rounded-xl p-4 sm:p-6 w-full max-w-lg max-h-[calc(100vh-2rem)] overflow-y-auto">
+<div class="glass-panel-velocity rounded-[24px] p-4 sm:p-6 w-full max-w-lg max-h-[calc(100vh-2rem)] overflow-y-auto">
 <div class="flex items-start justify-between gap-4 mb-4">
 <div>
 <div class="font-label-caps text-label-caps text-primary">MESAJ GÖNDER</div>
@@ -229,11 +285,11 @@
 </button>
 </div>
 <div id="message-suggestions" class="flex flex-wrap gap-2 mb-4"></div>
-<textarea id="seller-message-input" class="w-full min-h-[120px] rounded-lg bg-surface-container-high border border-glass-border text-on-surface resize-none" placeholder="Mesajınızı yazın..."></textarea>
+<textarea id="seller-message-input" class="w-full min-h-[120px] rounded-2xl bg-surface-container-high border border-white/10 text-on-surface resize-none" placeholder="Mesajınızı yazın..."></textarea>
 <div id="message-status" class="hidden mt-3 text-sm text-primary"></div>
 <div class="flex flex-col sm:flex-row sm:justify-end gap-3 mt-5">
-<button id="cancel-message-box" class="w-full sm:w-auto px-4 py-2 rounded-lg border border-glass-border text-on-surface-variant hover:text-on-surface">Kapat</button>
-<button id="send-seller-message" class="w-full sm:w-auto px-4 py-2 rounded-lg bg-primary text-on-primary">Gönder</button>
+<button id="cancel-message-box" class="w-full sm:w-auto px-4 py-2 rounded-full border border-white/10 text-on-surface-variant hover:text-on-surface">Kapat</button>
+<button id="send-seller-message" class="w-full sm:w-auto px-4 py-2 rounded-full bg-primary text-on-primary">Gönder</button>
 </div>
 </div>
 </div>
@@ -321,11 +377,21 @@
             }
 
             function stat(label, value, icon) {
-                return '<div class="rounded-lg bg-surface-container-high/50 border border-glass-border p-3"><div class="flex items-center gap-2 text-slate-gray font-label-caps text-label-caps"><span class="material-symbols-outlined text-[16px]">' + icon + '</span>' + label + '</div><div class="text-on-surface font-mono-data text-mono-data mt-1">' + escapeHtml(value) + '</div></div>';
+                return '<div class="rounded-2xl bg-white/[0.055] border border-white/10 p-3 premium-chip"><div class="flex items-center gap-2 text-slate-gray font-label-caps text-label-caps"><span class="material-symbols-outlined text-[16px] text-primary">' + icon + '</span>' + label + '</div><div class="text-on-surface font-mono-data text-mono-data mt-1">' + escapeHtml(value) + '</div></div>';
             }
 
             function spec(label, value) {
-                return '<div class="rounded-lg bg-surface-container-high/50 border border-glass-border p-3"><div class="font-label-caps text-label-caps text-slate-gray">' + label + '</div><div class="text-on-surface mt-1">' + escapeHtml(value) + '</div></div>';
+                return '<div class="rounded-2xl bg-white/[0.055] border border-white/10 p-3 premium-chip"><div class="font-label-caps text-label-caps text-slate-gray">' + label + '</div><div class="text-on-surface mt-1">' + escapeHtml(value) + '</div></div>';
+            }
+
+            function expertiseSpec(label, value) {
+                var raw = String(value || "");
+                var isGood = ["Yok", "Temiz", "Orijinal"].indexOf(raw) >= 0;
+                if (raw === "Var" && label === "İlk Sahip") isGood = true;
+                if (label === "Tramer" && raw === "Yok") isGood = true;
+                var badge = isGood ? "Sorunsuz" : "Kontrol edilmeli";
+                var tone = isGood ? "text-primary bg-primary/10 border-primary/20" : "text-tertiary-fixed-dim bg-tertiary-fixed-dim/10 border-tertiary-fixed-dim/20";
+                return '<div class="rounded-2xl bg-white/[0.055] border border-white/10 p-3 premium-chip"><div class="flex items-start justify-between gap-2"><div><div class="font-label-caps text-label-caps text-slate-gray">' + label + '</div><div class="text-on-surface mt-1">' + escapeHtml(value) + '</div></div><span class="shrink-0 px-2 py-1 rounded-full border text-[10px] font-label-caps ' + tone + '">' + badge + '</span></div></div>';
             }
 
             function yesNo(value) {
@@ -363,7 +429,7 @@
                     label.classList.toggle("hidden", !currentImage);
                 }
                 document.getElementById("detail-thumbnails").innerHTML = listing.images.map(function (_, index) {
-                    return '<button data-thumb="' + index + '" class="w-20 h-14 rounded-lg overflow-hidden border ' + (index === activeImage ? "border-primary" : "border-glass-border") + ' bg-surface-container-high shrink-0 relative"><img class="w-full h-full object-cover" src="' + imageUrl(index) + '" alt="' + escapeHtml(imageAlt(index)) + '"/>' + (listing.images[index].isRepresentative ? '<span class="absolute bottom-1 left-1 px-1.5 py-0.5 rounded bg-surface/80 text-[9px] text-on-surface-variant">Temsili</span>' : "") + '</button>';
+                    return '<button data-thumb="' + index + '" class="w-24 h-16 rounded-2xl overflow-hidden border ' + (index === activeImage ? "border-primary shadow-[0_0_22px_rgba(137,206,255,0.35)]" : "border-white/10") + ' bg-surface-container-high shrink-0 relative"><img class="w-full h-full object-cover" src="' + imageUrl(index) + '" alt="' + escapeHtml(imageAlt(index)) + '"/>' + (listing.images[index].isRepresentative ? '<span class="absolute bottom-1 left-1 px-1.5 py-0.5 rounded bg-surface/80 text-[9px] text-on-surface-variant">Temsili</span>' : "") + '</button>';
                 }).join("");
                 document.querySelectorAll("#detail-thumbnails img").forEach(function (img, index) {
                     img.onerror = function () {
@@ -382,8 +448,8 @@
             function renderSeller() {
                 var seller = listing.seller;
                 document.getElementById("seller-card").innerHTML =
-                    '<div class="flex items-start justify-between gap-3 mb-5"><div><div class="font-label-caps text-label-caps text-primary">SATICI BİLGİLERİ</div><h2 class="font-headline-md text-headline-md text-on-surface mt-1">' + escapeHtml(seller.displayName) + '</h2><p class="text-on-surface-variant text-sm">' + escapeHtml(seller.sellerType) + '</p></div><div class="w-12 h-12 rounded-full bg-primary/10 border border-primary/30 flex items-center justify-center text-primary"><span class="material-symbols-outlined">person</span></div></div>' +
-                    '<div class="space-y-3 text-sm">' +
+                    '<div class="flex items-start justify-between gap-3 mb-5"><div><div class="font-label-caps text-label-caps text-primary tracking-[0.18em]">SATICI PROFİLİ</div><h2 class="font-headline-md text-headline-md text-on-surface mt-1">' + escapeHtml(seller.displayName) + '</h2><p class="text-on-surface-variant text-sm">' + escapeHtml(seller.sellerType) + '</p></div><div class="w-14 h-14 rounded-2xl bg-primary/10 border border-primary/30 flex items-center justify-center text-primary shadow-[0_0_24px_rgba(137,206,255,0.14)]"><span class="material-symbols-outlined">person</span></div></div>' +
+                    '<div class="grid grid-cols-1 gap-3 text-sm">' +
                     spec("Konum", listing.location.city + " / " + listing.location.district + " / " + listing.location.neighborhood) +
                     spec("Telefon", phoneVisible ? seller.phone : maskedPhone(seller.phone)) +
                     spec("Üyelik", seller.memberSince) +
@@ -392,13 +458,13 @@
                     spec("Cevaplama", seller.responseRate) +
                     '</div>' +
                     '<div class="flex flex-wrap gap-2 mt-4">' +
-                    (seller.verifiedPhone ? '<span class="px-2 py-1 rounded-full bg-primary/10 text-primary text-[11px]">Telefon doğrulandı</span>' : "") +
-                    (seller.verifiedIdentity ? '<span class="px-2 py-1 rounded-full bg-secondary/10 text-secondary text-[11px]">Kimlik doğrulandı</span>' : "") +
+                    (seller.verifiedPhone ? '<span class="px-3 py-1.5 rounded-full bg-primary/10 border border-primary/20 text-primary text-[11px]">Telefon doğrulandı</span>' : "") +
+                    (seller.verifiedIdentity ? '<span class="px-3 py-1.5 rounded-full bg-secondary/10 border border-secondary/20 text-secondary text-[11px]">Kimlik doğrulandı</span>' : "") +
                     '</div>' +
                     '<div class="grid grid-cols-1 gap-3 mt-5">' +
-                    '<button id="show-phone" class="py-3 rounded-lg bg-primary text-on-primary font-medium">Telefonu Göster</button>' +
-                    '<button id="open-message-box" class="py-3 rounded-lg border border-primary/30 text-primary hover:bg-primary/10 transition-colors">Mesaj Gönder</button>' +
-                    '<button onclick="window.top.location.href=\'/ara\'" class="py-3 rounded-lg border border-glass-border text-on-surface-variant hover:text-on-surface transition-colors">Satıcının Diğer İlanları</button>' +
+                    '<button id="show-phone" class="py-3 rounded-full bg-gradient-to-r from-primary to-secondary-fixed text-on-primary font-medium shadow-[0_0_26px_rgba(137,206,255,0.2)]">Telefonu Göster</button>' +
+                    '<button id="open-message-box" class="py-3 rounded-full border border-primary/30 text-primary hover:bg-primary/10 transition-colors">Mesaj Gönder</button>' +
+                    '<button onclick="window.top.location.href=\'/ara\'" class="py-3 rounded-full border border-white/10 text-on-surface-variant hover:text-on-surface transition-colors">Satıcının Diğer İlanları</button>' +
                     '</div>';
                 document.getElementById("show-phone").addEventListener("click", function () {
                     phoneVisible = true;
@@ -438,20 +504,22 @@
                     ["Tavan", ex.isRoofOriginal ? "Orijinal" : "Kontrol"], ["Şase / Podye", ex.isChassisClean ? "Temiz" : "Kontrol"],
                     ["Servis Geçmişi", cleanDirty(ex.hasServiceHistory)], ["Ekspertiz Raporu", cleanDirty(ex.hasExpertiseReport)],
                     ["İlk Sahip", yesNo(ex.isFirstOwner)], ["Kazasız", cleanDirty(ex.isAccidentFree)]
-                ].map(function (item) { return spec(item[0], item[1]); }).join("");
+                ].map(function (item) { return expertiseSpec(item[0], item[1]); }).join("");
                 document.getElementById("features-grid").innerHTML = listing.features.map(function (feature) {
-                    return '<span class="px-3 py-2 rounded-full bg-surface-container-high border border-glass-border text-on-surface-variant text-sm">' + escapeHtml(feature) + '</span>';
+                    return '<span class="px-3 py-2 rounded-full bg-white/[0.055] border border-white/10 text-on-surface-variant text-sm premium-chip">' + escapeHtml(feature) + '</span>';
                 }).join("");
                 document.getElementById("ai-review").innerHTML =
+                    '<div class="grid grid-cols-1 gap-3">' +
                     spec("Özet", listing.aiReview.summary) +
                     spec("Fiyat Analizi", listing.aiReview.priceAnalysis) +
-                    spec("Uygun Kullanım", listing.aiReview.suitableFor.join(", ")) +
-                    '<div class="grid grid-cols-1 md:grid-cols-2 gap-3"><div>' + spec("Artılar", listing.aiReview.pros.join(" • ")) + '</div><div>' + spec("Eksiler", listing.aiReview.cons.join(" • ")) + '</div></div>' +
-                    '<div class="rounded-lg border border-error/30 bg-error-container/20 p-4 text-on-error-container text-sm">' + escapeHtml(listing.aiReview.warning) + '</div>';
+                    spec("Kimler İçin Uygun?", listing.aiReview.suitableFor.join(", ")) +
+                    '</div>' +
+                    '<div class="grid grid-cols-1 md:grid-cols-2 gap-3"><div>' + spec("Artılar", listing.aiReview.pros.join(" • ")) + '</div><div>' + spec("Dikkat Edilmesi Gerekenler", listing.aiReview.cons.join(" • ")) + '</div></div>' +
+                    '<div class="rounded-2xl border border-error/30 bg-error-container/20 p-4 text-on-error-container text-sm"><div class="font-label-caps text-label-caps mb-2">EKSPERTİZ UYARISI</div>' + escapeHtml(listing.aiReview.warning) + '</div>';
                 document.getElementById("similar-listings").innerHTML = listings.filter(function (item) {
                     return item.id !== listing.id && (item.brand === listing.brand || item.category === listing.category);
                 }).slice(0, 4).map(function (item) {
-                    return '<button onclick="window.top.location.href=\'/ilan/' + item.id + '\'" class="w-full text-left rounded-lg border border-glass-border bg-surface-container-high/40 p-3 hover:border-primary/40 transition-colors"><div class="text-on-surface font-medium">' + escapeHtml(item.title) + '</div><div class="text-on-surface-variant text-xs mt-1">' + formatPrice(item.price) + " • " + formatKm(item.km) + '</div></button>';
+                    return '<button onclick="window.top.location.href=\'/ilan/' + item.id + '\'" class="w-full text-left rounded-2xl border border-white/10 bg-white/[0.055] p-4 hover:border-primary/40 transition-colors premium-chip"><div class="text-on-surface font-medium">' + escapeHtml(item.title) + '</div><div class="text-on-surface-variant text-xs mt-1">' + formatPrice(item.price) + " • " + formatKm(item.km) + '</div><div class="mt-2 inline-flex rounded-full bg-primary/10 border border-primary/20 px-2 py-1 text-[10px] text-primary">Detaya git</div></button>';
                 }).join("");
             }
 
@@ -472,7 +540,7 @@
             function renderMessageBox() {
                 var suggestions = ["Araç hâlâ satılık mı?", "Son fiyatınız nedir?", "Ekspertiz raporu var mı?", "Aracı görmek için ne zaman müsaitsiniz?", "Takas düşünür müsünüz?"];
                 document.getElementById("message-suggestions").innerHTML = suggestions.map(function (text) {
-                    return '<button data-message-suggestion="' + escapeHtml(text) + '" class="px-3 py-2 rounded-full bg-surface-container-high border border-glass-border text-on-surface-variant text-xs hover:text-primary">' + escapeHtml(text) + '</button>';
+                    return '<button data-message-suggestion="' + escapeHtml(text) + '" class="px-3 py-2 rounded-full bg-white/[0.055] border border-white/10 text-on-surface-variant text-xs hover:text-primary premium-chip">' + escapeHtml(text) + '</button>';
                 }).join("");
                 document.querySelectorAll("[data-message-suggestion]").forEach(function (button) {
                     button.addEventListener("click", function () {

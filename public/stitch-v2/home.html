@@ -110,19 +110,86 @@
             -webkit-backdrop-filter: blur(20px);
             border: 1px solid rgba(255, 255, 255, 0.1);
         }
-        .ai-glow-focus:focus-within {
-            box-shadow: inset 0 0 20px rgba(137, 206, 255, 0.15), 0 0 30px rgba(137, 206, 255, 0.1);
-            border-color: rgba(137, 206, 255, 0.3);
+        .velocity-shell {
+            background:
+                radial-gradient(circle at 50% 0%, rgba(137, 206, 255, 0.22), transparent 34rem),
+                radial-gradient(circle at 80% 12%, rgba(168, 85, 247, 0.22), transparent 28rem),
+                radial-gradient(circle at 16% 28%, rgba(31, 188, 245, 0.12), transparent 24rem),
+                linear-gradient(180deg, #05070d 0%, #0b1326 42%, #060e20 100%);
+        }
+        .hero-orb {
+            position: absolute;
+            border-radius: 9999px;
+            filter: blur(46px);
+            pointer-events: none;
+        }
+        .glass-panel-velocity {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.13), rgba(255, 255, 255, 0.04));
+            backdrop-filter: blur(28px);
+            -webkit-backdrop-filter: blur(28px);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.12), 0 30px 80px rgba(0, 0, 0, 0.28);
         }
         .text-gradient-primary {
-            background: linear-gradient(135deg, #dae2fd 0%, #89ceff 100%);
+            background: linear-gradient(135deg, #f8fbff 0%, #89ceff 42%, #c0c1ff 72%, #ffffff 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
             color: transparent;
         }
+        .velocity-title {
+            letter-spacing: -0.055em;
+            text-shadow: 0 0 50px rgba(137, 206, 255, 0.18);
+        }
+        .category-card {
+            background:
+                linear-gradient(135deg, rgba(137, 206, 255, 0.12), rgba(192, 193, 255, 0.05)),
+                rgba(11, 19, 38, 0.62);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
+        }
+        .category-card:hover {
+            border-color: rgba(137, 206, 255, 0.45);
+            box-shadow: 0 18px 45px rgba(14, 165, 233, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.14);
+        }
+        .vehicle-card-velocity::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, transparent 30%, rgba(2, 6, 23, 0.86) 100%);
+            pointer-events: none;
+            opacity: 0.8;
+        }
+        html.light .velocity-shell {
+            background:
+                radial-gradient(circle at 50% 0%, rgba(31, 188, 245, 0.18), transparent 34rem),
+                radial-gradient(circle at 82% 12%, rgba(168, 85, 247, 0.12), transparent 28rem),
+                linear-gradient(180deg, #f8fafc 0%, #eef4ff 48%, #f8fafc 100%);
+        }
+        html.light .glass-panel-velocity,
+        html.light .category-card {
+            background: rgba(255, 255, 255, 0.82);
+            border-color: rgba(15, 23, 42, 0.12);
+            box-shadow: 0 20px 50px rgba(15, 23, 42, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.85);
+        }
+        html.light .text-gradient-primary {
+            background: linear-gradient(135deg, #0f172a 0%, #006688 48%, #2f2ebe 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            color: transparent;
+        }
+        .ai-glow-focus:focus-within {
+            box-shadow: inset 0 0 28px rgba(137, 206, 255, 0.18), 0 0 55px rgba(137, 206, 255, 0.18);
+            border-color: rgba(137, 206, 255, 0.48);
+        }
         .pulse-dot {
             animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+        @media (max-width: 640px) {
+            .velocity-title {
+                letter-spacing: -0.025em;
+            }
         }
         @keyframes pulse {
             0%, 100% { opacity: 1; }
@@ -133,13 +200,17 @@
 <link href="/stitch-v2/i18n.css" rel="stylesheet"/>
 <script src="/stitch-v2/theme.js"></script>
 <script src="/stitch-v2/i18n.js"></script>
+<script src="/stitch-v2/demo-listings.js"></script>
 </head>
-<body class="bg-background text-on-background font-body-md antialiased min-h-screen flex flex-col overflow-x-hidden">
+<body class="velocity-shell bg-background text-on-background font-body-md antialiased min-h-screen flex flex-col overflow-x-hidden">
 <!-- TopNavBar -->
-<nav class="fixed top-0 w-full z-50 backdrop-blur-xl bg-background/80 border-b border-glass-border shadow-sm">
+<nav class="fixed top-0 w-full z-50 backdrop-blur-xl bg-background/70 border-b border-white/10 shadow-sm">
 <div class="flex justify-between items-center max-w-container-max-width mx-auto px-margin-mobile md:px-margin-desktop h-16 gap-3">
 <div class="flex items-center gap-4 md:gap-8 min-w-0">
-<a class="font-display-hero text-headline-md tracking-tighter text-on-background" href="/" target="_top">Vasıtan</a>
+<a class="font-display-hero text-headline-md tracking-tighter text-on-background flex items-center gap-2" href="/" target="_top">
+<span class="inline-flex h-2.5 w-2.5 rounded-full bg-primary shadow-[0_0_18px_rgba(137,206,255,0.8)]"></span>
+<span>Vasıtan</span>
+</a>
 <div class="hidden md:flex items-center gap-6">
 <a class="text-on-surface-variant hover:text-primary transition-colors duration-300 active:scale-95 transition-transform" data-i18n="nav_inventory" href="/ara">İlanlar</a>
 <a class="text-primary font-semibold border-b-2 border-primary active:scale-95 transition-transform py-5" data-i18n="nav_intelligence" href="/ai-danisman">Akıllı Analiz</a>
@@ -169,42 +240,102 @@
 <button data-theme-toggle type="button" class="text-on-surface-variant hover:text-primary transition-colors duration-300 active:scale-95 transition-transform hidden sm:block">
 <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">dark_mode</span>
 </button>
-<a class="hidden sm:inline-flex items-center justify-center px-4 py-2 rounded-full border border-glass-border text-on-background hover:bg-surface-container-high transition-colors text-body-md font-body-md" data-i18n="login" href="/giris">Giriş</a>
-<a class="inline-flex items-center justify-center px-3 sm:px-4 py-2 rounded-full bg-primary-container text-on-primary-container hover:bg-primary-fixed transition-colors text-sm sm:text-body-md font-body-md active:scale-95 transition-transform whitespace-nowrap" data-i18n="list_vehicle" href="/ilan-ver">İlan Ver</a>
+<a class="hidden sm:inline-flex items-center justify-center px-4 py-2 rounded-full border border-white/10 text-on-background hover:bg-white/10 transition-colors text-body-md font-body-md" data-i18n="login" href="/giris">Giriş</a>
+<a class="inline-flex items-center justify-center px-3 sm:px-4 py-2 rounded-full bg-gradient-to-r from-primary to-secondary-fixed text-on-primary hover:brightness-110 transition-colors text-sm sm:text-body-md font-body-md active:scale-95 transition-transform whitespace-nowrap shadow-[0_0_24px_rgba(137,206,255,0.22)]" data-i18n="list_vehicle" href="/ilan-ver">İlan Ver</a>
 </div>
 </div>
 </nav>
 <!-- Main Content -->
-<main class="flex-grow pt-20 md:pt-24 pb-section-gap flex flex-col items-center overflow-x-hidden">
+<main class="flex-grow pt-20 md:pt-24 pb-section-gap flex flex-col items-center overflow-x-hidden relative">
 <!-- Hero Section -->
-<section class="w-full max-w-container-max-width mx-auto px-margin-mobile md:px-margin-desktop pt-10 md:pt-32 pb-section-gap flex flex-col items-center text-center">
-<h1 class="font-display-hero text-headline-lg-mobile md:text-display-hero text-gradient-primary mb-6 max-w-4xl" data-i18n="hero_title">
+<section class="relative w-full max-w-container-max-width mx-auto px-margin-mobile md:px-margin-desktop pt-12 md:pt-32 pb-16 md:pb-section-gap flex flex-col items-center text-center overflow-hidden">
+<div class="hero-orb -top-24 left-1/2 h-72 w-72 -translate-x-1/2 bg-primary/20"></div>
+<div class="hero-orb top-24 right-0 h-80 w-80 bg-secondary-container/25"></div>
+<div class="hero-orb top-52 left-0 h-64 w-64 bg-primary-container/15"></div>
+<div class="relative z-10 mb-6 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.06] px-4 py-2 text-xs font-semibold uppercase tracking-[0.18em] text-primary shadow-[0_0_32px_rgba(137,206,255,0.14)]">
+<span class="h-1.5 w-1.5 rounded-full bg-primary pulse-dot"></span>
+<span>Araç zekası işletim sistemi</span>
+</div>
+<h1 class="relative z-10 font-display-hero velocity-title text-[42px] leading-[1.04] sm:text-[58px] md:text-[88px] text-gradient-primary mb-6 max-w-5xl" data-i18n="hero_title">
                 Mobilite zekayla buluşur.
             </h1>
-<p class="font-body-lg text-body-lg text-on-surface-variant mb-12 max-w-2xl" data-i18n="hero_subtitle">
+<p class="relative z-10 font-body-lg text-base sm:text-body-lg text-on-surface-variant mb-10 max-w-2xl" data-i18n="hero_subtitle">
                 Modern araç ekosistemi için AI destekli arama.
             </p>
 <!-- AI Search Input -->
-<div class="w-full max-w-3xl relative ai-glow-focus rounded-2xl sm:rounded-full transition-all duration-500 glass-panel">
+<div class="relative z-10 w-full max-w-4xl ai-glow-focus rounded-[28px] sm:rounded-full transition-all duration-500 glass-panel-velocity p-1.5">
+<div class="relative flex flex-col sm:flex-row sm:items-center gap-3">
 <div class="absolute inset-y-0 left-0 pl-6 flex items-center pointer-events-none">
 <span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 0;">search</span>
 </div>
-<input class="w-full bg-transparent border-none rounded-2xl sm:rounded-full py-4 sm:py-5 pl-12 sm:pl-14 pr-14 sm:pr-16 text-base sm:text-body-lg font-body-lg text-on-background placeholder-on-surface-variant/50 focus:ring-0 focus:outline-none" data-i18n-placeholder="search_placeholder" placeholder="1.5M TL altı, düşük masraflı aile SUV’u" type="text"/>
-<button onclick="location.href='/ara'" class="absolute inset-y-2 right-2 px-4 rounded-full bg-primary text-on-primary hover:bg-primary-fixed transition-colors flex items-center justify-center active:scale-95">
+<input id="home-ai-search" class="w-full bg-transparent border-none rounded-2xl sm:rounded-full py-4 sm:py-5 pl-12 sm:pl-14 pr-4 sm:pr-40 text-base sm:text-body-lg font-body-lg text-on-background placeholder-on-surface-variant/50 focus:ring-0 focus:outline-none" data-i18n-placeholder="search_placeholder" placeholder="1.5M TL altı, düşük masraflı aile SUV’u" type="text"/>
+<button id="home-ai-search-button" onclick="handleHomeSearch()" class="sm:absolute sm:inset-y-2 sm:right-2 w-full sm:w-auto px-5 sm:px-6 py-3 sm:py-0 rounded-full bg-gradient-to-r from-primary to-secondary-fixed text-on-primary hover:brightness-110 transition-colors flex items-center justify-center gap-2 active:scale-95 shadow-[0_0_28px_rgba(137,206,255,0.26)]">
+<span class="hidden sm:inline font-semibold">AI Ara</span>
 <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">send</span>
 </button>
 </div>
+</div>
+<div class="relative z-10 mt-5 grid grid-cols-3 gap-3 text-left w-full max-w-3xl">
+<div class="glass-panel-velocity rounded-2xl px-4 py-3">
+<div class="font-mono-data text-[18px] text-primary font-bold">50</div>
+<div class="text-[11px] uppercase tracking-[0.12em] text-on-surface-variant">Demo ilan</div>
+</div>
+<div class="glass-panel-velocity rounded-2xl px-4 py-3">
+<div class="font-mono-data text-[18px] text-secondary-fixed font-bold">AI</div>
+<div class="text-[11px] uppercase tracking-[0.12em] text-on-surface-variant">Akıllı skor</div>
+</div>
+<div class="glass-panel-velocity rounded-2xl px-4 py-3">
+<div class="font-mono-data text-[18px] text-tertiary-fixed-dim font-bold">6H</div>
+<div class="text-[11px] uppercase tracking-[0.12em] text-on-surface-variant">İlan kodu</div>
+</div>
+</div>
 <!-- Quick Action Chips -->
-<div class="flex flex-wrap justify-center gap-3 mt-8">
-<button onclick="window.top.location.href='/ara?kategori=otomobil'" class="px-4 py-2 rounded-full glass-panel text-body-md font-body-md text-on-surface-variant hover:text-primary hover:border-primary/50 transition-all active:scale-95">Otomobil</button>
-<button onclick="window.top.location.href='/ara?kategori=suv-pickup'" class="px-4 py-2 rounded-full glass-panel text-body-md font-body-md text-on-surface-variant hover:text-primary hover:border-primary/50 transition-all active:scale-95">SUV & Pickup</button>
-<button onclick="window.top.location.href='/ara?kategori=motosiklet'" class="px-4 py-2 rounded-full glass-panel text-body-md font-body-md text-on-surface-variant hover:text-primary hover:border-primary/50 transition-all active:scale-95">Motosiklet</button>
-<button onclick="window.top.location.href='/ara?kategori=ticari'" class="px-4 py-2 rounded-full glass-panel text-body-md font-body-md text-on-surface-variant hover:text-primary hover:border-primary/50 transition-all active:scale-95">Ticari</button>
-<button onclick="window.top.location.href='/ara?kategori=karavan'" class="px-4 py-2 rounded-full glass-panel text-body-md font-body-md text-on-surface-variant hover:text-primary hover:border-primary/50 transition-all active:scale-95">Karavan</button>
-<button onclick="window.top.location.href='/ara?kategori=deniz'" class="px-4 py-2 rounded-full glass-panel text-body-md font-body-md text-on-surface-variant hover:text-primary hover:border-primary/50 transition-all active:scale-95">Deniz Araçları</button>
-<button onclick="window.top.location.href='/ara?kategori=tarim'" class="px-4 py-2 rounded-full glass-panel text-body-md font-body-md text-on-surface-variant hover:text-primary hover:border-primary/50 transition-all active:scale-95">Tarım</button>
-<button onclick="window.top.location.href='/ara?kategori=is-makinalari'" class="px-4 py-2 rounded-full glass-panel text-body-md font-body-md text-on-surface-variant hover:text-primary hover:border-primary/50 transition-all active:scale-95">İş Makinaları</button>
-<button onclick="window.top.location.href='/ara?kategori=hava-araclari'" class="px-4 py-2 rounded-full glass-panel text-body-md font-body-md text-on-surface-variant hover:text-primary hover:border-primary/50 transition-all active:scale-95">Hava Araçları</button>
+<div class="relative z-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 mt-8 w-full max-w-5xl">
+<button onclick="window.top.location.href='/ara?kategori=otomobil'" class="category-card px-4 py-4 rounded-2xl text-left text-body-md font-body-md text-on-surface hover:text-primary transition-all active:scale-95 flex items-center justify-between gap-3"><span>Otomobil</span><span class="material-symbols-outlined text-primary">directions_car</span></button>
+<button onclick="window.top.location.href='/ara?kategori=suv-pickup'" class="category-card px-4 py-4 rounded-2xl text-left text-body-md font-body-md text-on-surface hover:text-primary transition-all active:scale-95 flex items-center justify-between gap-3"><span>SUV & Pickup</span><span class="material-symbols-outlined text-primary">terrain</span></button>
+<button onclick="window.top.location.href='/ara?kategori=motosiklet'" class="category-card px-4 py-4 rounded-2xl text-left text-body-md font-body-md text-on-surface hover:text-primary transition-all active:scale-95 flex items-center justify-between gap-3"><span>Motosiklet</span><span class="material-symbols-outlined text-primary">two_wheeler</span></button>
+<button onclick="window.top.location.href='/ara?kategori=ticari'" class="category-card px-4 py-4 rounded-2xl text-left text-body-md font-body-md text-on-surface hover:text-primary transition-all active:scale-95 flex items-center justify-between gap-3"><span>Ticari</span><span class="material-symbols-outlined text-primary">local_shipping</span></button>
+<button onclick="window.top.location.href='/ara?kategori=karavan'" class="category-card px-4 py-4 rounded-2xl text-left text-body-md font-body-md text-on-surface hover:text-primary transition-all active:scale-95 flex items-center justify-between gap-3"><span>Karavan</span><span class="material-symbols-outlined text-primary">rv_hookup</span></button>
+<button onclick="window.top.location.href='/ara?kategori=deniz'" class="category-card px-4 py-4 rounded-2xl text-left text-body-md font-body-md text-on-surface hover:text-primary transition-all active:scale-95 flex items-center justify-between gap-3"><span>Deniz Araçları</span><span class="material-symbols-outlined text-primary">sailing</span></button>
+<button onclick="window.top.location.href='/ara?kategori=tarim'" class="category-card px-4 py-4 rounded-2xl text-left text-body-md font-body-md text-on-surface hover:text-primary transition-all active:scale-95 flex items-center justify-between gap-3"><span>Tarım Araçları</span><span class="material-symbols-outlined text-primary">agriculture</span></button>
+<button onclick="window.top.location.href='/ara?kategori=is-makinalari'" class="category-card px-4 py-4 rounded-2xl text-left text-body-md font-body-md text-on-surface hover:text-primary transition-all active:scale-95 flex items-center justify-between gap-3"><span>İş Makinaları</span><span class="material-symbols-outlined text-primary">precision_manufacturing</span></button>
+<button onclick="window.top.location.href='/ara?kategori=hava-araclari'" class="category-card px-4 py-4 rounded-2xl text-left text-body-md font-body-md text-on-surface hover:text-primary transition-all active:scale-95 flex items-center justify-between gap-3"><span>Hava Araçları</span><span class="material-symbols-outlined text-primary">flight</span></button>
+</div>
+</section>
+<!-- Intelligence Platform Section -->
+<section class="w-full max-w-container-max-width mx-auto px-margin-mobile md:px-margin-desktop mb-section-gap">
+<div class="glass-panel-velocity rounded-[28px] p-5 md:p-8 relative overflow-hidden">
+<div class="absolute -right-20 -top-20 h-72 w-72 rounded-full bg-primary/10 blur-3xl"></div>
+<div class="absolute -left-20 bottom-0 h-64 w-64 rounded-full bg-secondary-container/15 blur-3xl"></div>
+<div class="relative grid grid-cols-1 lg:grid-cols-12 gap-gutter items-center">
+<div class="lg:col-span-5">
+<span class="font-label-caps text-label-caps text-primary uppercase tracking-[0.2em]">Vasıtan Intelligence</span>
+<h2 class="mt-4 font-display-hero text-[32px] leading-tight md:text-headline-lg text-on-background">İlan, analiz, topluluk ve kronik sorunlar tek araç zekası platformunda.</h2>
+<p class="mt-4 text-on-surface-variant leading-7">Vasıtan klasik ilan listesi değil; pazar verisini, satıcı güvenini, ekspertiz bilgisini ve AI önerilerini aynı karar ekranında birleştirir.</p>
+</div>
+<div class="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-3">
+<a href="/ara" class="rounded-2xl border border-white/10 bg-white/[0.05] p-4 hover:border-primary/40 transition-colors">
+<span class="material-symbols-outlined text-primary">manage_search</span>
+<h3 class="mt-3 font-semibold text-on-background">Akıllı ilan keşfi</h3>
+<p class="mt-2 text-sm text-on-surface-variant">Kategori, fiyat, ekspertiz ve AI skoru ile hassas filtreleme.</p>
+</a>
+<a href="/ai-danisman" class="rounded-2xl border border-white/10 bg-white/[0.05] p-4 hover:border-primary/40 transition-colors">
+<span class="material-symbols-outlined text-secondary-fixed">smart_toy</span>
+<h3 class="mt-3 font-semibold text-on-background">AI danışman</h3>
+<p class="mt-2 text-sm text-on-surface-variant">Bütçe, kullanım ve risklere göre araç önerisi.</p>
+</a>
+<a href="/topluluk" class="rounded-2xl border border-white/10 bg-white/[0.05] p-4 hover:border-primary/40 transition-colors">
+<span class="material-symbols-outlined text-tertiary-fixed-dim">forum</span>
+<h3 class="mt-3 font-semibold text-on-background">Topluluk sinyali</h3>
+<p class="mt-2 text-sm text-on-surface-variant">Sahip deneyimi, servis yorumu ve gerçek kullanım içgörüsü.</p>
+</a>
+<a href="/kronik-sorunlar" class="rounded-2xl border border-white/10 bg-white/[0.05] p-4 hover:border-primary/40 transition-colors">
+<span class="material-symbols-outlined text-error">report_problem</span>
+<h3 class="mt-3 font-semibold text-on-background">Kronik sorun takibi</h3>
+<p class="mt-2 text-sm text-on-surface-variant">Model bazlı riskler ve bakım maliyetleri görünür olur.</p>
+</a>
+</div>
+</div>
 </div>
 </section>
 <!-- Bento Grid Layout for Main Content -->
@@ -219,44 +350,44 @@
 </div>
 <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
 <!-- Card 1 -->
-<div onclick="location.href='/ilan/1'" class="glass-panel rounded-xl overflow-hidden group cursor-pointer hover:-translate-y-1 transition-transform duration-300 flex flex-col h-full">
-<div class="relative h-48 bg-surface-container-high overflow-hidden">
-<img alt="Tesla Model 3" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-80 mix-blend-luminosity hover:mix-blend-normal" data-alt="A sleek, modern electric sedan parked in a minimalist, dimly lit underground garage. The dark environment is illuminated by harsh, cool white overhead LED lights, creating dramatic reflections on the car's metallic grey surface. The mood is high-tech, premium, and futuristic, aligning perfectly with a sophisticated dark-mode UI aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBp6M9TOmd-XeSB8Wap9y7BaQrEzBo1fHNhet3xrZrcrXqjyD4jerwonDfMatq56Wniob3isZwS5P-heVg5aH8eoZVzgHbyiRYfFBpNiLWZ2USnoAHRkHJ9jPVUU57QZiyM8_9P56sQkEwvN033SL4DTjHwreiVrLIxohJ9FXJLtg3BZdccb6LGjxahJ2rNxbr0FfoTmYKSmT7vhYDQzOpD7_e9CaF4prGFkMHfg4A_hiUME1tBEcIrW-ZaFMnerM6Jt-3YMYIrSMw"/>
+<div onclick="location.href='/ilan/1'" class="glass-panel-velocity rounded-[24px] overflow-hidden group cursor-pointer hover:-translate-y-1 transition-transform duration-300 flex flex-col h-full relative">
+<div class="relative h-64 bg-surface-container-high overflow-hidden vehicle-card-velocity">
+<img alt="Tesla Model 3" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-90 mix-blend-luminosity hover:mix-blend-normal" data-alt="A sleek, modern electric sedan parked in a minimalist, dimly lit underground garage. The dark environment is illuminated by harsh, cool white overhead LED lights, creating dramatic reflections on the car's metallic grey surface. The mood is high-tech, premium, and futuristic, aligning perfectly with a sophisticated dark-mode UI aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBp6M9TOmd-XeSB8Wap9y7BaQrEzBo1fHNhet3xrZrcrXqjyD4jerwonDfMatq56Wniob3isZwS5P-heVg5aH8eoZVzgHbyiRYfFBpNiLWZ2USnoAHRkHJ9jPVUU57QZiyM8_9P56sQkEwvN033SL4DTjHwreiVrLIxohJ9FXJLtg3BZdccb6LGjxahJ2rNxbr0FfoTmYKSmT7vhYDQzOpD7_e9CaF4prGFkMHfg4A_hiUME1tBEcIrW-ZaFMnerM6Jt-3YMYIrSMw"/>
 <div class="absolute top-3 left-3 bg-surface-dark/80 backdrop-blur-md border border-primary/30 px-3 py-1 rounded-full flex items-center gap-1.5">
 <div class="w-2 h-2 rounded-full bg-primary pulse-dot"></div>
 <span class="font-label-caps text-label-caps text-primary tracking-wider uppercase" data-i18n="badge_demand">+12% Talep</span>
 </div>
 </div>
-<div class="p-5 flex flex-col flex-grow">
+<div class="p-5 flex flex-col flex-grow -mt-20 relative z-10">
 <div class="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-1 mb-2">
 <h3 class="font-headline-md text-body-lg font-semibold text-on-background">2023 Tesla Model 3</h3>
-<span class="font-mono-data text-mono-data text-on-surface-variant">₺1.85M</span>
+<span class="font-mono-data text-mono-data text-primary">₺1.85M</span>
 </div>
 <p class="font-body-md text-body-md text-on-surface-variant mb-4 flex-grow line-clamp-2" data-i18n="card_1_desc">Long Range AWD. Son 48 saatte güçlü piyasa ilgisi.</p>
 <div class="flex gap-2">
-<span class="px-2 py-1 bg-surface-container rounded text-label-caps font-label-caps text-on-surface-variant uppercase">EV</span>
-<span class="px-2 py-1 bg-surface-container rounded text-label-caps font-label-caps text-on-surface-variant uppercase">Sedan</span>
+<span class="px-2 py-1 bg-white/10 border border-white/10 rounded-full text-label-caps font-label-caps text-on-surface-variant uppercase">EV</span>
+<span class="px-2 py-1 bg-white/10 border border-white/10 rounded-full text-label-caps font-label-caps text-on-surface-variant uppercase">Sedan</span>
 </div>
 </div>
 </div>
 <!-- Card 2 -->
-<div onclick="location.href='/ilan/1'" class="glass-panel rounded-xl overflow-hidden group cursor-pointer hover:-translate-y-1 transition-transform duration-300 flex flex-col h-full">
-<div class="relative h-48 bg-surface-container-high overflow-hidden">
-<img alt="Volvo XC90" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-80 mix-blend-luminosity hover:mix-blend-normal" data-alt="A premium luxury SUV situated on a slick, dark wet asphalt road at night. Street lamps cast a neon-blue and cold-white glow, reflecting off the deep navy paint of the vehicle. The overall atmosphere is moody, secure, and technologically advanced, fitting seamlessly into a high-end dark-mode design system." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAnBQqBYKRuX5OdiMYOXgzzSWul7hx0DjbPeFI2-04lShmqhq6Okr9CKHwtpReueGIYwZMUSNIyPPQ-IoKpyJq7ZULNWIV_8ViPdU0y9qHEqQYw2HbnVnxDwAfYFUOf6dOMB5-44OL0CX2sXwQv3hoLtM00KVmOZeUxvLIgHTLP-h0zuLyXgS09NvbAcYjx6fT-pkZY-fyMY_SV4gKCuFLqK8VT-kOMBj2rndF1udzScchDKUZF1LqYYeou4YkaTc9UA-MEmk6BgUA"/>
+<div onclick="location.href='/ilan/1'" class="glass-panel-velocity rounded-[24px] overflow-hidden group cursor-pointer hover:-translate-y-1 transition-transform duration-300 flex flex-col h-full relative">
+<div class="relative h-64 bg-surface-container-high overflow-hidden vehicle-card-velocity">
+<img alt="Volvo XC90" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-90 mix-blend-luminosity hover:mix-blend-normal" data-alt="A premium luxury SUV situated on a slick, dark wet asphalt road at night. Street lamps cast a neon-blue and cold-white glow, reflecting off the deep navy paint of the vehicle. The overall atmosphere is moody, secure, and technologically advanced, fitting seamlessly into a high-end dark-mode design system." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAnBQqBYKRuX5OdiMYOXgzzSWul7hx0DjbPeFI2-04lShmqhq6Okr9CKHwtpReueGIYwZMUSNIyPPQ-IoKpyJq7ZULNWIV_8ViPdU0y9qHEqQYw2HbnVnxDwAfYFUOf6dOMB5-44OL0CX2sXwQv3hoLtM00KVmOZeUxvLIgHTLP-h0zuLyXgS09NvbAcYjx6fT-pkZY-fyMY_SV4gKCuFLqK8VT-kOMBj2rndF1udzScchDKUZF1LqYYeou4YkaTc9UA-MEmk6BgUA"/>
 <div class="absolute top-3 left-3 bg-surface-dark/80 backdrop-blur-md border border-tertiary-fixed-dim/30 px-3 py-1 rounded-full flex items-center gap-1.5">
 <span class="material-symbols-outlined text-tertiary-fixed-dim text-sm" style="font-variation-settings: 'FILL' 1;">local_fire_department</span>
 <span class="font-label-caps text-label-caps text-tertiary-fixed-dim tracking-wider uppercase" data-i18n="badge_hot">Popüler İlan</span>
 </div>
 </div>
-<div class="p-5 flex flex-col flex-grow">
+<div class="p-5 flex flex-col flex-grow -mt-20 relative z-10">
 <div class="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-1 mb-2">
 <h3 class="font-headline-md text-body-lg font-semibold text-on-background">2022 Volvo XC90</h3>
-<span class="font-mono-data text-mono-data text-on-surface-variant">₺2.4M</span>
+<span class="font-mono-data text-mono-data text-primary">₺2.4M</span>
 </div>
 <p class="font-body-md text-body-md text-on-surface-variant mb-4 flex-grow line-clamp-2" data-i18n="card_2_desc">B5 Inscription. Segmentine göre çok düşük kilometre.</p>
 <div class="flex gap-2">
-<span class="px-2 py-1 bg-surface-container rounded text-label-caps font-label-caps text-on-surface-variant uppercase" data-i18n="hybrid">Hibrit</span>
-<span class="px-2 py-1 bg-surface-container rounded text-label-caps font-label-caps text-on-surface-variant uppercase">SUV</span>
+<span class="px-2 py-1 bg-white/10 border border-white/10 rounded-full text-label-caps font-label-caps text-on-surface-variant uppercase" data-i18n="hybrid">Hibrit</span>
+<span class="px-2 py-1 bg-white/10 border border-white/10 rounded-full text-label-caps font-label-caps text-on-surface-variant uppercase">SUV</span>
 </div>
 </div>
 </div>
@@ -270,7 +401,7 @@
 <span data-i18n="ai_matches">AI Eşleşmeleri</span>
                     </h2>
 </div>
-<div class="glass-panel rounded-xl p-5 flex flex-col gap-4 relative overflow-hidden h-full">
+<div class="glass-panel-velocity rounded-[24px] p-5 flex flex-col gap-4 relative overflow-hidden h-full">
 <!-- Subtle ambient glow background -->
 <div class="absolute top-0 right-0 w-32 h-32 bg-secondary-container/20 rounded-full blur-3xl -z-10"></div>
 <div class="flex justify-between items-start">
@@ -303,7 +434,7 @@
 <span class="font-body-md text-body-md text-on-surface-variant text-sm" data-i18n="ai_reason_3">Aile kullanım puanı yüksek.</span>
 </li>
 </ul>
-<button onclick="location.href='/ara'" class="w-full py-3 rounded-lg border border-glass-border hover:bg-surface-container-high transition-colors font-body-md text-body-md text-on-background mt-4">
+<button onclick="location.href='/ara'" class="w-full py-3 rounded-full border border-white/10 bg-white/[0.04] hover:bg-white/10 transition-colors font-body-md text-body-md text-on-background mt-4">
 <span data-i18n="view_analysis">Analizi Gör</span>
                     </button>
 </div>
@@ -333,4 +464,32 @@
 </div>
 </div>
 </footer>
+<script>
+        function handleHomeSearch() {
+            var input = document.getElementById("home-ai-search");
+            var query = input ? input.value.trim() : "";
+            var code = query.replace(/\D/g, "");
+            if (code.length === 6 && window.VASITAN_DEMO_LISTINGS) {
+                var listing = window.VASITAN_DEMO_LISTINGS.find(function (item) {
+                    return String(item.listingCode) === code;
+                });
+                if (listing) {
+                    window.top.location.href = "/ilan/" + listing.id;
+                    return;
+                }
+            }
+            window.top.location.href = "/ara";
+        }
+
+        (function () {
+            var input = document.getElementById("home-ai-search");
+            if (!input) return;
+            input.addEventListener("keydown", function (event) {
+                if (event.key === "Enter") {
+                    event.preventDefault();
+                    handleHomeSearch();
+                }
+            });
+        })();
+    </script>
 </body></html>
