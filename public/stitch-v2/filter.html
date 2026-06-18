@@ -469,7 +469,13 @@
             var sortSelect = document.getElementById("sort-select");
             var filterPanel = document.getElementById("filter-panel");
             var mobileFilterToggle = document.getElementById("mobile-filter-toggle");
-            var params = new URLSearchParams(window.location.search);
+            var parentSearch = "";
+            try {
+                parentSearch = window.top.location.search;
+            } catch (error) {
+                parentSearch = window.location.search;
+            }
+            var params = new URLSearchParams(parentSearch || window.location.search);
             var initialCategory = params.get("kategori") || "";
             var controls = {};
 
@@ -811,7 +817,11 @@
                 var filtered = sortListings(listings.filter(matches));
                 var category = value("category");
                 var nextUrl = category ? "/ara?kategori=" + encodeURIComponent(category) : "/ara";
-                history.replaceState(null, "", nextUrl);
+                try {
+                    window.top.history.replaceState(null, "", nextUrl);
+                } catch (error) {
+                    history.replaceState(null, "", nextUrl);
+                }
                 renderSummary(filtered);
                 renderRows(filtered);
             }
@@ -823,7 +833,11 @@
                 });
                 document.querySelectorAll("[data-feature]").forEach(function (item) { item.checked = false; });
                 if (sortSelect) sortSelect.value = "recommended";
-                history.replaceState(null, "", "/ara");
+                try {
+                    window.top.history.replaceState(null, "", "/ara");
+                } catch (error) {
+                    history.replaceState(null, "", "/ara");
+                }
                 render();
             }
 
