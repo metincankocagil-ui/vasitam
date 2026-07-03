@@ -1,0 +1,54 @@
+<!doctype html>
+<html class="dark" lang="tr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Teknik Veri - Vasıtan</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Material+Symbols+Outlined&display=swap" rel="stylesheet" />
+  <script>tailwind.config={darkMode:'class',theme:{extend:{colors:{surface:'#0b1326',panel:'#171f33',primary:'#89ceff',secondary:'#c0c1ff',ink:'#dae2fd',muted:'#9eabbc'}}}}</script>
+  <link href="/stitch-v2/theme.css" rel="stylesheet" />
+  <script src="/stitch-v2/theme.js"></script>
+  <script src="/stitch-v2/demo-listings.js"></script>
+  <style>
+    body{font-family:Inter,sans-serif;background:radial-gradient(circle at 52% -12%,rgba(137,206,255,.18),transparent 36rem),linear-gradient(180deg,#05070d,#0b1326 48%,#060e20);color:#dae2fd}
+    .glass{background:linear-gradient(135deg,rgba(255,255,255,.12),rgba(255,255,255,.04));border:1px solid rgba(255,255,255,.11);box-shadow:inset 0 1px rgba(255,255,255,.1),0 24px 60px rgba(0,0,0,.2)}
+    .datum{background:rgba(255,255,255,.045);border:1px solid rgba(255,255,255,.08)}
+    html.light body{background:#f3f6fb;color:#172033}.light .glass,.light .datum{background:rgba(255,255,255,.9);border-color:rgba(15,23,42,.12)}
+    select{color-scheme:dark}.light select{color-scheme:light}
+  </style>
+</head>
+<body class="min-h-screen">
+  <header class="sticky top-0 z-20 border-b border-white/10 bg-surface/80 backdrop-blur-xl">
+    <div class="mx-auto flex max-w-7xl items-center justify-between gap-4 px-5 py-4">
+      <a href="/" target="_top" class="flex items-center gap-2 text-2xl font-bold text-primary"><span class="h-2.5 w-2.5 rounded-full bg-primary shadow-[0_0_18px_#89ceff]"></span>Vasıtan Wiki</a>
+      <nav class="hidden items-center gap-6 md:flex"><a href="/arac-wiki" target="_top" class="text-sm text-muted hover:text-primary">Modeller</a><a href="/karsilastir" target="_top" class="text-sm text-muted hover:text-primary">Karşılaştır</a><span class="border-b-2 border-primary pb-1 text-sm font-semibold text-primary">Teknik Veri</span></nav>
+      <button data-theme-toggle type="button" aria-label="Temayı değiştir" class="material-symbols-outlined text-muted hover:text-primary">dark_mode</button>
+    </div>
+  </header>
+  <main class="mx-auto max-w-7xl px-5 py-10">
+    <section class="grid items-end gap-8 lg:grid-cols-[1fr_420px]">
+      <div><div class="mb-2 text-xs font-semibold uppercase tracking-[.2em] text-primary">ARAÇ VERİ ARŞİVİ</div><h1 class="text-3xl font-semibold md:text-5xl">Teknik özellikleri keşfet</h1><p class="mt-3 max-w-2xl leading-7 text-muted">Motor, güç aktarma, tüketim, kapasite ve ilan verilerini tek görünümde incele.</p></div>
+      <label class="block"><span class="mb-2 block text-sm text-muted">Araç seç</span><select id="vehicle" class="w-full rounded-xl border border-white/10 bg-panel px-4 py-3 text-ink focus:border-primary focus:ring-primary"></select></label>
+    </section>
+    <section id="hero" class="glass mt-8 overflow-hidden rounded-3xl"></section>
+    <div id="content" class="mt-6 grid gap-6 lg:grid-cols-3"></div>
+  </main>
+  <script>
+    (function(){
+      var list=window.VASITAN_DEMO_LISTINGS||[], select=document.getElementById('vehicle'), query=new URLSearchParams(location.search), initial=Number(query.get('id'))||1;
+      function esc(v){return String(v==null||v===''?'Belirtilmedi':v).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]})}
+      function money(v){return new Intl.NumberFormat('tr-TR').format(v)+' TL'}
+      function number(v){return new Intl.NumberFormat('tr-TR').format(v)}
+      function image(x){return x.images&&x.images[0]&&x.images[0].url||''}
+      select.innerHTML=list.map(function(x){return '<option value="'+x.id+'" '+(x.id===initial?'selected':'')+'>'+esc(x.title)+' ('+x.year+')</option>'}).join('');
+      function card(title,icon,rows){return '<section class="glass rounded-3xl p-5 md:p-6"><div class="mb-5 flex items-center gap-2"><span class="material-symbols-outlined text-primary">'+icon+'</span><h2 class="text-xl font-semibold">'+title+'</h2></div><div class="space-y-2">'+rows.map(function(r){return '<div class="datum flex items-center justify-between gap-4 rounded-xl px-4 py-3"><span class="text-sm text-muted">'+r[0]+'</span><strong class="text-right text-sm font-medium">'+esc(r[1])+'</strong></div>'}).join('')+'</div></section>'}
+      function render(){var x=list.find(function(i){return i.id===Number(select.value)})||list[0];if(!x)return;var t=x.technicalSpecs||{};history.replaceState(null,'','?id='+x.id);
+        document.getElementById('hero').innerHTML='<div class="grid md:grid-cols-[42%_1fr]"><div class="min-h-60 bg-panel">'+(image(x)?'<img src="'+esc(image(x))+'" alt="'+esc(x.title)+'" class="h-full w-full object-cover">':'<div class="flex h-full min-h-60 items-center justify-center"><span class="material-symbols-outlined text-6xl text-muted">directions_car</span></div>')+'</div><div class="p-6 md:p-9"><div class="text-sm font-semibold text-primary">'+esc(x.brand)+' · '+esc(x.model)+'</div><h2 class="mt-2 text-2xl font-semibold md:text-4xl">'+esc(x.title)+'</h2><p class="mt-3 leading-7 text-muted">'+esc(x.description)+'</p><div class="mt-6 flex flex-wrap gap-2"><span class="datum rounded-full px-3 py-1.5 text-sm">'+x.year+'</span><span class="datum rounded-full px-3 py-1.5 text-sm">'+number(x.km)+' km</span><span class="datum rounded-full px-3 py-1.5 text-sm">'+money(x.price)+'</span></div><a href="/ilan/'+x.id+'" target="_top" class="mt-6 inline-flex items-center gap-1 text-sm text-primary hover:underline">İlan detayına git <span class="material-symbols-outlined text-base">arrow_forward</span></a></div></div>';
+        document.getElementById('content').innerHTML=card('Motor ve Performans','speed',[['Motor',t.engineType],['Motor hacmi',t.engineDisplacement],['Güç',t.horsepower],['Tork',t.torque],['Silindir',t.cylinders===0?'Elektrikli':t.cylinders]])+card('Aktarma ve Tüketim','settings',[['Yakıt',t.fuel],['Şanzıman',t.transmission],['Çekiş',t.drivetrain],['Ortalama tüketim',t.averageFuelConsumption],['Kasa tipi',t.bodyType]])+card('Kapasite ve Kimlik','directions_car',[['Marka',t.brand],['Model',t.model],['Paket',t.trim],['Kapı',t.doors],['Koltuk',t.seats],['Bagaj hacmi',t.trunkVolume]]);
+      }
+      select.addEventListener('change',render);render();
+    })();
+  </script>
+</body>
+</html>
